@@ -12,3 +12,35 @@ website:
   page-footer:
     right: "This page is built with [Quarto](https://quarto.org/)."
     left: "&copy; CC-By US GHG Center, 2022-2023"
+
+  sidebar:
+    # logo: "logo/ghgc-logo-light.svg"
+    pinned: true
+    align: center
+    tools:
+      - icon: globe-americas
+        href: https://earth.gov/ghgcenter
+        text: "US GHG Center Website"
+      - icon: github
+        href: https://github.com/us-ghg-center/ams-2023-workshop
+        text: "Repository home"
+
+    style: "docked"
+    search: true
+    collapse-level: 1
+  
+  format:
+  html:
+    grid:
+      sidebar-width: 20vw
+      body-width: 900px
+    theme:
+      light: [journal]
+    # css: styles.css
+    code-copy: true
+    code-overflow: wrap
+    toc: true
+    toc-depth: 3
+
+  filters:
+    - quarto

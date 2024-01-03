@@ -1,17 +1,10 @@
 [
   {
-    "objectID": "interactive-session-1-epa-gridded-methane-emissions/index.html",
-    "href": "interactive-session-1-epa-gridded-methane-emissions/index.html",
-    "title": "EPA Gridded Methane Emissions Inventory",
+    "objectID": "intro-stac/index.html",
+    "href": "intro-stac/index.html",
+    "title": "Spatio-Temporal Asset Catalog",
     "section": "",
-    "text": "EPA Gridded Methane Emissions Inventory\n\n\n\n\n Back to top"
-  },
-  {
-    "objectID": "interactive-session-3-large-point-source-methane-emission-events/index.html",
-    "href": "interactive-session-3-large-point-source-methane-emission-events/index.html",
-    "title": "Identifying and quantifying emissions from large point source methane emission events leveraging aircraft and satellite data",
-    "section": "",
-    "text": "Identifying and quantifying emissions from large point source methane emission events leveraging aircraft and satellite data\n\n\n\n\n Back to top"
+    "text": "Spatio-Temporal Asset Catalog\n\n\n\n\n Back to top"
   },
   {
     "objectID": "interactive-session-2-anthropogenic-ghg-emissions/index.html",
@@ -21,11 +14,25 @@
     "text": "Complementing anthropogenic GHG emissions with natural GHG emissions and fluxes\n\n\n\n\n Back to top"
   },
   {
-    "objectID": "intro-stac/index.html",
-    "href": "intro-stac/index.html",
-    "title": "Spatio-Temporal Asset Catalog",
+    "objectID": "interactive-session-3-large-point-source-methane-emission-events/index.html",
+    "href": "interactive-session-3-large-point-source-methane-emission-events/index.html",
+    "title": "Identifying and quantifying emissions from large point source methane emission events leveraging aircraft and satellite data",
     "section": "",
-    "text": "Spatio-Temporal Asset Catalog\n\n\n\n\n Back to top"
+    "text": "Identifying and quantifying emissions from large point source methane emission events leveraging aircraft and satellite data\n\n\n\n\n Back to top"
+  },
+  {
+    "objectID": "interactive-session-1-epa-gridded-methane-emissions/index.html",
+    "href": "interactive-session-1-epa-gridded-methane-emissions/index.html",
+    "title": "EPA Gridded Methane Emissions Inventory",
+    "section": "",
+    "text": "EPA Gridded Methane Emissions Inventory\n\n\n\n\n Back to top"
+  },
+  {
+    "objectID": "open-science-in-action/index.html",
+    "href": "open-science-in-action/index.html",
+    "title": "Open Science in Action: Intro to GitHub & Communicating Science Discoveries via Web Dashboard",
+    "section": "",
+    "text": "Open Science in Action: Intro to GitHub & Communicating Science Discoveries via Web Dashboard\n\n\n\n\n Back to top"
   },
   {
     "objectID": "intro-us-ghg-center/index.html",
@@ -68,12 +75,5 @@
     "title": "Utilizing Open Science Techniques for Exploring Greenhouse Gas Data: An Interactive Workshop on the U.S. Greenhouse Gas Center and VEDA Tools for use in Earth Science Research",
     "section": "",
     "text": "The full-day workshop will be divided into the following sections:\n\nWelcome (0:00 - 0:10)\n\nWorkshop Introduction\nTeam Introduction\n\nOverview of the U.S. Greenhouse Gas Center (0:10 - 0:30)\n\nIntro to the VEDA project and its relevance to Earth Science research and the US GHG Center\nWhat is the US GHG Center?\nIntroduction to the science use cases / demonstration areas that will be explored - during the workshop\n\nIntroduction to STAC Catalog (0:30 - 1:00)\n\nWhat is a STAC catalog?\nHands-on exercise: searching and accessing cloud-optimized datasets using the - STAC catalog\n\nAccessing GHG Center Data in STAC\n\n\nPython and Jupyter Notebooks for Data Analysis and Visualization (1:00 - 1:15)\n\nIntro to Jupyter Notebooks\nHands-on exercise: user notebook access and practice environment\n\nSetting the Scope for Interactive Sessions (1:15 - 1:35)\n\nRole of Methane and Carbon Dioxide in Climate Change\nSession Objectives / Goal\nDescription of Areas of Interest (AOI)\n\nBREAK (1:35 - 1:50)\nInteractive Session 1: EPA Gridded Methane Emissions Inventory (1:50 - 2:50)\n\nBackground and gridding methods overview/ example\nImproving access and latency of human anthropogenic emissions\nHands-on exercise:\n\nInteractive Session 2: Complementing anthropogenic GHG emissions with natural GHG emissions and fluxes (2:50 - 3:50)\n\nDescription of data sets and analysis available via the U.S. GHG Center (e.g., gridded wetland emissions and ecosystem exchange estimates)\nHands-on exercise: Exploring annual U.S. wetland methane emissions and their - meteorological influences.\n\nBREAK (3:50 - 4:05)\n\nInteractive Session 3: Identifying and quantifying emissions from large point source methane emission events leveraging aircraft and satellite data (4:05 - 5:05)\nDescription of data sets and analysis available via the U.S. GHG Center (e.g., EMIT methane enhancements; plans for emission rates, CO2, etc.)\nHands-on exercise: Locating enhancement, understanding temporal relevance, exploring site with multiple observations.\n\nOpen Science in Action: Intro to GitHub & Communicating Science Discoveries via Web Dashboard (5:05 - 5:50)\n\nHow do VEDA, GitHub, and JupyterHub interoperate and why is this important?\n\nHands-on exercise:\n\nIntroduction to web dashboards for science communication\n\nHands-on exercise: creating a web dashboard to communicate science discoveries - using the platform\n\n\nClosing Remarks (5:50 - 6:00)\n\nFuture Developments and Community Contributions\nEngaging with the U.S. Greenhouse Gas Center\n\n\nThroughout the workshop, facilitators will be available to provide support and guidance, ensuring participants are able to actively explore the workshop topics and apply their knowledge and skills to their own research projects."
-  },
-  {
-    "objectID": "open-science-in-action/index.html",
-    "href": "open-science-in-action/index.html",
-    "title": "Open Science in Action: Intro to GitHub & Communicating Science Discoveries via Web Dashboard",
-    "section": "",
-    "text": "Open Science in Action: Intro to GitHub & Communicating Science Discoveries via Web Dashboard\n\n\n\n\n Back to top"
   }
 ]

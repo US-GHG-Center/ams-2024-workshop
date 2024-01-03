@@ -30,17 +30,14 @@ website:
     collapse-level: 1
   
   format:
-  html:
-    grid:
-      sidebar-width: 20vw
-      body-width: 900px
-    theme:
-      light: [journal]
-    # css: styles.css
-    code-copy: true
-    code-overflow: wrap
-    toc: true
-    toc-depth: 3
-
-  filters:
-    - quarto
+    html:
+      grid:
+        sidebar-width: 20vw
+        body-width: 900px
+      theme:
+        light: [journal]
+      # css: styles.css
+      code-copy: true
+      code-overflow: wrap
+      toc: true
+      toc-depth: 3

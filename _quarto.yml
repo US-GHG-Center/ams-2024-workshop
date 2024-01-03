@@ -3,7 +3,7 @@ project:
 
 website:
   page-navigation: true
-  back-to-top-navigation: true
+  # back-to-top-navigation: true
   title: "U.S. Greenhouse Gas Center - AMS 2023 Workshop"
   site-url: "https://us-ghg-center.github.io/ams-2023-workshop"
   repo-url: https://github.com/us-ghg-center/ams-2023-workshop
@@ -14,7 +14,7 @@ website:
     left: "&copy; CC-By US GHG Center, 2022-2023"
 
   sidebar:
-    # logo: "logo/ghgc-logo-light.svg"
+    logo: "https://us-ghg-center.github.io/ghgc-docs/logo/ghgc-logo-light.svg"
     pinned: true
     align: center
     tools:
@@ -27,17 +27,43 @@ website:
 
     style: "docked"
     search: true
-    collapse-level: 1
-  
+    collapse-level: 2
+    contents:
+      - href: index.md
+        text: Welcome
+      - href: agenda.md
+        text: Workshop Agenda
+      - section: Chapters
+        contents:
+          - section: Intro to US GHG Center
+            contents:
+              - intro-us-ghg-center/index.md
+          - section: Intro to STAC
+            contents:
+              - intro-stac/index.md
+          - section: EPA Gridded Methane Emissions
+            contents:
+              - interactive-session-1-epa-gridded-methane-emissions/index.md
+          - section: Anthropogenic GHG Emissions
+            contents:
+              - interactive-session-2-anthropogenic-ghg-emissions/index.md
+          - section: Large Point Source Methane Emission Events
+            contents:
+              - interactive-session-3-large-point-source-methane-emission-events/index.md
+          - section: GitHub and Science Communication using a Web Dashboard
+            contents:
+              - open-science-in-action/index.md
+          
 format:
   html:
     grid:
-      sidebar-width: 20vw
+      sidebar-width: 30vw
       body-width: 900px
     theme:
       light: [journal]
     # css: styles.css
     code-copy: true
     code-overflow: wrap
-    toc: true
-    toc-depth: 3
+    # toc: true
+    # # toc-depth: 3
+    # toc-expand: true

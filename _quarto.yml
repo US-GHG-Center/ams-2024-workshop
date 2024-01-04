@@ -9,6 +9,15 @@ website:
   repo-url: https://github.com/us-ghg-center/ams-2023-workshop
   repo-actions: [edit, issue]
 
+  navbar:
+    search: false
+    collapse: true
+    left:
+      - text: Home
+        file: index.md
+      - text: Speakers
+        file: speakers.md
+        # icon: team
   page-footer:
     right: "This page is built with [Quarto](https://quarto.org/)."
     left: "&copy; CC-By US GHG Center, 2022-2023"
@@ -33,6 +42,8 @@ website:
         text: Welcome
       - href: agenda.md
         text: Workshop Agenda
+      - href: prerequisites.md
+        text: Prerequisites
       - section: Chapters
         contents:
           - section: Intro to US GHG Center

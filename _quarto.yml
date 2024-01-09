@@ -44,26 +44,27 @@ website:
         text: Workshop Agenda
       - href: prerequisites.md
         text: Prerequisites
-      - section: Chapters
-        contents:
-          - section: Intro to US GHG Center
-            contents:
-              - intro-us-ghg-center/index.md
-          - section: Intro to STAC
-            contents:
-              - intro-stac/index.md
-          - section: EPA Gridded Methane Emissions
-            contents:
-              - interactive-session-1-epa-gridded-methane-emissions/index.md
-          - section: Anthropogenic GHG Emissions
-            contents:
-              - interactive-session-2-anthropogenic-ghg-emissions/index.md
-          - section: Large Point Source Methane Emission Events
-            contents:
-              - interactive-session-3-large-point-source-methane-emission-events/index.md
-          - section: GitHub and Science Communication using a Web Dashboard
-            contents:
-              - open-science-in-action/index.md
+      - text: Chapters
+        href: chapters.md
+        # contents:
+        #   - section: Intro to US GHG Center
+        #     contents:
+        #       - intro-us-ghg-center/index.md
+        #   - section: Intro to STAC
+        #     contents:
+        #       - intro-stac/index.md
+        #   - section: EPA Gridded Methane Emissions
+        #     contents:
+        #       - interactive-session-1-epa-gridded-methane-emissions/index.md
+        #   - section: Anthropogenic GHG Emissions
+        #     contents:
+        #       - interactive-session-2-anthropogenic-ghg-emissions/index.md
+        #   - section: Large Point Source Methane Emission Events
+        #     contents:
+        #       - interactive-session-3-large-point-source-methane-emission-events/index.md
+        #   - section: GitHub and Science Communication using a Web Dashboard
+        #     contents:
+        #       - open-science-in-action/index.md
           
 format:
   html:

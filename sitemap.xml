@@ -1,19 +1,23 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>https://us-ghg-center.github.io/ams-2023-workshop/agenda.html</loc>
-    <lastmod>2024-01-08T20:54:23.207Z</lastmod>
-  </url>
-  <url>
-    <loc>https://us-ghg-center.github.io/ams-2023-workshop/speakers.html</loc>
-    <lastmod>2024-01-08T20:54:22.563Z</lastmod>
+    <loc>https://us-ghg-center.github.io/ams-2023-workshop/chapters.html</loc>
+    <lastmod>2024-01-09T17:26:09.859Z</lastmod>
   </url>
   <url>
     <loc>https://us-ghg-center.github.io/ams-2023-workshop/prerequisites.html</loc>
-    <lastmod>2024-01-08T20:54:22.279Z</lastmod>
+    <lastmod>2024-01-09T17:26:08.755Z</lastmod>
+  </url>
+  <url>
+    <loc>https://us-ghg-center.github.io/ams-2023-workshop/speakers.html</loc>
+    <lastmod>2024-01-09T17:26:09.023Z</lastmod>
+  </url>
+  <url>
+    <loc>https://us-ghg-center.github.io/ams-2023-workshop/agenda.html</loc>
+    <lastmod>2024-01-09T17:26:09.607Z</lastmod>
   </url>
   <url>
     <loc>https://us-ghg-center.github.io/ams-2023-workshop/index.html</loc>
-    <lastmod>2024-01-08T20:54:24.059Z</lastmod>
+    <lastmod>2024-01-09T17:26:10.607Z</lastmod>
   </url>
 </urlset>

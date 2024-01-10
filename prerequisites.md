@@ -1,6 +1,11 @@
 # Prerequisites
 
-All the workshop participants need to have access to the US GHG Center JupyterHub to follow along the workshop.
+All the workshop participants **MUST** obtain the following to be able to follow along the workshop:
+
+1. US GHG Center JupyterHub Access
+2. Earthdata credentials
+
+> 🚨 Please make sure you have both of the accesses before you come to the workshop on Sunday.
 
 ## To Get US GHG Center JupyterHub access
 
@@ -11,3 +16,9 @@ All the workshop participants need to have access to the US GHG Center JupyterHu
 * Watch your email for notification of authorization and the invite to join the [US GHG Center Hub Access GitHub Team](https://GitHub.com/orgs/US-GHG-Center/teams/ghgc-hub-access).
 
 * Once you accept the invitation, you can go to [hub.ghg.center](https://hub.ghg.center/) and login using your GitHub credentials.
+
+## To obtain Earthdata credentials
+
+Follow the tutorial on this link to register for Earthdata login: [https://www.earthdata.nasa.gov/eosdis/science-system-description/eosdis-components/earthdata-login](https://www.earthdata.nasa.gov/eosdis/science-system-description/eosdis-components/earthdata-login).
+
+Make sure to note your username and password.

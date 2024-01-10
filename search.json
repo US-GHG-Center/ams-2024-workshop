@@ -137,7 +137,7 @@
     "href": "prerequisites.html",
     "title": "Prerequisites",
     "section": "",
-    "text": "All the workshop participants need to have access to the US GHG Center JupyterHub to follow along the workshop.\n\n\nThe US GHG Center notebook environment is available to authorized users on an as-need basis. You can request access by using our Hub Access Request form.\n\nMake sure you have a GitHub Account. Take note of your GitHub username.\nFill out the request form and provide needed information. Make sure to use your organization/univerity email and use “AMS Workshop 2023” as the reason.\nWatch your email for notification of authorization and the invite to join the US GHG Center Hub Access GitHub Team.\nOnce you accept the invitation, you can go to hub.ghg.center and login using your GitHub credentials."
+    "text": "All the workshop participants MUST obtain the following to be able to follow along the workshop:\n\nUS GHG Center JupyterHub Access\nEarthdata credentials\n\n\n🚨 Please make sure you have both of the accesses before you come to the workshop on Sunday.\n\n\n\nThe US GHG Center notebook environment is available to authorized users on an as-need basis. You can request access by using our Hub Access Request form.\n\nMake sure you have a GitHub Account. Take note of your GitHub username.\nFill out the request form and provide needed information. Make sure to use your organization/univerity email and use “AMS Workshop 2023” as the reason.\nWatch your email for notification of authorization and the invite to join the US GHG Center Hub Access GitHub Team.\nOnce you accept the invitation, you can go to hub.ghg.center and login using your GitHub credentials.\n\n\n\n\nFollow the tutorial on this link to register for Earthdata login: https://www.earthdata.nasa.gov/eosdis/science-system-description/eosdis-components/earthdata-login.\nMake sure to note your username and password."
   },
   {
     "objectID": "prerequisites.html#to-get-us-ghg-center-jupyterhub-access",
@@ -145,6 +145,13 @@
     "title": "Prerequisites",
     "section": "",
     "text": "The US GHG Center notebook environment is available to authorized users on an as-need basis. You can request access by using our Hub Access Request form.\n\nMake sure you have a GitHub Account. Take note of your GitHub username.\nFill out the request form and provide needed information. Make sure to use your organization/univerity email and use “AMS Workshop 2023” as the reason.\nWatch your email for notification of authorization and the invite to join the US GHG Center Hub Access GitHub Team.\nOnce you accept the invitation, you can go to hub.ghg.center and login using your GitHub credentials."
+  },
+  {
+    "objectID": "prerequisites.html#to-obtain-earthdata-credentials",
+    "href": "prerequisites.html#to-obtain-earthdata-credentials",
+    "title": "Prerequisites",
+    "section": "",
+    "text": "Follow the tutorial on this link to register for Earthdata login: https://www.earthdata.nasa.gov/eosdis/science-system-description/eosdis-components/earthdata-login.\nMake sure to note your username and password."
   },
   {
     "objectID": "interactive-session-3-large-point-source-methane-emission-events/index.html",

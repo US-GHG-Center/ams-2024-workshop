@@ -53,6 +53,6 @@ The full-day workshop will be divided into the following sections:
 |                 | - Future Developments and Community Contributions                                                                                                 |
 |                 | - Engaging with the U.S. Greenhouse Gas Center                                                                                                    |
 +-----------------+---------------------------------------------------------------------------------------------------------------------------------------------------+
-
+: {.striped .hover .smaller}
 
 Throughout the workshop, facilitators will be available to provide support and guidance, ensuring participants are able to actively explore the workshop topics and apply their knowledge and skills to their own research projects.

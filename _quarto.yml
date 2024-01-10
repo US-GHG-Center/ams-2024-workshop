@@ -17,6 +17,8 @@ website:
         file: index.md
       - text: Speakers
         file: speakers.md
+      - text: US GHG Center at AMS 2024
+        href: ghg-center-at-ams-2024.md
         # icon: team
   page-footer:
     right: "This page is built with [Quarto](https://quarto.org/)."

@@ -42,39 +42,32 @@
     "text": "Intro to GitHub & Communicating Science Discoveries via Web Dashboard\n\n\nℹ️ Content for each chapter will be added as they are prepared, please check back."
   },
   {
-    "objectID": "interactive-session-3-large-point-source-methane-emission-events/index.html",
-    "href": "interactive-session-3-large-point-source-methane-emission-events/index.html",
-    "title": "Identifying and quantifying emissions from large point source methane emission events leveraging aircraft and satellite data",
+    "objectID": "ghg-center-at-ams-2024.html",
+    "href": "ghg-center-at-ams-2024.html",
+    "title": "The US GHG Center at American Meteorological Society Annual Meeting 2024",
     "section": "",
-    "text": "Identifying and quantifying emissions from large point source methane emission events leveraging aircraft and satellite data"
+    "text": "Join members of the GHG Center team for several events at the 2024 AMS Annual Meeting at Baltimore, Maryland; January 28th - February 1st"
   },
   {
-    "objectID": "prerequisites.html",
-    "href": "prerequisites.html",
-    "title": "Prerequisites",
-    "section": "",
-    "text": "All the workshop participants need to have access to the US GHG Center JupyterHub to follow along the workshop.\n\n\nThe US GHG Center notebook environment is available to authorized users on an as-need basis. You can request access by using our Hub Access Request form.\n\nMake sure you have a GitHub Account. Take note of your GitHub username.\nFill out the request form and provide needed information. Make sure to use your organization/univerity email and use “AMS Workshop 2023” as the reason.\nWatch your email for notification of authorization and the invite to join the US GHG Center Hub Access GitHub Team.\nOnce you accept the invitation, you can go to hub.ghg.center and login using your GitHub credentials."
+    "objectID": "ghg-center-at-ams-2024.html#short-course",
+    "href": "ghg-center-at-ams-2024.html#short-course",
+    "title": "The US GHG Center at American Meteorological Society Annual Meeting 2024",
+    "section": "Short Course",
+    "text": "Short Course\nAdvancing Open Science: An Interactive Workshop on Harnessing VEDA for Earth Science Research at the U.S. Greenhouse Gas Center\n📅 Jan 28, 2024, 🕣 8:00 AM - 3:45 PM EST, 📍 Baltimore Convention Center\nLearn how to effectively analyze and visualize Earth science data in the cloud using open-source tools and datasets [Jan 28, room ]."
   },
   {
-    "objectID": "prerequisites.html#to-get-us-ghg-center-jupyterhub-access",
-    "href": "prerequisites.html#to-get-us-ghg-center-jupyterhub-access",
-    "title": "Prerequisites",
-    "section": "",
-    "text": "The US GHG Center notebook environment is available to authorized users on an as-need basis. You can request access by using our Hub Access Request form.\n\nMake sure you have a GitHub Account. Take note of your GitHub username.\nFill out the request form and provide needed information. Make sure to use your organization/univerity email and use “AMS Workshop 2023” as the reason.\nWatch your email for notification of authorization and the invite to join the US GHG Center Hub Access GitHub Team.\nOnce you accept the invitation, you can go to hub.ghg.center and login using your GitHub credentials."
+    "objectID": "ghg-center-at-ams-2024.html#town-hall",
+    "href": "ghg-center-at-ams-2024.html#town-hall",
+    "title": "The US GHG Center at American Meteorological Society Annual Meeting 2024",
+    "section": "Town Hall",
+    "text": "Town Hall\nU.S. Greenhouse Gas Center: Listening Session.\n📅 Jan 30, 2024, 🕣 12:25 PM - 1:15 PM EST, 📍 Holiday 5, Hilton Baltimore Inner Harbor\nCome share your thoughts and see a demonstration of the US GHG Center. Upcoming developments and opportunities will be presented. [Jan 30, room Holiday 5 at Hilton Baltimore Inner Harbor]."
   },
   {
-    "objectID": "interactive-session-1-epa-gridded-methane-emissions/index.html",
-    "href": "interactive-session-1-epa-gridded-methane-emissions/index.html",
-    "title": "EPA Gridded Methane Emissions Inventory",
-    "section": "",
-    "text": "EPA Gridded Methane Emissions Inventory"
-  },
-  {
-    "objectID": "open-science-in-action/index.html",
-    "href": "open-science-in-action/index.html",
-    "title": "Open Science in Action: Intro to GitHub & Communicating Science Discoveries via Web Dashboard",
-    "section": "",
-    "text": "Open Science in Action: Intro to GitHub & Communicating Science Discoveries via Web Dashboard"
+    "objectID": "ghg-center-at-ams-2024.html#presentations",
+    "href": "ghg-center-at-ams-2024.html#presentations",
+    "title": "The US GHG Center at American Meteorological Society Annual Meeting 2024",
+    "section": "Presentations",
+    "text": "Presentations\nMultiple presentations by GHG Center team members will occur throughout the week. Stop by to hear more from GHG Center team members!\n\n\n\n\n\n\n\n\n\nWhen\nRoom\nPresentation Title\n\n\n\n\nTues, Jan 30 4:45\nHoliday 5\nHilton Baltimore Inner Harbor\n8A.2 Stakeholder Engagement for the US Greenhouse Gas Center (Combley)\n\n\nMon, Jan 29 5:15\n336\nThe Baltimore Convention Center\nJ4B.4 Developing a Cross-Institutional Open-Source Cyberinfrastructure to Explore, Analyze, and Communicate Greenhouse Gas Data and Information (Chaudhary)\n\n\nTues, Jan 30 5:15\nBallroom II\nThe Baltimore Convention Center\nJ8A.4 PPAP’s and NIST’s Urban Greenhouse Gas Measurements Program (Whetstone)\n\n\nWed, Jan 31 5:30\nHoliday 5\nHilton Baltimore Inner Harbor\n12A.5 NIST’s Urban Greenhouse Gas Measurements Program and Interactions with NOAA’s Air Resources Laboratory (Whetstone)\n\n\nMon, Jan 29 11:30\n321/322\nThe Baltimore Convention Center\n2B.4 Methane and Carbon Dioxide Point Source Measurements Across Six Continents from the EMIT Imaging Spectrometer on the International Space Station - and Contributions to the U.S. Greenhouse Gas Center (Green)\n\n\nMon, Jan 29 5:30\n321/322\nThe Baltimore Convention Center\n4B.5 Detectability of Anthropogenic Impacts on Terrestrial Carbon Storage through Space Based Greenhouse Gas Observations (Weir)\n\n\nThur, Feb 1 2:30\nHoliday 4\nHilton Baltimore Inner Harbor\nJ15.4 NOAA Carbon Monitoring, Research and Innovation: Long-Standing Foundation to Support Climate Mitigation (Grubišić)"
   },
   {
     "objectID": "speakers.html",
@@ -126,11 +119,46 @@
     "text": "Deborah Smith\nSlesa Adhikari\nSiddharth Chaudhary"
   },
   {
+    "objectID": "open-science-in-action/index.html",
+    "href": "open-science-in-action/index.html",
+    "title": "Open Science in Action: Intro to GitHub & Communicating Science Discoveries via Web Dashboard",
+    "section": "",
+    "text": "Open Science in Action: Intro to GitHub & Communicating Science Discoveries via Web Dashboard"
+  },
+  {
+    "objectID": "interactive-session-1-epa-gridded-methane-emissions/index.html",
+    "href": "interactive-session-1-epa-gridded-methane-emissions/index.html",
+    "title": "EPA Gridded Methane Emissions Inventory",
+    "section": "",
+    "text": "EPA Gridded Methane Emissions Inventory"
+  },
+  {
+    "objectID": "prerequisites.html",
+    "href": "prerequisites.html",
+    "title": "Prerequisites",
+    "section": "",
+    "text": "All the workshop participants need to have access to the US GHG Center JupyterHub to follow along the workshop.\n\n\nThe US GHG Center notebook environment is available to authorized users on an as-need basis. You can request access by using our Hub Access Request form.\n\nMake sure you have a GitHub Account. Take note of your GitHub username.\nFill out the request form and provide needed information. Make sure to use your organization/univerity email and use “AMS Workshop 2023” as the reason.\nWatch your email for notification of authorization and the invite to join the US GHG Center Hub Access GitHub Team.\nOnce you accept the invitation, you can go to hub.ghg.center and login using your GitHub credentials."
+  },
+  {
+    "objectID": "prerequisites.html#to-get-us-ghg-center-jupyterhub-access",
+    "href": "prerequisites.html#to-get-us-ghg-center-jupyterhub-access",
+    "title": "Prerequisites",
+    "section": "",
+    "text": "The US GHG Center notebook environment is available to authorized users on an as-need basis. You can request access by using our Hub Access Request form.\n\nMake sure you have a GitHub Account. Take note of your GitHub username.\nFill out the request form and provide needed information. Make sure to use your organization/univerity email and use “AMS Workshop 2023” as the reason.\nWatch your email for notification of authorization and the invite to join the US GHG Center Hub Access GitHub Team.\nOnce you accept the invitation, you can go to hub.ghg.center and login using your GitHub credentials."
+  },
+  {
+    "objectID": "interactive-session-3-large-point-source-methane-emission-events/index.html",
+    "href": "interactive-session-3-large-point-source-methane-emission-events/index.html",
+    "title": "Identifying and quantifying emissions from large point source methane emission events leveraging aircraft and satellite data",
+    "section": "",
+    "text": "Identifying and quantifying emissions from large point source methane emission events leveraging aircraft and satellite data"
+  },
+  {
     "objectID": "agenda.html",
     "href": "agenda.html",
     "title": "Workshop Agenda",
     "section": "",
-    "text": "Workshop Agenda\nThe full-day workshop will be divided into the following sections:\n\n\n\n\n\n\n\n0:00 - 0:10\nWelcome\n\nWorkshop Introduction\nTeam Introduction\n\n\n\n0:10 - 0.30\nOverview of the U.S. Greenhouse Gas Center\n\nIntro to the VEDA project and its relevance to Earth Science research and the US GHG Center\nWhat is the US GHG Center?\nIntroduction to the science use cases / demonstration areas that will be explored - during the workshop\n\n\n\n0:30 - 1:00\nIntroduction to STAC Catalog\n\nWhat is a STAC catalog?\nHands-on exercise: searching and accessing cloud-optimized datasets using the STAC catalog\n\nAccessing GHG Center Data in STAC\n\n\n\n\n1:00 - 1:15\nPython and Jupyter Notebooks for Data Analysis and Visualization\n\nIntro to Jupyter Notebooks\nHands-on exercise: user notebook access and practice environment\n\n\n\n1:15 - 1:35\nSetting the Scope for Interactive Sessions\n\nRole of Methane and Carbon Dioxide in Climate Change\nSession Objectives / Goal\nDescription of Areas of Interest (AOI)\n\n\n\n1:35 - 1:50\nBREAK\n\n\n1:50 - 2:50\nInteractive Session 1: EPA Gridded Methane Emissions Inventory\n\nBackground and gridding methods overview/ example\nImproving access and latency of human anthropogenic emissions\nHands-on exercise\n\n\n\n2:50 - 3:50\nInteractive Session 2: Complementing anthropogenic GHG emissions with natural GHG emissions and fluxes\n\nDescription of data sets and analysis available via the U.S. GHG Center (e.g., gridded wetland emissions and ecosystem exchange estimates)\nHands-on exercise: Exploring annual U.S. wetland methane emissions and their - meteorological influences.\n\n\n\n3:50 - 4:05\nBREAK\n\n\n4:05 - 5:05\nIdentifying and quantifying emissions from large point source methane emission events leveraging aircraft and satellite data\n\nDescription of data sets and analysis available via the U.S. GHG Center (e.g., EMIT methane enhancements; plans for emission rates, CO2, etc.)\nHands-on exercise: Locating enhancement, understanding temporal relevance, exploring site with multiple observations.\n\n\n\n5:05 - 5:50\nOpen Science in Action: Intro to GitHub & Communicating Science Discoveries via Web Dashboard\n\nHow do VEDA, GitHub, and JupyterHub interoperate and why is this important?\n\nHands-on exercise:\n\nIntroduction to web dashboards for science communication\n\nHands-on exercise: creating a web dashboard to communicate science discoveries - using the platform\n\n\n\n\n5:50 - 6:00\nClosing Remarks (5:50 - 6:00)\n\nFuture Developments and Community Contributions\nEngaging with the U.S. Greenhouse Gas Center\n\n\n\n\nThroughout the workshop, facilitators will be available to provide support and guidance, ensuring participants are able to actively explore the workshop topics and apply their knowledge and skills to their own research projects."
+    "text": "Workshop Agenda\nThe full-day workshop will be divided into the following sections:\n\n\n\n\n\n\n\n\n0:00 - 0:10\nWelcome\n\nWorkshop Introduction\nTeam Introduction\n\n\n\n0:10 - 0.30\nOverview of the U.S. Greenhouse Gas Center\n\nIntro to the VEDA project and its relevance to Earth Science research and the US GHG Center\nWhat is the US GHG Center?\nIntroduction to the science use cases / demonstration areas that will be explored - during the workshop\n\n\n\n0:30 - 1:00\nIntroduction to STAC Catalog\n\nWhat is a STAC catalog?\nHands-on exercise: searching and accessing cloud-optimized datasets using the STAC catalog\n\nAccessing GHG Center Data in STAC\n\n\n\n\n1:00 - 1:15\nPython and Jupyter Notebooks for Data Analysis and Visualization\n\nIntro to Jupyter Notebooks\nHands-on exercise: user notebook access and practice environment\n\n\n\n1:15 - 1:35\nSetting the Scope for Interactive Sessions\n\nRole of Methane and Carbon Dioxide in Climate Change\nSession Objectives / Goal\nDescription of Areas of Interest (AOI)\n\n\n\n1:35 - 1:50\nBREAK\n\n\n1:50 - 2:50\nInteractive Session 1: EPA Gridded Methane Emissions Inventory\n\nBackground and gridding methods overview/ example\nImproving access and latency of human anthropogenic emissions\nHands-on exercise\n\n\n\n2:50 - 3:50\nInteractive Session 2: Complementing anthropogenic GHG emissions with natural GHG emissions and fluxes\n\nDescription of data sets and analysis available via the U.S. GHG Center (e.g., gridded wetland emissions and ecosystem exchange estimates)\nHands-on exercise: Exploring annual U.S. wetland methane emissions and their - meteorological influences.\n\n\n\n3:50 - 4:05\nBREAK\n\n\n4:05 - 5:05\nIdentifying and quantifying emissions from large point source methane emission events leveraging aircraft and satellite data\n\nDescription of data sets and analysis available via the U.S. GHG Center (e.g., EMIT methane enhancements; plans for emission rates, CO2, etc.)\nHands-on exercise: Locating enhancement, understanding temporal relevance, exploring site with multiple observations.\n\n\n\n5:05 - 5:50\nOpen Science in Action: Intro to GitHub & Communicating Science Discoveries via Web Dashboard\n\nHow do VEDA, GitHub, and JupyterHub interoperate and why is this important?\n\nHands-on exercise:\n\nIntroduction to web dashboards for science communication\n\nHands-on exercise: creating a web dashboard to communicate science discoveries - using the platform\n\n\n\n\n5:50 - 6:00\nClosing Remarks (5:50 - 6:00)\n\nFuture Developments and Community Contributions\nEngaging with the U.S. Greenhouse Gas Center\n\n\n\n\nThroughout the workshop, facilitators will be available to provide support and guidance, ensuring participants are able to actively explore the workshop topics and apply their knowledge and skills to their own research projects."
   },
   {
     "objectID": "intro-us-ghg-center/index.html",

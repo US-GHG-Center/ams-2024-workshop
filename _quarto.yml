@@ -18,7 +18,7 @@ website:
       - text: Speakers
         file: speakers.md
       - text: US GHG Center at AMS 2024
-        href: ghg-center-at-ams-2024.md
+        file: ghg-center-at-ams-2024.md
         # icon: team
   page-footer:
     right: "This page is built with [Quarto](https://quarto.org/)."
@@ -74,7 +74,8 @@ format:
       sidebar-width: 30vw
       body-width: 900px
     theme:
-      light: [journal]
+      light: [journal, style.scss]
+    
     # css: styles.css
     code-copy: true
     code-overflow: wrap

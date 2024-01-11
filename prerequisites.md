@@ -1,9 +1,11 @@
 # Prerequisites
 
-All the workshop participants **MUST** obtain the following to be able to follow along the workshop:
+- Participants are expected to have a basic knowledge of the python programming language.
 
-1. US GHG Center JupyterHub Access
-2. Earthdata credentials
+- Participants **MUST** obtain the following to be able to follow along the workshop:
+
+    1. US GHG Center JupyterHub Access
+    2. Earthdata credentials
 
 > 🚨 Please make sure you have both of the accesses before you come to the workshop on Sunday.
 

@@ -2,6 +2,7 @@
 title: Utilizing Open Science Techniques for Exploring Greenhouse Gas Data
 subtitle: An Interactive Workshop on the U.S. Greenhouse Gas Center and VEDA Tools for use in Earth Science Research
 ---
+📅 Jan 28, 2024, 🕣 8:00 AM - 3:45 PM EST, 📍 Baltimore Convention Center
 
 🔗 [Session on the AMS Website](https://www.ametsoc.org/index.cfm/ams/education-careers/careers/professional-development/short-courses/advancing-open-science-an-interactive-workshop-on-harnessing-veda-for-earth-science-research-at-the-u-s-greenhouse-gas-center/)
 

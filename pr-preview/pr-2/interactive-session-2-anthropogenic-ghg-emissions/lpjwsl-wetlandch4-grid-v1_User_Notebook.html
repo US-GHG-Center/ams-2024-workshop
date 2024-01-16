@@ -249,7 +249,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>%pip install requests, folium, rasterstats, pystac_client, pandas, matplotlib</p>
 <section id="querying-the-stac-api" class="level2">
 <h2 class="anchored" data-anchor-id="querying-the-stac-api">Querying the STAC API</h2>
-<div class="cell" data-execution_count="77">
+<div class="cell" data-execution_count="137">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> requests</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> folium</span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> folium.plugins</span>
@@ -263,7 +263,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> shapely <span class="im">import</span> wkt</span>
 <span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> seaborn <span class="im">as</span> sns</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div class="cell" data-execution_count="78">
+<div class="cell" data-execution_count="138">
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Provide STAC and RASTER API endpoints</span></span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>STAC_API_URL <span class="op">=</span> <span class="st">"http://ghg.center/api/stac"</span></span>
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>RASTER_API_URL <span class="op">=</span> <span class="st">"https://ghg.center/api/raster"</span></span>
@@ -273,11 +273,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Name of the collection for wetland methane monthly emissions. </span></span>
 <span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>collection_name <span class="op">=</span> <span class="st">"lpjwsl-wetlandch4-monthgrid-v1"</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div class="cell" data-execution_count="79">
+<div class="cell" data-execution_count="139">
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Fetching the collection from STAC collections using appropriate endpoint.</span></span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>collection <span class="op">=</span> requests.get(<span class="ss">f"</span><span class="sc">{</span>STAC_API_URL<span class="sc">}</span><span class="ss">/collections/</span><span class="sc">{</span>collection_name<span class="sc">}</span><span class="ss">"</span>).json()</span>
 <span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>collection</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="79">
+<div class="cell-output cell-output-display" data-execution_count="139">
 <pre><code>{'id': 'lpjwsl-wetlandch4-monthgrid-v1',
  'type': 'Collection',
  'links': [{'rel': 'items',
@@ -313,7 +313,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 <p>Examining the contents of our <code>collection</code> under <code>summaries</code>, we see that the data is available from January 1980 to December 2021. By looking at <code>dashboard: time density</code>, we can see that these observations are collected monthly.</p>
-<div class="cell" data-execution_count="80">
+<div class="cell" data-execution_count="140">
 <div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> get_item_count(collection_id):</span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>    count <span class="op">=</span> <span class="dv">0</span></span>
 <span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>    items_url <span class="op">=</span> <span class="ss">f"</span><span class="sc">{</span>STAC_API_URL<span class="sc">}</span><span class="ss">/collections/</span><span class="sc">{</span>collection_id<span class="sc">}</span><span class="ss">/items"</span></span>
@@ -335,7 +335,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb5-19"><a href="#cb5-19" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb5-20"><a href="#cb5-20" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> count</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div class="cell" data-execution_count="81">
+<div class="cell" data-execution_count="141">
 <div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Check total number of items available</span></span>
 <span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>number_of_items <span class="op">=</span> get_item_count(collection_name)</span>
 <span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>items <span class="op">=</span> requests.get(<span class="ss">f"</span><span class="sc">{</span>STAC_API_URL<span class="sc">}</span><span class="ss">/collections/</span><span class="sc">{</span>collection_name<span class="sc">}</span><span class="ss">/items?limit=</span><span class="sc">{</span>number_of_items<span class="sc">}</span><span class="ss">"</span>).json()[<span class="st">"features"</span>]</span>
@@ -344,10 +344,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <pre><code>Found 504 items</code></pre>
 </div>
 </div>
-<div class="cell" data-execution_count="82">
+<div class="cell" data-execution_count="142">
 <div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Examining the first item in the collection</span></span>
 <span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>items[<span class="dv">0</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="82">
+<div class="cell-output cell-output-display" data-execution_count="142">
 <pre><code>{'id': 'lpjwsl-wetlandch4-monthgrid-v1-202112',
  'bbox': [-180.0, -90.0, 180.0, 90.0],
  'type': 'Feature',
@@ -431,19 +431,19 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 <p>Below, we enter minimum and maximum values to provide our upper and lower bounds in <code>rescale_values.</code></p>
-<div class="cell" data-execution_count="83">
+<div class="cell" data-execution_count="143">
 <div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>rescale_values <span class="op">=</span> {<span class="st">'max'</span>: <span class="fl">0.2</span>, <span class="st">'min'</span>: <span class="fl">0.0</span>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 <section id="exploring-changes-in-methane-ch4-emission-levels-using-the-raster-api" class="level2">
 <h2 class="anchored" data-anchor-id="exploring-changes-in-methane-ch4-emission-levels-using-the-raster-api">Exploring Changes in Methane (CH4) Emission Levels Using the Raster API</h2>
 <p>In this notebook, we will explore the temporal impacts of methane emissions. We will visualize the outputs on a map using <code>folium</code>.</p>
-<div class="cell" data-execution_count="84">
+<div class="cell" data-execution_count="144">
 <div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="co"># To access the year value from each item more easily, this will let us query more explicity by year and month (e.g., 2020-02)</span></span>
 <span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>items <span class="op">=</span> {item[<span class="st">"properties"</span>][<span class="st">"datetime"</span>][:<span class="dv">7</span>]: item <span class="cf">for</span> item <span class="kw">in</span> items} </span>
 <span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>asset_name <span class="op">=</span> <span class="st">'ch4-wetlands-emissions'</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div class="cell" data-execution_count="85">
+<div class="cell" data-execution_count="145">
 <div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>aoi <span class="op">=</span> [<span class="op">-</span><span class="fl">95.9</span>,<span class="op">-</span><span class="fl">87.50</span>,<span class="fl">28.7</span>,<span class="fl">33.5</span>]</span>
 <span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>louisiana_aoi <span class="op">=</span> {</span>
 <span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>    <span class="st">"type"</span>: <span class="st">"Feature"</span>,</span>
@@ -463,7 +463,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb12-17"><a href="#cb12-17" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Now, we will pass the item id, collection name, and <code>rescaling_factor</code> to the <code>Raster API</code> endpoint. We will do this twice, once for December 2001 and again for December 2021, so we can visualize each event independently.</p>
-<div class="cell" data-execution_count="86">
+<div class="cell" data-execution_count="146">
 <div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>color_map <span class="op">=</span> <span class="st">"magma"</span> <span class="co"># select the color ramp from matplotlib library.</span></span>
 <span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>december_2001_tile <span class="op">=</span> requests.get(</span>
 <span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>    <span class="ss">f"</span><span class="sc">{</span>RASTER_API_URL<span class="sc">}</span><span class="ss">/stac/tilejson.json?collection=</span><span class="sc">{</span>items[<span class="st">'2020-12'</span>][<span class="st">'collection'</span>]<span class="sc">}</span><span class="ss">&amp;item=</span><span class="sc">{</span>items[<span class="st">'2020-12'</span>][<span class="st">'id'</span>]<span class="sc">}</span><span class="ss">"</span></span>
@@ -472,7 +472,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a>    <span class="ss">f"&amp;rescale=</span><span class="sc">{</span>rescale_values[<span class="st">'min'</span>]<span class="sc">}</span><span class="ss">,</span><span class="sc">{</span>rescale_values[<span class="st">'max'</span>]<span class="sc">}</span><span class="ss">"</span></span>
 <span id="cb13-7"><a href="#cb13-7" aria-hidden="true" tabindex="-1"></a>).json()</span>
 <span id="cb13-8"><a href="#cb13-8" aria-hidden="true" tabindex="-1"></a>december_2001_tile</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="86">
+<div class="cell-output cell-output-display" data-execution_count="146">
 <pre><code>{'tilejson': '2.2.0',
  'version': '1.0.0',
  'scheme': 'xyz',
@@ -483,7 +483,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
  'center': [0.0, 0.0, 0]}</code></pre>
 </div>
 </div>
-<div class="cell" data-execution_count="87">
+<div class="cell" data-execution_count="147">
 <div class="sourceCode cell-code" id="cb15"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>december_2021_tile <span class="op">=</span> requests.get(</span>
 <span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>    <span class="ss">f"</span><span class="sc">{</span>RASTER_API_URL<span class="sc">}</span><span class="ss">/stac/tilejson.json?collection=</span><span class="sc">{</span>items[<span class="st">'2021-12'</span>][<span class="st">'collection'</span>]<span class="sc">}</span><span class="ss">&amp;item=</span><span class="sc">{</span>items[<span class="st">'2021-12'</span>][<span class="st">'id'</span>]<span class="sc">}</span><span class="ss">"</span></span>
 <span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>    <span class="st">"&amp;assets=ch4-wetlands-emissions"</span></span>
@@ -491,7 +491,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a>    <span class="ss">f"&amp;rescale=</span><span class="sc">{</span>rescale_values[<span class="st">'min'</span>]<span class="sc">}</span><span class="ss">,</span><span class="sc">{</span>rescale_values[<span class="st">'max'</span>]<span class="sc">}</span><span class="ss">"</span>, </span>
 <span id="cb15-6"><a href="#cb15-6" aria-hidden="true" tabindex="-1"></a>).json()</span>
 <span id="cb15-7"><a href="#cb15-7" aria-hidden="true" tabindex="-1"></a>december_2021_tile</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="87">
+<div class="cell-output cell-output-display" data-execution_count="147">
 <pre><code>{'tilejson': '2.2.0',
  'version': '1.0.0',
  'scheme': 'xyz',
@@ -505,7 +505,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 <section id="visualizing-ch₄-emissions" class="level2">
 <h2 class="anchored" data-anchor-id="visualizing-ch₄-emissions">Visualizing CH₄ Emissions</h2>
-<div class="cell" data-execution_count="88">
+<div class="cell" data-execution_count="148">
 <div class="sourceCode cell-code" id="cb17"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="co"># We will import folium to map and folium.plugins to allow side-by-side mapping</span></span>
 <span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> folium</span>
 <span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> folium.plugins</span>
@@ -534,7 +534,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb17-26"><a href="#cb17-26" aria-hidden="true" tabindex="-1"></a><span class="co"># visualising the map</span></span>
 <span id="cb17-27"><a href="#cb17-27" aria-hidden="true" tabindex="-1"></a>map_</span>
 <span id="cb17-28"><a href="#cb17-28" aria-hidden="true" tabindex="-1"></a></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="88">
+<div class="cell-output cell-output-display" data-execution_count="148">
 <div style="width:100%;"><div style="position:relative;width:100%;height:0;padding-bottom:60%;"><span style="color:#565656">Make this Notebook Trusted to load map: File -&gt; Trust Notebook</span><iframe srcdoc="<!DOCTYPE html>
 <html>
 <head>
@@ -562,7 +562,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
             <meta name=&quot;viewport&quot; content=&quot;width=device-width,
                 initial-scale=1.0, maximum-scale=1.0, user-scalable=no&quot; />
             <style>
-                #map_0d187a7756ee2139018493979f4e6f17 {
+                #map_1b1b4326e06846b397a9d34861972fd8 {
                     position: absolute;
                     width: 50.0%;
                     height: 100.0%;
@@ -576,7 +576,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
             <meta name=&quot;viewport&quot; content=&quot;width=device-width,
                 initial-scale=1.0, maximum-scale=1.0, user-scalable=no&quot; />
             <style>
-                #map_2687d07b10e92e538a2eb78bafab7213 {
+                #map_67b97860c45dd19815f060202f9dcf69 {
                     position: absolute;
                     width: 50.0%;
                     height: 100.0%;
@@ -591,17 +591,17 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <body>
     
     
-            <div class=&quot;folium-map&quot; id=&quot;map_0d187a7756ee2139018493979f4e6f17&quot; ></div>
+            <div class=&quot;folium-map&quot; id=&quot;map_1b1b4326e06846b397a9d34861972fd8&quot; ></div>
         
     
-            <div class=&quot;folium-map&quot; id=&quot;map_2687d07b10e92e538a2eb78bafab7213&quot; ></div>
+            <div class=&quot;folium-map&quot; id=&quot;map_67b97860c45dd19815f060202f9dcf69&quot; ></div>
         
 </body>
 <script>
     
     
-            var map_0d187a7756ee2139018493979f4e6f17 = L.map(
-                &quot;map_0d187a7756ee2139018493979f4e6f17&quot;,
+            var map_1b1b4326e06846b397a9d34861972fd8 = L.map(
+                &quot;map_1b1b4326e06846b397a9d34861972fd8&quot;,
                 {
                     center: [33.5, -87.5],
                     crs: L.CRS.EPSG3857,
@@ -615,39 +615,39 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
         
     
-            var tile_layer_6e7d97e616b5c4f3588ed2fd9f643b3e = L.tileLayer(
+            var tile_layer_9a134c236738ead4e38ea88b789fef9e = L.tileLayer(
                 &quot;https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png&quot;,
                 {&quot;attribution&quot;: &quot;Data by \u0026copy; \u003ca target=\&quot;_blank\&quot; href=\&quot;http://openstreetmap.org\&quot;\u003eOpenStreetMap\u003c/a\u003e, under \u003ca target=\&quot;_blank\&quot; href=\&quot;http://www.openstreetmap.org/copyright\&quot;\u003eODbL\u003c/a\u003e.&quot;, &quot;detectRetina&quot;: false, &quot;maxNativeZoom&quot;: 18, &quot;maxZoom&quot;: 18, &quot;minZoom&quot;: 0, &quot;noWrap&quot;: false, &quot;opacity&quot;: 1, &quot;subdomains&quot;: &quot;abc&quot;, &quot;tms&quot;: false}
-            ).addTo(map_0d187a7756ee2139018493979f4e6f17);
+            ).addTo(map_1b1b4326e06846b397a9d34861972fd8);
         
     
-            var tile_layer_0b04f4c47c8e1858502a248dddccdc21 = L.tileLayer(
+            var tile_layer_bf391a92ae6a3af0c68bd36a92ab513d = L.tileLayer(
                 &quot;https://ghg.center/api/raster/stac/tiles/WebMercatorQuad/{z}/{x}/{y}@1x?collection=lpjwsl-wetlandch4-monthgrid-v1\u0026item=lpjwsl-wetlandch4-monthgrid-v1-202012\u0026assets=ch4-wetlands-emissions\u0026color_formula=gamma+r+1.05\u0026colormap_name=magma\u0026rescale=0.0%2C0.2&quot;,
                 {&quot;attribution&quot;: &quot;GHG&quot;, &quot;detectRetina&quot;: false, &quot;maxNativeZoom&quot;: 18, &quot;maxZoom&quot;: 18, &quot;minZoom&quot;: 0, &quot;noWrap&quot;: false, &quot;opacity&quot;: 0.5, &quot;subdomains&quot;: &quot;abc&quot;, &quot;tms&quot;: false}
-            ).addTo(map_0d187a7756ee2139018493979f4e6f17);
+            ).addTo(map_1b1b4326e06846b397a9d34861972fd8);
         
     
 
-        function geo_json_b828954aa4847f6cbed2bf14e86138c7_onEachFeature(feature, layer) {
+        function geo_json_b951168c91d017d3bab9b9145f72a36c_onEachFeature(feature, layer) {
             layer.on({
             });
         };
-        var geo_json_b828954aa4847f6cbed2bf14e86138c7 = L.geoJson(null, {
-                onEachFeature: geo_json_b828954aa4847f6cbed2bf14e86138c7_onEachFeature,
+        var geo_json_b951168c91d017d3bab9b9145f72a36c = L.geoJson(null, {
+                onEachFeature: geo_json_b951168c91d017d3bab9b9145f72a36c_onEachFeature,
             
         });
 
-        function geo_json_b828954aa4847f6cbed2bf14e86138c7_add (data) {
-            geo_json_b828954aa4847f6cbed2bf14e86138c7
+        function geo_json_b951168c91d017d3bab9b9145f72a36c_add (data) {
+            geo_json_b951168c91d017d3bab9b9145f72a36c
                 .addData(data)
-                .addTo(map_0d187a7756ee2139018493979f4e6f17);
+                .addTo(map_1b1b4326e06846b397a9d34861972fd8);
         }
-            geo_json_b828954aa4847f6cbed2bf14e86138c7_add({&quot;geometry&quot;: {&quot;coordinates&quot;: [[[-95.9, 28.7], [-95.9, 33.5], [-87.5, 33.5], [-87.5, 28.7], [-95.9, 28.7]]], &quot;type&quot;: &quot;Polygon&quot;}, &quot;properties&quot;: {}, &quot;type&quot;: &quot;Feature&quot;});
+            geo_json_b951168c91d017d3bab9b9145f72a36c_add({&quot;geometry&quot;: {&quot;coordinates&quot;: [[[-95.9, 28.7], [-95.9, 33.5], [-87.5, 33.5], [-87.5, 28.7], [-95.9, 28.7]]], &quot;type&quot;: &quot;Polygon&quot;}, &quot;properties&quot;: {}, &quot;type&quot;: &quot;Feature&quot;});
 
         
     
-            var map_2687d07b10e92e538a2eb78bafab7213 = L.map(
-                &quot;map_2687d07b10e92e538a2eb78bafab7213&quot;,
+            var map_67b97860c45dd19815f060202f9dcf69 = L.map(
+                &quot;map_67b97860c45dd19815f060202f9dcf69&quot;,
                 {
                     center: [33.5, -87.5],
                     crs: L.CRS.EPSG3857,
@@ -661,45 +661,45 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
         
     
-            var tile_layer_f38751456ce393666565caa8e49e66c1 = L.tileLayer(
+            var tile_layer_6a0afcbc935d0470c8ac4fddf3369b3b = L.tileLayer(
                 &quot;https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png&quot;,
                 {&quot;attribution&quot;: &quot;Data by \u0026copy; \u003ca target=\&quot;_blank\&quot; href=\&quot;http://openstreetmap.org\&quot;\u003eOpenStreetMap\u003c/a\u003e, under \u003ca target=\&quot;_blank\&quot; href=\&quot;http://www.openstreetmap.org/copyright\&quot;\u003eODbL\u003c/a\u003e.&quot;, &quot;detectRetina&quot;: false, &quot;maxNativeZoom&quot;: 18, &quot;maxZoom&quot;: 18, &quot;minZoom&quot;: 0, &quot;noWrap&quot;: false, &quot;opacity&quot;: 1, &quot;subdomains&quot;: &quot;abc&quot;, &quot;tms&quot;: false}
-            ).addTo(map_2687d07b10e92e538a2eb78bafab7213);
+            ).addTo(map_67b97860c45dd19815f060202f9dcf69);
         
     
-            var tile_layer_04acf66336665b4ee8bb99573d2d9a3f = L.tileLayer(
+            var tile_layer_75380c8e2d3a2fbc363661f8f2862f26 = L.tileLayer(
                 &quot;https://ghg.center/api/raster/stac/tiles/WebMercatorQuad/{z}/{x}/{y}@1x?collection=lpjwsl-wetlandch4-monthgrid-v1\u0026item=lpjwsl-wetlandch4-monthgrid-v1-202112\u0026assets=ch4-wetlands-emissions\u0026color_formula=gamma+r+1.05\u0026colormap_name=magma\u0026rescale=0.0%2C0.2&quot;,
                 {&quot;attribution&quot;: &quot;GHG&quot;, &quot;detectRetina&quot;: false, &quot;maxNativeZoom&quot;: 18, &quot;maxZoom&quot;: 18, &quot;minZoom&quot;: 0, &quot;noWrap&quot;: false, &quot;opacity&quot;: 0.5, &quot;subdomains&quot;: &quot;abc&quot;, &quot;tms&quot;: false}
-            ).addTo(map_2687d07b10e92e538a2eb78bafab7213);
+            ).addTo(map_67b97860c45dd19815f060202f9dcf69);
         
     
-            map_0d187a7756ee2139018493979f4e6f17.sync(map_2687d07b10e92e538a2eb78bafab7213);
-            map_2687d07b10e92e538a2eb78bafab7213.sync(map_0d187a7756ee2139018493979f4e6f17);
+            map_1b1b4326e06846b397a9d34861972fd8.sync(map_67b97860c45dd19815f060202f9dcf69);
+            map_67b97860c45dd19815f060202f9dcf69.sync(map_1b1b4326e06846b397a9d34861972fd8);
         
     
 
-        function geo_json_f929f102e5d94b5497b5d9b6e0fbaeb5_onEachFeature(feature, layer) {
+        function geo_json_162cceca639b4632a2a6ba2207c5c6be_onEachFeature(feature, layer) {
             layer.on({
             });
         };
-        var geo_json_f929f102e5d94b5497b5d9b6e0fbaeb5 = L.geoJson(null, {
-                onEachFeature: geo_json_f929f102e5d94b5497b5d9b6e0fbaeb5_onEachFeature,
+        var geo_json_162cceca639b4632a2a6ba2207c5c6be = L.geoJson(null, {
+                onEachFeature: geo_json_162cceca639b4632a2a6ba2207c5c6be_onEachFeature,
             
         });
 
-        function geo_json_f929f102e5d94b5497b5d9b6e0fbaeb5_add (data) {
-            geo_json_f929f102e5d94b5497b5d9b6e0fbaeb5
+        function geo_json_162cceca639b4632a2a6ba2207c5c6be_add (data) {
+            geo_json_162cceca639b4632a2a6ba2207c5c6be
                 .addData(data)
-                .addTo(map_2687d07b10e92e538a2eb78bafab7213);
+                .addTo(map_67b97860c45dd19815f060202f9dcf69);
         }
-            geo_json_f929f102e5d94b5497b5d9b6e0fbaeb5_add({&quot;geometry&quot;: {&quot;coordinates&quot;: [[[-95.9, 28.7], [-95.9, 33.5], [-87.5, 33.5], [-87.5, 28.7], [-95.9, 28.7]]], &quot;type&quot;: &quot;Polygon&quot;}, &quot;properties&quot;: {}, &quot;type&quot;: &quot;Feature&quot;});
+            geo_json_162cceca639b4632a2a6ba2207c5c6be_add({&quot;geometry&quot;: {&quot;coordinates&quot;: [[[-95.9, 28.7], [-95.9, 33.5], [-87.5, 33.5], [-87.5, 28.7], [-95.9, 28.7]]], &quot;type&quot;: &quot;Polygon&quot;}, &quot;properties&quot;: {}, &quot;type&quot;: &quot;Feature&quot;});
 
         
 </script>
 </html>" style="position:absolute;width:100%;height:100%;left:0;top:0;border:none !important;" allowfullscreen="" webkitallowfullscreen="" mozallowfullscreen=""></iframe></div></div>
 </div>
 </div>
-<div class="cell" data-execution_count="89">
+<div class="cell" data-execution_count="149">
 <div class="sourceCode cell-code" id="cb18"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Check total number of items available</span></span>
 <span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>items <span class="op">=</span> requests.get(</span>
 <span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a>    <span class="ss">f"</span><span class="sc">{</span>STAC_API_URL<span class="sc">}</span><span class="ss">/collections/</span><span class="sc">{</span>collection_name<span class="sc">}</span><span class="ss">/items?limit=</span><span class="sc">{</span>number_of_items<span class="sc">}</span><span class="ss">"</span></span>
@@ -709,7 +709,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <pre><code>Found 504 items</code></pre>
 </div>
 </div>
-<div class="cell" data-execution_count="90">
+<div class="cell" data-execution_count="150">
 <div class="sourceCode cell-code" id="cb20"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="co"># The bounding box should be passed to the geojson param as a geojson Feature or FeatureCollection</span></span>
 <span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> generate_stats(item, geojson):</span>
 <span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a>    result <span class="op">=</span> requests.post(</span>
@@ -723,17 +723,17 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb20-11"><a href="#cb20-11" aria-hidden="true" tabindex="-1"></a>    }</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>With the function above, we can generate the statistics for the area of interest.</p>
-<div class="cell" data-execution_count="91">
+<div class="cell" data-execution_count="151">
 <div class="sourceCode cell-code" id="cb21"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="op">%%</span>time</span>
 <span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>stats <span class="op">=</span> [generate_stats(item, louisiana_aoi) <span class="cf">for</span> item <span class="kw">in</span> items]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>CPU times: user 14.9 s, sys: 1.46 s, total: 16.3 s
-Wall time: 3min 53s</code></pre>
+<pre><code>CPU times: user 15 s, sys: 1.55 s, total: 16.5 s
+Wall time: 3min 51s</code></pre>
 </div>
 </div>
-<div class="cell" data-execution_count="92">
+<div class="cell" data-execution_count="152">
 <div class="sourceCode cell-code" id="cb23"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a>stats</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="92">
+<div class="cell-output cell-output-display" data-execution_count="152">
 <pre><code>[{'statistics': {'b1': {'min': 0.0,
     'max': 0.7171422839164734,
     'mean': 0.15437047621783087,
@@ -14848,7 +14848,7 @@ Wall time: 3min 53s</code></pre>
   'datetime': '1980-01-01T00:00:00+00:00'}]</code></pre>
 </div>
 </div>
-<div class="cell" data-execution_count="93">
+<div class="cell" data-execution_count="153">
 <div class="sourceCode cell-code" id="cb25"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
 <span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -14861,7 +14861,7 @@ Wall time: 3min 53s</code></pre>
 <span id="cb25-10"><a href="#cb25-10" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb25-11"><a href="#cb25-11" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span> clean_stats(stats)</span>
 <span id="cb25-12"><a href="#cb25-12" aria-hidden="true" tabindex="-1"></a>df.head(<span class="dv">5</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="93">
+<div class="cell-output cell-output-display" data-execution_count="153">
 <div>
 
 
@@ -15001,19 +15001,26 @@ Wall time: 3min 53s</code></pre>
 </div>
 </div>
 </div>
-<div class="cell" data-execution_count="123">
+<div class="cell" data-execution_count="154">
 <div class="sourceCode cell-code" id="cb26"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a>df_2020_2021 <span class="op">=</span> df[(df[<span class="st">'date'</span>].dt.year <span class="op">==</span> <span class="dv">2020</span>) <span class="op">|</span> (df[<span class="st">'date'</span>].dt.year <span class="op">==</span> <span class="dv">2021</span>)]</span>
-<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a>df_2020_2021[<span class="st">'date'</span>] <span class="op">=</span> df_2020_2021[<span class="st">'date'</span>].dt.year</span>
-<span id="cb26-3"><a href="#cb26-3" aria-hidden="true" tabindex="-1"></a>df_2020_2021</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a>df_2020_2021[<span class="st">'year'</span>] <span class="op">=</span> pd.to_datetime(df_2020_2021[<span class="st">'datetime'</span>]).dt.year</span>
+<span id="cb26-3"><a href="#cb26-3" aria-hidden="true" tabindex="-1"></a>df_2020_2021[<span class="st">'month'</span>] <span class="op">=</span> pd.to_datetime(df_2020_2021[<span class="st">'datetime'</span>]).dt.month</span>
+<span id="cb26-4"><a href="#cb26-4" aria-hidden="true" tabindex="-1"></a>df_2020_2021</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stderr">
-<pre><code>/var/folders/7b/5rrvrjx51l54jchgs0tqps0c0000gn/T/ipykernel_75866/2063308578.py:2: SettingWithCopyWarning: 
+<pre><code>/var/folders/7b/5rrvrjx51l54jchgs0tqps0c0000gn/T/ipykernel_75866/1430459887.py:2: SettingWithCopyWarning: 
 A value is trying to be set on a copy of a slice from a DataFrame.
 Try using .loc[row_indexer,col_indexer] = value instead
 
 See the caveats in the documentation: https://pandas.pydata.org/pandas-docs/stable/user_guide/indexing.html#returning-a-view-versus-a-copy
-  df_2020_2021['date'] = df_2020_2021['date'].dt.year</code></pre>
+  df_2020_2021['year'] = pd.to_datetime(df_2020_2021['datetime']).dt.year
+/var/folders/7b/5rrvrjx51l54jchgs0tqps0c0000gn/T/ipykernel_75866/1430459887.py:3: SettingWithCopyWarning: 
+A value is trying to be set on a copy of a slice from a DataFrame.
+Try using .loc[row_indexer,col_indexer] = value instead
+
+See the caveats in the documentation: https://pandas.pydata.org/pandas-docs/stable/user_guide/indexing.html#returning-a-view-versus-a-copy
+  df_2020_2021['month'] = pd.to_datetime(df_2020_2021['datetime']).dt.month</code></pre>
 </div>
-<div class="cell-output cell-output-display" data-execution_count="123">
+<div class="cell-output cell-output-display" data-execution_count="154">
 <div>
 
 
@@ -15039,6 +15046,8 @@ See the caveats in the documentation: https://pandas.pydata.org/pandas-docs/stab
 <th data-quarto-table-cell-role="th">percentile_2</th>
 <th data-quarto-table-cell-role="th">percentile_98</th>
 <th data-quarto-table-cell-role="th">date</th>
+<th data-quarto-table-cell-role="th">year</th>
+<th data-quarto-table-cell-role="th">month</th>
 </tr>
 </thead>
 <tbody>
@@ -15061,7 +15070,9 @@ See the caveats in the documentation: https://pandas.pydata.org/pandas-docs/stab
 <td>170.0</td>
 <td>0.0</td>
 <td>0.580248</td>
+<td>2021-12-01 00:00:00+00:00</td>
 <td>2021</td>
+<td>12</td>
 </tr>
 <tr class="even">
 <td data-quarto-table-cell-role="th">1</td>
@@ -15082,7 +15093,9 @@ See the caveats in the documentation: https://pandas.pydata.org/pandas-docs/stab
 <td>170.0</td>
 <td>0.0</td>
 <td>0.487611</td>
+<td>2021-11-01 00:00:00+00:00</td>
 <td>2021</td>
+<td>11</td>
 </tr>
 <tr class="odd">
 <td data-quarto-table-cell-role="th">2</td>
@@ -15103,7 +15116,9 @@ See the caveats in the documentation: https://pandas.pydata.org/pandas-docs/stab
 <td>170.0</td>
 <td>0.0</td>
 <td>1.060954</td>
+<td>2021-10-01 00:00:00+00:00</td>
 <td>2021</td>
+<td>10</td>
 </tr>
 <tr class="even">
 <td data-quarto-table-cell-role="th">3</td>
@@ -15124,7 +15139,9 @@ See the caveats in the documentation: https://pandas.pydata.org/pandas-docs/stab
 <td>170.0</td>
 <td>0.0</td>
 <td>1.683133</td>
+<td>2021-09-01 00:00:00+00:00</td>
 <td>2021</td>
+<td>9</td>
 </tr>
 <tr class="odd">
 <td data-quarto-table-cell-role="th">4</td>
@@ -15145,7 +15162,9 @@ See the caveats in the documentation: https://pandas.pydata.org/pandas-docs/stab
 <td>170.0</td>
 <td>0.0</td>
 <td>1.888353</td>
+<td>2021-08-01 00:00:00+00:00</td>
 <td>2021</td>
+<td>8</td>
 </tr>
 <tr class="even">
 <td data-quarto-table-cell-role="th">5</td>
@@ -15166,7 +15185,9 @@ See the caveats in the documentation: https://pandas.pydata.org/pandas-docs/stab
 <td>170.0</td>
 <td>0.0</td>
 <td>2.494618</td>
+<td>2021-07-01 00:00:00+00:00</td>
 <td>2021</td>
+<td>7</td>
 </tr>
 <tr class="odd">
 <td data-quarto-table-cell-role="th">6</td>
@@ -15187,7 +15208,9 @@ See the caveats in the documentation: https://pandas.pydata.org/pandas-docs/stab
 <td>170.0</td>
 <td>0.0</td>
 <td>1.740848</td>
+<td>2021-06-01 00:00:00+00:00</td>
 <td>2021</td>
+<td>6</td>
 </tr>
 <tr class="even">
 <td data-quarto-table-cell-role="th">7</td>
@@ -15208,7 +15231,9 @@ See the caveats in the documentation: https://pandas.pydata.org/pandas-docs/stab
 <td>170.0</td>
 <td>0.0</td>
 <td>1.412362</td>
+<td>2021-05-01 00:00:00+00:00</td>
 <td>2021</td>
+<td>5</td>
 </tr>
 <tr class="odd">
 <td data-quarto-table-cell-role="th">8</td>
@@ -15229,7 +15254,9 @@ See the caveats in the documentation: https://pandas.pydata.org/pandas-docs/stab
 <td>170.0</td>
 <td>0.0</td>
 <td>0.846270</td>
+<td>2021-04-01 00:00:00+00:00</td>
 <td>2021</td>
+<td>4</td>
 </tr>
 <tr class="even">
 <td data-quarto-table-cell-role="th">9</td>
@@ -15250,7 +15277,9 @@ See the caveats in the documentation: https://pandas.pydata.org/pandas-docs/stab
 <td>170.0</td>
 <td>0.0</td>
 <td>0.631327</td>
+<td>2021-03-01 00:00:00+00:00</td>
 <td>2021</td>
+<td>3</td>
 </tr>
 <tr class="odd">
 <td data-quarto-table-cell-role="th">10</td>
@@ -15271,7 +15300,9 @@ See the caveats in the documentation: https://pandas.pydata.org/pandas-docs/stab
 <td>170.0</td>
 <td>0.0</td>
 <td>0.398276</td>
+<td>2021-02-01 00:00:00+00:00</td>
 <td>2021</td>
+<td>2</td>
 </tr>
 <tr class="even">
 <td data-quarto-table-cell-role="th">11</td>
@@ -15292,7 +15323,9 @@ See the caveats in the documentation: https://pandas.pydata.org/pandas-docs/stab
 <td>170.0</td>
 <td>0.0</td>
 <td>0.570820</td>
+<td>2021-01-01 00:00:00+00:00</td>
 <td>2021</td>
+<td>1</td>
 </tr>
 <tr class="odd">
 <td data-quarto-table-cell-role="th">12</td>
@@ -15313,7 +15346,9 @@ See the caveats in the documentation: https://pandas.pydata.org/pandas-docs/stab
 <td>170.0</td>
 <td>0.0</td>
 <td>0.566325</td>
+<td>2020-12-01 00:00:00+00:00</td>
 <td>2020</td>
+<td>12</td>
 </tr>
 <tr class="even">
 <td data-quarto-table-cell-role="th">13</td>
@@ -15334,7 +15369,9 @@ See the caveats in the documentation: https://pandas.pydata.org/pandas-docs/stab
 <td>170.0</td>
 <td>0.0</td>
 <td>0.482069</td>
+<td>2020-11-01 00:00:00+00:00</td>
 <td>2020</td>
+<td>11</td>
 </tr>
 <tr class="odd">
 <td data-quarto-table-cell-role="th">14</td>
@@ -15355,7 +15392,9 @@ See the caveats in the documentation: https://pandas.pydata.org/pandas-docs/stab
 <td>170.0</td>
 <td>0.0</td>
 <td>1.039435</td>
+<td>2020-10-01 00:00:00+00:00</td>
 <td>2020</td>
+<td>10</td>
 </tr>
 <tr class="even">
 <td data-quarto-table-cell-role="th">15</td>
@@ -15376,7 +15415,9 @@ See the caveats in the documentation: https://pandas.pydata.org/pandas-docs/stab
 <td>170.0</td>
 <td>0.0</td>
 <td>1.611278</td>
+<td>2020-09-01 00:00:00+00:00</td>
 <td>2020</td>
+<td>9</td>
 </tr>
 <tr class="odd">
 <td data-quarto-table-cell-role="th">16</td>
@@ -15397,7 +15438,9 @@ See the caveats in the documentation: https://pandas.pydata.org/pandas-docs/stab
 <td>170.0</td>
 <td>0.0</td>
 <td>1.828948</td>
+<td>2020-08-01 00:00:00+00:00</td>
 <td>2020</td>
+<td>8</td>
 </tr>
 <tr class="even">
 <td data-quarto-table-cell-role="th">17</td>
@@ -15418,7 +15461,9 @@ See the caveats in the documentation: https://pandas.pydata.org/pandas-docs/stab
 <td>170.0</td>
 <td>0.0</td>
 <td>1.980502</td>
+<td>2020-07-01 00:00:00+00:00</td>
 <td>2020</td>
+<td>7</td>
 </tr>
 <tr class="odd">
 <td data-quarto-table-cell-role="th">18</td>
@@ -15439,7 +15484,9 @@ See the caveats in the documentation: https://pandas.pydata.org/pandas-docs/stab
 <td>170.0</td>
 <td>0.0</td>
 <td>1.364019</td>
+<td>2020-06-01 00:00:00+00:00</td>
 <td>2020</td>
+<td>6</td>
 </tr>
 <tr class="even">
 <td data-quarto-table-cell-role="th">19</td>
@@ -15460,7 +15507,9 @@ See the caveats in the documentation: https://pandas.pydata.org/pandas-docs/stab
 <td>170.0</td>
 <td>0.0</td>
 <td>1.092335</td>
+<td>2020-05-01 00:00:00+00:00</td>
 <td>2020</td>
+<td>5</td>
 </tr>
 <tr class="odd">
 <td data-quarto-table-cell-role="th">20</td>
@@ -15481,7 +15530,9 @@ See the caveats in the documentation: https://pandas.pydata.org/pandas-docs/stab
 <td>170.0</td>
 <td>0.0</td>
 <td>0.723726</td>
+<td>2020-04-01 00:00:00+00:00</td>
 <td>2020</td>
+<td>4</td>
 </tr>
 <tr class="even">
 <td data-quarto-table-cell-role="th">21</td>
@@ -15502,7 +15553,9 @@ See the caveats in the documentation: https://pandas.pydata.org/pandas-docs/stab
 <td>170.0</td>
 <td>0.0</td>
 <td>0.783878</td>
+<td>2020-03-01 00:00:00+00:00</td>
 <td>2020</td>
+<td>3</td>
 </tr>
 <tr class="odd">
 <td data-quarto-table-cell-role="th">22</td>
@@ -15523,7 +15576,9 @@ See the caveats in the documentation: https://pandas.pydata.org/pandas-docs/stab
 <td>170.0</td>
 <td>0.0</td>
 <td>0.620612</td>
+<td>2020-02-01 00:00:00+00:00</td>
 <td>2020</td>
+<td>2</td>
 </tr>
 <tr class="even">
 <td data-quarto-table-cell-role="th">23</td>
@@ -15544,7 +15599,9 @@ See the caveats in the documentation: https://pandas.pydata.org/pandas-docs/stab
 <td>170.0</td>
 <td>0.0</td>
 <td>0.637993</td>
+<td>2020-01-01 00:00:00+00:00</td>
 <td>2020</td>
+<td>1</td>
 </tr>
 </tbody>
 </table>
@@ -15556,34 +15613,24 @@ See the caveats in the documentation: https://pandas.pydata.org/pandas-docs/stab
 <section id="visualizing-the-data-as-a-time-series" class="level2">
 <h2 class="anchored" data-anchor-id="visualizing-the-data-as-a-time-series">Visualizing the Data as a Time Series</h2>
 <p>We can now explore the wetland methane emissions time series (January 1980 – December 2021) available for the Dallas, Texas area of the U.S. We can plot the data set using the code below:</p>
-<div class="cell" data-execution_count="126">
+<div class="cell" data-execution_count="155">
 <div class="sourceCode cell-code" id="cb28"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
 <span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb28-3"><a href="#cb28-3" aria-hidden="true" tabindex="-1"></a>fig <span class="op">=</span> plt.figure(figsize<span class="op">=</span>(<span class="dv">20</span>, <span class="dv">10</span>))</span>
 <span id="cb28-4"><a href="#cb28-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb28-5"><a href="#cb28-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb28-6"><a href="#cb28-6" aria-hidden="true" tabindex="-1"></a><span class="co"># plt.plot(</span></span>
-<span id="cb28-7"><a href="#cb28-7" aria-hidden="true" tabindex="-1"></a><span class="co">#     df_2020_2021["date"],</span></span>
-<span id="cb28-8"><a href="#cb28-8" aria-hidden="true" tabindex="-1"></a><span class="co">#     df_2020_2021["max"],</span></span>
-<span id="cb28-9"><a href="#cb28-9" aria-hidden="true" tabindex="-1"></a><span class="co">#     color="red",</span></span>
-<span id="cb28-10"><a href="#cb28-10" aria-hidden="true" tabindex="-1"></a><span class="co">#     linestyle="-",</span></span>
-<span id="cb28-11"><a href="#cb28-11" aria-hidden="true" tabindex="-1"></a><span class="co">#     linewidth=0.5,</span></span>
-<span id="cb28-12"><a href="#cb28-12" aria-hidden="true" tabindex="-1"></a><span class="co">#     label="Max monthly 2020 CH₄ emissions",</span></span>
-<span id="cb28-13"><a href="#cb28-13" aria-hidden="true" tabindex="-1"></a><span class="co">#     hue =  df_2020_2021.date</span></span>
-<span id="cb28-14"><a href="#cb28-14" aria-hidden="true" tabindex="-1"></a><span class="co"># )</span></span>
-<span id="cb28-15"><a href="#cb28-15" aria-hidden="true" tabindex="-1"></a>sns.lineplot(</span>
-<span id="cb28-16"><a href="#cb28-16" aria-hidden="true" tabindex="-1"></a>    df_2020_2021,</span>
-<span id="cb28-17"><a href="#cb28-17" aria-hidden="true" tabindex="-1"></a>    x <span class="op">=</span> <span class="st">'datetime'</span>, </span>
-<span id="cb28-18"><a href="#cb28-18" aria-hidden="true" tabindex="-1"></a>    y <span class="op">=</span> <span class="st">'max'</span>,</span>
-<span id="cb28-19"><a href="#cb28-19" aria-hidden="true" tabindex="-1"></a>    hue<span class="op">=</span> <span class="st">'date'</span></span>
-<span id="cb28-20"><a href="#cb28-20" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb28-21"><a href="#cb28-21" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb28-22"><a href="#cb28-22" aria-hidden="true" tabindex="-1"></a><span class="co"># plt.legend()</span></span>
-<span id="cb28-23"><a href="#cb28-23" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="st">"Years"</span>)</span>
-<span id="cb28-24"><a href="#cb28-24" aria-hidden="true" tabindex="-1"></a>plt.xticks(rotation<span class="op">=</span><span class="dv">60</span>)</span>
-<span id="cb28-25"><a href="#cb28-25" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="st">"CH4 emissions g/m2"</span>)</span>
-<span id="cb28-26"><a href="#cb28-26" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">"CH4 emission Values for louisiana for 2020 and 2021"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="126">
+<span id="cb28-5"><a href="#cb28-5" aria-hidden="true" tabindex="-1"></a>sns.lineplot(</span>
+<span id="cb28-6"><a href="#cb28-6" aria-hidden="true" tabindex="-1"></a>    df_2020_2021,</span>
+<span id="cb28-7"><a href="#cb28-7" aria-hidden="true" tabindex="-1"></a>    x <span class="op">=</span> <span class="st">'month'</span>, </span>
+<span id="cb28-8"><a href="#cb28-8" aria-hidden="true" tabindex="-1"></a>    y <span class="op">=</span> <span class="st">'max'</span>,</span>
+<span id="cb28-9"><a href="#cb28-9" aria-hidden="true" tabindex="-1"></a>    hue<span class="op">=</span> <span class="st">'year'</span>,</span>
+<span id="cb28-10"><a href="#cb28-10" aria-hidden="true" tabindex="-1"></a>    palette<span class="op">=</span><span class="st">'flare'</span></span>
+<span id="cb28-11"><a href="#cb28-11" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb28-12"><a href="#cb28-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-13"><a href="#cb28-13" aria-hidden="true" tabindex="-1"></a><span class="co"># plt.legend()</span></span>
+<span id="cb28-14"><a href="#cb28-14" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="st">"months"</span>)</span>
+<span id="cb28-15"><a href="#cb28-15" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="st">"CH4 emissions g/m2"</span>)</span>
+<span id="cb28-16"><a href="#cb28-16" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">"CH4 emission Values for louisiana for 2020 and 2021"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="155">
 <pre><code>Text(0.5, 1.0, 'CH4 emission Values for louisiana for 2020 and 2021')</code></pre>
 </div>
 <div class="cell-output cell-output-display">
@@ -15591,163 +15638,170 @@ See the caveats in the documentation: https://pandas.pydata.org/pandas-docs/stab
 </div>
 </div>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb30"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(items[<span class="dv">2</span>][<span class="st">"properties"</span>][<span class="st">"datetime"</span>])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb30"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a>pivot_df <span class="op">=</span> df_2020_2021.pivot(index<span class="op">=</span><span class="st">'month'</span>, columns<span class="op">=</span><span class="st">'year'</span>, values<span class="op">=</span><span class="st">'max'</span>)</span>
+<span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a>pivot_df.plot(marker<span class="op">=</span><span class="st">'o'</span>)</span>
+<span id="cb30-3"><a href="#cb30-3" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="st">'Month'</span>)</span>
+<span id="cb30-4"><a href="#cb30-4" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="st">'Values'</span>)</span>
+<span id="cb30-5"><a href="#cb30-5" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">'Time Series for 2020 and 2021'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb31"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a>october_tile <span class="op">=</span> requests.get(</span>
-<span id="cb31-2"><a href="#cb31-2" aria-hidden="true" tabindex="-1"></a>    <span class="ss">f"</span><span class="sc">{</span>RASTER_API_URL<span class="sc">}</span><span class="ss">/stac/tilejson.json?collection=</span><span class="sc">{</span>items[<span class="dv">2</span>][<span class="st">'collection'</span>]<span class="sc">}</span><span class="ss">&amp;item=</span><span class="sc">{</span>items[<span class="dv">2</span>][<span class="st">'id'</span>]<span class="sc">}</span><span class="ss">"</span></span>
-<span id="cb31-3"><a href="#cb31-3" aria-hidden="true" tabindex="-1"></a>    <span class="st">"&amp;assets=ch4-wetlands-emissions"</span></span>
-<span id="cb31-4"><a href="#cb31-4" aria-hidden="true" tabindex="-1"></a>    <span class="ss">f"&amp;color_formula=gamma+r+1.05&amp;colormap_name=</span><span class="sc">{</span>color_map<span class="sc">}</span><span class="ss">"</span></span>
-<span id="cb31-5"><a href="#cb31-5" aria-hidden="true" tabindex="-1"></a>    <span class="ss">f"&amp;rescale=</span><span class="sc">{</span>rescale_values[<span class="st">'min'</span>]<span class="sc">}</span><span class="ss">,</span><span class="sc">{</span>rescale_values[<span class="st">'max'</span>]<span class="sc">}</span><span class="ss">"</span>,</span>
-<span id="cb31-6"><a href="#cb31-6" aria-hidden="true" tabindex="-1"></a>).json()</span>
-<span id="cb31-7"><a href="#cb31-7" aria-hidden="true" tabindex="-1"></a>october_tile</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb31"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(items[<span class="dv">2</span>][<span class="st">"properties"</span>][<span class="st">"datetime"</span>])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb32"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Use bbox initial zoom and map</span></span>
-<span id="cb32-2"><a href="#cb32-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Set up a map located w/in event bounds</span></span>
-<span id="cb32-3"><a href="#cb32-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> folium</span>
-<span id="cb32-4"><a href="#cb32-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb32-5"><a href="#cb32-5" aria-hidden="true" tabindex="-1"></a>aoi_map_bbox <span class="op">=</span> Map(</span>
-<span id="cb32-6"><a href="#cb32-6" aria-hidden="true" tabindex="-1"></a>    tiles<span class="op">=</span><span class="st">"OpenStreetMap"</span>,</span>
-<span id="cb32-7"><a href="#cb32-7" aria-hidden="true" tabindex="-1"></a>    location<span class="op">=</span>[</span>
-<span id="cb32-8"><a href="#cb32-8" aria-hidden="true" tabindex="-1"></a>        <span class="dv">30</span>,<span class="op">-</span><span class="dv">100</span></span>
-<span id="cb32-9"><a href="#cb32-9" aria-hidden="true" tabindex="-1"></a>    ],</span>
-<span id="cb32-10"><a href="#cb32-10" aria-hidden="true" tabindex="-1"></a>    zoom_start<span class="op">=</span><span class="dv">8</span>,</span>
-<span id="cb32-11"><a href="#cb32-11" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb32-12"><a href="#cb32-12" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb32-13"><a href="#cb32-13" aria-hidden="true" tabindex="-1"></a>map_layer <span class="op">=</span> TileLayer(</span>
-<span id="cb32-14"><a href="#cb32-14" aria-hidden="true" tabindex="-1"></a>    tiles<span class="op">=</span>october_tile[<span class="st">"tiles"</span>][<span class="dv">0</span>],</span>
-<span id="cb32-15"><a href="#cb32-15" aria-hidden="true" tabindex="-1"></a>    attr<span class="op">=</span><span class="st">"GHG"</span>, opacity <span class="op">=</span> <span class="fl">0.5</span></span>
-<span id="cb32-16"><a href="#cb32-16" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb32-17"><a href="#cb32-17" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb32-18"><a href="#cb32-18" aria-hidden="true" tabindex="-1"></a>map_layer.add_to(aoi_map_bbox)</span>
-<span id="cb32-19"><a href="#cb32-19" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb32-20"><a href="#cb32-20" aria-hidden="true" tabindex="-1"></a>aoi_map_bbox</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb32"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a>october_tile <span class="op">=</span> requests.get(</span>
+<span id="cb32-2"><a href="#cb32-2" aria-hidden="true" tabindex="-1"></a>    <span class="ss">f"</span><span class="sc">{</span>RASTER_API_URL<span class="sc">}</span><span class="ss">/stac/tilejson.json?collection=</span><span class="sc">{</span>items[<span class="dv">2</span>][<span class="st">'collection'</span>]<span class="sc">}</span><span class="ss">&amp;item=</span><span class="sc">{</span>items[<span class="dv">2</span>][<span class="st">'id'</span>]<span class="sc">}</span><span class="ss">"</span></span>
+<span id="cb32-3"><a href="#cb32-3" aria-hidden="true" tabindex="-1"></a>    <span class="st">"&amp;assets=ch4-wetlands-emissions"</span></span>
+<span id="cb32-4"><a href="#cb32-4" aria-hidden="true" tabindex="-1"></a>    <span class="ss">f"&amp;color_formula=gamma+r+1.05&amp;colormap_name=</span><span class="sc">{</span>color_map<span class="sc">}</span><span class="ss">"</span></span>
+<span id="cb32-5"><a href="#cb32-5" aria-hidden="true" tabindex="-1"></a>    <span class="ss">f"&amp;rescale=</span><span class="sc">{</span>rescale_values[<span class="st">'min'</span>]<span class="sc">}</span><span class="ss">,</span><span class="sc">{</span>rescale_values[<span class="st">'max'</span>]<span class="sc">}</span><span class="ss">"</span>,</span>
+<span id="cb32-6"><a href="#cb32-6" aria-hidden="true" tabindex="-1"></a>).json()</span>
+<span id="cb32-7"><a href="#cb32-7" aria-hidden="true" tabindex="-1"></a>october_tile</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb33"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> monthly_timeseries(year,focus,param,anomaly):</span>
-<span id="cb33-2"><a href="#cb33-2" aria-hidden="true" tabindex="-1"></a>    labels <span class="op">=</span> []</span>
-<span id="cb33-3"><a href="#cb33-3" aria-hidden="true" tabindex="-1"></a>    cmap <span class="op">=</span> plt.get_cmap(<span class="st">'gnuplot'</span>) </span>
-<span id="cb33-4"><a href="#cb33-4" aria-hidden="true" tabindex="-1"></a>    colors <span class="op">=</span> cmap(np.linspace(<span class="dv">0</span>,<span class="dv">1</span>,<span class="bu">len</span>(param)))</span>
-<span id="cb33-5"><a href="#cb33-5" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> i,p <span class="kw">in</span> <span class="bu">enumerate</span>(param):</span>
-<span id="cb33-6"><a href="#cb33-6" aria-hidden="true" tabindex="-1"></a>    <span class="co">#   In theory this loop is to iterate over multiple parameters</span></span>
-<span id="cb33-7"><a href="#cb33-7" aria-hidden="true" tabindex="-1"></a>    <span class="co">#   and put them on the same plot,</span></span>
-<span id="cb33-8"><a href="#cb33-8" aria-hidden="true" tabindex="-1"></a>    <span class="co">#   but I never got around to incorporating multiple axes for </span></span>
-<span id="cb33-9"><a href="#cb33-9" aria-hidden="true" tabindex="-1"></a>    <span class="co">#   parameters of different magnitudes/scales.</span></span>
-<span id="cb33-10"><a href="#cb33-10" aria-hidden="true" tabindex="-1"></a>    <span class="co">#   So right now, [param] should be one element long. </span></span>
-<span id="cb33-11"><a href="#cb33-11" aria-hidden="true" tabindex="-1"></a>    <span class="co">#   Don't pass multiple at a time.</span></span>
-<span id="cb33-12"><a href="#cb33-12" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> <span class="st">'LPJ'</span> <span class="kw">in</span> p:</span>
-<span id="cb33-13"><a href="#cb33-13" aria-hidden="true" tabindex="-1"></a>            ts <span class="op">=</span> get_lpj_timeseries(year,focus,p)</span>
-<span id="cb33-14"><a href="#cb33-14" aria-hidden="true" tabindex="-1"></a>        <span class="cf">elif</span> <span class="st">'MERRA'</span> <span class="kw">in</span> p:</span>
-<span id="cb33-15"><a href="#cb33-15" aria-hidden="true" tabindex="-1"></a>            ts <span class="op">=</span> get_merra2_timeseries(year,focus,p,anomaly)</span>
-<span id="cb33-16"><a href="#cb33-16" aria-hidden="true" tabindex="-1"></a>            </span>
-<span id="cb33-17"><a href="#cb33-17" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> i <span class="op">==</span> <span class="dv">0</span>:</span>
-<span id="cb33-18"><a href="#cb33-18" aria-hidden="true" tabindex="-1"></a>            fig <span class="op">=</span> plt.figure(figsize<span class="op">=</span>(<span class="dv">6</span>,<span class="dv">3</span>))</span>
-<span id="cb33-19"><a href="#cb33-19" aria-hidden="true" tabindex="-1"></a>            ax <span class="op">=</span> fig.add_subplot(<span class="dv">111</span>)</span>
-<span id="cb33-20"><a href="#cb33-20" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb33-21"><a href="#cb33-21" aria-hidden="true" tabindex="-1"></a>        <span class="co">#breakpoint()</span></span>
-<span id="cb33-22"><a href="#cb33-22" aria-hidden="true" tabindex="-1"></a>        <span class="cf">try</span>:</span>
-<span id="cb33-23"><a href="#cb33-23" aria-hidden="true" tabindex="-1"></a>            ax.plot(</span>
-<span id="cb33-24"><a href="#cb33-24" aria-hidden="true" tabindex="-1"></a>                <span class="bu">list</span>(<span class="bu">range</span>(<span class="dv">0</span>,<span class="dv">12</span>)),</span>
-<span id="cb33-25"><a href="#cb33-25" aria-hidden="true" tabindex="-1"></a>                ts[<span class="st">'box_totals'</span>],</span>
-<span id="cb33-26"><a href="#cb33-26" aria-hidden="true" tabindex="-1"></a>                linestyle<span class="op">=</span><span class="st">'-'</span>,</span>
-<span id="cb33-27"><a href="#cb33-27" aria-hidden="true" tabindex="-1"></a>                linewidth<span class="op">=</span><span class="dv">2</span>,</span>
-<span id="cb33-28"><a href="#cb33-28" aria-hidden="true" tabindex="-1"></a>                color<span class="op">=</span>colors[i],</span>
-<span id="cb33-29"><a href="#cb33-29" aria-hidden="true" tabindex="-1"></a>                markersize<span class="op">=</span><span class="dv">4</span>,</span>
-<span id="cb33-30"><a href="#cb33-30" aria-hidden="true" tabindex="-1"></a>                marker<span class="op">=</span><span class="st">'o'</span>,</span>
-<span id="cb33-31"><a href="#cb33-31" aria-hidden="true" tabindex="-1"></a>                label<span class="op">=</span>p</span>
-<span id="cb33-32"><a href="#cb33-32" aria-hidden="true" tabindex="-1"></a>            )</span>
-<span id="cb33-33"><a href="#cb33-33" aria-hidden="true" tabindex="-1"></a>        <span class="cf">except</span> <span class="pp">ValueError</span>:</span>
-<span id="cb33-34"><a href="#cb33-34" aria-hidden="true" tabindex="-1"></a>            <span class="bu">print</span>(<span class="st">'Double check that you have all twelve months of MERRA-2 data downloaded!'</span>)</span>
-<span id="cb33-35"><a href="#cb33-35" aria-hidden="true" tabindex="-1"></a>            <span class="bu">print</span>(params[p][<span class="st">'dir'</span>])</span>
-<span id="cb33-36"><a href="#cb33-36" aria-hidden="true" tabindex="-1"></a>            <span class="bu">breakpoint</span>()</span>
-<span id="cb33-37"><a href="#cb33-37" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb33-38"><a href="#cb33-38" aria-hidden="true" tabindex="-1"></a>        <span class="co">#   Construct plot title</span></span>
-<span id="cb33-39"><a href="#cb33-39" aria-hidden="true" tabindex="-1"></a>        title <span class="op">=</span> <span class="st">'</span><span class="sc">%s</span><span class="ch">\n</span><span class="sc">%s</span><span class="st"> Mean Monthly </span><span class="sc">%s</span><span class="st">'</span><span class="op">%</span>(focus,year,p)</span>
-<span id="cb33-40"><a href="#cb33-40" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> anomaly:</span>
-<span id="cb33-41"><a href="#cb33-41" aria-hidden="true" tabindex="-1"></a>           title<span class="op">+=</span><span class="st">' Anomaly'</span> </span>
-<span id="cb33-42"><a href="#cb33-42" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> <span class="st">'LPJ'</span> <span class="kw">in</span> p:</span>
-<span id="cb33-43"><a href="#cb33-43" aria-hidden="true" tabindex="-1"></a>            title <span class="op">=</span> title.replace(<span class="st">'Mean'</span>,<span class="st">'Total'</span>)</span>
-<span id="cb33-44"><a href="#cb33-44" aria-hidden="true" tabindex="-1"></a>        plt.title(title)</span>
-<span id="cb33-45"><a href="#cb33-45" aria-hidden="true" tabindex="-1"></a>        </span>
-<span id="cb33-46"><a href="#cb33-46" aria-hidden="true" tabindex="-1"></a>        plt.xticks(<span class="bu">list</span>(<span class="bu">range</span>(<span class="dv">0</span>,<span class="dv">12</span>)))</span>
-<span id="cb33-47"><a href="#cb33-47" aria-hidden="true" tabindex="-1"></a>        ax.set_xticklabels(ts[<span class="st">'month_labels'</span>],rotation<span class="op">=</span><span class="dv">40</span>,ha<span class="op">=</span><span class="st">'right'</span>)</span>
-<span id="cb33-48"><a href="#cb33-48" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb33-49"><a href="#cb33-49" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb33-50"><a href="#cb33-50" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> p <span class="op">==</span> param[<span class="op">-</span><span class="dv">1</span>]:</span>
-<span id="cb33-51"><a href="#cb33-51" aria-hidden="true" tabindex="-1"></a>            <span class="cf">if</span> i <span class="op">&gt;</span> <span class="dv">0</span>:</span>
-<span id="cb33-52"><a href="#cb33-52" aria-hidden="true" tabindex="-1"></a>                ax.legend(loc<span class="op">=</span><span class="st">'best'</span>)</span>
-<span id="cb33-53"><a href="#cb33-53" aria-hidden="true" tabindex="-1"></a>                nickname <span class="op">=</span> <span class="st">'_'</span>.join(params[p][<span class="st">'nickname'</span>] <span class="cf">for</span> p <span class="kw">in</span> params)</span>
-<span id="cb33-54"><a href="#cb33-54" aria-hidden="true" tabindex="-1"></a>                savename <span class="op">=</span> <span class="st">'</span><span class="sc">%s</span><span class="st">/box_summed_</span><span class="sc">%s</span><span class="st">_</span><span class="sc">%s</span><span class="st">_</span><span class="sc">%s</span><span class="st">.png'</span><span class="op">%</span> <span class="op">\</span></span>
-<span id="cb33-55"><a href="#cb33-55" aria-hidden="true" tabindex="-1"></a>                    (savedir,nickname,year,focus)</span>
-<span id="cb33-56"><a href="#cb33-56" aria-hidden="true" tabindex="-1"></a>            <span class="cf">else</span>:</span>
-<span id="cb33-57"><a href="#cb33-57" aria-hidden="true" tabindex="-1"></a>                nickname <span class="op">=</span> params[p][<span class="st">'nickname'</span>]</span>
-<span id="cb33-58"><a href="#cb33-58" aria-hidden="true" tabindex="-1"></a>                savename <span class="op">=</span> <span class="st">'</span><span class="sc">%s</span><span class="st">/</span><span class="sc">%s</span><span class="st">/</span><span class="sc">%s</span><span class="st">/box_summed_</span><span class="sc">%s</span><span class="st">_</span><span class="sc">%s</span><span class="st">_</span><span class="sc">%s</span><span class="st">.png'</span><span class="op">%</span> <span class="op">\</span></span>
-<span id="cb33-59"><a href="#cb33-59" aria-hidden="true" tabindex="-1"></a>                    (savedir,nickname,focus,nickname,year,focus)</span>
-<span id="cb33-60"><a href="#cb33-60" aria-hidden="true" tabindex="-1"></a>            <span class="cf">if</span> anomaly:</span>
-<span id="cb33-61"><a href="#cb33-61" aria-hidden="true" tabindex="-1"></a>                ax.plot(<span class="bu">list</span>(<span class="bu">range</span>(<span class="op">-</span><span class="dv">1</span>,<span class="dv">13</span>)),np.zeros(<span class="dv">14</span>),linewidth<span class="op">=</span><span class="fl">0.4</span>)</span>
-<span id="cb33-62"><a href="#cb33-62" aria-hidden="true" tabindex="-1"></a>                savename <span class="op">=</span> savename.replace(<span class="st">'.png'</span>,<span class="st">'_Anomaly.png'</span>)</span>
-<span id="cb33-63"><a href="#cb33-63" aria-hidden="true" tabindex="-1"></a>            ax.set_xlim(<span class="op">-</span><span class="dv">1</span>,<span class="dv">12</span>)</span>
-<span id="cb33-64"><a href="#cb33-64" aria-hidden="true" tabindex="-1"></a>            ax.set_ylim(<span class="op">-</span><span class="fl">4e-5</span>,<span class="fl">4e-5</span>)     <span class="co">#   manual per parameter</span></span>
-<span id="cb33-65"><a href="#cb33-65" aria-hidden="true" tabindex="-1"></a>            <span class="bu">print</span>(<span class="st">'Saving to '</span><span class="op">+</span>savename)</span>
-<span id="cb33-66"><a href="#cb33-66" aria-hidden="true" tabindex="-1"></a>            plt.figure(<span class="dv">1</span>).savefig(savename,dpi<span class="op">=</span><span class="dv">300</span>,bbox_inches<span class="op">=</span><span class="st">'tight'</span>)</span>
-<span id="cb33-67"><a href="#cb33-67" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb33-68"><a href="#cb33-68" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> ts </span>
-<span id="cb33-69"><a href="#cb33-69" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb33-70"><a href="#cb33-70" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb33-71"><a href="#cb33-71" aria-hidden="true" tabindex="-1"></a><span class="co">#------------    </span></span>
-<span id="cb33-72"><a href="#cb33-72" aria-hidden="true" tabindex="-1"></a><span class="co">#------------ </span></span>
-<span id="cb33-73"><a href="#cb33-73" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb33-74"><a href="#cb33-74" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> monthly_heatmaps(year,focus,p,anomaly):</span>
-<span id="cb33-75"><a href="#cb33-75" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> <span class="st">'LPJ'</span> <span class="kw">in</span> p:</span>
-<span id="cb33-76"><a href="#cb33-76" aria-hidden="true" tabindex="-1"></a>        ts <span class="op">=</span> get_lpj_timeseries(year,focus,p)</span>
-<span id="cb33-77"><a href="#cb33-77" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> <span class="st">'MERRA-2'</span> <span class="kw">in</span> p:</span>
-<span id="cb33-78"><a href="#cb33-78" aria-hidden="true" tabindex="-1"></a>        ts <span class="op">=</span> get_merra2_timeseries(year,focus,p,anomaly)</span>
-<span id="cb33-79"><a href="#cb33-79" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb33-80"><a href="#cb33-80" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> t <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">0</span>,<span class="bu">len</span>(ts[<span class="st">'month_labels'</span>])):    <span class="co">#   monthly data</span></span>
-<span id="cb33-81"><a href="#cb33-81" aria-hidden="true" tabindex="-1"></a>        plt.close()</span>
-<span id="cb33-82"><a href="#cb33-82" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb33-83"><a href="#cb33-83" aria-hidden="true" tabindex="-1"></a>        <span class="co">#   Construct plot title</span></span>
-<span id="cb33-84"><a href="#cb33-84" aria-hidden="true" tabindex="-1"></a>        title <span class="op">=</span> <span class="st">'</span><span class="sc">%s</span><span class="ch">\n</span><span class="sc">%s</span><span class="st"> </span><span class="sc">%s</span><span class="st">'</span><span class="op">%</span> <span class="op">\</span></span>
-<span id="cb33-85"><a href="#cb33-85" aria-hidden="true" tabindex="-1"></a>            (datetime(<span class="bu">int</span>(year),t<span class="op">+</span><span class="dv">1</span>,<span class="dv">1</span>).strftime(<span class="st">'%B %Y'</span>),focus,p)</span>
-<span id="cb33-86"><a href="#cb33-86" aria-hidden="true" tabindex="-1"></a>        <span class="co">#   Construct file savename</span></span>
-<span id="cb33-87"><a href="#cb33-87" aria-hidden="true" tabindex="-1"></a>        savename <span class="op">=</span> savedir<span class="op">+</span><span class="st">'</span><span class="sc">%s</span><span class="st">/</span><span class="sc">%s</span><span class="st">/</span><span class="sc">%s</span><span class="st">_</span><span class="sc">%s</span><span class="st">_</span><span class="sc">%s</span><span class="st">_</span><span class="sc">%s</span><span class="st">.png'</span><span class="op">%</span> <span class="op">\</span></span>
-<span id="cb33-88"><a href="#cb33-88" aria-hidden="true" tabindex="-1"></a>            (params[p][<span class="st">'nickname'</span>],</span>
-<span id="cb33-89"><a href="#cb33-89" aria-hidden="true" tabindex="-1"></a>            focus,</span>
-<span id="cb33-90"><a href="#cb33-90" aria-hidden="true" tabindex="-1"></a>            params[p][<span class="st">'nickname'</span>],</span>
-<span id="cb33-91"><a href="#cb33-91" aria-hidden="true" tabindex="-1"></a>            focus,</span>
-<span id="cb33-92"><a href="#cb33-92" aria-hidden="true" tabindex="-1"></a>            year,</span>
-<span id="cb33-93"><a href="#cb33-93" aria-hidden="true" tabindex="-1"></a>            datetime(<span class="bu">int</span>(year),t<span class="op">+</span><span class="dv">1</span>,<span class="dv">1</span>).strftime(<span class="st">'%m'</span>)</span>
-<span id="cb33-94"><a href="#cb33-94" aria-hidden="true" tabindex="-1"></a>            )</span>
-<span id="cb33-95"><a href="#cb33-95" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb33-96"><a href="#cb33-96" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> anomaly:</span>
-<span id="cb33-97"><a href="#cb33-97" aria-hidden="true" tabindex="-1"></a>            savename <span class="op">=</span> savename.replace(<span class="st">'.png'</span>,<span class="st">'_Anomaly.png'</span>)</span>
-<span id="cb33-98"><a href="#cb33-98" aria-hidden="true" tabindex="-1"></a>            title<span class="op">+=</span><span class="st">' Anomaly'</span></span>
-<span id="cb33-99"><a href="#cb33-99" aria-hidden="true" tabindex="-1"></a>            cmap <span class="op">=</span> <span class="st">'RdBu_r'</span></span>
-<span id="cb33-100"><a href="#cb33-100" aria-hidden="true" tabindex="-1"></a>        <span class="cf">else</span>:</span>
-<span id="cb33-101"><a href="#cb33-101" aria-hidden="true" tabindex="-1"></a>            cmap <span class="op">=</span> params[p][<span class="st">'cmap'</span>]</span>
-<span id="cb33-102"><a href="#cb33-102" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb33-103"><a href="#cb33-103" aria-hidden="true" tabindex="-1"></a>        <span class="co">#   vmin and vmax currently set manually per parameter</span></span>
-<span id="cb33-104"><a href="#cb33-104" aria-hidden="true" tabindex="-1"></a>        heatmap(</span>
-<span id="cb33-105"><a href="#cb33-105" aria-hidden="true" tabindex="-1"></a>            ts[<span class="st">'lon'</span>],</span>
-<span id="cb33-106"><a href="#cb33-106" aria-hidden="true" tabindex="-1"></a>            ts[<span class="st">'lat'</span>][:],</span>
-<span id="cb33-107"><a href="#cb33-107" aria-hidden="true" tabindex="-1"></a>            ts[<span class="st">'month_fields'</span>][t],</span>
-<span id="cb33-108"><a href="#cb33-108" aria-hidden="true" tabindex="-1"></a>            colbar_label<span class="op">=</span>ts[<span class="st">'units'</span>],</span>
-<span id="cb33-109"><a href="#cb33-109" aria-hidden="true" tabindex="-1"></a>            boundaries<span class="op">=</span>boundaries[focus],</span>
-<span id="cb33-110"><a href="#cb33-110" aria-hidden="true" tabindex="-1"></a>            cmap<span class="op">=</span>cmap,</span>
-<span id="cb33-111"><a href="#cb33-111" aria-hidden="true" tabindex="-1"></a>            <span class="co">#vmin = 0,</span></span>
-<span id="cb33-112"><a href="#cb33-112" aria-hidden="true" tabindex="-1"></a>            <span class="co">#vmax = 0.0025,</span></span>
-<span id="cb33-113"><a href="#cb33-113" aria-hidden="true" tabindex="-1"></a>            vmin <span class="op">=</span> <span class="op">-</span><span class="fl">4e-5</span>,</span>
-<span id="cb33-114"><a href="#cb33-114" aria-hidden="true" tabindex="-1"></a>            vmax <span class="op">=</span> <span class="fl">4e-5</span>,</span>
-<span id="cb33-115"><a href="#cb33-115" aria-hidden="true" tabindex="-1"></a>            <span class="co">#vmin = 260,</span></span>
-<span id="cb33-116"><a href="#cb33-116" aria-hidden="true" tabindex="-1"></a>            <span class="co">#vmax = 315,</span></span>
-<span id="cb33-117"><a href="#cb33-117" aria-hidden="true" tabindex="-1"></a>            <span class="co">#vmin = 0,</span></span>
-<span id="cb33-118"><a href="#cb33-118" aria-hidden="true" tabindex="-1"></a>            <span class="co">#vmax = np.nanmean(ts['month_fields'])+2.5*np.nanstd(ts['month_fields']),</span></span>
-<span id="cb33-119"><a href="#cb33-119" aria-hidden="true" tabindex="-1"></a>            <span class="co">#vmin = -4*np.nanstd(ts['month_fields']),</span></span>
-<span id="cb33-120"><a href="#cb33-120" aria-hidden="true" tabindex="-1"></a>            <span class="co">#vmax = 4*np.nanstd(ts['month_fields']),</span></span>
-<span id="cb33-121"><a href="#cb33-121" aria-hidden="true" tabindex="-1"></a>            <span class="op">**</span>{<span class="st">'title'</span>:title,<span class="st">'savename'</span>:savename}</span>
-<span id="cb33-122"><a href="#cb33-122" aria-hidden="true" tabindex="-1"></a>        )</span>
-<span id="cb33-123"><a href="#cb33-123" aria-hidden="true" tabindex="-1"></a><span class="co">#   save(year)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb33"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Use bbox initial zoom and map</span></span>
+<span id="cb33-2"><a href="#cb33-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Set up a map located w/in event bounds</span></span>
+<span id="cb33-3"><a href="#cb33-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> folium</span>
+<span id="cb33-4"><a href="#cb33-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-5"><a href="#cb33-5" aria-hidden="true" tabindex="-1"></a>aoi_map_bbox <span class="op">=</span> Map(</span>
+<span id="cb33-6"><a href="#cb33-6" aria-hidden="true" tabindex="-1"></a>    tiles<span class="op">=</span><span class="st">"OpenStreetMap"</span>,</span>
+<span id="cb33-7"><a href="#cb33-7" aria-hidden="true" tabindex="-1"></a>    location<span class="op">=</span>[</span>
+<span id="cb33-8"><a href="#cb33-8" aria-hidden="true" tabindex="-1"></a>        <span class="dv">30</span>,<span class="op">-</span><span class="dv">100</span></span>
+<span id="cb33-9"><a href="#cb33-9" aria-hidden="true" tabindex="-1"></a>    ],</span>
+<span id="cb33-10"><a href="#cb33-10" aria-hidden="true" tabindex="-1"></a>    zoom_start<span class="op">=</span><span class="dv">8</span>,</span>
+<span id="cb33-11"><a href="#cb33-11" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb33-12"><a href="#cb33-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-13"><a href="#cb33-13" aria-hidden="true" tabindex="-1"></a>map_layer <span class="op">=</span> TileLayer(</span>
+<span id="cb33-14"><a href="#cb33-14" aria-hidden="true" tabindex="-1"></a>    tiles<span class="op">=</span>october_tile[<span class="st">"tiles"</span>][<span class="dv">0</span>],</span>
+<span id="cb33-15"><a href="#cb33-15" aria-hidden="true" tabindex="-1"></a>    attr<span class="op">=</span><span class="st">"GHG"</span>, opacity <span class="op">=</span> <span class="fl">0.5</span></span>
+<span id="cb33-16"><a href="#cb33-16" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb33-17"><a href="#cb33-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-18"><a href="#cb33-18" aria-hidden="true" tabindex="-1"></a>map_layer.add_to(aoi_map_bbox)</span>
+<span id="cb33-19"><a href="#cb33-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-20"><a href="#cb33-20" aria-hidden="true" tabindex="-1"></a>aoi_map_bbox</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb34"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> monthly_timeseries(year,focus,param,anomaly):</span>
+<span id="cb34-2"><a href="#cb34-2" aria-hidden="true" tabindex="-1"></a>    labels <span class="op">=</span> []</span>
+<span id="cb34-3"><a href="#cb34-3" aria-hidden="true" tabindex="-1"></a>    cmap <span class="op">=</span> plt.get_cmap(<span class="st">'gnuplot'</span>) </span>
+<span id="cb34-4"><a href="#cb34-4" aria-hidden="true" tabindex="-1"></a>    colors <span class="op">=</span> cmap(np.linspace(<span class="dv">0</span>,<span class="dv">1</span>,<span class="bu">len</span>(param)))</span>
+<span id="cb34-5"><a href="#cb34-5" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> i,p <span class="kw">in</span> <span class="bu">enumerate</span>(param):</span>
+<span id="cb34-6"><a href="#cb34-6" aria-hidden="true" tabindex="-1"></a>    <span class="co">#   In theory this loop is to iterate over multiple parameters</span></span>
+<span id="cb34-7"><a href="#cb34-7" aria-hidden="true" tabindex="-1"></a>    <span class="co">#   and put them on the same plot,</span></span>
+<span id="cb34-8"><a href="#cb34-8" aria-hidden="true" tabindex="-1"></a>    <span class="co">#   but I never got around to incorporating multiple axes for </span></span>
+<span id="cb34-9"><a href="#cb34-9" aria-hidden="true" tabindex="-1"></a>    <span class="co">#   parameters of different magnitudes/scales.</span></span>
+<span id="cb34-10"><a href="#cb34-10" aria-hidden="true" tabindex="-1"></a>    <span class="co">#   So right now, [param] should be one element long. </span></span>
+<span id="cb34-11"><a href="#cb34-11" aria-hidden="true" tabindex="-1"></a>    <span class="co">#   Don't pass multiple at a time.</span></span>
+<span id="cb34-12"><a href="#cb34-12" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> <span class="st">'LPJ'</span> <span class="kw">in</span> p:</span>
+<span id="cb34-13"><a href="#cb34-13" aria-hidden="true" tabindex="-1"></a>            ts <span class="op">=</span> get_lpj_timeseries(year,focus,p)</span>
+<span id="cb34-14"><a href="#cb34-14" aria-hidden="true" tabindex="-1"></a>        <span class="cf">elif</span> <span class="st">'MERRA'</span> <span class="kw">in</span> p:</span>
+<span id="cb34-15"><a href="#cb34-15" aria-hidden="true" tabindex="-1"></a>            ts <span class="op">=</span> get_merra2_timeseries(year,focus,p,anomaly)</span>
+<span id="cb34-16"><a href="#cb34-16" aria-hidden="true" tabindex="-1"></a>            </span>
+<span id="cb34-17"><a href="#cb34-17" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> i <span class="op">==</span> <span class="dv">0</span>:</span>
+<span id="cb34-18"><a href="#cb34-18" aria-hidden="true" tabindex="-1"></a>            fig <span class="op">=</span> plt.figure(figsize<span class="op">=</span>(<span class="dv">6</span>,<span class="dv">3</span>))</span>
+<span id="cb34-19"><a href="#cb34-19" aria-hidden="true" tabindex="-1"></a>            ax <span class="op">=</span> fig.add_subplot(<span class="dv">111</span>)</span>
+<span id="cb34-20"><a href="#cb34-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb34-21"><a href="#cb34-21" aria-hidden="true" tabindex="-1"></a>        <span class="co">#breakpoint()</span></span>
+<span id="cb34-22"><a href="#cb34-22" aria-hidden="true" tabindex="-1"></a>        <span class="cf">try</span>:</span>
+<span id="cb34-23"><a href="#cb34-23" aria-hidden="true" tabindex="-1"></a>            ax.plot(</span>
+<span id="cb34-24"><a href="#cb34-24" aria-hidden="true" tabindex="-1"></a>                <span class="bu">list</span>(<span class="bu">range</span>(<span class="dv">0</span>,<span class="dv">12</span>)),</span>
+<span id="cb34-25"><a href="#cb34-25" aria-hidden="true" tabindex="-1"></a>                ts[<span class="st">'box_totals'</span>],</span>
+<span id="cb34-26"><a href="#cb34-26" aria-hidden="true" tabindex="-1"></a>                linestyle<span class="op">=</span><span class="st">'-'</span>,</span>
+<span id="cb34-27"><a href="#cb34-27" aria-hidden="true" tabindex="-1"></a>                linewidth<span class="op">=</span><span class="dv">2</span>,</span>
+<span id="cb34-28"><a href="#cb34-28" aria-hidden="true" tabindex="-1"></a>                color<span class="op">=</span>colors[i],</span>
+<span id="cb34-29"><a href="#cb34-29" aria-hidden="true" tabindex="-1"></a>                markersize<span class="op">=</span><span class="dv">4</span>,</span>
+<span id="cb34-30"><a href="#cb34-30" aria-hidden="true" tabindex="-1"></a>                marker<span class="op">=</span><span class="st">'o'</span>,</span>
+<span id="cb34-31"><a href="#cb34-31" aria-hidden="true" tabindex="-1"></a>                label<span class="op">=</span>p</span>
+<span id="cb34-32"><a href="#cb34-32" aria-hidden="true" tabindex="-1"></a>            )</span>
+<span id="cb34-33"><a href="#cb34-33" aria-hidden="true" tabindex="-1"></a>        <span class="cf">except</span> <span class="pp">ValueError</span>:</span>
+<span id="cb34-34"><a href="#cb34-34" aria-hidden="true" tabindex="-1"></a>            <span class="bu">print</span>(<span class="st">'Double check that you have all twelve months of MERRA-2 data downloaded!'</span>)</span>
+<span id="cb34-35"><a href="#cb34-35" aria-hidden="true" tabindex="-1"></a>            <span class="bu">print</span>(params[p][<span class="st">'dir'</span>])</span>
+<span id="cb34-36"><a href="#cb34-36" aria-hidden="true" tabindex="-1"></a>            <span class="bu">breakpoint</span>()</span>
+<span id="cb34-37"><a href="#cb34-37" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb34-38"><a href="#cb34-38" aria-hidden="true" tabindex="-1"></a>        <span class="co">#   Construct plot title</span></span>
+<span id="cb34-39"><a href="#cb34-39" aria-hidden="true" tabindex="-1"></a>        title <span class="op">=</span> <span class="st">'</span><span class="sc">%s</span><span class="ch">\n</span><span class="sc">%s</span><span class="st"> Mean Monthly </span><span class="sc">%s</span><span class="st">'</span><span class="op">%</span>(focus,year,p)</span>
+<span id="cb34-40"><a href="#cb34-40" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> anomaly:</span>
+<span id="cb34-41"><a href="#cb34-41" aria-hidden="true" tabindex="-1"></a>           title<span class="op">+=</span><span class="st">' Anomaly'</span> </span>
+<span id="cb34-42"><a href="#cb34-42" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> <span class="st">'LPJ'</span> <span class="kw">in</span> p:</span>
+<span id="cb34-43"><a href="#cb34-43" aria-hidden="true" tabindex="-1"></a>            title <span class="op">=</span> title.replace(<span class="st">'Mean'</span>,<span class="st">'Total'</span>)</span>
+<span id="cb34-44"><a href="#cb34-44" aria-hidden="true" tabindex="-1"></a>        plt.title(title)</span>
+<span id="cb34-45"><a href="#cb34-45" aria-hidden="true" tabindex="-1"></a>        </span>
+<span id="cb34-46"><a href="#cb34-46" aria-hidden="true" tabindex="-1"></a>        plt.xticks(<span class="bu">list</span>(<span class="bu">range</span>(<span class="dv">0</span>,<span class="dv">12</span>)))</span>
+<span id="cb34-47"><a href="#cb34-47" aria-hidden="true" tabindex="-1"></a>        ax.set_xticklabels(ts[<span class="st">'month_labels'</span>],rotation<span class="op">=</span><span class="dv">40</span>,ha<span class="op">=</span><span class="st">'right'</span>)</span>
+<span id="cb34-48"><a href="#cb34-48" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb34-49"><a href="#cb34-49" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb34-50"><a href="#cb34-50" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> p <span class="op">==</span> param[<span class="op">-</span><span class="dv">1</span>]:</span>
+<span id="cb34-51"><a href="#cb34-51" aria-hidden="true" tabindex="-1"></a>            <span class="cf">if</span> i <span class="op">&gt;</span> <span class="dv">0</span>:</span>
+<span id="cb34-52"><a href="#cb34-52" aria-hidden="true" tabindex="-1"></a>                ax.legend(loc<span class="op">=</span><span class="st">'best'</span>)</span>
+<span id="cb34-53"><a href="#cb34-53" aria-hidden="true" tabindex="-1"></a>                nickname <span class="op">=</span> <span class="st">'_'</span>.join(params[p][<span class="st">'nickname'</span>] <span class="cf">for</span> p <span class="kw">in</span> params)</span>
+<span id="cb34-54"><a href="#cb34-54" aria-hidden="true" tabindex="-1"></a>                savename <span class="op">=</span> <span class="st">'</span><span class="sc">%s</span><span class="st">/box_summed_</span><span class="sc">%s</span><span class="st">_</span><span class="sc">%s</span><span class="st">_</span><span class="sc">%s</span><span class="st">.png'</span><span class="op">%</span> <span class="op">\</span></span>
+<span id="cb34-55"><a href="#cb34-55" aria-hidden="true" tabindex="-1"></a>                    (savedir,nickname,year,focus)</span>
+<span id="cb34-56"><a href="#cb34-56" aria-hidden="true" tabindex="-1"></a>            <span class="cf">else</span>:</span>
+<span id="cb34-57"><a href="#cb34-57" aria-hidden="true" tabindex="-1"></a>                nickname <span class="op">=</span> params[p][<span class="st">'nickname'</span>]</span>
+<span id="cb34-58"><a href="#cb34-58" aria-hidden="true" tabindex="-1"></a>                savename <span class="op">=</span> <span class="st">'</span><span class="sc">%s</span><span class="st">/</span><span class="sc">%s</span><span class="st">/</span><span class="sc">%s</span><span class="st">/box_summed_</span><span class="sc">%s</span><span class="st">_</span><span class="sc">%s</span><span class="st">_</span><span class="sc">%s</span><span class="st">.png'</span><span class="op">%</span> <span class="op">\</span></span>
+<span id="cb34-59"><a href="#cb34-59" aria-hidden="true" tabindex="-1"></a>                    (savedir,nickname,focus,nickname,year,focus)</span>
+<span id="cb34-60"><a href="#cb34-60" aria-hidden="true" tabindex="-1"></a>            <span class="cf">if</span> anomaly:</span>
+<span id="cb34-61"><a href="#cb34-61" aria-hidden="true" tabindex="-1"></a>                ax.plot(<span class="bu">list</span>(<span class="bu">range</span>(<span class="op">-</span><span class="dv">1</span>,<span class="dv">13</span>)),np.zeros(<span class="dv">14</span>),linewidth<span class="op">=</span><span class="fl">0.4</span>)</span>
+<span id="cb34-62"><a href="#cb34-62" aria-hidden="true" tabindex="-1"></a>                savename <span class="op">=</span> savename.replace(<span class="st">'.png'</span>,<span class="st">'_Anomaly.png'</span>)</span>
+<span id="cb34-63"><a href="#cb34-63" aria-hidden="true" tabindex="-1"></a>            ax.set_xlim(<span class="op">-</span><span class="dv">1</span>,<span class="dv">12</span>)</span>
+<span id="cb34-64"><a href="#cb34-64" aria-hidden="true" tabindex="-1"></a>            ax.set_ylim(<span class="op">-</span><span class="fl">4e-5</span>,<span class="fl">4e-5</span>)     <span class="co">#   manual per parameter</span></span>
+<span id="cb34-65"><a href="#cb34-65" aria-hidden="true" tabindex="-1"></a>            <span class="bu">print</span>(<span class="st">'Saving to '</span><span class="op">+</span>savename)</span>
+<span id="cb34-66"><a href="#cb34-66" aria-hidden="true" tabindex="-1"></a>            plt.figure(<span class="dv">1</span>).savefig(savename,dpi<span class="op">=</span><span class="dv">300</span>,bbox_inches<span class="op">=</span><span class="st">'tight'</span>)</span>
+<span id="cb34-67"><a href="#cb34-67" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb34-68"><a href="#cb34-68" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> ts </span>
+<span id="cb34-69"><a href="#cb34-69" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb34-70"><a href="#cb34-70" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb34-71"><a href="#cb34-71" aria-hidden="true" tabindex="-1"></a><span class="co">#------------    </span></span>
+<span id="cb34-72"><a href="#cb34-72" aria-hidden="true" tabindex="-1"></a><span class="co">#------------ </span></span>
+<span id="cb34-73"><a href="#cb34-73" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb34-74"><a href="#cb34-74" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> monthly_heatmaps(year,focus,p,anomaly):</span>
+<span id="cb34-75"><a href="#cb34-75" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> <span class="st">'LPJ'</span> <span class="kw">in</span> p:</span>
+<span id="cb34-76"><a href="#cb34-76" aria-hidden="true" tabindex="-1"></a>        ts <span class="op">=</span> get_lpj_timeseries(year,focus,p)</span>
+<span id="cb34-77"><a href="#cb34-77" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> <span class="st">'MERRA-2'</span> <span class="kw">in</span> p:</span>
+<span id="cb34-78"><a href="#cb34-78" aria-hidden="true" tabindex="-1"></a>        ts <span class="op">=</span> get_merra2_timeseries(year,focus,p,anomaly)</span>
+<span id="cb34-79"><a href="#cb34-79" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb34-80"><a href="#cb34-80" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> t <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">0</span>,<span class="bu">len</span>(ts[<span class="st">'month_labels'</span>])):    <span class="co">#   monthly data</span></span>
+<span id="cb34-81"><a href="#cb34-81" aria-hidden="true" tabindex="-1"></a>        plt.close()</span>
+<span id="cb34-82"><a href="#cb34-82" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb34-83"><a href="#cb34-83" aria-hidden="true" tabindex="-1"></a>        <span class="co">#   Construct plot title</span></span>
+<span id="cb34-84"><a href="#cb34-84" aria-hidden="true" tabindex="-1"></a>        title <span class="op">=</span> <span class="st">'</span><span class="sc">%s</span><span class="ch">\n</span><span class="sc">%s</span><span class="st"> </span><span class="sc">%s</span><span class="st">'</span><span class="op">%</span> <span class="op">\</span></span>
+<span id="cb34-85"><a href="#cb34-85" aria-hidden="true" tabindex="-1"></a>            (datetime(<span class="bu">int</span>(year),t<span class="op">+</span><span class="dv">1</span>,<span class="dv">1</span>).strftime(<span class="st">'%B %Y'</span>),focus,p)</span>
+<span id="cb34-86"><a href="#cb34-86" aria-hidden="true" tabindex="-1"></a>        <span class="co">#   Construct file savename</span></span>
+<span id="cb34-87"><a href="#cb34-87" aria-hidden="true" tabindex="-1"></a>        savename <span class="op">=</span> savedir<span class="op">+</span><span class="st">'</span><span class="sc">%s</span><span class="st">/</span><span class="sc">%s</span><span class="st">/</span><span class="sc">%s</span><span class="st">_</span><span class="sc">%s</span><span class="st">_</span><span class="sc">%s</span><span class="st">_</span><span class="sc">%s</span><span class="st">.png'</span><span class="op">%</span> <span class="op">\</span></span>
+<span id="cb34-88"><a href="#cb34-88" aria-hidden="true" tabindex="-1"></a>            (params[p][<span class="st">'nickname'</span>],</span>
+<span id="cb34-89"><a href="#cb34-89" aria-hidden="true" tabindex="-1"></a>            focus,</span>
+<span id="cb34-90"><a href="#cb34-90" aria-hidden="true" tabindex="-1"></a>            params[p][<span class="st">'nickname'</span>],</span>
+<span id="cb34-91"><a href="#cb34-91" aria-hidden="true" tabindex="-1"></a>            focus,</span>
+<span id="cb34-92"><a href="#cb34-92" aria-hidden="true" tabindex="-1"></a>            year,</span>
+<span id="cb34-93"><a href="#cb34-93" aria-hidden="true" tabindex="-1"></a>            datetime(<span class="bu">int</span>(year),t<span class="op">+</span><span class="dv">1</span>,<span class="dv">1</span>).strftime(<span class="st">'%m'</span>)</span>
+<span id="cb34-94"><a href="#cb34-94" aria-hidden="true" tabindex="-1"></a>            )</span>
+<span id="cb34-95"><a href="#cb34-95" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb34-96"><a href="#cb34-96" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> anomaly:</span>
+<span id="cb34-97"><a href="#cb34-97" aria-hidden="true" tabindex="-1"></a>            savename <span class="op">=</span> savename.replace(<span class="st">'.png'</span>,<span class="st">'_Anomaly.png'</span>)</span>
+<span id="cb34-98"><a href="#cb34-98" aria-hidden="true" tabindex="-1"></a>            title<span class="op">+=</span><span class="st">' Anomaly'</span></span>
+<span id="cb34-99"><a href="#cb34-99" aria-hidden="true" tabindex="-1"></a>            cmap <span class="op">=</span> <span class="st">'RdBu_r'</span></span>
+<span id="cb34-100"><a href="#cb34-100" aria-hidden="true" tabindex="-1"></a>        <span class="cf">else</span>:</span>
+<span id="cb34-101"><a href="#cb34-101" aria-hidden="true" tabindex="-1"></a>            cmap <span class="op">=</span> params[p][<span class="st">'cmap'</span>]</span>
+<span id="cb34-102"><a href="#cb34-102" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb34-103"><a href="#cb34-103" aria-hidden="true" tabindex="-1"></a>        <span class="co">#   vmin and vmax currently set manually per parameter</span></span>
+<span id="cb34-104"><a href="#cb34-104" aria-hidden="true" tabindex="-1"></a>        heatmap(</span>
+<span id="cb34-105"><a href="#cb34-105" aria-hidden="true" tabindex="-1"></a>            ts[<span class="st">'lon'</span>],</span>
+<span id="cb34-106"><a href="#cb34-106" aria-hidden="true" tabindex="-1"></a>            ts[<span class="st">'lat'</span>][:],</span>
+<span id="cb34-107"><a href="#cb34-107" aria-hidden="true" tabindex="-1"></a>            ts[<span class="st">'month_fields'</span>][t],</span>
+<span id="cb34-108"><a href="#cb34-108" aria-hidden="true" tabindex="-1"></a>            colbar_label<span class="op">=</span>ts[<span class="st">'units'</span>],</span>
+<span id="cb34-109"><a href="#cb34-109" aria-hidden="true" tabindex="-1"></a>            boundaries<span class="op">=</span>boundaries[focus],</span>
+<span id="cb34-110"><a href="#cb34-110" aria-hidden="true" tabindex="-1"></a>            cmap<span class="op">=</span>cmap,</span>
+<span id="cb34-111"><a href="#cb34-111" aria-hidden="true" tabindex="-1"></a>            <span class="co">#vmin = 0,</span></span>
+<span id="cb34-112"><a href="#cb34-112" aria-hidden="true" tabindex="-1"></a>            <span class="co">#vmax = 0.0025,</span></span>
+<span id="cb34-113"><a href="#cb34-113" aria-hidden="true" tabindex="-1"></a>            vmin <span class="op">=</span> <span class="op">-</span><span class="fl">4e-5</span>,</span>
+<span id="cb34-114"><a href="#cb34-114" aria-hidden="true" tabindex="-1"></a>            vmax <span class="op">=</span> <span class="fl">4e-5</span>,</span>
+<span id="cb34-115"><a href="#cb34-115" aria-hidden="true" tabindex="-1"></a>            <span class="co">#vmin = 260,</span></span>
+<span id="cb34-116"><a href="#cb34-116" aria-hidden="true" tabindex="-1"></a>            <span class="co">#vmax = 315,</span></span>
+<span id="cb34-117"><a href="#cb34-117" aria-hidden="true" tabindex="-1"></a>            <span class="co">#vmin = 0,</span></span>
+<span id="cb34-118"><a href="#cb34-118" aria-hidden="true" tabindex="-1"></a>            <span class="co">#vmax = np.nanmean(ts['month_fields'])+2.5*np.nanstd(ts['month_fields']),</span></span>
+<span id="cb34-119"><a href="#cb34-119" aria-hidden="true" tabindex="-1"></a>            <span class="co">#vmin = -4*np.nanstd(ts['month_fields']),</span></span>
+<span id="cb34-120"><a href="#cb34-120" aria-hidden="true" tabindex="-1"></a>            <span class="co">#vmax = 4*np.nanstd(ts['month_fields']),</span></span>
+<span id="cb34-121"><a href="#cb34-121" aria-hidden="true" tabindex="-1"></a>            <span class="op">**</span>{<span class="st">'title'</span>:title,<span class="st">'savename'</span>:savename}</span>
+<span id="cb34-122"><a href="#cb34-122" aria-hidden="true" tabindex="-1"></a>        )</span>
+<span id="cb34-123"><a href="#cb34-123" aria-hidden="true" tabindex="-1"></a><span class="co">#   save(year)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 <section id="summary" class="level2">

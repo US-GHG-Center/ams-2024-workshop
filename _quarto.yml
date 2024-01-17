@@ -22,7 +22,7 @@ website:
         # icon: team
   page-footer:
     right: "This page is built with [Quarto](https://quarto.org/)."
-    left: "&copy; CC-By US GHG Center, 2022-2023"
+    left: "&copy; CC-By US GHG Center, 2024"
 
   sidebar:
     logo: "https://us-ghg-center.github.io/ghgc-docs/logo/ghgc-logo-light.svg"

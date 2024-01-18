@@ -93,6 +93,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     "search-label": "Search"
   }
 }</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.6/require.min.js" integrity="sha512-c3Nl8+7g4LMSTdrm621y7kf9v3SDPnhxLNhcjFJbKECVnmZHTdo+IRO05sNLTH/D3vA6u1X32ehoLC7WFVdheg==" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js" integrity="sha512-bLT0Qm9VnAYZDflyKcBaQ2gg0hSYNQrJ8RilYldYQ1FxQYoCLtUjuuRuZo+fjqhx/qtq/1itJ0C2ejDxltZVFg==" crossorigin="anonymous"></script>
+<script type="application/javascript">define('jquery', [],function() {return window.jQuery;})</script>
 
 
 </head>
@@ -345,8 +348,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>items[<span class="dv">0</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Below, we enter minimum and maximum values to provide our upper and lower bounds in <code>rescale_values.</code></p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>rescale_values <span class="op">=</span> {<span class="st">'max'</span>: <span class="fl">0.2</span>, <span class="st">'min'</span>: <span class="fl">0.0</span>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell" data-execution_count="65">
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>rescale_values <span class="op">=</span> {<span class="st">'max'</span>: <span class="fl">2.0</span>, <span class="st">'min'</span>: <span class="fl">0.0</span>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 <section id="exploring-changes-in-methane-ch4-emission-levels-using-the-raster-api" class="level2">
@@ -377,231 +380,643 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb9-17"><a href="#cb9-17" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Now, we will pass the item id, collection name, and <code>rescaling_factor</code> to the <code>Raster API</code> endpoint. We will do this twice, once for may 2001 and again for may 2021, so we can visualize each event independently.</p>
-<div class="cell">
+<div class="cell" data-execution_count="95">
 <div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>color_map <span class="op">=</span> <span class="st">"magma"</span> <span class="co"># select the color ramp from matplotlib library.</span></span>
-<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>may_2001_tile <span class="op">=</span> requests.get(</span>
-<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>    <span class="ss">f"</span><span class="sc">{</span>RASTER_API_URL<span class="sc">}</span><span class="ss">/stac/tilejson.json?collection=</span><span class="sc">{</span>items[<span class="st">'2001-05'</span>][<span class="st">'collection'</span>]<span class="sc">}</span><span class="ss">&amp;item=</span><span class="sc">{</span>items[<span class="st">'2001-05'</span>][<span class="st">'id'</span>]<span class="sc">}</span><span class="ss">"</span></span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>may_2020_tile <span class="op">=</span> requests.get(</span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>    <span class="ss">f"</span><span class="sc">{</span>RASTER_API_URL<span class="sc">}</span><span class="ss">/stac/tilejson.json?collection=</span><span class="sc">{</span>items[<span class="st">'2001-05'</span>][<span class="st">'collection'</span>]<span class="sc">}</span><span class="ss">&amp;item=</span><span class="sc">{</span>items[<span class="st">'2020-05'</span>][<span class="st">'id'</span>]<span class="sc">}</span><span class="ss">"</span></span>
 <span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>    <span class="st">"&amp;assets=ch4-wetlands-emissions"</span></span>
 <span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a>    <span class="ss">f"&amp;color_formula=gamma+r+1.05&amp;colormap_name=</span><span class="sc">{</span>color_map<span class="sc">}</span><span class="ss">"</span></span>
 <span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a>    <span class="ss">f"&amp;rescale=</span><span class="sc">{</span>rescale_values[<span class="st">'min'</span>]<span class="sc">}</span><span class="ss">,</span><span class="sc">{</span>rescale_values[<span class="st">'max'</span>]<span class="sc">}</span><span class="ss">"</span></span>
 <span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a>).json()</span>
-<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a>may_2001_tile</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a>may_2020_tile</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="95">
+<pre><code>{'tilejson': '2.2.0',
+ 'version': '1.0.0',
+ 'scheme': 'xyz',
+ 'tiles': ['https://ghg.center/api/raster/stac/tiles/WebMercatorQuad/{z}/{x}/{y}@1x?collection=lpjwsl-wetlandch4-monthgrid-v1&amp;item=lpjwsl-wetlandch4-monthgrid-v1-202005&amp;assets=ch4-wetlands-emissions&amp;color_formula=gamma+r+1.05&amp;colormap_name=magma&amp;rescale=0.0%2C2.0'],
+ 'minzoom': 0,
+ 'maxzoom': 24,
+ 'bounds': [-180.0, -90.0, 180.0, 90.0],
+ 'center': [0.0, 0.0, 0]}</code></pre>
 </div>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>may_2021_tile <span class="op">=</span> requests.get(</span>
-<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>    <span class="ss">f"</span><span class="sc">{</span>RASTER_API_URL<span class="sc">}</span><span class="ss">/stac/tilejson.json?collection=</span><span class="sc">{</span>items[<span class="st">'2021-05'</span>][<span class="st">'collection'</span>]<span class="sc">}</span><span class="ss">&amp;item=</span><span class="sc">{</span>items[<span class="st">'2021-05'</span>][<span class="st">'id'</span>]<span class="sc">}</span><span class="ss">"</span></span>
-<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>    <span class="st">"&amp;assets=ch4-wetlands-emissions"</span></span>
-<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a>    <span class="ss">f"&amp;color_formula=gamma+r+1.05&amp;colormap_name=</span><span class="sc">{</span>color_map<span class="sc">}</span><span class="ss">"</span></span>
-<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a>    <span class="ss">f"&amp;rescale=</span><span class="sc">{</span>rescale_values[<span class="st">'min'</span>]<span class="sc">}</span><span class="ss">,</span><span class="sc">{</span>rescale_values[<span class="st">'max'</span>]<span class="sc">}</span><span class="ss">"</span>, </span>
-<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a>).json()</span>
-<span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a>may_2021_tile</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell" data-execution_count="67">
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>may_2021_tile <span class="op">=</span> requests.get(</span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>    <span class="ss">f"</span><span class="sc">{</span>RASTER_API_URL<span class="sc">}</span><span class="ss">/stac/tilejson.json?collection=</span><span class="sc">{</span>items[<span class="st">'2021-05'</span>][<span class="st">'collection'</span>]<span class="sc">}</span><span class="ss">&amp;item=</span><span class="sc">{</span>items[<span class="st">'2021-05'</span>][<span class="st">'id'</span>]<span class="sc">}</span><span class="ss">"</span></span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>    <span class="st">"&amp;assets=ch4-wetlands-emissions"</span></span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a>    <span class="ss">f"&amp;color_formula=gamma+r+1.05&amp;colormap_name=</span><span class="sc">{</span>color_map<span class="sc">}</span><span class="ss">"</span></span>
+<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a>    <span class="ss">f"&amp;rescale=</span><span class="sc">{</span>rescale_values[<span class="st">'min'</span>]<span class="sc">}</span><span class="ss">,</span><span class="sc">{</span>rescale_values[<span class="st">'max'</span>]<span class="sc">}</span><span class="ss">"</span>, </span>
+<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a>).json()</span>
+<span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a>may_2021_tile</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="67">
+<pre><code>{'tilejson': '2.2.0',
+ 'version': '1.0.0',
+ 'scheme': 'xyz',
+ 'tiles': ['https://ghg.center/api/raster/stac/tiles/WebMercatorQuad/{z}/{x}/{y}@1x?collection=lpjwsl-wetlandch4-monthgrid-v1&amp;item=lpjwsl-wetlandch4-monthgrid-v1-202105&amp;assets=ch4-wetlands-emissions&amp;color_formula=gamma+r+1.05&amp;colormap_name=magma&amp;rescale=0.0%2C2.0'],
+ 'minzoom': 0,
+ 'maxzoom': 24,
+ 'bounds': [-180.0, -90.0, 180.0, 90.0],
+ 'center': [0.0, 0.0, 0]}</code></pre>
+</div>
 </div>
 </section>
 <section id="visualizing-ch₄-emissions" class="level2">
 <h2 class="anchored" data-anchor-id="visualizing-ch₄-emissions">Visualizing CH₄ Emissions</h2>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="co"># We will import folium to map and folium.plugins to allow side-by-side mapping</span></span>
-<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Set initial zoom and center of map for CH₄ Layer</span></span>
-<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Centre of map [latitude,longitude]</span></span>
-<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a>map_ <span class="op">=</span> folium.plugins.DualMap(location<span class="op">=</span>(aoi[<span class="dv">2</span>],aoi[<span class="dv">0</span>]), zoom_start<span class="op">=</span><span class="dv">5</span>)</span>
-<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a><span class="co"># May 2001</span></span>
-<span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a>map_layer_2001 <span class="op">=</span> TileLayer(</span>
-<span id="cb12-8"><a href="#cb12-8" aria-hidden="true" tabindex="-1"></a>    tiles<span class="op">=</span>may_2001_tile[<span class="st">"tiles"</span>][<span class="dv">0</span>],</span>
-<span id="cb12-9"><a href="#cb12-9" aria-hidden="true" tabindex="-1"></a>    attr<span class="op">=</span><span class="st">"GHG"</span>,</span>
-<span id="cb12-10"><a href="#cb12-10" aria-hidden="true" tabindex="-1"></a>    opacity<span class="op">=</span><span class="fl">0.5</span>,</span>
-<span id="cb12-11"><a href="#cb12-11" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb12-12"><a href="#cb12-12" aria-hidden="true" tabindex="-1"></a>map_layer_2001.add_to(map_.m1)</span>
-<span id="cb12-13"><a href="#cb12-13" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb12-14"><a href="#cb12-14" aria-hidden="true" tabindex="-1"></a><span class="co"># May 2021</span></span>
-<span id="cb12-15"><a href="#cb12-15" aria-hidden="true" tabindex="-1"></a>map_layer_2021 <span class="op">=</span> TileLayer(</span>
-<span id="cb12-16"><a href="#cb12-16" aria-hidden="true" tabindex="-1"></a>    tiles<span class="op">=</span>may_2021_tile[<span class="st">"tiles"</span>][<span class="dv">0</span>],</span>
-<span id="cb12-17"><a href="#cb12-17" aria-hidden="true" tabindex="-1"></a>    attr<span class="op">=</span><span class="st">"GHG"</span>,</span>
-<span id="cb12-18"><a href="#cb12-18" aria-hidden="true" tabindex="-1"></a>    opacity<span class="op">=</span><span class="fl">0.5</span>,</span>
-<span id="cb12-19"><a href="#cb12-19" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb12-20"><a href="#cb12-20" aria-hidden="true" tabindex="-1"></a>map_layer_2021.add_to(map_.m2)</span>
-<span id="cb12-21"><a href="#cb12-21" aria-hidden="true" tabindex="-1"></a>folium.GeoJson(louisiana_aoi, name<span class="op">=</span><span class="st">"louisiana, USA"</span>).add_to(map_)</span>
-<span id="cb12-22"><a href="#cb12-22" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb12-23"><a href="#cb12-23" aria-hidden="true" tabindex="-1"></a><span class="co"># visualising the map</span></span>
-<span id="cb12-24"><a href="#cb12-24" aria-hidden="true" tabindex="-1"></a>map_</span>
-<span id="cb12-25"><a href="#cb12-25" aria-hidden="true" tabindex="-1"></a></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell" data-execution_count="82">
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="co"># We will import folium to map and folium.plugins to allow side-by-side mapping</span></span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Set initial zoom and center of map for CH₄ Layer</span></span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Centre of map [latitude,longitude]</span></span>
+<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> folium.plugins <span class="im">import</span> MousePosition</span>
+<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a>map_ <span class="op">=</span> folium.Map(location<span class="op">=</span>(<span class="dv">30</span>,<span class="op">-</span><span class="dv">90</span>), zoom_start<span class="op">=</span><span class="dv">6</span>)</span>
+<span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-7"><a href="#cb14-7" aria-hidden="true" tabindex="-1"></a><span class="co"># May 2001</span></span>
+<span id="cb14-8"><a href="#cb14-8" aria-hidden="true" tabindex="-1"></a>map_layer_2001 <span class="op">=</span> TileLayer(</span>
+<span id="cb14-9"><a href="#cb14-9" aria-hidden="true" tabindex="-1"></a>    tiles<span class="op">=</span>may_2020_tile[<span class="st">"tiles"</span>][<span class="dv">0</span>],</span>
+<span id="cb14-10"><a href="#cb14-10" aria-hidden="true" tabindex="-1"></a>    attr<span class="op">=</span><span class="st">"GHG"</span>,</span>
+<span id="cb14-11"><a href="#cb14-11" aria-hidden="true" tabindex="-1"></a>    opacity<span class="op">=</span><span class="fl">0.5</span>,</span>
+<span id="cb14-12"><a href="#cb14-12" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb14-13"><a href="#cb14-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-14"><a href="#cb14-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-15"><a href="#cb14-15" aria-hidden="true" tabindex="-1"></a><span class="co"># May 2021</span></span>
+<span id="cb14-16"><a href="#cb14-16" aria-hidden="true" tabindex="-1"></a>map_layer_2021 <span class="op">=</span> TileLayer(</span>
+<span id="cb14-17"><a href="#cb14-17" aria-hidden="true" tabindex="-1"></a>    tiles<span class="op">=</span>may_2021_tile[<span class="st">"tiles"</span>][<span class="dv">0</span>],</span>
+<span id="cb14-18"><a href="#cb14-18" aria-hidden="true" tabindex="-1"></a>    attr<span class="op">=</span><span class="st">"GHG"</span>,</span>
+<span id="cb14-19"><a href="#cb14-19" aria-hidden="true" tabindex="-1"></a>    opacity<span class="op">=</span><span class="fl">0.5</span>,</span>
+<span id="cb14-20"><a href="#cb14-20" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb14-21"><a href="#cb14-21" aria-hidden="true" tabindex="-1"></a>sbs <span class="op">=</span> folium.plugins.SideBySideLayers(layer_left<span class="op">=</span>map_layer_2001, layer_right<span class="op">=</span>map_layer_2021)</span>
+<span id="cb14-22"><a href="#cb14-22" aria-hidden="true" tabindex="-1"></a>map_layer_2001.add_to(map_)</span>
+<span id="cb14-23"><a href="#cb14-23" aria-hidden="true" tabindex="-1"></a>map_layer_2021.add_to(map_)</span>
+<span id="cb14-24"><a href="#cb14-24" aria-hidden="true" tabindex="-1"></a>folium.GeoJson(louisiana_aoi, name<span class="op">=</span><span class="st">"louisiana, USA"</span>).add_to(map_)</span>
+<span id="cb14-25"><a href="#cb14-25" aria-hidden="true" tabindex="-1"></a>sbs.add_to(map_)</span>
+<span id="cb14-26"><a href="#cb14-26" aria-hidden="true" tabindex="-1"></a>MousePosition().add_to(map_)</span>
+<span id="cb14-27"><a href="#cb14-27" aria-hidden="true" tabindex="-1"></a><span class="co"># visualising the map</span></span>
+<span id="cb14-28"><a href="#cb14-28" aria-hidden="true" tabindex="-1"></a>map_</span>
+<span id="cb14-29"><a href="#cb14-29" aria-hidden="true" tabindex="-1"></a></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="82">
+<div style="width:100%;"><div style="position:relative;width:100%;height:0;padding-bottom:60%;"><span style="color:#565656">Make this Notebook Trusted to load map: File -&gt; Trust Notebook</span><iframe srcdoc="<!DOCTYPE html>
+<html>
+<head>
+    
+    <meta http-equiv=&quot;content-type&quot; content=&quot;text/html; charset=UTF-8&quot; />
+    
+        <script>
+            L_NO_TOUCH = false;
+            L_DISABLE_3D = false;
+        </script>
+    
+    <style>html, body {width: 100%;height: 100%;margin: 0;padding: 0;}</style>
+    <style>#map {position:absolute;top:0;bottom:0;right:0;left:0;}</style>
+    <script src=&quot;https://cdn.jsdelivr.net/npm/leaflet@1.9.3/dist/leaflet.js&quot;></script>
+    <script src=&quot;https://code.jquery.com/jquery-3.7.1.min.js&quot;></script>
+    <script src=&quot;https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js&quot;></script>
+    <script src=&quot;https://cdnjs.cloudflare.com/ajax/libs/Leaflet.awesome-markers/2.0.2/leaflet.awesome-markers.js&quot;></script>
+    <link rel=&quot;stylesheet&quot; href=&quot;https://cdn.jsdelivr.net/npm/leaflet@1.9.3/dist/leaflet.css&quot;/>
+    <link rel=&quot;stylesheet&quot; href=&quot;https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css&quot;/>
+    <link rel=&quot;stylesheet&quot; href=&quot;https://netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css&quot;/>
+    <link rel=&quot;stylesheet&quot; href=&quot;https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.2.0/css/all.min.css&quot;/>
+    <link rel=&quot;stylesheet&quot; href=&quot;https://cdnjs.cloudflare.com/ajax/libs/Leaflet.awesome-markers/2.0.2/leaflet.awesome-markers.css&quot;/>
+    <link rel=&quot;stylesheet&quot; href=&quot;https://cdn.jsdelivr.net/gh/python-visualization/folium/folium/templates/leaflet.awesome.rotate.min.css&quot;/>
+    
+            <meta name=&quot;viewport&quot; content=&quot;width=device-width,
+                initial-scale=1.0, maximum-scale=1.0, user-scalable=no&quot; />
+            <style>
+                #map_967e0b4e4297d005665806559f82baca {
+                    position: relative;
+                    width: 100.0%;
+                    height: 100.0%;
+                    left: 0.0%;
+                    top: 0.0%;
+                }
+                .leaflet-container { font-size: 1rem; }
+            </style>
+        
+    <script src=&quot;https://cdn.jsdelivr.net/gh/digidem/leaflet-side-by-side@2.0.0/leaflet-side-by-side.min.js&quot;></script>
+    <script src=&quot;https://cdn.jsdelivr.net/gh/ardhi/Leaflet.MousePosition/src/L.Control.MousePosition.min.js&quot;></script>
+    <link rel=&quot;stylesheet&quot; href=&quot;https://cdn.jsdelivr.net/gh/ardhi/Leaflet.MousePosition/src/L.Control.MousePosition.min.css&quot;/>
+</head>
+<body>
+    
+    
+            <div class=&quot;folium-map&quot; id=&quot;map_967e0b4e4297d005665806559f82baca&quot; ></div>
+        
+</body>
+<script>
+    
+    
+            var map_967e0b4e4297d005665806559f82baca = L.map(
+                &quot;map_967e0b4e4297d005665806559f82baca&quot;,
+                {
+                    center: [30.0, -90.0],
+                    crs: L.CRS.EPSG3857,
+                    zoom: 6,
+                    zoomControl: true,
+                    preferCanvas: false,
+                }
+            );
+
+            
+
+        
+    
+            var tile_layer_e630ddf87f6dcb8baf031ca77976bcca = L.tileLayer(
+                &quot;https://tile.openstreetmap.org/{z}/{x}/{y}.png&quot;,
+                {&quot;attribution&quot;: &quot;\u0026copy; \u003ca href=\&quot;https://www.openstreetmap.org/copyright\&quot;\u003eOpenStreetMap\u003c/a\u003e contributors&quot;, &quot;detectRetina&quot;: false, &quot;maxNativeZoom&quot;: 19, &quot;maxZoom&quot;: 19, &quot;minZoom&quot;: 0, &quot;noWrap&quot;: false, &quot;opacity&quot;: 1, &quot;subdomains&quot;: &quot;abc&quot;, &quot;tms&quot;: false}
+            );
+        
+    
+            tile_layer_e630ddf87f6dcb8baf031ca77976bcca.addTo(map_967e0b4e4297d005665806559f82baca);
+        
+    
+            var tile_layer_9c3fdb36bd1604adbaee4307ddf84851 = L.tileLayer(
+                &quot;https://ghg.center/api/raster/stac/tiles/WebMercatorQuad/{z}/{x}/{y}@1x?collection=lpjwsl-wetlandch4-monthgrid-v1\u0026item=lpjwsl-wetlandch4-monthgrid-v1-202005\u0026assets=ch4-wetlands-emissions\u0026color_formula=gamma+r+1.05\u0026colormap_name=magma\u0026rescale=0.0%2C2.0&quot;,
+                {&quot;attribution&quot;: &quot;GHG&quot;, &quot;detectRetina&quot;: false, &quot;maxNativeZoom&quot;: 18, &quot;maxZoom&quot;: 18, &quot;minZoom&quot;: 0, &quot;noWrap&quot;: false, &quot;opacity&quot;: 0.5, &quot;subdomains&quot;: &quot;abc&quot;, &quot;tms&quot;: false}
+            );
+        
+    
+            tile_layer_9c3fdb36bd1604adbaee4307ddf84851.addTo(map_967e0b4e4297d005665806559f82baca);
+        
+    
+            var tile_layer_53440efa202b7c6ba09c5b8e01053543 = L.tileLayer(
+                &quot;https://ghg.center/api/raster/stac/tiles/WebMercatorQuad/{z}/{x}/{y}@1x?collection=lpjwsl-wetlandch4-monthgrid-v1\u0026item=lpjwsl-wetlandch4-monthgrid-v1-202105\u0026assets=ch4-wetlands-emissions\u0026color_formula=gamma+r+1.05\u0026colormap_name=magma\u0026rescale=0.0%2C2.0&quot;,
+                {&quot;attribution&quot;: &quot;GHG&quot;, &quot;detectRetina&quot;: false, &quot;maxNativeZoom&quot;: 18, &quot;maxZoom&quot;: 18, &quot;minZoom&quot;: 0, &quot;noWrap&quot;: false, &quot;opacity&quot;: 0.5, &quot;subdomains&quot;: &quot;abc&quot;, &quot;tms&quot;: false}
+            );
+        
+    
+            tile_layer_53440efa202b7c6ba09c5b8e01053543.addTo(map_967e0b4e4297d005665806559f82baca);
+        
+    
+
+        function geo_json_accd756a233038c69d936ac0b6abaa45_onEachFeature(feature, layer) {
+            layer.on({
+            });
+        };
+        var geo_json_accd756a233038c69d936ac0b6abaa45 = L.geoJson(null, {
+                onEachFeature: geo_json_accd756a233038c69d936ac0b6abaa45_onEachFeature,
+            
+        });
+
+        function geo_json_accd756a233038c69d936ac0b6abaa45_add (data) {
+            geo_json_accd756a233038c69d936ac0b6abaa45
+                .addData(data);
+        }
+            geo_json_accd756a233038c69d936ac0b6abaa45_add({&quot;geometry&quot;: {&quot;coordinates&quot;: [[[-95.9, 28.7], [-95.9, 33.5], [-87.5, 33.5], [-87.5, 28.7], [-95.9, 28.7]]], &quot;type&quot;: &quot;Polygon&quot;}, &quot;properties&quot;: {}, &quot;type&quot;: &quot;Feature&quot;});
+
+        
+    
+            geo_json_accd756a233038c69d936ac0b6abaa45.addTo(map_967e0b4e4297d005665806559f82baca);
+        
+    
+            var side_by_side_layers_c88d95e345234821084c96747f57c163 = L.control.sideBySide(
+                tile_layer_9c3fdb36bd1604adbaee4307ddf84851, tile_layer_53440efa202b7c6ba09c5b8e01053543
+            ).addTo(map_967e0b4e4297d005665806559f82baca);
+        
+    
+            var mouse_position_5fdab37e29d9a4107d294a000f0b2e67 = new L.Control.MousePosition(
+                {&quot;emptyString&quot;: &quot;Unavailable&quot;, &quot;lngFirst&quot;: false, &quot;numDigits&quot;: 5, &quot;position&quot;: &quot;bottomright&quot;, &quot;prefix&quot;: &quot;&quot;, &quot;separator&quot;: &quot; : &quot;}
+            );
+            mouse_position_5fdab37e29d9a4107d294a000f0b2e67.options[&quot;latFormatter&quot;] =
+                undefined;
+            mouse_position_5fdab37e29d9a4107d294a000f0b2e67.options[&quot;lngFormatter&quot;] =
+                undefined;
+            map_967e0b4e4297d005665806559f82baca.addControl(mouse_position_5fdab37e29d9a4107d294a000f0b2e67);
+        
+</script>
+</html>" style="position:absolute;width:100%;height:100%;left:0;top:0;border:none !important;" allowfullscreen="" webkitallowfullscreen="" mozallowfullscreen=""></iframe></div></div>
+</div>
 </div>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="co"># The bounding box should be passed to the geojson param as a geojson Feature or FeatureCollection</span></span>
-<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> generate_stats(item, geojson):</span>
-<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>    result <span class="op">=</span> requests.post(</span>
-<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a>        <span class="ss">f"</span><span class="sc">{</span>RASTER_API_URL<span class="sc">}</span><span class="ss">/cog/statistics"</span>,</span>
-<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a>        params<span class="op">=</span>{<span class="st">"url"</span>: item[<span class="st">"assets"</span>][<span class="st">"ch4-wetlands-emissions"</span>][<span class="st">"href"</span>]},</span>
-<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a>        json<span class="op">=</span>geojson,</span>
-<span id="cb13-7"><a href="#cb13-7" aria-hidden="true" tabindex="-1"></a>    ).json()</span>
-<span id="cb13-8"><a href="#cb13-8" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> {</span>
-<span id="cb13-9"><a href="#cb13-9" aria-hidden="true" tabindex="-1"></a>        <span class="op">**</span>result[<span class="st">"properties"</span>],</span>
-<span id="cb13-10"><a href="#cb13-10" aria-hidden="true" tabindex="-1"></a>        <span class="st">"datetime"</span>: item[<span class="st">"properties"</span>][<span class="st">"datetime"</span>],</span>
-<span id="cb13-11"><a href="#cb13-11" aria-hidden="true" tabindex="-1"></a>    }</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="co"># The bounding box should be passed to the geojson param as a geojson Feature or FeatureCollection</span></span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> generate_stats(item, geojson):</span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>    result <span class="op">=</span> requests.post(</span>
+<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a>        <span class="ss">f"</span><span class="sc">{</span>RASTER_API_URL<span class="sc">}</span><span class="ss">/cog/statistics"</span>,</span>
+<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a>        params<span class="op">=</span>{<span class="st">"url"</span>: item[<span class="st">"assets"</span>][<span class="st">"ch4-wetlands-emissions"</span>][<span class="st">"href"</span>]},</span>
+<span id="cb15-6"><a href="#cb15-6" aria-hidden="true" tabindex="-1"></a>        json<span class="op">=</span>geojson,</span>
+<span id="cb15-7"><a href="#cb15-7" aria-hidden="true" tabindex="-1"></a>    ).json()</span>
+<span id="cb15-8"><a href="#cb15-8" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> {</span>
+<span id="cb15-9"><a href="#cb15-9" aria-hidden="true" tabindex="-1"></a>        <span class="op">**</span>result[<span class="st">"properties"</span>],</span>
+<span id="cb15-10"><a href="#cb15-10" aria-hidden="true" tabindex="-1"></a>        <span class="st">"datetime"</span>: item[<span class="st">"properties"</span>][<span class="st">"datetime"</span>],</span>
+<span id="cb15-11"><a href="#cb15-11" aria-hidden="true" tabindex="-1"></a>    }</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>With the function above, we can generate the statistics for the area of interest.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="co"># around 5 mins </span></span>
-<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>stats <span class="op">=</span> [generate_stats(item, louisiana_aoi) <span class="cf">for</span> item <span class="kw">in</span> items]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="co"># around 5 mins </span></span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>stats <span class="op">=</span> [generate_stats(item, louisiana_aoi) <span class="cf">for</span> item <span class="kw">in</span> items]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>stats</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>stats</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> clean_stats(stats_json) <span class="op">-&gt;</span> pd.DataFrame:</span>
-<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>    df <span class="op">=</span> pd.json_normalize(stats_json)</span>
-<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a>    df.columns <span class="op">=</span> [col.replace(<span class="st">"statistics.b1."</span>, <span class="st">""</span>) <span class="cf">for</span> col <span class="kw">in</span> df.columns]</span>
-<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a>    df[<span class="st">"date"</span>] <span class="op">=</span> pd.to_datetime(df[<span class="st">"datetime"</span>])</span>
-<span id="cb16-6"><a href="#cb16-6" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> df</span>
-<span id="cb16-7"><a href="#cb16-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-8"><a href="#cb16-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-9"><a href="#cb16-9" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span> clean_stats(stats)</span>
-<span id="cb16-10"><a href="#cb16-10" aria-hidden="true" tabindex="-1"></a>df.head(<span class="dv">5</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> clean_stats(stats_json) <span class="op">-&gt;</span> pd.DataFrame:</span>
+<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a>    df <span class="op">=</span> pd.json_normalize(stats_json)</span>
+<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a>    df.columns <span class="op">=</span> [col.replace(<span class="st">"statistics.b1."</span>, <span class="st">""</span>) <span class="cf">for</span> col <span class="kw">in</span> df.columns]</span>
+<span id="cb18-5"><a href="#cb18-5" aria-hidden="true" tabindex="-1"></a>    df[<span class="st">"date"</span>] <span class="op">=</span> pd.to_datetime(df[<span class="st">"datetime"</span>])</span>
+<span id="cb18-6"><a href="#cb18-6" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> df</span>
+<span id="cb18-7"><a href="#cb18-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-8"><a href="#cb18-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-9"><a href="#cb18-9" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span> clean_stats(stats)</span>
+<span id="cb18-10"><a href="#cb18-10" aria-hidden="true" tabindex="-1"></a>df.head(<span class="dv">5</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>df_2020_2021 <span class="op">=</span> df[(df[<span class="st">'date'</span>].dt.year <span class="op">==</span> <span class="dv">2020</span>) <span class="op">|</span> (df[<span class="st">'date'</span>].dt.year <span class="op">==</span> <span class="dv">2021</span>)]</span>
-<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>df_2020_2021[<span class="st">'year'</span>] <span class="op">=</span> pd.to_datetime(df_2020_2021[<span class="st">'datetime'</span>]).dt.year</span>
-<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>df_2020_2021[<span class="st">'month'</span>] <span class="op">=</span> pd.to_datetime(df_2020_2021[<span class="st">'datetime'</span>]).dt.month</span>
-<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a>df_2020_2021</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>df_2020_2021 <span class="op">=</span> df[(df[<span class="st">'date'</span>].dt.year <span class="op">==</span> <span class="dv">2020</span>) <span class="op">|</span> (df[<span class="st">'date'</span>].dt.year <span class="op">==</span> <span class="dv">2021</span>)]</span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>df_2020_2021[<span class="st">'year'</span>] <span class="op">=</span> pd.to_datetime(df_2020_2021[<span class="st">'datetime'</span>]).dt.year</span>
+<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a>df_2020_2021[<span class="st">'month'</span>] <span class="op">=</span> pd.to_datetime(df_2020_2021[<span class="st">'datetime'</span>]).dt.month</span>
+<span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a>df_2020_2021</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 <section id="visualizing-the-data-as-a-time-series" class="level2">
 <h2 class="anchored" data-anchor-id="visualizing-the-data-as-a-time-series">Visualizing the Data as a Time Series</h2>
 <p>We can now explore the wetland methane emissions time series (January 1980 – may 2021) available for the Dallas, Texas area of the U.S. We can plot the data set using the code below:</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>fig <span class="op">=</span> plt.figure(figsize<span class="op">=</span>(<span class="dv">20</span>, <span class="dv">10</span>))</span>
-<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a>sns.lineplot(</span>
-<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a>    df_2020_2021,</span>
-<span id="cb18-5"><a href="#cb18-5" aria-hidden="true" tabindex="-1"></a>    x <span class="op">=</span> <span class="st">'month'</span>, </span>
-<span id="cb18-6"><a href="#cb18-6" aria-hidden="true" tabindex="-1"></a>    y <span class="op">=</span> <span class="st">'sum'</span>,</span>
-<span id="cb18-7"><a href="#cb18-7" aria-hidden="true" tabindex="-1"></a>    hue<span class="op">=</span> <span class="st">'year'</span>,</span>
-<span id="cb18-8"><a href="#cb18-8" aria-hidden="true" tabindex="-1"></a>    palette<span class="op">=</span><span class="st">'flare'</span></span>
-<span id="cb18-9"><a href="#cb18-9" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb18-10"><a href="#cb18-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb18-11"><a href="#cb18-11" aria-hidden="true" tabindex="-1"></a><span class="co"># plt.legend()</span></span>
-<span id="cb18-12"><a href="#cb18-12" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="st">"months"</span>)</span>
-<span id="cb18-13"><a href="#cb18-13" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="st">"CH4 emissions g/m2"</span>)</span>
-<span id="cb18-14"><a href="#cb18-14" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">"CH4 emission Values for louisiana for 2020 and 2021"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell" data-execution_count="99">
+<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>fig <span class="op">=</span> plt.figure(figsize<span class="op">=</span>(<span class="dv">20</span>, <span class="dv">10</span>))</span>
+<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a>sns.lineplot(</span>
+<span id="cb20-4"><a href="#cb20-4" aria-hidden="true" tabindex="-1"></a>    df_2020_2021,</span>
+<span id="cb20-5"><a href="#cb20-5" aria-hidden="true" tabindex="-1"></a>    x <span class="op">=</span> <span class="st">'month'</span>, </span>
+<span id="cb20-6"><a href="#cb20-6" aria-hidden="true" tabindex="-1"></a>    y <span class="op">=</span> <span class="st">'sum'</span>,</span>
+<span id="cb20-7"><a href="#cb20-7" aria-hidden="true" tabindex="-1"></a>    hue<span class="op">=</span> <span class="st">'year'</span>,</span>
+<span id="cb20-8"><a href="#cb20-8" aria-hidden="true" tabindex="-1"></a>    palette<span class="op">=</span><span class="st">'flare'</span></span>
+<span id="cb20-9"><a href="#cb20-9" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb20-10"><a href="#cb20-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-11"><a href="#cb20-11" aria-hidden="true" tabindex="-1"></a><span class="co"># plt.legend()</span></span>
+<span id="cb20-12"><a href="#cb20-12" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="st">"months"</span>)</span>
+<span id="cb20-13"><a href="#cb20-13" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="st">"CH4 emissions g/m2"</span>)</span>
+<span id="cb20-14"><a href="#cb20-14" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">"CH4 emission Values for louisiana for 2020 and 2021"</span>)</span>
+<span id="cb20-15"><a href="#cb20-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-16"><a href="#cb20-16" aria-hidden="true" tabindex="-1"></a><span class="co"># We will import folium to map and folium.plugins to allow side-by-side mapping</span></span>
+<span id="cb20-17"><a href="#cb20-17" aria-hidden="true" tabindex="-1"></a><span class="co"># Set initial zoom and center of map for CH₄ Layer</span></span>
+<span id="cb20-18"><a href="#cb20-18" aria-hidden="true" tabindex="-1"></a><span class="co"># Centre of map [latitude,longitude]</span></span>
+<span id="cb20-19"><a href="#cb20-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-20"><a href="#cb20-20" aria-hidden="true" tabindex="-1"></a>colormap <span class="op">=</span> cm.LinearColormap(colors <span class="op">=</span> [<span class="st">'#2c115f'</span>,<span class="st">'#721f81'</span>,<span class="st">'#b73779'</span>,<span class="st">'#f1605d'</span>,<span class="st">'#feb078'</span>], vmin <span class="op">=</span> <span class="dv">0</span>, vmax <span class="op">=</span> <span class="dv">2</span> )</span>
+<span id="cb20-21"><a href="#cb20-21" aria-hidden="true" tabindex="-1"></a>colormap.caption <span class="op">=</span> <span class="st">'g CH₄/m²/day'</span></span>
+<span id="cb20-22"><a href="#cb20-22" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-23"><a href="#cb20-23" aria-hidden="true" tabindex="-1"></a>may_2021_tile <span class="op">=</span> requests.get(</span>
+<span id="cb20-24"><a href="#cb20-24" aria-hidden="true" tabindex="-1"></a>    <span class="ss">f"</span><span class="sc">{</span>RASTER_API_URL<span class="sc">}</span><span class="ss">/stac/tilejson.json?collection=</span><span class="sc">{</span>items[<span class="st">'2021-05'</span>][<span class="st">'collection'</span>]<span class="sc">}</span><span class="ss">&amp;item=</span><span class="sc">{</span>items[<span class="st">'2021-05'</span>][<span class="st">'id'</span>]<span class="sc">}</span><span class="ss">"</span></span>
+<span id="cb20-25"><a href="#cb20-25" aria-hidden="true" tabindex="-1"></a>    <span class="st">"&amp;assets=ch4-wetlands-emissions"</span></span>
+<span id="cb20-26"><a href="#cb20-26" aria-hidden="true" tabindex="-1"></a>    <span class="ss">f"&amp;color_formula=gamma+r+1.05&amp;colormap_name=</span><span class="sc">{</span>color_map<span class="sc">}</span><span class="ss">"</span></span>
+<span id="cb20-27"><a href="#cb20-27" aria-hidden="true" tabindex="-1"></a>    <span class="ss">f"&amp;rescale=</span><span class="sc">{</span>rescale_values[<span class="st">'min'</span>]<span class="sc">}</span><span class="ss">,</span><span class="sc">{</span>rescale_values[<span class="st">'max'</span>]<span class="sc">}</span><span class="ss">"</span>, </span>
+<span id="cb20-28"><a href="#cb20-28" aria-hidden="true" tabindex="-1"></a>).json()</span>
+<span id="cb20-29"><a href="#cb20-29" aria-hidden="true" tabindex="-1"></a>may_2021_tile</span>
+<span id="cb20-30"><a href="#cb20-30" aria-hidden="true" tabindex="-1"></a>june_2021_tile <span class="op">=</span> requests.get(</span>
+<span id="cb20-31"><a href="#cb20-31" aria-hidden="true" tabindex="-1"></a>    <span class="ss">f"</span><span class="sc">{</span>RASTER_API_URL<span class="sc">}</span><span class="ss">/stac/tilejson.json?collection=</span><span class="sc">{</span>items[<span class="st">'2021-06'</span>][<span class="st">'collection'</span>]<span class="sc">}</span><span class="ss">&amp;item=</span><span class="sc">{</span>items[<span class="st">'2021-06'</span>][<span class="st">'id'</span>]<span class="sc">}</span><span class="ss">"</span></span>
+<span id="cb20-32"><a href="#cb20-32" aria-hidden="true" tabindex="-1"></a>    <span class="st">"&amp;assets=ch4-wetlands-emissions"</span></span>
+<span id="cb20-33"><a href="#cb20-33" aria-hidden="true" tabindex="-1"></a>    <span class="ss">f"&amp;color_formula=gamma+r+1.05&amp;colormap_name=</span><span class="sc">{</span>color_map<span class="sc">}</span><span class="ss">"</span></span>
+<span id="cb20-34"><a href="#cb20-34" aria-hidden="true" tabindex="-1"></a>    <span class="ss">f"&amp;rescale=</span><span class="sc">{</span>rescale_values[<span class="st">'min'</span>]<span class="sc">}</span><span class="ss">,</span><span class="sc">{</span>rescale_values[<span class="st">'max'</span>]<span class="sc">}</span><span class="ss">"</span>, </span>
+<span id="cb20-35"><a href="#cb20-35" aria-hidden="true" tabindex="-1"></a>).json()</span>
+<span id="cb20-36"><a href="#cb20-36" aria-hidden="true" tabindex="-1"></a>june_2021_tile</span>
+<span id="cb20-37"><a href="#cb20-37" aria-hidden="true" tabindex="-1"></a>july_2021_tile <span class="op">=</span> requests.get(</span>
+<span id="cb20-38"><a href="#cb20-38" aria-hidden="true" tabindex="-1"></a>    <span class="ss">f"</span><span class="sc">{</span>RASTER_API_URL<span class="sc">}</span><span class="ss">/stac/tilejson.json?collection=</span><span class="sc">{</span>items[<span class="st">'2021-07'</span>][<span class="st">'collection'</span>]<span class="sc">}</span><span class="ss">&amp;item=</span><span class="sc">{</span>items[<span class="st">'2021-07'</span>][<span class="st">'id'</span>]<span class="sc">}</span><span class="ss">"</span></span>
+<span id="cb20-39"><a href="#cb20-39" aria-hidden="true" tabindex="-1"></a>    <span class="st">"&amp;assets=ch4-wetlands-emissions"</span></span>
+<span id="cb20-40"><a href="#cb20-40" aria-hidden="true" tabindex="-1"></a>    <span class="ss">f"&amp;color_formula=gamma+r+1.05&amp;colormap_name=</span><span class="sc">{</span>color_map<span class="sc">}</span><span class="ss">"</span></span>
+<span id="cb20-41"><a href="#cb20-41" aria-hidden="true" tabindex="-1"></a>    <span class="ss">f"&amp;rescale=</span><span class="sc">{</span>rescale_values[<span class="st">'min'</span>]<span class="sc">}</span><span class="ss">,</span><span class="sc">{</span>rescale_values[<span class="st">'max'</span>]<span class="sc">}</span><span class="ss">"</span>, </span>
+<span id="cb20-42"><a href="#cb20-42" aria-hidden="true" tabindex="-1"></a>).json()</span>
+<span id="cb20-43"><a href="#cb20-43" aria-hidden="true" tabindex="-1"></a>july_2021_tile</span>
+<span id="cb20-44"><a href="#cb20-44" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-45"><a href="#cb20-45" aria-hidden="true" tabindex="-1"></a>map_ <span class="op">=</span> folium.Map(location<span class="op">=</span>(<span class="dv">30</span>,<span class="op">-</span><span class="dv">90</span>), zoom_start<span class="op">=</span><span class="dv">5</span>)</span>
+<span id="cb20-46"><a href="#cb20-46" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-47"><a href="#cb20-47" aria-hidden="true" tabindex="-1"></a><span class="co"># May 2001</span></span>
+<span id="cb20-48"><a href="#cb20-48" aria-hidden="true" tabindex="-1"></a>map_layer_202105 <span class="op">=</span> TileLayer(</span>
+<span id="cb20-49"><a href="#cb20-49" aria-hidden="true" tabindex="-1"></a>    tiles<span class="op">=</span>may_2020_tile[<span class="st">"tiles"</span>][<span class="dv">0</span>],</span>
+<span id="cb20-50"><a href="#cb20-50" aria-hidden="true" tabindex="-1"></a>    attr<span class="op">=</span><span class="st">"GHG"</span>,</span>
+<span id="cb20-51"><a href="#cb20-51" aria-hidden="true" tabindex="-1"></a>    opacity<span class="op">=</span><span class="fl">0.5</span>,</span>
+<span id="cb20-52"><a href="#cb20-52" aria-hidden="true" tabindex="-1"></a>    name<span class="op">=</span><span class="st">'May'</span></span>
+<span id="cb20-53"><a href="#cb20-53" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb20-54"><a href="#cb20-54" aria-hidden="true" tabindex="-1"></a>map_layer_202105.add_to(map_)</span>
+<span id="cb20-55"><a href="#cb20-55" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-56"><a href="#cb20-56" aria-hidden="true" tabindex="-1"></a><span class="co"># May 2021</span></span>
+<span id="cb20-57"><a href="#cb20-57" aria-hidden="true" tabindex="-1"></a>map_layer_202106 <span class="op">=</span> TileLayer(</span>
+<span id="cb20-58"><a href="#cb20-58" aria-hidden="true" tabindex="-1"></a>    tiles<span class="op">=</span>june_2021_tile[<span class="st">"tiles"</span>][<span class="dv">0</span>],</span>
+<span id="cb20-59"><a href="#cb20-59" aria-hidden="true" tabindex="-1"></a>    attr<span class="op">=</span><span class="st">"GHG"</span>,</span>
+<span id="cb20-60"><a href="#cb20-60" aria-hidden="true" tabindex="-1"></a>    opacity<span class="op">=</span><span class="fl">0.5</span>,</span>
+<span id="cb20-61"><a href="#cb20-61" aria-hidden="true" tabindex="-1"></a>    name<span class="op">=</span><span class="st">'June'</span></span>
+<span id="cb20-62"><a href="#cb20-62" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb20-63"><a href="#cb20-63" aria-hidden="true" tabindex="-1"></a>map_layer_202106.add_to(map_)</span>
+<span id="cb20-64"><a href="#cb20-64" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-65"><a href="#cb20-65" aria-hidden="true" tabindex="-1"></a>map_layer_202107 <span class="op">=</span> TileLayer(</span>
+<span id="cb20-66"><a href="#cb20-66" aria-hidden="true" tabindex="-1"></a>    tiles<span class="op">=</span>july_2021_tile[<span class="st">"tiles"</span>][<span class="dv">0</span>],</span>
+<span id="cb20-67"><a href="#cb20-67" aria-hidden="true" tabindex="-1"></a>    attr<span class="op">=</span><span class="st">"GHG"</span>,</span>
+<span id="cb20-68"><a href="#cb20-68" aria-hidden="true" tabindex="-1"></a>    opacity<span class="op">=</span><span class="fl">0.5</span>,</span>
+<span id="cb20-69"><a href="#cb20-69" aria-hidden="true" tabindex="-1"></a>    name<span class="op">=</span><span class="st">'July'</span></span>
+<span id="cb20-70"><a href="#cb20-70" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb20-71"><a href="#cb20-71" aria-hidden="true" tabindex="-1"></a>map_layer_202107.add_to(map_)</span>
+<span id="cb20-72"><a href="#cb20-72" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-73"><a href="#cb20-73" aria-hidden="true" tabindex="-1"></a>folium.GeoJson(louisiana_aoi, name<span class="op">=</span><span class="st">"louisiana, USA"</span>).add_to(map_)</span>
+<span id="cb20-74"><a href="#cb20-74" aria-hidden="true" tabindex="-1"></a>folium.LayerControl(collapsed<span class="op">=</span><span class="va">False</span>,position<span class="op">=</span><span class="st">'bottomleft'</span>).add_to(map_)</span>
+<span id="cb20-75"><a href="#cb20-75" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-76"><a href="#cb20-76" aria-hidden="true" tabindex="-1"></a>svg_style <span class="op">=</span> <span class="st">'&lt;style&gt;svg#legend {font-size: 14px; background-color: white;}&lt;/style&gt;'</span></span>
+<span id="cb20-77"><a href="#cb20-77" aria-hidden="true" tabindex="-1"></a>map_.get_root().header.add_child(folium.Element(svg_style))</span>
+<span id="cb20-78"><a href="#cb20-78" aria-hidden="true" tabindex="-1"></a>map_.add_child(colormap)</span>
+<span id="cb20-79"><a href="#cb20-79" aria-hidden="true" tabindex="-1"></a><span class="co"># visualising the map</span></span>
+<span id="cb20-80"><a href="#cb20-80" aria-hidden="true" tabindex="-1"></a>map_</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="99">
+<div style="width:100%;"><div style="position:relative;width:100%;height:0;padding-bottom:60%;"><span style="color:#565656">Make this Notebook Trusted to load map: File -&gt; Trust Notebook</span><iframe srcdoc="<!DOCTYPE html>
+<html>
+<head>
+    
+    <meta http-equiv=&quot;content-type&quot; content=&quot;text/html; charset=UTF-8&quot; />
+    <style>svg#legend {font-size: 14px; background-color: white;}</style>
+    
+        <script>
+            L_NO_TOUCH = false;
+            L_DISABLE_3D = false;
+        </script>
+    
+    <style>html, body {width: 100%;height: 100%;margin: 0;padding: 0;}</style>
+    <style>#map {position:absolute;top:0;bottom:0;right:0;left:0;}</style>
+    <script src=&quot;https://cdn.jsdelivr.net/npm/leaflet@1.9.3/dist/leaflet.js&quot;></script>
+    <script src=&quot;https://code.jquery.com/jquery-3.7.1.min.js&quot;></script>
+    <script src=&quot;https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js&quot;></script>
+    <script src=&quot;https://cdnjs.cloudflare.com/ajax/libs/Leaflet.awesome-markers/2.0.2/leaflet.awesome-markers.js&quot;></script>
+    <link rel=&quot;stylesheet&quot; href=&quot;https://cdn.jsdelivr.net/npm/leaflet@1.9.3/dist/leaflet.css&quot;/>
+    <link rel=&quot;stylesheet&quot; href=&quot;https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css&quot;/>
+    <link rel=&quot;stylesheet&quot; href=&quot;https://netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css&quot;/>
+    <link rel=&quot;stylesheet&quot; href=&quot;https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.2.0/css/all.min.css&quot;/>
+    <link rel=&quot;stylesheet&quot; href=&quot;https://cdnjs.cloudflare.com/ajax/libs/Leaflet.awesome-markers/2.0.2/leaflet.awesome-markers.css&quot;/>
+    <link rel=&quot;stylesheet&quot; href=&quot;https://cdn.jsdelivr.net/gh/python-visualization/folium/folium/templates/leaflet.awesome.rotate.min.css&quot;/>
+    
+            <meta name=&quot;viewport&quot; content=&quot;width=device-width,
+                initial-scale=1.0, maximum-scale=1.0, user-scalable=no&quot; />
+            <style>
+                #map_1a17cafc2cc776953562598b9da5da2a {
+                    position: relative;
+                    width: 100.0%;
+                    height: 100.0%;
+                    left: 0.0%;
+                    top: 0.0%;
+                }
+                .leaflet-container { font-size: 1rem; }
+            </style>
+        
+    <script src=&quot;https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.5/d3.min.js&quot;></script>
+</head>
+<body>
+    
+    
+            <div class=&quot;folium-map&quot; id=&quot;map_1a17cafc2cc776953562598b9da5da2a&quot; ></div>
+        
+</body>
+<script>
+    
+    
+            var map_1a17cafc2cc776953562598b9da5da2a = L.map(
+                &quot;map_1a17cafc2cc776953562598b9da5da2a&quot;,
+                {
+                    center: [30.0, -90.0],
+                    crs: L.CRS.EPSG3857,
+                    zoom: 13,
+                    zoomControl: true,
+                    preferCanvas: false,
+                    tooltip: &quot;test tool tip&quot;,
+                }
+            );
+
+            
+
+        
+    
+            var tile_layer_bd7067922f881dc8fde5d2f93b82ee10 = L.tileLayer(
+                &quot;https://ghg.center/api/raster/stac/tiles/WebMercatorQuad/{z}/{x}/{y}@1x?collection=lpjwsl-wetlandch4-monthgrid-v1\u0026item=lpjwsl-wetlandch4-monthgrid-v1-202005\u0026assets=ch4-wetlands-emissions\u0026color_formula=gamma+r+1.05\u0026colormap_name=magma\u0026rescale=0.0%2C2.0&quot;,
+                {&quot;attribution&quot;: &quot;GHG&quot;, &quot;detectRetina&quot;: false, &quot;maxNativeZoom&quot;: 18, &quot;maxZoom&quot;: 18, &quot;minZoom&quot;: 0, &quot;noWrap&quot;: false, &quot;opacity&quot;: 0.5, &quot;subdomains&quot;: &quot;abc&quot;, &quot;tms&quot;: false}
+            );
+        
+    
+            tile_layer_bd7067922f881dc8fde5d2f93b82ee10.addTo(map_1a17cafc2cc776953562598b9da5da2a);
+        
+    
+            var tile_layer_dc236d7bc794c0e612194bb76934f0de = L.tileLayer(
+                &quot;https://ghg.center/api/raster/stac/tiles/WebMercatorQuad/{z}/{x}/{y}@1x?collection=lpjwsl-wetlandch4-monthgrid-v1\u0026item=lpjwsl-wetlandch4-monthgrid-v1-202106\u0026assets=ch4-wetlands-emissions\u0026color_formula=gamma+r+1.05\u0026colormap_name=magma\u0026rescale=0.0%2C2.0&quot;,
+                {&quot;attribution&quot;: &quot;GHG&quot;, &quot;detectRetina&quot;: false, &quot;maxNativeZoom&quot;: 18, &quot;maxZoom&quot;: 18, &quot;minZoom&quot;: 0, &quot;noWrap&quot;: false, &quot;opacity&quot;: 0.5, &quot;subdomains&quot;: &quot;abc&quot;, &quot;tms&quot;: false}
+            );
+        
+    
+            tile_layer_dc236d7bc794c0e612194bb76934f0de.addTo(map_1a17cafc2cc776953562598b9da5da2a);
+        
+    
+            var tile_layer_619d38c12a80861a1f1d645851616cab = L.tileLayer(
+                &quot;https://ghg.center/api/raster/stac/tiles/WebMercatorQuad/{z}/{x}/{y}@1x?collection=lpjwsl-wetlandch4-monthgrid-v1\u0026item=lpjwsl-wetlandch4-monthgrid-v1-202107\u0026assets=ch4-wetlands-emissions\u0026color_formula=gamma+r+1.05\u0026colormap_name=magma\u0026rescale=0.0%2C2.0&quot;,
+                {&quot;attribution&quot;: &quot;GHG&quot;, &quot;detectRetina&quot;: false, &quot;maxNativeZoom&quot;: 18, &quot;maxZoom&quot;: 18, &quot;minZoom&quot;: 0, &quot;noWrap&quot;: false, &quot;opacity&quot;: 0.5, &quot;subdomains&quot;: &quot;abc&quot;, &quot;tms&quot;: false}
+            );
+        
+    
+            tile_layer_619d38c12a80861a1f1d645851616cab.addTo(map_1a17cafc2cc776953562598b9da5da2a);
+        
+    
+
+        function geo_json_33f8d0b0059973e1def71b8124776b53_onEachFeature(feature, layer) {
+            layer.on({
+            });
+        };
+        var geo_json_33f8d0b0059973e1def71b8124776b53 = L.geoJson(null, {
+                onEachFeature: geo_json_33f8d0b0059973e1def71b8124776b53_onEachFeature,
+            
+        });
+
+        function geo_json_33f8d0b0059973e1def71b8124776b53_add (data) {
+            geo_json_33f8d0b0059973e1def71b8124776b53
+                .addData(data);
+        }
+            geo_json_33f8d0b0059973e1def71b8124776b53_add({&quot;geometry&quot;: {&quot;coordinates&quot;: [[[-95.9, 28.7], [-95.9, 33.5], [-87.5, 33.5], [-87.5, 28.7], [-95.9, 28.7]]], &quot;type&quot;: &quot;Polygon&quot;}, &quot;properties&quot;: {}, &quot;type&quot;: &quot;Feature&quot;});
+
+        
+    
+            geo_json_33f8d0b0059973e1def71b8124776b53.addTo(map_1a17cafc2cc776953562598b9da5da2a);
+        
+    
+            var layer_control_c39c2323926cae2a159b2175f3609cda_layers = {
+                base_layers : {
+                    &quot;May&quot; : tile_layer_bd7067922f881dc8fde5d2f93b82ee10,
+                    &quot;June&quot; : tile_layer_dc236d7bc794c0e612194bb76934f0de,
+                    &quot;July&quot; : tile_layer_619d38c12a80861a1f1d645851616cab,
+                },
+                overlays :  {
+                    &quot;louisiana, USA&quot; : geo_json_33f8d0b0059973e1def71b8124776b53,
+                },
+            };
+            let layer_control_c39c2323926cae2a159b2175f3609cda = L.control.layers(
+                layer_control_c39c2323926cae2a159b2175f3609cda_layers.base_layers,
+                layer_control_c39c2323926cae2a159b2175f3609cda_layers.overlays,
+                {&quot;autoZIndex&quot;: true, &quot;collapsed&quot;: false, &quot;position&quot;: &quot;bottomleft&quot;}
+            ).addTo(map_1a17cafc2cc776953562598b9da5da2a);
+
+        
+    
+    var color_map_70d632201683a41b8888c83cce7271b7 = {};
+
+    
+    color_map_70d632201683a41b8888c83cce7271b7.color = d3.scale.threshold()
+              .domain([0.0, 0.004008016032064128, 0.008016032064128256, 0.012024048096192385, 0.01603206412825651, 0.02004008016032064, 0.02404809619238477, 0.028056112224448898, 0.03206412825651302, 0.036072144288577156, 0.04008016032064128, 0.04408817635270541, 0.04809619238476954, 0.052104208416833664, 0.056112224448897796, 0.06012024048096192, 0.06412825651302605, 0.06813627254509018, 0.07214428857715431, 0.07615230460921844, 0.08016032064128256, 0.0841683366733467, 0.08817635270541083, 0.09218436873747494, 0.09619238476953908, 0.10020040080160321, 0.10420841683366733, 0.10821643286573146, 0.11222444889779559, 0.11623246492985972, 0.12024048096192384, 0.12424849699398798, 0.1282565130260521, 0.13226452905811623, 0.13627254509018036, 0.1402805611222445, 0.14428857715430862, 0.14829659318637275, 0.1523046092184369, 0.156312625250501, 0.16032064128256512, 0.16432865731462926, 0.1683366733466934, 0.17234468937875752, 0.17635270541082165, 0.18036072144288579, 0.1843687374749499, 0.18837675350701402, 0.19238476953907815, 0.1963927855711423, 0.20040080160320642, 0.20440881763527055, 0.20841683366733466, 0.2124248496993988, 0.21643286573146292, 0.22044088176352705, 0.22444889779559118, 0.22845691382765532, 0.23246492985971945, 0.23647294589178355, 0.24048096192384769, 0.24448897795591182, 0.24849699398797595, 0.25250501002004005, 0.2565130260521042, 0.2605210420841683, 0.26452905811623245, 0.2685370741482966, 0.2725450901803607, 0.27655310621242485, 0.280561122244489, 0.2845691382765531, 0.28857715430861725, 0.2925851703406814, 0.2965931863727455, 0.30060120240480964, 0.3046092184368738, 0.30861723446893785, 0.312625250501002, 0.3166332665330661, 0.32064128256513025, 0.3246492985971944, 0.3286573146292585, 0.33266533066132264, 0.3366733466933868, 0.3406813627254509, 0.34468937875751504, 0.3486973947895792, 0.3527054108216433, 0.35671342685370744, 0.36072144288577157, 0.36472945891783565, 0.3687374749498998, 0.3727454909819639, 0.37675350701402804, 0.3807615230460922, 0.3847695390781563, 0.38877755511022044, 0.3927855711422846, 0.3967935871743487, 0.40080160320641284, 0.40480961923847697, 0.4088176352705411, 0.41282565130260523, 0.4168336673346693, 0.42084168336673344, 0.4248496993987976, 0.4288577154308617, 0.43286573146292584, 0.43687374749499, 0.4408817635270541, 0.44488977955911824, 0.44889779559118237, 0.4529058116232465, 0.45691382765531063, 0.46092184368737477, 0.4649298597194389, 0.46893787575150303, 0.4729458917835671, 0.47695390781563124, 0.48096192384769537, 0.4849699398797595, 0.48897795591182364, 0.49298597194388777, 0.4969939879759519, 0.501002004008016, 0.5050100200400801, 0.5090180360721442, 0.5130260521042084, 0.5170340681362725, 0.5210420841683366, 0.5250501002004008, 0.5290581162324649, 0.533066132264529, 0.5370741482965932, 0.5410821643286573, 0.5450901803607214, 0.5490981963927856, 0.5531062124248497, 0.5571142284569138, 0.561122244488978, 0.5651302605210421, 0.5691382765531062, 0.5731462925851704, 0.5771543086172345, 0.5811623246492986, 0.5851703406813628, 0.5891783567134269, 0.593186372745491, 0.5971943887775552, 0.6012024048096193, 0.6052104208416834, 0.6092184368737475, 0.6132264529058116, 0.6172344689378757, 0.6212424849699398, 0.625250501002004, 0.6292585170340681, 0.6332665330661322, 0.6372745490981964, 0.6412825651302605, 0.6452905811623246, 0.6492985971943888, 0.6533066132264529, 0.657314629258517, 0.6613226452905812, 0.6653306613226453, 0.6693386773547094, 0.6733466933867736, 0.6773547094188377, 0.6813627254509018, 0.685370741482966, 0.6893787575150301, 0.6933867735470942, 0.6973947895791583, 0.7014028056112225, 0.7054108216432866, 0.7094188376753507, 0.7134268537074149, 0.717434869739479, 0.7214428857715431, 0.7254509018036072, 0.7294589178356713, 0.7334669338677354, 0.7374749498997996, 0.7414829659318637, 0.7454909819639278, 0.749498997995992, 0.7535070140280561, 0.7575150300601202, 0.7615230460921844, 0.7655310621242485, 0.7695390781563126, 0.7735470941883767, 0.7775551102204409, 0.781563126252505, 0.7855711422845691, 0.7895791583166333, 0.7935871743486974, 0.7975951903807615, 0.8016032064128257, 0.8056112224448898, 0.8096192384769539, 0.8136272545090181, 0.8176352705410822, 0.8216432865731463, 0.8256513026052105, 0.8296593186372746, 0.8336673346693386, 0.8376753507014028, 0.8416833667334669, 0.845691382765531, 0.8496993987975952, 0.8537074148296593, 0.8577154308617234, 0.8617234468937875, 0.8657314629258517, 0.8697394789579158, 0.87374749498998, 0.8777555110220441, 0.8817635270541082, 0.8857715430861723, 0.8897795591182365, 0.8937875751503006, 0.8977955911823647, 0.9018036072144289, 0.905811623246493, 0.9098196392785571, 0.9138276553106213, 0.9178356713426854, 0.9218436873747495, 0.9258517034068137, 0.9298597194388778, 0.9338677354709419, 0.9378757515030061, 0.9418837675350702, 0.9458917835671342, 0.9498997995991983, 0.9539078156312625, 0.9579158316633266, 0.9619238476953907, 0.9659318637274549, 0.969939879759519, 0.9739478957915831, 0.9779559118236473, 0.9819639278557114, 0.9859719438877755, 0.9899799599198397, 0.9939879759519038, 0.9979959919839679, 1.002004008016032, 1.006012024048096, 1.0100200400801602, 1.0140280561122244, 1.0180360721442885, 1.0220440881763526, 1.0260521042084167, 1.0300601202404809, 1.034068136272545, 1.0380761523046091, 1.0420841683366733, 1.0460921843687374, 1.0501002004008015, 1.0541082164328657, 1.0581162324649298, 1.062124248496994, 1.066132264529058, 1.0701402805611222, 1.0741482965931863, 1.0781563126252505, 1.0821643286573146, 1.0861723446893787, 1.0901803607214429, 1.094188376753507, 1.0981963927855711, 1.1022044088176353, 1.1062124248496994, 1.1102204408817635, 1.1142284569138277, 1.1182364729458918, 1.122244488977956, 1.12625250501002, 1.1302605210420842, 1.1342685370741483, 1.1382765531062125, 1.1422845691382766, 1.1462925851703407, 1.1503006012024048, 1.154308617234469, 1.1583166332665331, 1.1623246492985972, 1.1663326653306614, 1.1703406813627255, 1.1743486973947896, 1.1783567134268538, 1.182364729458918, 1.186372745490982, 1.1903807615230462, 1.1943887775551103, 1.1983967935871744, 1.2024048096192386, 1.2064128256513027, 1.2104208416833668, 1.214428857715431, 1.218436873747495, 1.222444889779559, 1.2264529058116231, 1.2304609218436873, 1.2344689378757514, 1.2384769539078155, 1.2424849699398797, 1.2464929859719438, 1.250501002004008, 1.254509018036072, 1.2585170340681362, 1.2625250501002003, 1.2665330661322645, 1.2705410821643286, 1.2745490981963927, 1.2785571142284569, 1.282565130260521, 1.2865731462925851, 1.2905811623246493, 1.2945891783567134, 1.2985971943887775, 1.3026052104208417, 1.3066132264529058, 1.31062124248497, 1.314629258517034, 1.3186372745490982, 1.3226452905811623, 1.3266533066132264, 1.3306613226452906, 1.3346693386773547, 1.3386773547094188, 1.342685370741483, 1.346693386773547, 1.3507014028056112, 1.3547094188376754, 1.3587174348697395, 1.3627254509018036, 1.3667334669338678, 1.370741482965932, 1.374749498997996, 1.3787575150300602, 1.3827655310621243, 1.3867735470941884, 1.3907815631262526, 1.3947895791583167, 1.3987975951903808, 1.402805611222445, 1.406813627254509, 1.4108216432865732, 1.4148296593186374, 1.4188376753507015, 1.4228456913827656, 1.4268537074148298, 1.4308617234468939, 1.434869739478958, 1.4388777555110221, 1.4428857715430863, 1.4468937875751502, 1.4509018036072143, 1.4549098196392785, 1.4589178356713426, 1.4629258517034067, 1.4669338677354709, 1.470941883767535, 1.4749498997995991, 1.4789579158316633, 1.4829659318637274, 1.4869739478957915, 1.4909819639278556, 1.4949899799599198, 1.498997995991984, 1.503006012024048, 1.5070140280561122, 1.5110220440881763, 1.5150300601202404, 1.5190380761523046, 1.5230460921843687, 1.5270541082164328, 1.531062124248497, 1.535070140280561, 1.5390781563126252, 1.5430861723446894, 1.5470941883767535, 1.5511022044088176, 1.5551102204408818, 1.559118236472946, 1.56312625250501, 1.5671342685370742, 1.5711422845691383, 1.5751503006012024, 1.5791583166332666, 1.5831663326653307, 1.5871743486973948, 1.591182364729459, 1.595190380761523, 1.5991983967935872, 1.6032064128256514, 1.6072144288577155, 1.6112224448897796, 1.6152304609218437, 1.6192384769539079, 1.623246492985972, 1.6272545090180361, 1.6312625250501003, 1.6352705410821644, 1.6392785571142285, 1.6432865731462927, 1.6472945891783568, 1.651302605210421, 1.655310621242485, 1.6593186372745492, 1.6633266533066133, 1.6673346693386772, 1.6713426853707414, 1.6753507014028055, 1.6793587174348696, 1.6833667334669338, 1.687374749498998, 1.691382765531062, 1.6953907815631262, 1.6993987975951903, 1.7034068136272544, 1.7074148296593186, 1.7114228456913827, 1.7154308617234468, 1.719438877755511, 1.723446893787575, 1.7274549098196392, 1.7314629258517034, 1.7354709418837675, 1.7394789579158316, 1.7434869739478958, 1.74749498997996, 1.751503006012024, 1.7555110220440882, 1.7595190380761523, 1.7635270541082164, 1.7675350701402806, 1.7715430861723447, 1.7755511022044088, 1.779559118236473, 1.783567134268537, 1.7875751503006012, 1.7915831663326653, 1.7955911823647295, 1.7995991983967936, 1.8036072144288577, 1.8076152304609219, 1.811623246492986, 1.8156312625250501, 1.8196392785571143, 1.8236472945891784, 1.8276553106212425, 1.8316633266533067, 1.8356713426853708, 1.839679358717435, 1.843687374749499, 1.8476953907815632, 1.8517034068136273, 1.8557114228456915, 1.8597194388777556, 1.8637274549098197, 1.8677354709418839, 1.871743486973948, 1.8757515030060121, 1.8797595190380763, 1.8837675350701404, 1.8877755511022045, 1.8917835671342684, 1.8957915831663326, 1.8997995991983967, 1.9038076152304608, 1.907815631262525, 1.911823647294589, 1.9158316633266532, 1.9198396793587174, 1.9238476953907815, 1.9278557114228456, 1.9318637274549098, 1.9358717434869739, 1.939879759519038, 1.9438877755511021, 1.9478957915831663, 1.9519038076152304, 1.9559118236472945, 1.9599198396793587, 1.9639278557114228, 1.967935871743487, 1.971943887775551, 1.9759519038076152, 1.9799599198396793, 1.9839679358717435, 1.9879759519038076, 1.9919839679358717, 1.9959919839679359, 2.0])
+              .range(['#2c115fff', '#2c115fff', '#2d115fff', '#2d1160ff', '#2e1160ff', '#2e1160ff', '#2f1161ff', '#301161ff', '#301161ff', '#311261ff', '#311262ff', '#321262ff', '#321262ff', '#331262ff', '#341263ff', '#341263ff', '#351263ff', '#351264ff', '#361364ff', '#361364ff', '#371364ff', '#381365ff', '#381365ff', '#391365ff', '#391365ff', '#3a1366ff', '#3a1366ff', '#3b1466ff', '#3b1467ff', '#3c1467ff', '#3d1467ff', '#3d1467ff', '#3e1468ff', '#3e1468ff', '#3f1468ff', '#3f1568ff', '#401569ff', '#411569ff', '#411569ff', '#42156aff', '#42156aff', '#43156aff', '#43156aff', '#44156bff', '#44166bff', '#45166bff', '#46166bff', '#46166cff', '#47166cff', '#47166cff', '#48166dff', '#48166dff', '#49166dff', '#4a176dff', '#4a176eff', '#4b176eff', '#4b176eff', '#4c176eff', '#4c176fff', '#4d176fff', '#4d176fff', '#4e1770ff', '#4f1870ff', '#4f1870ff', '#501870ff', '#501871ff', '#511871ff', '#511871ff', '#521871ff', '#531872ff', '#531872ff', '#541972ff', '#541973ff', '#551973ff', '#551973ff', '#561973ff', '#561974ff', '#571974ff', '#581974ff', '#581974ff', '#591a75ff', '#591a75ff', '#5a1a75ff', '#5a1a76ff', '#5b1a76ff', '#5c1a76ff', '#5c1a76ff', '#5d1a77ff', '#5d1a77ff', '#5e1b77ff', '#5e1b77ff', '#5f1b78ff', '#5f1b78ff', '#601b78ff', '#611b79ff', '#611b79ff', '#621b79ff', '#621b79ff', '#631c7aff', '#631c7aff', '#641c7aff', '#651c7bff', '#651c7bff', '#661c7bff', '#661c7bff', '#671c7cff', '#671d7cff', '#681d7cff', '#691d7cff', '#691d7dff', '#6a1d7dff', '#6a1d7dff', '#6b1d7eff', '#6b1d7eff', '#6c1d7eff', '#6c1e7eff', '#6d1e7fff', '#6e1e7fff', '#6e1e7fff', '#6f1e7fff', '#6f1e80ff', '#701e80ff', '#701e80ff', '#711e81ff', '#721f81ff', '#721f81ff', '#731f81ff', '#731f81ff', '#741f81ff', '#741f81ff', '#752081ff', '#752081ff', '#762081ff', '#772080ff', '#772080ff', '#782180ff', '#782180ff', '#792180ff', '#792180ff', '#7a2180ff', '#7a2280ff', '#7b2280ff', '#7c2280ff', '#7c2280ff', '#7d2280ff', '#7d2380ff', '#7e2380ff', '#7e2380ff', '#7f2380ff', '#7f237fff', '#80237fff', '#81247fff', '#81247fff', '#82247fff', '#82247fff', '#83247fff', '#83257fff', '#84257fff', '#84257fff', '#85257fff', '#86257fff', '#86267fff', '#87267fff', '#87267fff', '#88267eff', '#88267eff', '#89277eff', '#89277eff', '#8a277eff', '#8b277eff', '#8b277eff', '#8c287eff', '#8c287eff', '#8d287eff', '#8d287eff', '#8e287eff', '#8e297eff', '#8f297eff', '#90297eff', '#90297eff', '#91297dff', '#91297dff', '#922a7dff', '#922a7dff', '#932a7dff', '#932a7dff', '#942a7dff', '#952b7dff', '#952b7dff', '#962b7dff', '#962b7dff', '#972b7dff', '#972c7dff', '#982c7dff', '#982c7dff', '#992c7cff', '#9a2c7cff', '#9a2d7cff', '#9b2d7cff', '#9b2d7cff', '#9c2d7cff', '#9c2d7cff', '#9d2e7cff', '#9d2e7cff', '#9e2e7cff', '#9f2e7cff', '#9f2e7cff', '#a02f7cff', '#a02f7cff', '#a12f7cff', '#a12f7cff', '#a22f7bff', '#a22f7bff', '#a3307bff', '#a4307bff', '#a4307bff', '#a5307bff', '#a5307bff', '#a6317bff', '#a6317bff', '#a7317bff', '#a7317bff', '#a8317bff', '#a9327bff', '#a9327bff', '#aa327bff', '#aa327aff', '#ab327aff', '#ab337aff', '#ac337aff', '#ac337aff', '#ad337aff', '#ae337aff', '#ae347aff', '#af347aff', '#af347aff', '#b0347aff', '#b0347aff', '#b1347aff', '#b1357aff', '#b2357aff', '#b2357aff', '#b33579ff', '#b43579ff', '#b43679ff', '#b53679ff', '#b53679ff', '#b63679ff', '#b63679ff', '#b73779ff', '#b73779ff', '#b83779ff', '#b83878ff', '#b93878ff', '#b93878ff', '#ba3978ff', '#ba3978ff', '#bb3977ff', '#bb3a77ff', '#bc3a77ff', '#bc3a77ff', '#bd3b76ff', '#bd3b76ff', '#be3b76ff', '#be3b76ff', '#be3c75ff', '#bf3c75ff', '#bf3c75ff', '#c03d75ff', '#c03d75ff', '#c13d74ff', '#c13e74ff', '#c23e74ff', '#c23e74ff', '#c33f73ff', '#c33f73ff', '#c43f73ff', '#c44073ff', '#c54073ff', '#c54072ff', '#c54172ff', '#c64172ff', '#c64172ff', '#c74271ff', '#c74271ff', '#c84271ff', '#c84371ff', '#c94371ff', '#c94370ff', '#ca4470ff', '#ca4470ff', '#cb4470ff', '#cb456fff', '#cc456fff', '#cc456fff', '#cc466fff', '#cd466eff', '#cd466eff', '#ce476eff', '#ce476eff', '#cf476eff', '#cf486dff', '#d0486dff', '#d0486dff', '#d1496dff', '#d1496cff', '#d2496cff', '#d24a6cff', '#d34a6cff', '#d34a6cff', '#d34b6bff', '#d44b6bff', '#d44b6bff', '#d54c6bff', '#d54c6aff', '#d64c6aff', '#d64d6aff', '#d74d6aff', '#d74d6aff', '#d84e69ff', '#d84e69ff', '#d94e69ff', '#d94f69ff', '#da4f68ff', '#da4f68ff', '#da5068ff', '#db5068ff', '#db5068ff', '#dc5167ff', '#dc5167ff', '#dd5167ff', '#dd5267ff', '#de5266ff', '#de5266ff', '#df5366ff', '#df5366ff', '#e05365ff', '#e05465ff', '#e15465ff', '#e15465ff', '#e15565ff', '#e25564ff', '#e25564ff', '#e35664ff', '#e35664ff', '#e45663ff', '#e45763ff', '#e55763ff', '#e55763ff', '#e65863ff', '#e65862ff', '#e75862ff', '#e75962ff', '#e85962ff', '#e85961ff', '#e85a61ff', '#e95a61ff', '#e95a61ff', '#ea5b61ff', '#ea5b60ff', '#eb5b60ff', '#eb5c60ff', '#ec5c60ff', '#ec5c5fff', '#ed5c5fff', '#ed5d5fff', '#ee5d5fff', '#ee5d5eff', '#ef5e5eff', '#ef5e5eff', '#ef5e5eff', '#f05f5eff', '#f05f5dff', '#f15f5dff', '#f1605dff', '#f2605dff', '#f2615dff', '#f2625dff', '#f2625eff', '#f2635eff', '#f2645eff', '#f2645eff', '#f2655fff', '#f2665fff', '#f2665fff', '#f3675fff', '#f3675fff', '#f36860ff', '#f36960ff', '#f36960ff', '#f36a60ff', '#f36b61ff', '#f36b61ff', '#f36c61ff', '#f46d61ff', '#f46d61ff', '#f46e62ff', '#f46f62ff', '#f46f62ff', '#f47062ff', '#f47062ff', '#f47163ff', '#f47263ff', '#f47263ff', '#f57363ff', '#f57464ff', '#f57464ff', '#f57564ff', '#f57664ff', '#f57664ff', '#f57765ff', '#f57865ff', '#f57865ff', '#f57965ff', '#f67966ff', '#f67a66ff', '#f67b66ff', '#f67b66ff', '#f67c66ff', '#f67d67ff', '#f67d67ff', '#f67e67ff', '#f67f67ff', '#f77f67ff', '#f78068ff', '#f78168ff', '#f78168ff', '#f78268ff', '#f78269ff', '#f78369ff', '#f78469ff', '#f78469ff', '#f78569ff', '#f8866aff', '#f8866aff', '#f8876aff', '#f8886aff', '#f8886aff', '#f8896bff', '#f88a6bff', '#f88a6bff', '#f88b6bff', '#f98b6cff', '#f98c6cff', '#f98d6cff', '#f98d6cff', '#f98e6cff', '#f98f6dff', '#f98f6dff', '#f9906dff', '#f9916dff', '#f9916eff', '#fa926eff', '#fa936eff', '#fa936eff', '#fa946eff', '#fa956fff', '#fa956fff', '#fa966fff', '#fa966fff', '#fa976fff', '#fb9870ff', '#fb9870ff', '#fb9970ff', '#fb9a70ff', '#fb9a71ff', '#fb9b71ff', '#fb9c71ff', '#fb9c71ff', '#fb9d71ff', '#fb9e72ff', '#fc9e72ff', '#fc9f72ff', '#fc9f72ff', '#fca073ff', '#fca173ff', '#fca173ff', '#fca273ff', '#fca373ff', '#fca374ff', '#fda474ff', '#fda574ff', '#fda574ff', '#fda674ff', '#fda775ff', '#fda775ff', '#fda875ff', '#fda875ff', '#fda976ff', '#fdaa76ff', '#feaa76ff', '#feab76ff', '#feac76ff', '#feac77ff', '#fead77ff', '#feae77ff', '#feae77ff', '#feaf78ff', '#feb078ff', '#feb078ff']);
+    
+
+    color_map_70d632201683a41b8888c83cce7271b7.x = d3.scale.linear()
+              .domain([0.0, 2.0])
+              .range([0, 450 - 50]);
+
+    color_map_70d632201683a41b8888c83cce7271b7.legend = L.control({position: 'topright'});
+    color_map_70d632201683a41b8888c83cce7271b7.legend.onAdd = function (map) {var div = L.DomUtil.create('div', 'legend'); return div};
+    color_map_70d632201683a41b8888c83cce7271b7.legend.addTo(map_1a17cafc2cc776953562598b9da5da2a);
+
+    color_map_70d632201683a41b8888c83cce7271b7.xAxis = d3.svg.axis()
+        .scale(color_map_70d632201683a41b8888c83cce7271b7.x)
+        .orient(&quot;top&quot;)
+        .tickSize(1)
+        .tickValues([0.0, 0.5, 1.0, 1.5, 2.0]);
+
+    color_map_70d632201683a41b8888c83cce7271b7.svg = d3.select(&quot;.legend.leaflet-control&quot;).append(&quot;svg&quot;)
+        .attr(&quot;id&quot;, 'legend')
+        .attr(&quot;width&quot;, 450)
+        .attr(&quot;height&quot;, 40);
+
+    color_map_70d632201683a41b8888c83cce7271b7.g = color_map_70d632201683a41b8888c83cce7271b7.svg.append(&quot;g&quot;)
+        .attr(&quot;class&quot;, &quot;key&quot;)
+        .attr(&quot;transform&quot;, &quot;translate(25,16)&quot;);
+
+    color_map_70d632201683a41b8888c83cce7271b7.g.selectAll(&quot;rect&quot;)
+        .data(color_map_70d632201683a41b8888c83cce7271b7.color.range().map(function(d, i) {
+          return {
+            x0: i ? color_map_70d632201683a41b8888c83cce7271b7.x(color_map_70d632201683a41b8888c83cce7271b7.color.domain()[i - 1]) : color_map_70d632201683a41b8888c83cce7271b7.x.range()[0],
+            x1: i < color_map_70d632201683a41b8888c83cce7271b7.color.domain().length ? color_map_70d632201683a41b8888c83cce7271b7.x(color_map_70d632201683a41b8888c83cce7271b7.color.domain()[i]) : color_map_70d632201683a41b8888c83cce7271b7.x.range()[1],
+            z: d
+          };
+        }))
+      .enter().append(&quot;rect&quot;)
+        .attr(&quot;height&quot;, 40 - 30)
+        .attr(&quot;x&quot;, function(d) { return d.x0; })
+        .attr(&quot;width&quot;, function(d) { return d.x1 - d.x0; })
+        .style(&quot;fill&quot;, function(d) { return d.z; });
+
+    color_map_70d632201683a41b8888c83cce7271b7.g.call(color_map_70d632201683a41b8888c83cce7271b7.xAxis).append(&quot;text&quot;)
+        .attr(&quot;class&quot;, &quot;caption&quot;)
+        .attr(&quot;y&quot;, 21)
+        .text(&quot;g CH\u2084/m\u00b2/day&quot;);
+</script>
+</html>" style="position:absolute;width:100%;height:100%;left:0;top:0;border:none !important;" allowfullscreen="" webkitallowfullscreen="" mozallowfullscreen=""></iframe></div></div>
+</div>
+<div class="cell-output cell-output-display">
+<p><img src="lpjwsl-wetlandch4-grid-v1_User_Notebook_files/figure-html/cell-19-output-2.png" class="img-fluid"></p>
+</div>
 </div>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> monthly_timeseries(year,focus,param,anomaly):</span>
-<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>    labels <span class="op">=</span> []</span>
-<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a>    cmap <span class="op">=</span> plt.get_cmap(<span class="st">'gnuplot'</span>) </span>
-<span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a>    colors <span class="op">=</span> cmap(np.linspace(<span class="dv">0</span>,<span class="dv">1</span>,<span class="bu">len</span>(param)))</span>
-<span id="cb19-5"><a href="#cb19-5" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> i,p <span class="kw">in</span> <span class="bu">enumerate</span>(param):</span>
-<span id="cb19-6"><a href="#cb19-6" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> <span class="st">'LPJ'</span> <span class="kw">in</span> p:</span>
-<span id="cb19-7"><a href="#cb19-7" aria-hidden="true" tabindex="-1"></a>            ts <span class="op">=</span> get_lpj_timeseries(year,focus,p)</span>
-<span id="cb19-8"><a href="#cb19-8" aria-hidden="true" tabindex="-1"></a>        <span class="cf">elif</span> <span class="st">'MERRA'</span> <span class="kw">in</span> p:</span>
-<span id="cb19-9"><a href="#cb19-9" aria-hidden="true" tabindex="-1"></a>            ts <span class="op">=</span> get_merra2_timeseries(year,focus,p,anomaly)</span>
-<span id="cb19-10"><a href="#cb19-10" aria-hidden="true" tabindex="-1"></a>            </span>
-<span id="cb19-11"><a href="#cb19-11" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> i <span class="op">==</span> <span class="dv">0</span>:</span>
-<span id="cb19-12"><a href="#cb19-12" aria-hidden="true" tabindex="-1"></a>            fig <span class="op">=</span> plt.figure(figsize<span class="op">=</span>(<span class="dv">6</span>,<span class="dv">3</span>))</span>
-<span id="cb19-13"><a href="#cb19-13" aria-hidden="true" tabindex="-1"></a>            ax <span class="op">=</span> fig.add_subplot(<span class="dv">111</span>)</span>
-<span id="cb19-14"><a href="#cb19-14" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb19-15"><a href="#cb19-15" aria-hidden="true" tabindex="-1"></a>        <span class="co">#breakpoint()</span></span>
-<span id="cb19-16"><a href="#cb19-16" aria-hidden="true" tabindex="-1"></a>        <span class="cf">try</span>:</span>
-<span id="cb19-17"><a href="#cb19-17" aria-hidden="true" tabindex="-1"></a>            ax.plot(</span>
-<span id="cb19-18"><a href="#cb19-18" aria-hidden="true" tabindex="-1"></a>                <span class="bu">list</span>(<span class="bu">range</span>(<span class="dv">0</span>,<span class="dv">12</span>)),</span>
-<span id="cb19-19"><a href="#cb19-19" aria-hidden="true" tabindex="-1"></a>                ts[<span class="st">'box_totals'</span>],</span>
-<span id="cb19-20"><a href="#cb19-20" aria-hidden="true" tabindex="-1"></a>                linestyle<span class="op">=</span><span class="st">'-'</span>,</span>
-<span id="cb19-21"><a href="#cb19-21" aria-hidden="true" tabindex="-1"></a>                linewidth<span class="op">=</span><span class="dv">2</span>,</span>
-<span id="cb19-22"><a href="#cb19-22" aria-hidden="true" tabindex="-1"></a>                color<span class="op">=</span>colors[i],</span>
-<span id="cb19-23"><a href="#cb19-23" aria-hidden="true" tabindex="-1"></a>                markersize<span class="op">=</span><span class="dv">4</span>,</span>
-<span id="cb19-24"><a href="#cb19-24" aria-hidden="true" tabindex="-1"></a>                marker<span class="op">=</span><span class="st">'o'</span>,</span>
-<span id="cb19-25"><a href="#cb19-25" aria-hidden="true" tabindex="-1"></a>                label<span class="op">=</span>p</span>
-<span id="cb19-26"><a href="#cb19-26" aria-hidden="true" tabindex="-1"></a>            )</span>
-<span id="cb19-27"><a href="#cb19-27" aria-hidden="true" tabindex="-1"></a>        <span class="cf">except</span> <span class="pp">ValueError</span>:</span>
-<span id="cb19-28"><a href="#cb19-28" aria-hidden="true" tabindex="-1"></a>            <span class="bu">print</span>(<span class="st">'Double check that you have all twelve months of MERRA-2 data downloaded!'</span>)</span>
-<span id="cb19-29"><a href="#cb19-29" aria-hidden="true" tabindex="-1"></a>            <span class="bu">print</span>(params[p][<span class="st">'dir'</span>])</span>
-<span id="cb19-30"><a href="#cb19-30" aria-hidden="true" tabindex="-1"></a>            <span class="bu">breakpoint</span>()</span>
-<span id="cb19-31"><a href="#cb19-31" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb19-32"><a href="#cb19-32" aria-hidden="true" tabindex="-1"></a>        <span class="co">#   Construct plot title</span></span>
-<span id="cb19-33"><a href="#cb19-33" aria-hidden="true" tabindex="-1"></a>        title <span class="op">=</span> <span class="st">'</span><span class="sc">%s</span><span class="ch">\n</span><span class="sc">%s</span><span class="st"> Mean Monthly </span><span class="sc">%s</span><span class="st">'</span><span class="op">%</span>(focus,year,p)</span>
-<span id="cb19-34"><a href="#cb19-34" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> anomaly:</span>
-<span id="cb19-35"><a href="#cb19-35" aria-hidden="true" tabindex="-1"></a>           title<span class="op">+=</span><span class="st">' Anomaly'</span> </span>
-<span id="cb19-36"><a href="#cb19-36" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> <span class="st">'LPJ'</span> <span class="kw">in</span> p:</span>
-<span id="cb19-37"><a href="#cb19-37" aria-hidden="true" tabindex="-1"></a>            title <span class="op">=</span> title.replace(<span class="st">'Mean'</span>,<span class="st">'Total'</span>)</span>
-<span id="cb19-38"><a href="#cb19-38" aria-hidden="true" tabindex="-1"></a>        plt.title(title)</span>
-<span id="cb19-39"><a href="#cb19-39" aria-hidden="true" tabindex="-1"></a>        </span>
-<span id="cb19-40"><a href="#cb19-40" aria-hidden="true" tabindex="-1"></a>        plt.xticks(<span class="bu">list</span>(<span class="bu">range</span>(<span class="dv">0</span>,<span class="dv">12</span>)))</span>
-<span id="cb19-41"><a href="#cb19-41" aria-hidden="true" tabindex="-1"></a>        ax.set_xticklabels(ts[<span class="st">'month_labels'</span>],rotation<span class="op">=</span><span class="dv">40</span>,ha<span class="op">=</span><span class="st">'right'</span>)</span>
-<span id="cb19-42"><a href="#cb19-42" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb19-43"><a href="#cb19-43" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb19-44"><a href="#cb19-44" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> p <span class="op">==</span> param[<span class="op">-</span><span class="dv">1</span>]:</span>
-<span id="cb19-45"><a href="#cb19-45" aria-hidden="true" tabindex="-1"></a>            <span class="cf">if</span> i <span class="op">&gt;</span> <span class="dv">0</span>:</span>
-<span id="cb19-46"><a href="#cb19-46" aria-hidden="true" tabindex="-1"></a>                ax.legend(loc<span class="op">=</span><span class="st">'best'</span>)</span>
-<span id="cb19-47"><a href="#cb19-47" aria-hidden="true" tabindex="-1"></a>                nickname <span class="op">=</span> <span class="st">'_'</span>.join(params[p][<span class="st">'nickname'</span>] <span class="cf">for</span> p <span class="kw">in</span> params)</span>
-<span id="cb19-48"><a href="#cb19-48" aria-hidden="true" tabindex="-1"></a>                savename <span class="op">=</span> <span class="st">'</span><span class="sc">%s</span><span class="st">/box_summed_</span><span class="sc">%s</span><span class="st">_</span><span class="sc">%s</span><span class="st">_</span><span class="sc">%s</span><span class="st">.png'</span><span class="op">%</span> <span class="op">\</span></span>
-<span id="cb19-49"><a href="#cb19-49" aria-hidden="true" tabindex="-1"></a>                    (savedir,nickname,year,focus)</span>
-<span id="cb19-50"><a href="#cb19-50" aria-hidden="true" tabindex="-1"></a>            <span class="cf">else</span>:</span>
-<span id="cb19-51"><a href="#cb19-51" aria-hidden="true" tabindex="-1"></a>                nickname <span class="op">=</span> params[p][<span class="st">'nickname'</span>]</span>
-<span id="cb19-52"><a href="#cb19-52" aria-hidden="true" tabindex="-1"></a>                savename <span class="op">=</span> <span class="st">'</span><span class="sc">%s</span><span class="st">/</span><span class="sc">%s</span><span class="st">/</span><span class="sc">%s</span><span class="st">/box_summed_</span><span class="sc">%s</span><span class="st">_</span><span class="sc">%s</span><span class="st">_</span><span class="sc">%s</span><span class="st">.png'</span><span class="op">%</span> <span class="op">\</span></span>
-<span id="cb19-53"><a href="#cb19-53" aria-hidden="true" tabindex="-1"></a>                    (savedir,nickname,focus,nickname,year,focus)</span>
-<span id="cb19-54"><a href="#cb19-54" aria-hidden="true" tabindex="-1"></a>            <span class="cf">if</span> anomaly:</span>
-<span id="cb19-55"><a href="#cb19-55" aria-hidden="true" tabindex="-1"></a>                ax.plot(<span class="bu">list</span>(<span class="bu">range</span>(<span class="op">-</span><span class="dv">1</span>,<span class="dv">13</span>)),np.zeros(<span class="dv">14</span>),linewidth<span class="op">=</span><span class="fl">0.4</span>)</span>
-<span id="cb19-56"><a href="#cb19-56" aria-hidden="true" tabindex="-1"></a>                savename <span class="op">=</span> savename.replace(<span class="st">'.png'</span>,<span class="st">'_Anomaly.png'</span>)</span>
-<span id="cb19-57"><a href="#cb19-57" aria-hidden="true" tabindex="-1"></a>            ax.set_xlim(<span class="op">-</span><span class="dv">1</span>,<span class="dv">12</span>)</span>
-<span id="cb19-58"><a href="#cb19-58" aria-hidden="true" tabindex="-1"></a>            ax.set_ylim(<span class="op">-</span><span class="fl">4e-5</span>,<span class="fl">4e-5</span>)     <span class="co">#   manual per parameter</span></span>
-<span id="cb19-59"><a href="#cb19-59" aria-hidden="true" tabindex="-1"></a>            <span class="bu">print</span>(<span class="st">'Saving to '</span><span class="op">+</span>savename)</span>
-<span id="cb19-60"><a href="#cb19-60" aria-hidden="true" tabindex="-1"></a>            plt.figure(<span class="dv">1</span>).savefig(savename,dpi<span class="op">=</span><span class="dv">300</span>,bbox_inches<span class="op">=</span><span class="st">'tight'</span>)</span>
-<span id="cb19-61"><a href="#cb19-61" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb19-62"><a href="#cb19-62" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> ts </span>
-<span id="cb19-63"><a href="#cb19-63" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb19-64"><a href="#cb19-64" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb19-65"><a href="#cb19-65" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb19-66"><a href="#cb19-66" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> monthly_heatmaps(year,focus,p,anomaly):</span>
-<span id="cb19-67"><a href="#cb19-67" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> <span class="st">'LPJ'</span> <span class="kw">in</span> p:</span>
-<span id="cb19-68"><a href="#cb19-68" aria-hidden="true" tabindex="-1"></a>        ts <span class="op">=</span> get_lpj_timeseries(year,focus,p)</span>
-<span id="cb19-69"><a href="#cb19-69" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> <span class="st">'MERRA-2'</span> <span class="kw">in</span> p:</span>
-<span id="cb19-70"><a href="#cb19-70" aria-hidden="true" tabindex="-1"></a>        ts <span class="op">=</span> get_merra2_timeseries(year,focus,p,anomaly)</span>
-<span id="cb19-71"><a href="#cb19-71" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb19-72"><a href="#cb19-72" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> t <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">0</span>,<span class="bu">len</span>(ts[<span class="st">'month_labels'</span>])):    <span class="co">#   monthly data</span></span>
-<span id="cb19-73"><a href="#cb19-73" aria-hidden="true" tabindex="-1"></a>        plt.close()</span>
-<span id="cb19-74"><a href="#cb19-74" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb19-75"><a href="#cb19-75" aria-hidden="true" tabindex="-1"></a>        <span class="co">#   Construct plot title</span></span>
-<span id="cb19-76"><a href="#cb19-76" aria-hidden="true" tabindex="-1"></a>        title <span class="op">=</span> <span class="st">'</span><span class="sc">%s</span><span class="ch">\n</span><span class="sc">%s</span><span class="st"> </span><span class="sc">%s</span><span class="st">'</span><span class="op">%</span> <span class="op">\</span></span>
-<span id="cb19-77"><a href="#cb19-77" aria-hidden="true" tabindex="-1"></a>            (datetime(<span class="bu">int</span>(year),t<span class="op">+</span><span class="dv">1</span>,<span class="dv">1</span>).strftime(<span class="st">'%B %Y'</span>),focus,p)</span>
-<span id="cb19-78"><a href="#cb19-78" aria-hidden="true" tabindex="-1"></a>        <span class="co">#   Construct file savename</span></span>
-<span id="cb19-79"><a href="#cb19-79" aria-hidden="true" tabindex="-1"></a>        savename <span class="op">=</span> savedir<span class="op">+</span><span class="st">'</span><span class="sc">%s</span><span class="st">/</span><span class="sc">%s</span><span class="st">/</span><span class="sc">%s</span><span class="st">_</span><span class="sc">%s</span><span class="st">_</span><span class="sc">%s</span><span class="st">_</span><span class="sc">%s</span><span class="st">.png'</span><span class="op">%</span> <span class="op">\</span></span>
-<span id="cb19-80"><a href="#cb19-80" aria-hidden="true" tabindex="-1"></a>            (params[p][<span class="st">'nickname'</span>],</span>
-<span id="cb19-81"><a href="#cb19-81" aria-hidden="true" tabindex="-1"></a>            focus,</span>
-<span id="cb19-82"><a href="#cb19-82" aria-hidden="true" tabindex="-1"></a>            params[p][<span class="st">'nickname'</span>],</span>
-<span id="cb19-83"><a href="#cb19-83" aria-hidden="true" tabindex="-1"></a>            focus,</span>
-<span id="cb19-84"><a href="#cb19-84" aria-hidden="true" tabindex="-1"></a>            year,</span>
-<span id="cb19-85"><a href="#cb19-85" aria-hidden="true" tabindex="-1"></a>            datetime(<span class="bu">int</span>(year),t<span class="op">+</span><span class="dv">1</span>,<span class="dv">1</span>).strftime(<span class="st">'%m'</span>)</span>
-<span id="cb19-86"><a href="#cb19-86" aria-hidden="true" tabindex="-1"></a>            )</span>
-<span id="cb19-87"><a href="#cb19-87" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb19-88"><a href="#cb19-88" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> anomaly:</span>
-<span id="cb19-89"><a href="#cb19-89" aria-hidden="true" tabindex="-1"></a>            savename <span class="op">=</span> savename.replace(<span class="st">'.png'</span>,<span class="st">'_Anomaly.png'</span>)</span>
-<span id="cb19-90"><a href="#cb19-90" aria-hidden="true" tabindex="-1"></a>            title<span class="op">+=</span><span class="st">' Anomaly'</span></span>
-<span id="cb19-91"><a href="#cb19-91" aria-hidden="true" tabindex="-1"></a>            cmap <span class="op">=</span> <span class="st">'RdBu_r'</span></span>
-<span id="cb19-92"><a href="#cb19-92" aria-hidden="true" tabindex="-1"></a>        <span class="cf">else</span>:</span>
-<span id="cb19-93"><a href="#cb19-93" aria-hidden="true" tabindex="-1"></a>            cmap <span class="op">=</span> params[p][<span class="st">'cmap'</span>]</span>
-<span id="cb19-94"><a href="#cb19-94" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb19-95"><a href="#cb19-95" aria-hidden="true" tabindex="-1"></a>        <span class="co">#   vmin and vmax currently set manually per parameter</span></span>
-<span id="cb19-96"><a href="#cb19-96" aria-hidden="true" tabindex="-1"></a>        heatmap(</span>
-<span id="cb19-97"><a href="#cb19-97" aria-hidden="true" tabindex="-1"></a>            ts[<span class="st">'lon'</span>],</span>
-<span id="cb19-98"><a href="#cb19-98" aria-hidden="true" tabindex="-1"></a>            ts[<span class="st">'lat'</span>][:],</span>
-<span id="cb19-99"><a href="#cb19-99" aria-hidden="true" tabindex="-1"></a>            ts[<span class="st">'month_fields'</span>][t],</span>
-<span id="cb19-100"><a href="#cb19-100" aria-hidden="true" tabindex="-1"></a>            colbar_label<span class="op">=</span>ts[<span class="st">'units'</span>],</span>
-<span id="cb19-101"><a href="#cb19-101" aria-hidden="true" tabindex="-1"></a>            boundaries<span class="op">=</span>boundaries[focus],</span>
-<span id="cb19-102"><a href="#cb19-102" aria-hidden="true" tabindex="-1"></a>            cmap<span class="op">=</span>cmap,</span>
-<span id="cb19-103"><a href="#cb19-103" aria-hidden="true" tabindex="-1"></a>            <span class="co">#vmin = 0,</span></span>
-<span id="cb19-104"><a href="#cb19-104" aria-hidden="true" tabindex="-1"></a>            <span class="co">#vmax = 0.0025,</span></span>
-<span id="cb19-105"><a href="#cb19-105" aria-hidden="true" tabindex="-1"></a>            vmin <span class="op">=</span> <span class="op">-</span><span class="fl">4e-5</span>,</span>
-<span id="cb19-106"><a href="#cb19-106" aria-hidden="true" tabindex="-1"></a>            vmax <span class="op">=</span> <span class="fl">4e-5</span>,</span>
-<span id="cb19-107"><a href="#cb19-107" aria-hidden="true" tabindex="-1"></a>            <span class="co">#vmin = 260,</span></span>
-<span id="cb19-108"><a href="#cb19-108" aria-hidden="true" tabindex="-1"></a>            <span class="co">#vmax = 315,</span></span>
-<span id="cb19-109"><a href="#cb19-109" aria-hidden="true" tabindex="-1"></a>            <span class="co">#vmin = 0,</span></span>
-<span id="cb19-110"><a href="#cb19-110" aria-hidden="true" tabindex="-1"></a>            <span class="co">#vmax = np.nanmean(ts['month_fields'])+2.5*np.nanstd(ts['month_fields']),</span></span>
-<span id="cb19-111"><a href="#cb19-111" aria-hidden="true" tabindex="-1"></a>            <span class="co">#vmin = -4*np.nanstd(ts['month_fields']),</span></span>
-<span id="cb19-112"><a href="#cb19-112" aria-hidden="true" tabindex="-1"></a>            <span class="co">#vmax = 4*np.nanstd(ts['month_fields']),</span></span>
-<span id="cb19-113"><a href="#cb19-113" aria-hidden="true" tabindex="-1"></a>            <span class="op">**</span>{<span class="st">'title'</span>:title,<span class="st">'savename'</span>:savename}</span>
-<span id="cb19-114"><a href="#cb19-114" aria-hidden="true" tabindex="-1"></a>        )</span>
-<span id="cb19-115"><a href="#cb19-115" aria-hidden="true" tabindex="-1"></a><span class="co">#   save(year)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> monthly_timeseries(year,focus,param,anomaly):</span>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>    labels <span class="op">=</span> []</span>
+<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a>    cmap <span class="op">=</span> plt.get_cmap(<span class="st">'gnuplot'</span>) </span>
+<span id="cb21-4"><a href="#cb21-4" aria-hidden="true" tabindex="-1"></a>    colors <span class="op">=</span> cmap(np.linspace(<span class="dv">0</span>,<span class="dv">1</span>,<span class="bu">len</span>(param)))</span>
+<span id="cb21-5"><a href="#cb21-5" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> i,p <span class="kw">in</span> <span class="bu">enumerate</span>(param):</span>
+<span id="cb21-6"><a href="#cb21-6" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> <span class="st">'LPJ'</span> <span class="kw">in</span> p:</span>
+<span id="cb21-7"><a href="#cb21-7" aria-hidden="true" tabindex="-1"></a>            ts <span class="op">=</span> get_lpj_timeseries(year,focus,p)</span>
+<span id="cb21-8"><a href="#cb21-8" aria-hidden="true" tabindex="-1"></a>        <span class="cf">elif</span> <span class="st">'MERRA'</span> <span class="kw">in</span> p:</span>
+<span id="cb21-9"><a href="#cb21-9" aria-hidden="true" tabindex="-1"></a>            ts <span class="op">=</span> get_merra2_timeseries(year,focus,p,anomaly)</span>
+<span id="cb21-10"><a href="#cb21-10" aria-hidden="true" tabindex="-1"></a>            </span>
+<span id="cb21-11"><a href="#cb21-11" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> i <span class="op">==</span> <span class="dv">0</span>:</span>
+<span id="cb21-12"><a href="#cb21-12" aria-hidden="true" tabindex="-1"></a>            fig <span class="op">=</span> plt.figure(figsize<span class="op">=</span>(<span class="dv">6</span>,<span class="dv">3</span>))</span>
+<span id="cb21-13"><a href="#cb21-13" aria-hidden="true" tabindex="-1"></a>            ax <span class="op">=</span> fig.add_subplot(<span class="dv">111</span>)</span>
+<span id="cb21-14"><a href="#cb21-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-15"><a href="#cb21-15" aria-hidden="true" tabindex="-1"></a>        <span class="co">#breakpoint()</span></span>
+<span id="cb21-16"><a href="#cb21-16" aria-hidden="true" tabindex="-1"></a>        <span class="cf">try</span>:</span>
+<span id="cb21-17"><a href="#cb21-17" aria-hidden="true" tabindex="-1"></a>            ax.plot(</span>
+<span id="cb21-18"><a href="#cb21-18" aria-hidden="true" tabindex="-1"></a>                <span class="bu">list</span>(<span class="bu">range</span>(<span class="dv">0</span>,<span class="dv">12</span>)),</span>
+<span id="cb21-19"><a href="#cb21-19" aria-hidden="true" tabindex="-1"></a>                ts[<span class="st">'box_totals'</span>],</span>
+<span id="cb21-20"><a href="#cb21-20" aria-hidden="true" tabindex="-1"></a>                linestyle<span class="op">=</span><span class="st">'-'</span>,</span>
+<span id="cb21-21"><a href="#cb21-21" aria-hidden="true" tabindex="-1"></a>                linewidth<span class="op">=</span><span class="dv">2</span>,</span>
+<span id="cb21-22"><a href="#cb21-22" aria-hidden="true" tabindex="-1"></a>                color<span class="op">=</span>colors[i],</span>
+<span id="cb21-23"><a href="#cb21-23" aria-hidden="true" tabindex="-1"></a>                markersize<span class="op">=</span><span class="dv">4</span>,</span>
+<span id="cb21-24"><a href="#cb21-24" aria-hidden="true" tabindex="-1"></a>                marker<span class="op">=</span><span class="st">'o'</span>,</span>
+<span id="cb21-25"><a href="#cb21-25" aria-hidden="true" tabindex="-1"></a>                label<span class="op">=</span>p</span>
+<span id="cb21-26"><a href="#cb21-26" aria-hidden="true" tabindex="-1"></a>            )</span>
+<span id="cb21-27"><a href="#cb21-27" aria-hidden="true" tabindex="-1"></a>        <span class="cf">except</span> <span class="pp">ValueError</span>:</span>
+<span id="cb21-28"><a href="#cb21-28" aria-hidden="true" tabindex="-1"></a>            <span class="bu">print</span>(<span class="st">'Double check that you have all twelve months of MERRA-2 data downloaded!'</span>)</span>
+<span id="cb21-29"><a href="#cb21-29" aria-hidden="true" tabindex="-1"></a>            <span class="bu">print</span>(params[p][<span class="st">'dir'</span>])</span>
+<span id="cb21-30"><a href="#cb21-30" aria-hidden="true" tabindex="-1"></a>            <span class="bu">breakpoint</span>()</span>
+<span id="cb21-31"><a href="#cb21-31" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-32"><a href="#cb21-32" aria-hidden="true" tabindex="-1"></a>        <span class="co">#   Construct plot title</span></span>
+<span id="cb21-33"><a href="#cb21-33" aria-hidden="true" tabindex="-1"></a>        title <span class="op">=</span> <span class="st">'</span><span class="sc">%s</span><span class="ch">\n</span><span class="sc">%s</span><span class="st"> Mean Monthly </span><span class="sc">%s</span><span class="st">'</span><span class="op">%</span>(focus,year,p)</span>
+<span id="cb21-34"><a href="#cb21-34" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> anomaly:</span>
+<span id="cb21-35"><a href="#cb21-35" aria-hidden="true" tabindex="-1"></a>           title<span class="op">+=</span><span class="st">' Anomaly'</span> </span>
+<span id="cb21-36"><a href="#cb21-36" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> <span class="st">'LPJ'</span> <span class="kw">in</span> p:</span>
+<span id="cb21-37"><a href="#cb21-37" aria-hidden="true" tabindex="-1"></a>            title <span class="op">=</span> title.replace(<span class="st">'Mean'</span>,<span class="st">'Total'</span>)</span>
+<span id="cb21-38"><a href="#cb21-38" aria-hidden="true" tabindex="-1"></a>        plt.title(title)</span>
+<span id="cb21-39"><a href="#cb21-39" aria-hidden="true" tabindex="-1"></a>        </span>
+<span id="cb21-40"><a href="#cb21-40" aria-hidden="true" tabindex="-1"></a>        plt.xticks(<span class="bu">list</span>(<span class="bu">range</span>(<span class="dv">0</span>,<span class="dv">12</span>)))</span>
+<span id="cb21-41"><a href="#cb21-41" aria-hidden="true" tabindex="-1"></a>        ax.set_xticklabels(ts[<span class="st">'month_labels'</span>],rotation<span class="op">=</span><span class="dv">40</span>,ha<span class="op">=</span><span class="st">'right'</span>)</span>
+<span id="cb21-42"><a href="#cb21-42" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-43"><a href="#cb21-43" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-44"><a href="#cb21-44" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> p <span class="op">==</span> param[<span class="op">-</span><span class="dv">1</span>]:</span>
+<span id="cb21-45"><a href="#cb21-45" aria-hidden="true" tabindex="-1"></a>            <span class="cf">if</span> i <span class="op">&gt;</span> <span class="dv">0</span>:</span>
+<span id="cb21-46"><a href="#cb21-46" aria-hidden="true" tabindex="-1"></a>                ax.legend(loc<span class="op">=</span><span class="st">'best'</span>)</span>
+<span id="cb21-47"><a href="#cb21-47" aria-hidden="true" tabindex="-1"></a>                nickname <span class="op">=</span> <span class="st">'_'</span>.join(params[p][<span class="st">'nickname'</span>] <span class="cf">for</span> p <span class="kw">in</span> params)</span>
+<span id="cb21-48"><a href="#cb21-48" aria-hidden="true" tabindex="-1"></a>                savename <span class="op">=</span> <span class="st">'</span><span class="sc">%s</span><span class="st">/box_summed_</span><span class="sc">%s</span><span class="st">_</span><span class="sc">%s</span><span class="st">_</span><span class="sc">%s</span><span class="st">.png'</span><span class="op">%</span> <span class="op">\</span></span>
+<span id="cb21-49"><a href="#cb21-49" aria-hidden="true" tabindex="-1"></a>                    (savedir,nickname,year,focus)</span>
+<span id="cb21-50"><a href="#cb21-50" aria-hidden="true" tabindex="-1"></a>            <span class="cf">else</span>:</span>
+<span id="cb21-51"><a href="#cb21-51" aria-hidden="true" tabindex="-1"></a>                nickname <span class="op">=</span> params[p][<span class="st">'nickname'</span>]</span>
+<span id="cb21-52"><a href="#cb21-52" aria-hidden="true" tabindex="-1"></a>                savename <span class="op">=</span> <span class="st">'</span><span class="sc">%s</span><span class="st">/</span><span class="sc">%s</span><span class="st">/</span><span class="sc">%s</span><span class="st">/box_summed_</span><span class="sc">%s</span><span class="st">_</span><span class="sc">%s</span><span class="st">_</span><span class="sc">%s</span><span class="st">.png'</span><span class="op">%</span> <span class="op">\</span></span>
+<span id="cb21-53"><a href="#cb21-53" aria-hidden="true" tabindex="-1"></a>                    (savedir,nickname,focus,nickname,year,focus)</span>
+<span id="cb21-54"><a href="#cb21-54" aria-hidden="true" tabindex="-1"></a>            <span class="cf">if</span> anomaly:</span>
+<span id="cb21-55"><a href="#cb21-55" aria-hidden="true" tabindex="-1"></a>                ax.plot(<span class="bu">list</span>(<span class="bu">range</span>(<span class="op">-</span><span class="dv">1</span>,<span class="dv">13</span>)),np.zeros(<span class="dv">14</span>),linewidth<span class="op">=</span><span class="fl">0.4</span>)</span>
+<span id="cb21-56"><a href="#cb21-56" aria-hidden="true" tabindex="-1"></a>                savename <span class="op">=</span> savename.replace(<span class="st">'.png'</span>,<span class="st">'_Anomaly.png'</span>)</span>
+<span id="cb21-57"><a href="#cb21-57" aria-hidden="true" tabindex="-1"></a>            ax.set_xlim(<span class="op">-</span><span class="dv">1</span>,<span class="dv">12</span>)</span>
+<span id="cb21-58"><a href="#cb21-58" aria-hidden="true" tabindex="-1"></a>            ax.set_ylim(<span class="op">-</span><span class="fl">4e-5</span>,<span class="fl">4e-5</span>)     <span class="co">#   manual per parameter</span></span>
+<span id="cb21-59"><a href="#cb21-59" aria-hidden="true" tabindex="-1"></a>            <span class="bu">print</span>(<span class="st">'Saving to '</span><span class="op">+</span>savename)</span>
+<span id="cb21-60"><a href="#cb21-60" aria-hidden="true" tabindex="-1"></a>            plt.figure(<span class="dv">1</span>).savefig(savename,dpi<span class="op">=</span><span class="dv">300</span>,bbox_inches<span class="op">=</span><span class="st">'tight'</span>)</span>
+<span id="cb21-61"><a href="#cb21-61" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-62"><a href="#cb21-62" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> ts </span>
+<span id="cb21-63"><a href="#cb21-63" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb21-64"><a href="#cb21-64" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb21-65"><a href="#cb21-65" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-66"><a href="#cb21-66" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> monthly_heatmaps(year,focus,p,anomaly):</span>
+<span id="cb21-67"><a href="#cb21-67" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> <span class="st">'LPJ'</span> <span class="kw">in</span> p:</span>
+<span id="cb21-68"><a href="#cb21-68" aria-hidden="true" tabindex="-1"></a>        ts <span class="op">=</span> get_lpj_timeseries(year,focus,p)</span>
+<span id="cb21-69"><a href="#cb21-69" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> <span class="st">'MERRA-2'</span> <span class="kw">in</span> p:</span>
+<span id="cb21-70"><a href="#cb21-70" aria-hidden="true" tabindex="-1"></a>        ts <span class="op">=</span> get_merra2_timeseries(year,focus,p,anomaly)</span>
+<span id="cb21-71"><a href="#cb21-71" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb21-72"><a href="#cb21-72" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> t <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">0</span>,<span class="bu">len</span>(ts[<span class="st">'month_labels'</span>])):    <span class="co">#   monthly data</span></span>
+<span id="cb21-73"><a href="#cb21-73" aria-hidden="true" tabindex="-1"></a>        plt.close()</span>
+<span id="cb21-74"><a href="#cb21-74" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb21-75"><a href="#cb21-75" aria-hidden="true" tabindex="-1"></a>        <span class="co">#   Construct plot title</span></span>
+<span id="cb21-76"><a href="#cb21-76" aria-hidden="true" tabindex="-1"></a>        title <span class="op">=</span> <span class="st">'</span><span class="sc">%s</span><span class="ch">\n</span><span class="sc">%s</span><span class="st"> </span><span class="sc">%s</span><span class="st">'</span><span class="op">%</span> <span class="op">\</span></span>
+<span id="cb21-77"><a href="#cb21-77" aria-hidden="true" tabindex="-1"></a>            (datetime(<span class="bu">int</span>(year),t<span class="op">+</span><span class="dv">1</span>,<span class="dv">1</span>).strftime(<span class="st">'%B %Y'</span>),focus,p)</span>
+<span id="cb21-78"><a href="#cb21-78" aria-hidden="true" tabindex="-1"></a>        <span class="co">#   Construct file savename</span></span>
+<span id="cb21-79"><a href="#cb21-79" aria-hidden="true" tabindex="-1"></a>        savename <span class="op">=</span> savedir<span class="op">+</span><span class="st">'</span><span class="sc">%s</span><span class="st">/</span><span class="sc">%s</span><span class="st">/</span><span class="sc">%s</span><span class="st">_</span><span class="sc">%s</span><span class="st">_</span><span class="sc">%s</span><span class="st">_</span><span class="sc">%s</span><span class="st">.png'</span><span class="op">%</span> <span class="op">\</span></span>
+<span id="cb21-80"><a href="#cb21-80" aria-hidden="true" tabindex="-1"></a>            (params[p][<span class="st">'nickname'</span>],</span>
+<span id="cb21-81"><a href="#cb21-81" aria-hidden="true" tabindex="-1"></a>            focus,</span>
+<span id="cb21-82"><a href="#cb21-82" aria-hidden="true" tabindex="-1"></a>            params[p][<span class="st">'nickname'</span>],</span>
+<span id="cb21-83"><a href="#cb21-83" aria-hidden="true" tabindex="-1"></a>            focus,</span>
+<span id="cb21-84"><a href="#cb21-84" aria-hidden="true" tabindex="-1"></a>            year,</span>
+<span id="cb21-85"><a href="#cb21-85" aria-hidden="true" tabindex="-1"></a>            datetime(<span class="bu">int</span>(year),t<span class="op">+</span><span class="dv">1</span>,<span class="dv">1</span>).strftime(<span class="st">'%m'</span>)</span>
+<span id="cb21-86"><a href="#cb21-86" aria-hidden="true" tabindex="-1"></a>            )</span>
+<span id="cb21-87"><a href="#cb21-87" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-88"><a href="#cb21-88" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> anomaly:</span>
+<span id="cb21-89"><a href="#cb21-89" aria-hidden="true" tabindex="-1"></a>            savename <span class="op">=</span> savename.replace(<span class="st">'.png'</span>,<span class="st">'_Anomaly.png'</span>)</span>
+<span id="cb21-90"><a href="#cb21-90" aria-hidden="true" tabindex="-1"></a>            title<span class="op">+=</span><span class="st">' Anomaly'</span></span>
+<span id="cb21-91"><a href="#cb21-91" aria-hidden="true" tabindex="-1"></a>            cmap <span class="op">=</span> <span class="st">'RdBu_r'</span></span>
+<span id="cb21-92"><a href="#cb21-92" aria-hidden="true" tabindex="-1"></a>        <span class="cf">else</span>:</span>
+<span id="cb21-93"><a href="#cb21-93" aria-hidden="true" tabindex="-1"></a>            cmap <span class="op">=</span> params[p][<span class="st">'cmap'</span>]</span>
+<span id="cb21-94"><a href="#cb21-94" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb21-95"><a href="#cb21-95" aria-hidden="true" tabindex="-1"></a>        <span class="co">#   vmin and vmax currently set manually per parameter</span></span>
+<span id="cb21-96"><a href="#cb21-96" aria-hidden="true" tabindex="-1"></a>        heatmap(</span>
+<span id="cb21-97"><a href="#cb21-97" aria-hidden="true" tabindex="-1"></a>            ts[<span class="st">'lon'</span>],</span>
+<span id="cb21-98"><a href="#cb21-98" aria-hidden="true" tabindex="-1"></a>            ts[<span class="st">'lat'</span>][:],</span>
+<span id="cb21-99"><a href="#cb21-99" aria-hidden="true" tabindex="-1"></a>            ts[<span class="st">'month_fields'</span>][t],</span>
+<span id="cb21-100"><a href="#cb21-100" aria-hidden="true" tabindex="-1"></a>            colbar_label<span class="op">=</span>ts[<span class="st">'units'</span>],</span>
+<span id="cb21-101"><a href="#cb21-101" aria-hidden="true" tabindex="-1"></a>            boundaries<span class="op">=</span>boundaries[focus],</span>
+<span id="cb21-102"><a href="#cb21-102" aria-hidden="true" tabindex="-1"></a>            cmap<span class="op">=</span>cmap,</span>
+<span id="cb21-103"><a href="#cb21-103" aria-hidden="true" tabindex="-1"></a>            <span class="co">#vmin = 0,</span></span>
+<span id="cb21-104"><a href="#cb21-104" aria-hidden="true" tabindex="-1"></a>            <span class="co">#vmax = 0.0025,</span></span>
+<span id="cb21-105"><a href="#cb21-105" aria-hidden="true" tabindex="-1"></a>            vmin <span class="op">=</span> <span class="op">-</span><span class="fl">4e-5</span>,</span>
+<span id="cb21-106"><a href="#cb21-106" aria-hidden="true" tabindex="-1"></a>            vmax <span class="op">=</span> <span class="fl">4e-5</span>,</span>
+<span id="cb21-107"><a href="#cb21-107" aria-hidden="true" tabindex="-1"></a>            <span class="co">#vmin = 260,</span></span>
+<span id="cb21-108"><a href="#cb21-108" aria-hidden="true" tabindex="-1"></a>            <span class="co">#vmax = 315,</span></span>
+<span id="cb21-109"><a href="#cb21-109" aria-hidden="true" tabindex="-1"></a>            <span class="co">#vmin = 0,</span></span>
+<span id="cb21-110"><a href="#cb21-110" aria-hidden="true" tabindex="-1"></a>            <span class="co">#vmax = np.nanmean(ts['month_fields'])+2.5*np.nanstd(ts['month_fields']),</span></span>
+<span id="cb21-111"><a href="#cb21-111" aria-hidden="true" tabindex="-1"></a>            <span class="co">#vmin = -4*np.nanstd(ts['month_fields']),</span></span>
+<span id="cb21-112"><a href="#cb21-112" aria-hidden="true" tabindex="-1"></a>            <span class="co">#vmax = 4*np.nanstd(ts['month_fields']),</span></span>
+<span id="cb21-113"><a href="#cb21-113" aria-hidden="true" tabindex="-1"></a>            <span class="op">**</span>{<span class="st">'title'</span>:title,<span class="st">'savename'</span>:savename}</span>
+<span id="cb21-114"><a href="#cb21-114" aria-hidden="true" tabindex="-1"></a>        )</span>
+<span id="cb21-115"><a href="#cb21-115" aria-hidden="true" tabindex="-1"></a><span class="co">#   save(year)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
+<section id="things-to-be-added" class="level3">
+<h3 class="anchored" data-anchor-id="things-to-be-added">Things to be added</h3>
+<p>Plot for variable</p>
+</section>
 </section>
 <section id="summary" class="level2">
 <h2 class="anchored" data-anchor-id="summary">Summary</h2>

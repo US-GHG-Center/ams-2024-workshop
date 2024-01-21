@@ -226,23 +226,23 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <h2 class="anchored" data-anchor-id="requirements">Requirements</h2>
 <ul>
 <li>NASA Earthdata Account</li>
-<li>Set up Python Environment - See setup_instructions.md in the <code>/setup/</code> folder</li>
+<li>Set up Python Environment - See setup_instructions.md in the ‘/setup/’ folder</li>
 </ul>
 </section>
 <section id="learning-objectives" class="level2">
 <h2 class="anchored" data-anchor-id="learning-objectives">Learning Objectives</h2>
 <ul>
-<li>How to use <code>U.S.GHG Center STAC Catalog</code> to access <code>Wetland Methane Emissions, LPJ-wsl Model</code> data.</li>
-<li>How to use <code>earthaccess</code> to find MERRA-2 data.</li>
-<li>How to visualize datasets using <code>folium</code>and perfom zonal statistics.</li>
-<li>How to plot time series plot for <code>MERRA-2</code> variables and <code>Wetland Methane Emissions, LPJ-wsl Model</code> and analyze the results.</li>
+<li>How to use ‘U.S.GHG Center STAC Catalog’ to access ‘Wetland Methane Emissions, LPJ-wsl Model’ data.</li>
+<li>How to use ‘earthaccess’ to find MERRA-2 data.</li>
+<li>How to visualize datasets using ’folium’and perfom zonal statistics.</li>
+<li>How to plot time series plot for ‘MERRA-2’ variables and ‘Wetland Methane Emissions, LPJ-wsl Model’ and analyze the results.</li>
 </ul>
 </section>
 <section id="approach" class="level2">
 <h2 class="anchored" data-anchor-id="approach">Approach</h2>
 <ol type="1">
-<li>Identify available dates and temporal frequency of observations for the given collection using the GHGC API <code>/stac</code> endpoint. The collection processed in this notebook is the Wetland Methane Emissions, LPJ-wsl Model data product.</li>
-<li>Pass the STAC item into the raster API <code>/stac/tilejson.json</code>endpoint.</li>
+<li>Identify available dates and temporal frequency of observations for the given collection using the GHGC API ‘/stac’ endpoint. The collection processed in this notebook is the Wetland Methane Emissions, LPJ-wsl Model data product.</li>
+<li>Pass the STAC item into the raster API ’/stac/tilejson.json ’endpoint.</li>
 <li>Access MERRA-2 data for different variables (precipitation rate, surface soil moisture).</li>
 <li>Define spatial region of interest</li>
 <li>Using plugins from folium to visualize two tiles (side-by-side), allowing time point comparison.</li>
@@ -266,7 +266,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="cell">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Import required libraries</span></span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> earthaccess</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="co"># import earthaccess</span></span>
 <span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> warnings</span>
 <span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> requests</span>
 <span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
@@ -290,12 +290,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 <section id="nasa-earth-data-login-credentials" class="level2">
 <h2 class="anchored" data-anchor-id="nasa-earth-data-login-credentials">NASA Earth Data Login Credentials</h2>
-<p>To download or stream NASA data you will need an Earthdata account, you can create one here <a href="https://urs.earthdata.nasa.gov/home" class="uri">https://urs.earthdata.nasa.gov/home</a>. We will use the <code>login</code> function from the <code>earthaccess</code> library for authentication before downloading at the end of the notebook. This function can also be used to create a local <code>.netrc</code> file if it doesn’t exist or add your login info to an existing <code>.netrc</code> file. If no Earthdata Login credentials are found in the <code>.netrc</code> you’ll be prompted for them. This step is not necessary to conduct searches but is needed to download or stream data.</p>
+<p>To download or stream NASA data you will need an Earthdata account, you can create one here <a href="https://urs.earthdata.nasa.gov/home" class="uri">https://urs.earthdata.nasa.gov/home</a>. We will use the ‘login’ function from the ‘earthaccess’ library for authentication before downloading at the end of the notebook. This function can also be used to create a local ‘.netrc’ file if it doesn’t exist or add your login info to an existing ‘.netrc’ file. If no Earthdata Login credentials are found in the ‘.netrc’ you’ll be prompted for them. This step is not necessary to conduct searches but is needed to download or stream data.</p>
 </section>
 <section id="querying-the-stac-api" class="level2">
 <h2 class="anchored" data-anchor-id="querying-the-stac-api">Querying the STAC API</h2>
 <p>Search for LPJ Wetland Methane Emissions Data</p>
-<div class="cell" data-execution_count="2">
+<div class="cell">
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Provide STAC and RASTER API endpoints</span></span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>STAC_API_URL <span class="op">=</span> <span class="st">"http://ghg.center/api/stac"</span></span>
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>RASTER_API_URL <span class="op">=</span> <span class="st">"https://ghg.center/api/raster"</span></span>
@@ -310,8 +310,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>collection <span class="op">=</span> requests.get(<span class="ss">f"</span><span class="sc">{</span>STAC_API_URL<span class="sc">}</span><span class="ss">/collections/</span><span class="sc">{</span>collection_name<span class="sc">}</span><span class="ss">"</span>).json()</span>
 <span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>collection</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<p>Examining the contents of our <code>collection</code> under <code>summaries</code>, we see that the data is available from January 1980 to may 2021. By looking at <code>dashboard: time density</code>, we can see that these observations are collected monthly.</p>
-<div class="cell" data-execution_count="4">
+<p>Examining the contents of our ‘collection’ under ‘summaries’, we see that the data is available from January 1980 to may 2021. By looking at ‘dashboard: time density’, we can see that these observations are collected monthly.</p>
+<div class="cell">
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> get_item_count(collection_id):</span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>    count <span class="op">=</span> <span class="dv">0</span></span>
 <span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>    items_url <span class="op">=</span> <span class="ss">f"</span><span class="sc">{</span>STAC_API_URL<span class="sc">}</span><span class="ss">/collections/</span><span class="sc">{</span>collection_id<span class="sc">}</span><span class="ss">/items"</span></span>
@@ -343,11 +343,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Examining the first item in the collection</span></span>
 <span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>items[<span class="dv">0</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<p>Below, we enter minimum and maximum values to provide our upper and lower bounds in <code>rescale_values.</code></p>
+<p>Below, we enter minimum and maximum values to provide our upper and lower bounds in ‘rescale_values.’</p>
 </section>
 <section id="search-for-merra-2-data" class="level2">
 <h2 class="anchored" data-anchor-id="search-for-merra-2-data">Search for MERRA-2 Data</h2>
-<div class="cell" data-execution_count="19">
+<div class="cell">
 <div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>merra_t2m_dir<span class="op">=</span><span class="st">'merra_t2m_dir/'</span></span>
 <span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>merra_soil_moisture_dir <span class="op">=</span> <span class="st">'merra_soil_moisture_dir/'</span></span>
 <span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>merra_precip_rate_dir <span class="op">=</span> <span class="st">'merra_precip_rate_dir/'</span></span>
@@ -361,7 +361,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="define-spatial-region-of-interest" class="level2">
 <h2 class="anchored" data-anchor-id="define-spatial-region-of-interest">Define Spatial Region of Interest</h2>
 <p>For this example, our spatial region of interest (ROI) will be the a region in state of Louisiana (LA). In this example, we will create a rectangular ROI.</p>
-<div class="cell" data-execution_count="9">
+<div class="cell">
 <div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co"># We create a area of interest (polygon) on which will be used later </span></span>
 <span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>aoi <span class="op">=</span> [<span class="op">-</span><span class="fl">95.9</span>,<span class="op">-</span><span class="fl">87.50</span>,<span class="fl">28.7</span>,<span class="fl">33.5</span>]</span>
@@ -385,14 +385,14 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 <section id="opening-and-exploring-wetland-methane-emissions-data-using-the-raster-api" class="level2">
 <h2 class="anchored" data-anchor-id="opening-and-exploring-wetland-methane-emissions-data-using-the-raster-api">Opening and Exploring Wetland Methane Emissions Data Using the Raster API</h2>
-<p>In this notebook, we will explore the temporal impacts of methane emissions. We will visualize the outputs on a map using <code>folium</code>.</p>
-<div class="cell" data-execution_count="8">
+<p>In this notebook, we will explore the temporal impacts of methane emissions. We will visualize the outputs on a map using ‘folium’.</p>
+<div class="cell">
 <div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="co"># To access the year value from each item more easily, this will let us query more explicity by year and month (e.g., 2020-02)</span></span>
 <span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>items <span class="op">=</span> {item[<span class="st">"properties"</span>][<span class="st">"datetime"</span>][:<span class="dv">7</span>]: item <span class="cf">for</span> item <span class="kw">in</span> items} </span>
 <span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>asset_name <span class="op">=</span> <span class="st">'ch4-wetlands-emissions'</span></span>
 <span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>rescale_values <span class="op">=</span> {<span class="st">'max'</span>: <span class="fl">2.0</span>, <span class="st">'min'</span>: <span class="fl">0.0</span>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<p>Now, we will pass the item id, collection name, and <code>rescaling_factor</code> to the <code>Raster API</code> endpoint. We will do this twice, once for may 2020 and again for may 2021, so we can visualize each event independently.</p>
+<p>Now, we will pass the item id, collection name, and ‘rescaling_factor’ to the ‘Raster API’ endpoint. We will do this twice, once for may 2020 and again for may 2021, so we can visualize each event independently.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>color_map <span class="op">=</span> <span class="st">"magma"</span> <span class="co"># select the color ramp from matplotlib library.</span></span>
 <span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>may_2020_tile <span class="op">=</span> requests.get(</span>
@@ -519,17 +519,39 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 <section id="opening-and-exploring-merra-2-data" class="level2">
 <h2 class="anchored" data-anchor-id="opening-and-exploring-merra-2-data">Opening and Exploring MERRA-2 Data</h2>
-<p>In this notebook, we will explore the MERRA-2 data. We will visualize the outputs on a map using <code>folium</code>.</p>
-<div class="cell" data-execution_count="13">
+<p>In this notebook, we will explore the MERRA-2 data. We will visualize the outputs on a map using ‘folium’.</p>
+<div class="cell">
 <div class="sourceCode cell-code" id="cb14"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>items <span class="op">=</span> requests.get(<span class="ss">f"</span><span class="sc">{</span>STAC_API_URL<span class="sc">}</span><span class="ss">/collections/</span><span class="sc">{</span>collection_name<span class="sc">}</span><span class="ss">/items?limit=</span><span class="sc">{</span>number_of_items<span class="sc">}</span><span class="ss">"</span>).json()[<span class="st">"features"</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="co">## visualize MERRA-2</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="co">## visualize MERRA-2</span></span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a><span class="co"># [-95.9,-87.50,28.7,33.5]</span></span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a>file_path <span class="op">=</span> <span class="st">'merra_t2m_dir/MERRA2_100.instM_2d_asm_Nx.199101.nc4'</span>  <span class="co"># Replace with the path to your NetCDF file</span></span>
+<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a>dataset <span class="op">=</span> nc.Dataset(file_path)</span>
+<span id="cb15-6"><a href="#cb15-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Access coordinates (if needed)</span></span>
+<span id="cb15-7"><a href="#cb15-7" aria-hidden="true" tabindex="-1"></a>latitude <span class="op">=</span> dataset.variables[<span class="st">'lat'</span>][:]</span>
+<span id="cb15-8"><a href="#cb15-8" aria-hidden="true" tabindex="-1"></a>longitude <span class="op">=</span> dataset.variables[<span class="st">'lon'</span>][:]</span>
+<span id="cb15-9"><a href="#cb15-9" aria-hidden="true" tabindex="-1"></a><span class="co"># Access variables</span></span>
+<span id="cb15-10"><a href="#cb15-10" aria-hidden="true" tabindex="-1"></a>variable_name <span class="op">=</span> <span class="st">'T2M'</span>  <span class="co"># Replace with the variable you want to plot</span></span>
+<span id="cb15-11"><a href="#cb15-11" aria-hidden="true" tabindex="-1"></a><span class="co"># lat_indices = (latitude &gt;= 28.7) &amp; (latitude &lt;= 33.5)</span></span>
+<span id="cb15-12"><a href="#cb15-12" aria-hidden="true" tabindex="-1"></a><span class="co"># lon_indices = (longitude &gt;= -87.5) &amp; (longitude &lt;= -95.9)</span></span>
+<span id="cb15-13"><a href="#cb15-13" aria-hidden="true" tabindex="-1"></a>variable_data <span class="op">=</span> dataset.variables[variable_name][<span class="dv">0</span>,:,:]</span>
+<span id="cb15-14"><a href="#cb15-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-15"><a href="#cb15-15" aria-hidden="true" tabindex="-1"></a><span class="co"># Close the NetCDF file</span></span>
+<span id="cb15-16"><a href="#cb15-16" aria-hidden="true" tabindex="-1"></a>dataset.close()</span>
+<span id="cb15-17"><a href="#cb15-17" aria-hidden="true" tabindex="-1"></a><span class="co"># Plot the data</span></span>
+<span id="cb15-18"><a href="#cb15-18" aria-hidden="true" tabindex="-1"></a>plt.imshow(variable_data, origin<span class="op">=</span><span class="st">'lower'</span>, cmap<span class="op">=</span><span class="st">'viridis'</span>, extent<span class="op">=</span>(longitude.<span class="bu">min</span>(), longitude.<span class="bu">max</span>(), latitude.<span class="bu">min</span>(), latitude.<span class="bu">max</span>()))</span>
+<span id="cb15-19"><a href="#cb15-19" aria-hidden="true" tabindex="-1"></a>plt.colorbar(label<span class="op">=</span><span class="st">'Variable Unit'</span>)</span>
+<span id="cb15-20"><a href="#cb15-20" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="st">'Longitude'</span>)</span>
+<span id="cb15-21"><a href="#cb15-21" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="st">'Latitude'</span>)</span>
+<span id="cb15-22"><a href="#cb15-22" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="ss">f'Plot of </span><span class="sc">{</span>variable_name<span class="sc">}</span><span class="ss">'</span>)</span>
+<span id="cb15-23"><a href="#cb15-23" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 <section id="generate-statistics-and-time-series-lineplots-for-methane-emission-in-year-2020-2021" class="level2">
 <h2 class="anchored" data-anchor-id="generate-statistics-and-time-series-lineplots-for-methane-emission-in-year-2020-2021">Generate Statistics and Time Series Lineplots for Methane Emission in Year 2020, 2021</h2>
-<div class="cell" data-execution_count="14">
+<div class="cell">
 <div class="sourceCode cell-code" id="cb16"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="co"># The bounding box should be passed to the geojson param as a geojson Feature or FeatureCollection</span></span>
 <span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> generate_stats(item, geojson):</span>
@@ -593,25 +615,25 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 <section id="generate-statistics-and-time-series-lineplots-for-merra2-data-in-year-2020-2021" class="level2">
 <h2 class="anchored" data-anchor-id="generate-statistics-and-time-series-lineplots-for-merra2-data-in-year-2020-2021">Generate Statistics and Time Series Lineplots for MERRA2 Data in Year 2020, 2021</h2>
-<div class="cell" data-execution_count="20">
+<div class="cell">
 <div class="sourceCode cell-code" id="cb21"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>params<span class="op">=</span>{</span>
 <span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>    <span class="st">'MERRA-2 T2M'</span>:</span>
 <span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a>        {<span class="st">'var'</span>:<span class="st">'T2M'</span>,</span>
-<span id="cb21-4"><a href="#cb21-4" aria-hidden="true" tabindex="-1"></a>        <span class="st">'cmap'</span>:<span class="st">'Spectral_r'</span>,</span>
+<span id="cb21-4"><a href="#cb21-4" aria-hidden="true" tabindex="-1"></a>        <span class="st">'cmap'</span>:<span class="st">'#000000'</span>,</span>
 <span id="cb21-5"><a href="#cb21-5" aria-hidden="true" tabindex="-1"></a>        <span class="st">'dir'</span>:merra_t2m_dir,</span>
 <span id="cb21-6"><a href="#cb21-6" aria-hidden="true" tabindex="-1"></a>        <span class="st">'nickname'</span>:<span class="st">'merra2_t2m'</span>,</span>
 <span id="cb21-7"><a href="#cb21-7" aria-hidden="true" tabindex="-1"></a>        <span class="st">'climdir'</span>:merra_t2m_clim_dir,</span>
 <span id="cb21-8"><a href="#cb21-8" aria-hidden="true" tabindex="-1"></a>        <span class="st">'climvar'</span>:<span class="st">'T2MMEAN'</span>},</span>
 <span id="cb21-9"><a href="#cb21-9" aria-hidden="true" tabindex="-1"></a>    <span class="st">'MERRA-2 Surface Soil Moisture'</span>:</span>
 <span id="cb21-10"><a href="#cb21-10" aria-hidden="true" tabindex="-1"></a>        {<span class="st">'var'</span>:<span class="st">'GWETTOP'</span>,</span>
-<span id="cb21-11"><a href="#cb21-11" aria-hidden="true" tabindex="-1"></a>        <span class="st">'cmap'</span>:<span class="st">'Blues'</span>,</span>
+<span id="cb21-11"><a href="#cb21-11" aria-hidden="true" tabindex="-1"></a>        <span class="st">'cmap'</span>:<span class="st">'#000000'</span>,</span>
 <span id="cb21-12"><a href="#cb21-12" aria-hidden="true" tabindex="-1"></a>        <span class="st">'dir'</span>:merra_soil_moisture_dir,</span>
 <span id="cb21-13"><a href="#cb21-13" aria-hidden="true" tabindex="-1"></a>        <span class="st">'nickname'</span>:<span class="st">'merra2_sm'</span>,</span>
 <span id="cb21-14"><a href="#cb21-14" aria-hidden="true" tabindex="-1"></a>        <span class="st">'climdir'</span>:merra_soil_moisture_clim_dir,</span>
 <span id="cb21-15"><a href="#cb21-15" aria-hidden="true" tabindex="-1"></a>        <span class="st">'climvar'</span>:<span class="st">'GWETTOP'</span>},</span>
 <span id="cb21-16"><a href="#cb21-16" aria-hidden="true" tabindex="-1"></a>    <span class="st">'MERRA-2 Precipitation Rate'</span>:</span>
 <span id="cb21-17"><a href="#cb21-17" aria-hidden="true" tabindex="-1"></a>        {<span class="st">'var'</span>:<span class="st">'PRECTOT'</span>,</span>
-<span id="cb21-18"><a href="#cb21-18" aria-hidden="true" tabindex="-1"></a>        <span class="st">'cmap'</span>:<span class="st">'Spectral_r'</span>,</span>
+<span id="cb21-18"><a href="#cb21-18" aria-hidden="true" tabindex="-1"></a>        <span class="st">'cmap'</span>:<span class="st">'#000000'</span>,</span>
 <span id="cb21-19"><a href="#cb21-19" aria-hidden="true" tabindex="-1"></a>        <span class="st">'dir'</span>:merra_precip_rate_dir,</span>
 <span id="cb21-20"><a href="#cb21-20" aria-hidden="true" tabindex="-1"></a>        <span class="st">'nickname'</span>:<span class="st">'merra2_pr'</span>,</span>
 <span id="cb21-21"><a href="#cb21-21" aria-hidden="true" tabindex="-1"></a>        <span class="st">'climdir'</span>:merra_precip_rate_clim_dir,</span>
@@ -631,7 +653,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb21-35"><a href="#cb21-35" aria-hidden="true" tabindex="-1"></a>anomaly <span class="op">=</span> <span class="dv">1</span></span>
 <span id="cb21-36"><a href="#cb21-36" aria-hidden="true" tabindex="-1"></a>param <span class="op">=</span> [<span class="st">'MERRA-2 Precipitation Rate'</span>,<span class="st">'MERRA-2 Surface Soil Moisture'</span>, <span class="st">'MERRA-2 T2M'</span> ]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div class="cell" data-execution_count="21">
+<div class="cell">
 <div class="sourceCode cell-code" id="cb22"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> get_merra2_timeseries(year,focus,p,anomaly):</span>
 <span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a>    files <span class="op">=</span> glob.glob(params[p][<span class="st">'dir'</span>]<span class="op">+</span><span class="st">'*.nc4'</span>)</span>
 <span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> anomaly:</span>
@@ -723,60 +745,57 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb22-89"><a href="#cb22-89" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> data_return </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a>cmap <span class="op">=</span> plt.get_cmap(<span class="st">'gnuplot'</span>) </span>
-<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a>colors <span class="op">=</span> cmap(np.linspace(<span class="dv">0</span>,<span class="dv">1</span>,<span class="bu">len</span>(param)))</span>
-<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a><span class="co">## colors = [‘#1B8FB5’, ‘#16B573’, ‘#C76B21’] </span></span>
-<span id="cb23-4"><a href="#cb23-4" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> i,p <span class="kw">in</span> <span class="bu">enumerate</span>(param):</span>
-<span id="cb23-5"><a href="#cb23-5" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb23-6"><a href="#cb23-6" aria-hidden="true" tabindex="-1"></a>    ts <span class="op">=</span> get_merra2_timeseries(year,focus,p,anomaly)</span>
-<span id="cb23-7"><a href="#cb23-7" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="ss">f'Mean of variable </span><span class="sc">{</span>p<span class="sc">}</span><span class="ss"> is </span><span class="sc">{</span>ts[<span class="st">"mean"</span>]<span class="sc">}</span><span class="ss">'</span>)</span>
-<span id="cb23-8"><a href="#cb23-8" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="ss">f'Standard deviation of variable </span><span class="sc">{</span>p<span class="sc">}</span><span class="ss"> is </span><span class="sc">{</span>ts[<span class="st">"std"</span>]<span class="sc">}</span><span class="ss">'</span>)</span>
-<span id="cb23-9"><a href="#cb23-9" aria-hidden="true" tabindex="-1"></a>        </span>
-<span id="cb23-10"><a href="#cb23-10" aria-hidden="true" tabindex="-1"></a>    <span class="co"># if i == 0:</span></span>
-<span id="cb23-11"><a href="#cb23-11" aria-hidden="true" tabindex="-1"></a>    fig<span class="op">=</span> plt.figure(figsize<span class="op">=</span>(<span class="dv">6</span>,<span class="dv">3</span>))</span>
-<span id="cb23-12"><a href="#cb23-12" aria-hidden="true" tabindex="-1"></a>    ax <span class="op">=</span> fig.add_subplot(<span class="dv">1</span>,<span class="dv">1</span>,<span class="dv">1</span>)</span>
-<span id="cb23-13"><a href="#cb23-13" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb23-14"><a href="#cb23-14" aria-hidden="true" tabindex="-1"></a>    <span class="co">#breakpoint()</span></span>
-<span id="cb23-15"><a href="#cb23-15" aria-hidden="true" tabindex="-1"></a>    <span class="cf">try</span>:</span>
-<span id="cb23-16"><a href="#cb23-16" aria-hidden="true" tabindex="-1"></a>        ax.plot(</span>
-<span id="cb23-17"><a href="#cb23-17" aria-hidden="true" tabindex="-1"></a>            <span class="bu">list</span>(<span class="bu">range</span>(<span class="dv">0</span>,<span class="dv">12</span>)),</span>
-<span id="cb23-18"><a href="#cb23-18" aria-hidden="true" tabindex="-1"></a>            ts[<span class="st">'box_totals'</span>],</span>
-<span id="cb23-19"><a href="#cb23-19" aria-hidden="true" tabindex="-1"></a>            linestyle<span class="op">=</span><span class="st">'-'</span>,</span>
-<span id="cb23-20"><a href="#cb23-20" aria-hidden="true" tabindex="-1"></a>            linewidth<span class="op">=</span><span class="dv">2</span>,</span>
-<span id="cb23-21"><a href="#cb23-21" aria-hidden="true" tabindex="-1"></a>            color<span class="op">=</span>colors[i],</span>
-<span id="cb23-22"><a href="#cb23-22" aria-hidden="true" tabindex="-1"></a>            markersize<span class="op">=</span><span class="dv">4</span>,</span>
-<span id="cb23-23"><a href="#cb23-23" aria-hidden="true" tabindex="-1"></a>            marker<span class="op">=</span><span class="st">'o'</span>,</span>
-<span id="cb23-24"><a href="#cb23-24" aria-hidden="true" tabindex="-1"></a>            label<span class="op">=</span>p</span>
-<span id="cb23-25"><a href="#cb23-25" aria-hidden="true" tabindex="-1"></a>        )</span>
-<span id="cb23-26"><a href="#cb23-26" aria-hidden="true" tabindex="-1"></a>    <span class="cf">except</span> <span class="pp">ValueError</span>:</span>
-<span id="cb23-27"><a href="#cb23-27" aria-hidden="true" tabindex="-1"></a>        <span class="bu">print</span>(<span class="st">'Double check that you have all twelve months of MERRA-2 data downloaded!'</span>)</span>
-<span id="cb23-28"><a href="#cb23-28" aria-hidden="true" tabindex="-1"></a>        <span class="bu">print</span>(params[p][<span class="st">'dir'</span>])</span>
-<span id="cb23-29"><a href="#cb23-29" aria-hidden="true" tabindex="-1"></a>        <span class="bu">breakpoint</span>()</span>
-<span id="cb23-30"><a href="#cb23-30" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb23-31"><a href="#cb23-31" aria-hidden="true" tabindex="-1"></a>    <span class="co">#   Construct plot title</span></span>
-<span id="cb23-32"><a href="#cb23-32" aria-hidden="true" tabindex="-1"></a>    title <span class="op">=</span> <span class="st">'</span><span class="sc">%s</span><span class="ch">\n</span><span class="sc">%s</span><span class="st"> Mean Monthly </span><span class="sc">%s</span><span class="st">'</span><span class="op">%</span>(focus,year,p)</span>
-<span id="cb23-33"><a href="#cb23-33" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> anomaly:</span>
-<span id="cb23-34"><a href="#cb23-34" aria-hidden="true" tabindex="-1"></a>        title<span class="op">+=</span><span class="st">' Anomaly'</span> </span>
-<span id="cb23-35"><a href="#cb23-35" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> <span class="st">'LPJ'</span> <span class="kw">in</span> p:</span>
-<span id="cb23-36"><a href="#cb23-36" aria-hidden="true" tabindex="-1"></a>        title <span class="op">=</span> title.replace(<span class="st">'Mean'</span>,<span class="st">'Total'</span>)</span>
-<span id="cb23-37"><a href="#cb23-37" aria-hidden="true" tabindex="-1"></a>    plt.title(title)</span>
-<span id="cb23-38"><a href="#cb23-38" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb23-39"><a href="#cb23-39" aria-hidden="true" tabindex="-1"></a>    plt.xticks(<span class="bu">list</span>(<span class="bu">range</span>(<span class="dv">0</span>,<span class="dv">12</span>)))</span>
-<span id="cb23-40"><a href="#cb23-40" aria-hidden="true" tabindex="-1"></a>    ax.set_xticklabels(ts[<span class="st">'month_labels'</span>],rotation<span class="op">=</span><span class="dv">40</span>,ha<span class="op">=</span><span class="st">'right'</span>)</span>
-<span id="cb23-41"><a href="#cb23-41" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb23-42"><a href="#cb23-42" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb23-43"><a href="#cb23-43" aria-hidden="true" tabindex="-1"></a>    ax.legend(loc<span class="op">=</span><span class="st">'best'</span>)</span>
-<span id="cb23-44"><a href="#cb23-44" aria-hidden="true" tabindex="-1"></a>    nickname <span class="op">=</span> params[p][<span class="st">'nickname'</span>]</span>
-<span id="cb23-45"><a href="#cb23-45" aria-hidden="true" tabindex="-1"></a>    savename <span class="op">=</span> <span class="st">'</span><span class="sc">%s</span><span class="st">/box_summed_</span><span class="sc">%s</span><span class="st">_</span><span class="sc">%s</span><span class="st">_</span><span class="sc">%s</span><span class="st">.png'</span><span class="op">%</span> <span class="op">\</span></span>
-<span id="cb23-46"><a href="#cb23-46" aria-hidden="true" tabindex="-1"></a>        (savedir,nickname,year,focus)</span>
-<span id="cb23-47"><a href="#cb23-47" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> anomaly:</span>
-<span id="cb23-48"><a href="#cb23-48" aria-hidden="true" tabindex="-1"></a>        ax.plot(<span class="bu">list</span>(<span class="bu">range</span>(<span class="op">-</span><span class="dv">1</span>,<span class="dv">13</span>)),np.zeros(<span class="dv">14</span>),linewidth<span class="op">=</span><span class="fl">0.4</span>)</span>
-<span id="cb23-49"><a href="#cb23-49" aria-hidden="true" tabindex="-1"></a>        savename <span class="op">=</span> savename.replace(<span class="st">'.png'</span>,<span class="st">'_Anomaly.png'</span>)</span>
-<span id="cb23-50"><a href="#cb23-50" aria-hidden="true" tabindex="-1"></a>    ax.set_xlim(<span class="op">-</span><span class="dv">1</span>,<span class="dv">12</span>)</span>
-<span id="cb23-51"><a href="#cb23-51" aria-hidden="true" tabindex="-1"></a>    ax.set_ylim(<span class="bu">min</span>(ts[<span class="st">'box_totals'</span>]),<span class="bu">max</span>(ts[<span class="st">'box_totals'</span>]))     <span class="co">#   manual per parameter</span></span>
-<span id="cb23-52"><a href="#cb23-52" aria-hidden="true" tabindex="-1"></a>    <span class="co"># print('Saving to '+savename)</span></span>
-<span id="cb23-53"><a href="#cb23-53" aria-hidden="true" tabindex="-1"></a>    plt.show()</span>
-<span id="cb23-54"><a href="#cb23-54" aria-hidden="true" tabindex="-1"></a>    plt.savefig(<span class="st">'saved_files/'</span><span class="op">+</span>savename.split(<span class="st">'/'</span>)[<span class="op">-</span><span class="dv">1</span>],dpi<span class="op">=</span><span class="dv">300</span>,bbox_inches<span class="op">=</span><span class="st">'tight'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a>colors <span class="op">=</span> [<span class="st">'#1B8FB5'</span>, <span class="st">'#16B573'</span>, <span class="st">'#C76B21'</span>]</span>
+<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> i,p <span class="kw">in</span> <span class="bu">enumerate</span>(param):</span>
+<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb23-4"><a href="#cb23-4" aria-hidden="true" tabindex="-1"></a>    ts <span class="op">=</span> get_merra2_timeseries(year,focus,p,anomaly)</span>
+<span id="cb23-5"><a href="#cb23-5" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="ss">f'Mean of variable </span><span class="sc">{</span>p<span class="sc">}</span><span class="ss"> is </span><span class="sc">{</span>ts[<span class="st">"mean"</span>]<span class="sc">}</span><span class="ss">'</span>)</span>
+<span id="cb23-6"><a href="#cb23-6" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="ss">f'Standard deviation of variable </span><span class="sc">{</span>p<span class="sc">}</span><span class="ss"> is </span><span class="sc">{</span>ts[<span class="st">"std"</span>]<span class="sc">}</span><span class="ss">'</span>)</span>
+<span id="cb23-7"><a href="#cb23-7" aria-hidden="true" tabindex="-1"></a>        </span>
+<span id="cb23-8"><a href="#cb23-8" aria-hidden="true" tabindex="-1"></a>    <span class="co"># if i == 0:</span></span>
+<span id="cb23-9"><a href="#cb23-9" aria-hidden="true" tabindex="-1"></a>    fig<span class="op">=</span> plt.figure(figsize<span class="op">=</span>(<span class="dv">6</span>,<span class="dv">3</span>))</span>
+<span id="cb23-10"><a href="#cb23-10" aria-hidden="true" tabindex="-1"></a>    ax <span class="op">=</span> fig.add_subplot(<span class="dv">1</span>,<span class="dv">1</span>,<span class="dv">1</span>)</span>
+<span id="cb23-11"><a href="#cb23-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-12"><a href="#cb23-12" aria-hidden="true" tabindex="-1"></a>    <span class="co">#breakpoint()</span></span>
+<span id="cb23-13"><a href="#cb23-13" aria-hidden="true" tabindex="-1"></a>    <span class="cf">try</span>:</span>
+<span id="cb23-14"><a href="#cb23-14" aria-hidden="true" tabindex="-1"></a>        ax.plot(</span>
+<span id="cb23-15"><a href="#cb23-15" aria-hidden="true" tabindex="-1"></a>            <span class="bu">list</span>(<span class="bu">range</span>(<span class="dv">0</span>,<span class="dv">12</span>)),</span>
+<span id="cb23-16"><a href="#cb23-16" aria-hidden="true" tabindex="-1"></a>            ts[<span class="st">'box_totals'</span>],</span>
+<span id="cb23-17"><a href="#cb23-17" aria-hidden="true" tabindex="-1"></a>            linestyle<span class="op">=</span><span class="st">'-'</span>,</span>
+<span id="cb23-18"><a href="#cb23-18" aria-hidden="true" tabindex="-1"></a>            linewidth<span class="op">=</span><span class="dv">2</span>,</span>
+<span id="cb23-19"><a href="#cb23-19" aria-hidden="true" tabindex="-1"></a>            color<span class="op">=</span>colors[i],</span>
+<span id="cb23-20"><a href="#cb23-20" aria-hidden="true" tabindex="-1"></a>            markersize<span class="op">=</span><span class="dv">4</span>,</span>
+<span id="cb23-21"><a href="#cb23-21" aria-hidden="true" tabindex="-1"></a>            marker<span class="op">=</span><span class="st">'o'</span>,</span>
+<span id="cb23-22"><a href="#cb23-22" aria-hidden="true" tabindex="-1"></a>            label<span class="op">=</span>p</span>
+<span id="cb23-23"><a href="#cb23-23" aria-hidden="true" tabindex="-1"></a>        )</span>
+<span id="cb23-24"><a href="#cb23-24" aria-hidden="true" tabindex="-1"></a>    <span class="cf">except</span> <span class="pp">ValueError</span>:</span>
+<span id="cb23-25"><a href="#cb23-25" aria-hidden="true" tabindex="-1"></a>        <span class="bu">print</span>(<span class="st">'Double check that you have all twelve months of MERRA-2 data downloaded!'</span>)</span>
+<span id="cb23-26"><a href="#cb23-26" aria-hidden="true" tabindex="-1"></a>        <span class="bu">print</span>(params[p][<span class="st">'dir'</span>])</span>
+<span id="cb23-27"><a href="#cb23-27" aria-hidden="true" tabindex="-1"></a>        <span class="bu">breakpoint</span>()</span>
+<span id="cb23-28"><a href="#cb23-28" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-29"><a href="#cb23-29" aria-hidden="true" tabindex="-1"></a>    <span class="co">#   Construct plot title</span></span>
+<span id="cb23-30"><a href="#cb23-30" aria-hidden="true" tabindex="-1"></a>    title <span class="op">=</span> <span class="st">'</span><span class="sc">%s</span><span class="ch">\n</span><span class="sc">%s</span><span class="st"> Mean Monthly </span><span class="sc">%s</span><span class="st">'</span><span class="op">%</span>(focus,year,p)</span>
+<span id="cb23-31"><a href="#cb23-31" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> anomaly:</span>
+<span id="cb23-32"><a href="#cb23-32" aria-hidden="true" tabindex="-1"></a>        title<span class="op">+=</span><span class="st">' Anomaly'</span> </span>
+<span id="cb23-33"><a href="#cb23-33" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> <span class="st">'LPJ'</span> <span class="kw">in</span> p:</span>
+<span id="cb23-34"><a href="#cb23-34" aria-hidden="true" tabindex="-1"></a>        title <span class="op">=</span> title.replace(<span class="st">'Mean'</span>,<span class="st">'Total'</span>)</span>
+<span id="cb23-35"><a href="#cb23-35" aria-hidden="true" tabindex="-1"></a>    plt.title(title)</span>
+<span id="cb23-36"><a href="#cb23-36" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb23-37"><a href="#cb23-37" aria-hidden="true" tabindex="-1"></a>    plt.xticks(<span class="bu">list</span>(<span class="bu">range</span>(<span class="dv">0</span>,<span class="dv">12</span>)))</span>
+<span id="cb23-38"><a href="#cb23-38" aria-hidden="true" tabindex="-1"></a>    ax.set_xticklabels(ts[<span class="st">'month_labels'</span>],rotation<span class="op">=</span><span class="dv">40</span>,ha<span class="op">=</span><span class="st">'right'</span>)</span>
+<span id="cb23-39"><a href="#cb23-39" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-40"><a href="#cb23-40" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-41"><a href="#cb23-41" aria-hidden="true" tabindex="-1"></a>    ax.legend(loc<span class="op">=</span><span class="st">'best'</span>)</span>
+<span id="cb23-42"><a href="#cb23-42" aria-hidden="true" tabindex="-1"></a>    nickname <span class="op">=</span> params[p][<span class="st">'nickname'</span>]</span>
+<span id="cb23-43"><a href="#cb23-43" aria-hidden="true" tabindex="-1"></a>    savename <span class="op">=</span> <span class="st">'</span><span class="sc">%s</span><span class="st">/box_summed_</span><span class="sc">%s</span><span class="st">_</span><span class="sc">%s</span><span class="st">_</span><span class="sc">%s</span><span class="st">.png'</span><span class="op">%</span> <span class="op">\</span></span>
+<span id="cb23-44"><a href="#cb23-44" aria-hidden="true" tabindex="-1"></a>        (savedir,nickname,year,focus)</span>
+<span id="cb23-45"><a href="#cb23-45" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> anomaly:</span>
+<span id="cb23-46"><a href="#cb23-46" aria-hidden="true" tabindex="-1"></a>        ax.plot(<span class="bu">list</span>(<span class="bu">range</span>(<span class="op">-</span><span class="dv">1</span>,<span class="dv">13</span>)),np.zeros(<span class="dv">14</span>),linewidth<span class="op">=</span><span class="fl">0.4</span>)</span>
+<span id="cb23-47"><a href="#cb23-47" aria-hidden="true" tabindex="-1"></a>        savename <span class="op">=</span> savename.replace(<span class="st">'.png'</span>,<span class="st">'_Anomaly.png'</span>)</span>
+<span id="cb23-48"><a href="#cb23-48" aria-hidden="true" tabindex="-1"></a>    ax.set_xlim(<span class="op">-</span><span class="dv">1</span>,<span class="dv">12</span>)</span>
+<span id="cb23-49"><a href="#cb23-49" aria-hidden="true" tabindex="-1"></a>    ax.set_ylim(<span class="bu">min</span>(ts[<span class="st">'box_totals'</span>]),<span class="bu">max</span>(ts[<span class="st">'box_totals'</span>]))     <span class="co">#   manual per parameter</span></span>
+<span id="cb23-50"><a href="#cb23-50" aria-hidden="true" tabindex="-1"></a>    plt.show()</span>
+<span id="cb23-51"><a href="#cb23-51" aria-hidden="true" tabindex="-1"></a>    plt.savefig(<span class="st">'saved_files/'</span><span class="op">+</span>savename.split(<span class="st">'/'</span>)[<span class="op">-</span><span class="dv">1</span>],dpi<span class="op">=</span><span class="dv">300</span>,bbox_inches<span class="op">=</span><span class="st">'tight'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 
 

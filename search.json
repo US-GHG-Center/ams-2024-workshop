@@ -70,6 +70,111 @@
     "text": "Presentations\nMultiple presentations by GHG Center team members will occur throughout the week. Stop by to hear more from GHG Center team members!\n\n\n\n\n\n\n\n\n\nWhen\nRoom\nPresentation Title\n\n\n\n\nTues, Jan 30 4:45\nHoliday 5\nHilton Baltimore Inner Harbor\n8A.2 Stakeholder Engagement for the US Greenhouse Gas Center (Combley)\n\n\nMon, Jan 29 5:15\n336\nThe Baltimore Convention Center\nJ4B.4 Developing a Cross-Institutional Open-Source Cyberinfrastructure to Explore, Analyze, and Communicate Greenhouse Gas Data and Information (Chaudhary)\n\n\nTues, Jan 30 5:15\nBallroom II\nThe Baltimore Convention Center\nJ8A.4 PPAP’s and NIST’s Urban Greenhouse Gas Measurements Program (Whetstone)\n\n\nWed, Jan 31 5:30\nHoliday 5\nHilton Baltimore Inner Harbor\n12A.5 NIST’s Urban Greenhouse Gas Measurements Program and Interactions with NOAA’s Air Resources Laboratory (Whetstone)\n\n\nMon, Jan 29 11:30\n321/322\nThe Baltimore Convention Center\n2B.4 Methane and Carbon Dioxide Point Source Measurements Across Six Continents from the EMIT Imaging Spectrometer on the International Space Station - and Contributions to the U.S. Greenhouse Gas Center (Green)\n\n\nMon, Jan 29 5:30\n321/322\nThe Baltimore Convention Center\n4B.5 Detectability of Anthropogenic Impacts on Terrestrial Carbon Storage through Space Based Greenhouse Gas Observations (Weir)\n\n\nThur, Feb 1 2:30\nHoliday 4\nHilton Baltimore Inner Harbor\nJ15.4 NOAA Carbon Monitoring, Research and Innovation: Long-Standing Foundation to Support Climate Mitigation (Grubišić)"
   },
   {
+    "objectID": "interactive-session-3-large-point-source-methane-emission-events/emit-ch4plume-v1_User_Notebook.html",
+    "href": "interactive-session-3-large-point-source-methane-emission-events/emit-ch4plume-v1_User_Notebook.html",
+    "title": "About the Data",
+    "section": "",
+    "text": "The EMIT instrument builds upon NASA’s long history of developing advanced imaging spectrometers for new science and applications. EMIT launched to the International Space Station (ISS) on July 14, 2022. The data shows high-confidence research grade methane plumes from point source emitters - updated as they are identified - in keeping with JPL Open Science and Open Data policy."
+  },
+  {
+    "objectID": "interactive-session-3-large-point-source-methane-emission-events/emit-ch4plume-v1_User_Notebook.html#requirements",
+    "href": "interactive-session-3-large-point-source-methane-emission-events/emit-ch4plume-v1_User_Notebook.html#requirements",
+    "title": "About the Data",
+    "section": "Requirements",
+    "text": "Requirements\n\nNASA Earthdata Account\nSet up Python Environment - See setup_instructions.md in the ‘/setup/’ folder"
+  },
+  {
+    "objectID": "interactive-session-3-large-point-source-methane-emission-events/emit-ch4plume-v1_User_Notebook.html#learning-objectives",
+    "href": "interactive-session-3-large-point-source-methane-emission-events/emit-ch4plume-v1_User_Notebook.html#learning-objectives",
+    "title": "About the Data",
+    "section": "Learning Objectives",
+    "text": "Learning Objectives\n\nHow to use ‘U.S.GHG Center STAC Catalog’ to access ‘EMIT Methane Point Source Plume Complexes’ data.\nHow to visualize ISS Spatial coverage and detected plumes target mask.\nHow to visualize datasets using ‘folium’."
+  },
+  {
+    "objectID": "interactive-session-3-large-point-source-methane-emission-events/emit-ch4plume-v1_User_Notebook.html#approach",
+    "href": "interactive-session-3-large-point-source-methane-emission-events/emit-ch4plume-v1_User_Notebook.html#approach",
+    "title": "About the Data",
+    "section": "Approach",
+    "text": "Approach\n\nVisualize obsereved masks of the ISS and target masks of detected plumes.\n\nIdentify available dates and temporal frequency of observations for the given collection using the GHGC API /stac endpoint. The collection processed in this notebook is the Earth Surface Mineral Dust Source Investigation (EMIT) methane emission plumes data product.\nPass the STAC item into the raster API /stac/tilejson.json endpoint.\nUsing folium.Map, visualize the plumes."
+  },
+  {
+    "objectID": "interactive-session-3-large-point-source-methane-emission-events/emit-ch4plume-v1_User_Notebook.html#nasa-earth-data-login-credentials",
+    "href": "interactive-session-3-large-point-source-methane-emission-events/emit-ch4plume-v1_User_Notebook.html#nasa-earth-data-login-credentials",
+    "title": "About the Data",
+    "section": "NASA Earth Data Login Credentials",
+    "text": "NASA Earth Data Login Credentials\nTo download or stream NASA data you will need an Earthdata account, you can create one here https://urs.earthdata.nasa.gov/home. We will use the ‘login’ function from the ‘earthaccess’ library for authentication before downloading at the end of the notebook. This function can also be used to create a local ‘.netrc’ file if it doesn’t exist or add your login info to an existing ‘.netrc’ file. If no Earthdata Login credentials are found in the ‘.netrc’ you’ll be prompted for them. This step is not necessary to conduct searches but is needed to download or stream data."
+  },
+  {
+    "objectID": "interactive-session-3-large-point-source-methane-emission-events/emit-ch4plume-v1_User_Notebook.html#define-spatial-region-of-interest",
+    "href": "interactive-session-3-large-point-source-methane-emission-events/emit-ch4plume-v1_User_Notebook.html#define-spatial-region-of-interest",
+    "title": "About the Data",
+    "section": "Define Spatial Region of Interest",
+    "text": "Define Spatial Region of Interest\nFor this example, our spatial region of interest (ROI) will be the Permian Basin, USA.\n\n# Loading Permian Basin shape file as a region of interest\n# User can pass any json or shape file here\npermian_basin = geopandas.read_file('permian.zip')\n\n\n# ISS data coverage \ncoverage = geopandas.read_file('coverage.json')\ncoverage['new_start_time'] = coverage.start_time.astype('str')\n\n# location where plume was detected\ntarget_mask = geopandas.read_file('target_mask.json')\n\n# ISS area intersecting with permian basin\nresult_coverage = geopandas.clip(coverage, permian_basin)"
+  },
+  {
+    "objectID": "interactive-session-3-large-point-source-methane-emission-events/emit-ch4plume-v1_User_Notebook.html#opening-and-exploring-spatial-coverage-of-iss-and-mask-of-identified-plumes",
+    "href": "interactive-session-3-large-point-source-methane-emission-events/emit-ch4plume-v1_User_Notebook.html#opening-and-exploring-spatial-coverage-of-iss-and-mask-of-identified-plumes",
+    "title": "About the Data",
+    "section": "Opening and Exploring Spatial Coverage of ISS and Mask of Identified Plumes",
+    "text": "Opening and Exploring Spatial Coverage of ISS and Mask of Identified Plumes\nIn this cell, we will visualize the outputs on a map using ‘folium’.\n\n# Initializing a map with a center at [43, -100] and a zoom level of 4. The use of tiles = None has been employed to remove the default basemap.\n\ncolormap = cm.linear.YlGn_09.scale(\n    coverage.start_time.min(), coverage.start_time.max()\n)\nstart_time_dict = coverage.set_index(\"fid\")[\"start_time\"]\nm_ = folium.Map(location=[43, -100], zoom_start=4, tiles=None)\nfolium.TileLayer(tiles='https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}.png', name='ESRI World Imagery', attr='Tiles &copy; Esri &mdash; Source: Esri, i-cubed, USDA, USGS, AEX, GeoEye, Getmapping, Aerogrid, IGN, IGP, UPR-EGP, and the GIS User Community',overlay='True').add_to(m_)\n# Load other TileLayer from https://leaflet-extras.github.io/leaflet-providers/preview/\n\n# From covergae.json fid, geometry has been selected\n# map_layer_target = folium.GeoJson(coverage[['fid', 'geometry', 'new_start_time']], name = 'ISS coverage').add_to(m_)\n# map_layer_target.add_to(m_)\ncoverage[['fid', 'geometry', 'new_start_time']].explore(\n    \"fid\",\n    categorical=True,\n    tooltip=[\n        \"fid\",\n        \"new_start_time\",\n    ],\n    popup=True,\n    style_kwds=dict(fillOpacity=0.1, width=2),\n    name=\"EMIT\",\n    m=m_,\n    legend=False\n)\n\nmap_layer_coverage = folium.GeoJson(target_mask, name = ' Target Mask').add_to(m_)\nmap_layer_coverage.add_to(m_)\n\n# Layer control crates the toggle button for all the layers\nfolium.LayerControl(collapsed=False).add_to(m_)\nm_"
+  },
+  {
+    "objectID": "interactive-session-3-large-point-source-methane-emission-events/emit-ch4plume-v1_User_Notebook.html#opening-and-exploring-emit-methane-point-source-plume-complexes-data-using-the-raster-api",
+    "href": "interactive-session-3-large-point-source-methane-emission-events/emit-ch4plume-v1_User_Notebook.html#opening-and-exploring-emit-methane-point-source-plume-complexes-data-using-the-raster-api",
+    "title": "About the Data",
+    "section": "Opening and Exploring EMIT Methane Point Source Plume Complexes Data Using the Raster API",
+    "text": "Opening and Exploring EMIT Methane Point Source Plume Complexes Data Using the Raster API\nSearch for EMIT Methane Point Source Plume Complexes Data\n\n# Provide STAC and RASTER API endpoints\nSTAC_API_URL = \"http://ghg.center/api/stac\"\nRASTER_API_URL = \"https://ghg.center/api/raster\"\n\n# Please use the collection name similar to the one used in STAC collection.\n# Name of the collection for methane emission plumes. \ncollection_name = \"emit-ch4plume-v1\"\n\n\n# Fetching the collection from STAC collections using appropriate endpoint.\n# the 'requests' library allows a HTTP request possible\ncollection = requests.get(f\"{STAC_API_URL}/collections/{collection_name}\").json()\ncollection = {key: value for key, value in collection.items() if key != 'summaries'}\ncollection\n\nExamining the contents of our collection under the temporal variable, we note that data is available from August 2022 to May 2023. By looking at the dashboard: time density, we can see that observations are conducted daily and non-periodically (i.e., there are plumes emissions for multiple places on the same dates).\n\n# Create a function that would search for the number of items in above data collection in the STAC API\ndef get_item_count(collection_id):\n    count = 0\n    items_url = f\"{STAC_API_URL}/collections/{collection_id}/items\"\n\n    while True:\n        response = requests.get(items_url)\n\n        if not response.ok:\n            print(\"error getting items\")\n            exit()\n\n        stac = response.json()\n        count += int(stac[\"context\"].get(\"returned\", 0))\n        next = [link for link in stac[\"links\"] if link[\"rel\"] == \"next\"]\n\n        if not next:\n            break\n        items_url = next[0][\"href\"]\n\n    return count\n\n\n# Apply the above function and check the total number of items available within the collection\nnumber_of_items = get_item_count(collection_name)\nplume_complexes = requests.get(f\"{STAC_API_URL}/collections/{collection_name}/items?limit={number_of_items}\").json()[\"features\"]\nparse_plume_complexes = plume_complexes\nprint(f\"Found {len(plume_complexes)} items\")\n\n\n# Examine the first item in the collection\nplume_complex_ids = list(map(lambda d: d.get('id', f\"id not found in dictionary\"), plume_complexes))\nplume_complex_ids[:10]\n\n\n# To access the year value from each item more easily, this will let us query more explicity by year and month (e.g., 2020-02)\nplume_complexes = {plume_complex[\"id\"]: plume_complex for plume_complex in plume_complexes} \nasset_name = \"ch4-plume-emissions\"\n\nBelow, we are entering the minimum and maximum values to provide our upper and lower bounds in rescale_values.\n\n# Fetching the min and max values for a specific item\nrescale_values = {\"max\":plume_complexes[list(plume_complexes.keys())[0]][\"assets\"][asset_name][\"raster:bands\"][0][\"histogram\"][\"max\"], \"min\":plume_complexes[list(plume_complexes.keys())[0]][\"assets\"][asset_name][\"raster:bands\"][0][\"histogram\"][\"min\"]}\n\nNow we will pass the item id, collection name, and rescaling_factor to the Raster API endpoint. We will do this for only one item so that we can visualize the event.\n\ncolor_map = \"magma\" # please refer to matplotlib library if you'd prefer choosing a different color ramp.\n# For more information on Colormaps in Matplotlib, please visit https://matplotlib.org/stable/users/explain/colors/colormaps.html\n\n# Select the item ID which you want to visualize. Item ID is in the format yyyymmdd followed by the timestamp. This ID can be extracted from the COG name as well.\nplume_complex_id = \"EMIT_L2B_CH4PLM_001_20230418T200118_000829\"\nmethane_plume_tile = requests.get(\n    f\"{RASTER_API_URL}/stac/tilejson.json?collection={plume_complexes[plume_complex_id]['collection']}&item={plume_complexes[plume_complex_id]['id']}\"\n    f\"&assets={asset_name}\"\n    f\"&color_formula=gamma+r+1.05&colormap_name={color_map}\"\n    f\"&rescale={rescale_values['min']},{rescale_values['max']}\", \n).json()\nmethane_plume_tile"
+  },
+  {
+    "objectID": "interactive-session-3-large-point-source-methane-emission-events/emit-ch4plume-v1_User_Notebook.html#visualizing-ch₄-emission-plume",
+    "href": "interactive-session-3-large-point-source-methane-emission-events/emit-ch4plume-v1_User_Notebook.html#visualizing-ch₄-emission-plume",
+    "title": "About the Data",
+    "section": "Visualizing CH₄ Emission Plume",
+    "text": "Visualizing CH₄ Emission Plume\n\ncolormap = \"magma\" # please refer to matplotlib library if you'd prefer choosing a different color ramp.\n# For more information on Colormaps in Matplotlib, please visit https://matplotlib.org/stable/users/explain/colors/colormaps.html\n\n#Defining the breaks in the colormap \ncolor_map = cm.LinearColormap(colors = ['#310597', '#4C02A1', '#6600A7', '#7E03A8', '#9511A1', '#AA2395', '#BC3587', '#CC4778', '#DA5A6A', '#E66C5C', '#F0804E', '#F89540','#FDAC33', '#FDC527', '#F8DF25'], vmin = 0, vmax = 1500 )\ncolor_map.caption = 'ppm-m'\n\n# Select the item ID which you want to visualize. Item ID is in the format yyyymmdd followed by the timestamp. This ID can be extracted from the COG name as well.\nplume_complex_id = \"EMIT_L2B_CH4PLM_001_20230418T200118_000829\"\n\nmethane_plume_tile = requests.get(\n    f\"{RASTER_API_URL}/stac/tilejson.json?collection={plume_complexes[plume_complex_id]['collection']}&item={plume_complexes[plume_complex_id]['id']}\"\n    f\"&assets={asset_name}\"\n    f\"&color_formula=gamma+r+1.05&colormap_name={colormap}\"\n    f\"&rescale={rescale_values['min']},{rescale_values['max']}\", \n).json()\nmethane_plume_tile\n\n# Set initial zoom and center of map for plume Layer\nmap_ = folium.Map(location=(methane_plume_tile[\"center\"][1], methane_plume_tile[\"center\"][0]), zoom_start=13, tiles=None, tooltip = 'test tool tip')\nfolium.TileLayer(tiles='https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}.png', name='ESRI World Imagery', attr='Tiles &copy; Esri &mdash; Source: Esri, i-cubed, USDA, USGS, AEX, GeoEye, Getmapping, Aerogrid, IGN, IGP, UPR-EGP, and the GIS User Community',overlay='True').add_to(map_)\n\n\nmap_layer = TileLayer(\n    tiles=methane_plume_tile[\"tiles\"][0],\n    name='Plume Complex',\n    overlay='True',\n    attr=\"GHG\",\n    opacity=1,\n)\nmap_layer.add_to(map_)\nfolium.LayerControl(collapsed=False, position='bottomleft').add_to(map_)\nmap_.add_child(color_map)\nsvg_style = '&lt;style&gt;svg#legend {font-size: 14px; background-color: white;}&lt;/style&gt;'\nmap_.get_root().header.add_child(folium.Element(svg_style))\n# visualising the map\nmap_\n\n\n# Creating a dataframe for each plume in the STAC and its corresponding area \n\nplume_df = pd.DataFrame()\nfor plume in parse_plume_complexes:\n    temp_polygon = geopandas.GeoDataFrame.from_features([plume])['geometry'].values[0]\n    geod = Geod(ellps='WGS84')\n    ply = wkt.loads(str(temp_polygon))\n\n    temp_dict = {'id':plume['id'], 'geometry':temp_polygon, 'area(km2)':(abs(geod.geometry_area_perimeter(ply)[0])/1e+6)}\n    plume_df = plume_df._append(temp_dict, ignore_index = True)\n\n\nplume_df"
+  },
+  {
+    "objectID": "interactive-session-3-large-point-source-methane-emission-events/emit-ch4plume-v1_User_Notebook.html#visualizing-ch4-emission-plumes-in-the-permian-basin",
+    "href": "interactive-session-3-large-point-source-methane-emission-events/emit-ch4plume-v1_User_Notebook.html#visualizing-ch4-emission-plumes-in-the-permian-basin",
+    "title": "About the Data",
+    "section": "Visualizing CH4 Emission Plumes in the Permian Basin",
+    "text": "Visualizing CH4 Emission Plumes in the Permian Basin\n\n# Converting plume_df into a geo dataframe for further geospatial analysis\ngeo_temp_df = geopandas.GeoDataFrame(plume_df, geometry=plume_df.geometry, crs = 'EPSG:4326')\n\n\n# Selecting all the plume tagets which are under permian basin\ngeo_temp_df = geopandas.clip(geo_temp_df, permian_basin)\n\n\ncolormap = \"magma\" # please refer to matplotlib library if you'd prefer choosing a different color ramp.\n# For more information on Colormaps in Matplotlib, please visit https://matplotlib.org/stable/users/explain/colors/colormaps.html\n\ncolor_map = cm.LinearColormap(colors = ['#310597', '#4C02A1', '#6600A7', '#7E03A8', '#9511A1', '#AA2395', '#BC3587', '#CC4778', '#DA5A6A', '#E66C5C', '#F0804E', '#F89540','#FDAC33', '#FDC527', '#F8DF25'], vmin = 0, vmax = 1500 )\ncolor_map.caption = 'ppm-m'\n# Select the item ID which you want to visualize. Item ID is in the format yyyymmdd followed by the timestamp. This ID can be extracted from the COG name as well.\n\nmap_ = folium.Map(location=[32,-102], zoom_start=10, tiles=None)\nfolium.TileLayer(tiles='https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}.png', name='ESRI World Imagery', attr='Tiles &copy; Esri &mdash; Source: Esri, i-cubed, USDA, USGS, AEX, GeoEye, Getmapping, Aerogrid, IGN, IGP, UPR-EGP, and the GIS User Community',overlay='True').add_to(map_)\n\nfor tile_id in geo_temp_df['id']: \n    methane_plume_tile = requests.get(\n        f\"{RASTER_API_URL}/stac/tilejson.json?collection={plume_complexes[tile_id]['collection']}&item={plume_complexes[tile_id]['id']}\"\n        f\"&assets={asset_name}\"\n        f\"&color_formula=gamma+r+1.05&colormap_name={colormap}\"\n        f\"&rescale={rescale_values['min']},{rescale_values['max']}\", \n    ).json()\n    methane_plume_tile\n\n    map_layer = TileLayer(\n        tiles=methane_plume_tile[\"tiles\"][0],\n        name=tile_id,\n        overlay='True',\n        attr=\"GHG\",\n        opacity=1,\n    )\n    map_layer.add_to(map_)\n\nmap_layer_permian = folium.GeoJson(permian_basin, name= 'Permian Shape').add_to(m_)\nmap_layer_permian.add_to(map_)\nfolium.LayerControl(collapsed=True, position='bottomleft').add_to(map_)\nmap_.add_child(color_map)\nsvg_style = '&lt;style&gt;svg#legend {font-size: 14px; background-color: white;}&lt;/style&gt;'\nmap_.get_root().header.add_child(folium.Element(svg_style))\n# visualising the map\nmap_"
+  },
+  {
+    "objectID": "prerequisites.html",
+    "href": "prerequisites.html",
+    "title": "Prerequisites",
+    "section": "",
+    "text": "Participants are expected to have a basic knowledge of the python programming language.\nParticipants MUST obtain the following to be able to follow along the workshop:\n\nUS GHG Center JupyterHub Access\nEarthdata credentials\n\n\n\n🚨 Please make sure you have both of the accesses before you come to the workshop on Sunday.\n\n\n\nThe US GHG Center notebook environment is available to authorized users on an as-need basis. You can request access by using our Hub Access Request form.\n\nMake sure you have a GitHub Account. Take note of your GitHub username.\nFill out the request form and provide needed information. Make sure to use your organization/univerity email and use “AMS Workshop 2024” as the reason.\nWatch your email for notification of authorization and the invite to join the US GHG Center Hub Access GitHub Team.\nOnce you accept the invitation, you can go to hub.ghg.center and login using your GitHub credentials.\n\n\n\n\nFollow the tutorial on this link to register for Earthdata login: https://www.earthdata.nasa.gov/eosdis/science-system-description/eosdis-components/earthdata-login.\nMake sure to note your username and password."
+  },
+  {
+    "objectID": "prerequisites.html#to-get-us-ghg-center-jupyterhub-access",
+    "href": "prerequisites.html#to-get-us-ghg-center-jupyterhub-access",
+    "title": "Prerequisites",
+    "section": "",
+    "text": "The US GHG Center notebook environment is available to authorized users on an as-need basis. You can request access by using our Hub Access Request form.\n\nMake sure you have a GitHub Account. Take note of your GitHub username.\nFill out the request form and provide needed information. Make sure to use your organization/univerity email and use “AMS Workshop 2024” as the reason.\nWatch your email for notification of authorization and the invite to join the US GHG Center Hub Access GitHub Team.\nOnce you accept the invitation, you can go to hub.ghg.center and login using your GitHub credentials."
+  },
+  {
+    "objectID": "prerequisites.html#to-obtain-earthdata-credentials",
+    "href": "prerequisites.html#to-obtain-earthdata-credentials",
+    "title": "Prerequisites",
+    "section": "",
+    "text": "Follow the tutorial on this link to register for Earthdata login: https://www.earthdata.nasa.gov/eosdis/science-system-description/eosdis-components/earthdata-login.\nMake sure to note your username and password."
+  },
+  {
+    "objectID": "interactive-session-1-epa-gridded-methane-emissions/index.html",
+    "href": "interactive-session-1-epa-gridded-methane-emissions/index.html",
+    "title": "EPA Gridded Methane Emissions Inventory",
+    "section": "",
+    "text": "EPA Gridded Methane Emissions Inventory"
+  },
+  {
+    "objectID": "open-science-in-action/index.html",
+    "href": "open-science-in-action/index.html",
+    "title": "Open Science in Action: Intro to GitHub & Communicating Science Discoveries via Web Dashboard",
+    "section": "",
+    "text": "Open Science in Action: Intro to GitHub & Communicating Science Discoveries via Web Dashboard"
+  },
+  {
     "objectID": "speakers.html",
     "href": "speakers.html",
     "title": "Speakers",
@@ -117,41 +222,6 @@
     "title": "Speakers",
     "section": "",
     "text": "Deborah Smith\nSlesa Adhikari\nSiddharth Chaudhary"
-  },
-  {
-    "objectID": "open-science-in-action/index.html",
-    "href": "open-science-in-action/index.html",
-    "title": "Open Science in Action: Intro to GitHub & Communicating Science Discoveries via Web Dashboard",
-    "section": "",
-    "text": "Open Science in Action: Intro to GitHub & Communicating Science Discoveries via Web Dashboard"
-  },
-  {
-    "objectID": "interactive-session-1-epa-gridded-methane-emissions/index.html",
-    "href": "interactive-session-1-epa-gridded-methane-emissions/index.html",
-    "title": "EPA Gridded Methane Emissions Inventory",
-    "section": "",
-    "text": "EPA Gridded Methane Emissions Inventory"
-  },
-  {
-    "objectID": "prerequisites.html",
-    "href": "prerequisites.html",
-    "title": "Prerequisites",
-    "section": "",
-    "text": "Participants are expected to have a basic knowledge of the python programming language.\nParticipants MUST obtain the following to be able to follow along the workshop:\n\nUS GHG Center JupyterHub Access\nEarthdata credentials\n\n\n\n🚨 Please make sure you have both of the accesses before you come to the workshop on Sunday.\n\n\n\nThe US GHG Center notebook environment is available to authorized users on an as-need basis. You can request access by using our Hub Access Request form.\n\nMake sure you have a GitHub Account. Take note of your GitHub username.\nFill out the request form and provide needed information. Make sure to use your organization/univerity email and use “AMS Workshop 2024” as the reason.\nWatch your email for notification of authorization and the invite to join the US GHG Center Hub Access GitHub Team.\nOnce you accept the invitation, you can go to hub.ghg.center and login using your GitHub credentials.\n\n\n\n\nFollow the tutorial on this link to register for Earthdata login: https://www.earthdata.nasa.gov/eosdis/science-system-description/eosdis-components/earthdata-login.\nMake sure to note your username and password."
-  },
-  {
-    "objectID": "prerequisites.html#to-get-us-ghg-center-jupyterhub-access",
-    "href": "prerequisites.html#to-get-us-ghg-center-jupyterhub-access",
-    "title": "Prerequisites",
-    "section": "",
-    "text": "The US GHG Center notebook environment is available to authorized users on an as-need basis. You can request access by using our Hub Access Request form.\n\nMake sure you have a GitHub Account. Take note of your GitHub username.\nFill out the request form and provide needed information. Make sure to use your organization/univerity email and use “AMS Workshop 2024” as the reason.\nWatch your email for notification of authorization and the invite to join the US GHG Center Hub Access GitHub Team.\nOnce you accept the invitation, you can go to hub.ghg.center and login using your GitHub credentials."
-  },
-  {
-    "objectID": "prerequisites.html#to-obtain-earthdata-credentials",
-    "href": "prerequisites.html#to-obtain-earthdata-credentials",
-    "title": "Prerequisites",
-    "section": "",
-    "text": "Follow the tutorial on this link to register for Earthdata login: https://www.earthdata.nasa.gov/eosdis/science-system-description/eosdis-components/earthdata-login.\nMake sure to note your username and password."
   },
   {
     "objectID": "interactive-session-3-large-point-source-methane-emission-events/index.html",

@@ -47,7 +47,7 @@ The full-day workshop will be divided into the following sections:
 |                 | - Description of data sets and analysis available via the U.S. GHG Center (e.g., EMIT methane enhancements; plans for emission rates, CO2, etc.)  |
 |                 | - **Hands-on exercise**: Locating enhancement, understanding temporal relevance, exploring site with multiple observations.                       |
 +-----------------+---------------------------------------------------------------------------------------------------------------------------------------------------+
-| 3:45 - 3:15     | ###### Open Science in Action: Intro to GitHub & Communicating Science Discoveries via Web Dashboard                                              |
+| 2:45 - 3:15     | ###### Open Science in Action: Intro to GitHub & Communicating Science Discoveries via Web Dashboard                                              |
 |                 | - How do VEDA, GitHub, and JupyterHub interoperate and why is this important?                                                                     |
 |                 | - Introduction to web dashboards for science communication                                                                                        |
 |                 |     - **Hands-on exercise**: creating a web dashboard to communicate science discoveries using the platform                                       |

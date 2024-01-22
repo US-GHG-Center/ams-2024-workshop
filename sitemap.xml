@@ -1,31 +1,47 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
+    <loc>https://us-ghg-center.github.io/ams-2024-workshop/interactive-session-2-anthropogenic-ghg-emissions/draft-sid.html</loc>
+    <lastmod>2024-01-22T18:31:36.953Z</lastmod>
+  </url>
+  <url>
+    <loc>https://us-ghg-center.github.io/ams-2024-workshop/interactive-session-2-anthropogenic-ghg-emissions/lpjwsl-wetlandch4-grid-v1_User_Notebook.html</loc>
+    <lastmod>2024-01-22T18:31:36.297Z</lastmod>
+  </url>
+  <url>
     <loc>https://us-ghg-center.github.io/ams-2024-workshop/chapters.html</loc>
-    <lastmod>2024-01-22T18:30:19.810Z</lastmod>
+    <lastmod>2024-01-22T18:31:34.617Z</lastmod>
   </url>
   <url>
     <loc>https://us-ghg-center.github.io/ams-2024-workshop/ghg-center-at-ams-2024.html</loc>
-    <lastmod>2024-01-22T18:30:18.894Z</lastmod>
+    <lastmod>2024-01-22T18:31:33.989Z</lastmod>
   </url>
   <url>
     <loc>https://us-ghg-center.github.io/ams-2024-workshop/interactive-session-3-large-point-source-methane-emission-events/emit-ch4plume-v1_User_Notebook.html</loc>
-    <lastmod>2024-01-22T18:30:18.218Z</lastmod>
+    <lastmod>2024-01-22T18:31:33.397Z</lastmod>
   </url>
   <url>
     <loc>https://us-ghg-center.github.io/ams-2024-workshop/prerequisites.html</loc>
-    <lastmod>2024-01-22T18:30:17.514Z</lastmod>
+    <lastmod>2024-01-22T18:31:32.701Z</lastmod>
+  </url>
+  <url>
+    <loc>https://us-ghg-center.github.io/ams-2024-workshop/interactive-session-1-epa-gridded-methane-emissions/odiac-ffco2-monthgrid-v2022_User_Notebook.html</loc>
+    <lastmod>2024-01-22T18:31:31.469Z</lastmod>
+  </url>
+  <url>
+    <loc>https://us-ghg-center.github.io/ams-2024-workshop/interactive-session-1-epa-gridded-methane-emissions/epa-ch4emission-grid-v2express_User_Notebook.html</loc>
+    <lastmod>2024-01-22T18:31:31.929Z</lastmod>
   </url>
   <url>
     <loc>https://us-ghg-center.github.io/ams-2024-workshop/speakers.html</loc>
-    <lastmod>2024-01-22T18:30:17.770Z</lastmod>
+    <lastmod>2024-01-22T18:31:32.957Z</lastmod>
   </url>
   <url>
     <loc>https://us-ghg-center.github.io/ams-2024-workshop/agenda.html</loc>
-    <lastmod>2024-01-22T18:30:19.354Z</lastmod>
+    <lastmod>2024-01-22T18:31:34.365Z</lastmod>
   </url>
   <url>
     <loc>https://us-ghg-center.github.io/ams-2024-workshop/index.html</loc>
-    <lastmod>2024-01-22T18:30:20.554Z</lastmod>
+    <lastmod>2024-01-22T18:31:37.245Z</lastmod>
   </url>
 </urlset>

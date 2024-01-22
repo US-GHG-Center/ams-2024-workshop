@@ -24,3 +24,7 @@ Upon completing this workshop, participants will be able to:
 ## Target Audience
 
 The target audience for this workshop includes **Earth Science researchers, educators, and students across all career stages and disciplines who are interested in utilizing GHG datasets and open-source tools for their research projects**. The workshop will be beneficial for both experienced programmers seeking an overview of modern open tools and those just getting started with scientific programming.
+
+## Code of Conduct
+
+This workshop will be held following the [Transform to Open Science Code of Conduct](https://github.com/nasa/Transform-to-Open-Science/blob/main/CODE_OF_CONDUCT.md).

@@ -1,43 +1,47 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>https://us-ghg-center.github.io/ams-2024-workshop/agenda.html</loc>
-    <lastmod>2024-01-22T18:53:22.714Z</lastmod>
-  </url>
-  <url>
-    <loc>https://us-ghg-center.github.io/ams-2024-workshop/speakers.html</loc>
-    <lastmod>2024-01-22T18:53:21.242Z</lastmod>
-  </url>
-  <url>
-    <loc>https://us-ghg-center.github.io/ams-2024-workshop/interactive-session-1-epa-gridded-methane-emissions/epa-ch4emission-grid-v2express_User_Notebook.html</loc>
-    <lastmod>2024-01-22T18:53:20.122Z</lastmod>
-  </url>
-  <url>
-    <loc>https://us-ghg-center.github.io/ams-2024-workshop/interactive-session-1-epa-gridded-methane-emissions/odiac-ffco2-monthgrid-v2022_User_Notebook.html</loc>
-    <lastmod>2024-01-22T18:53:19.638Z</lastmod>
-  </url>
-  <url>
-    <loc>https://us-ghg-center.github.io/ams-2024-workshop/prerequisites.html</loc>
-    <lastmod>2024-01-22T18:53:20.962Z</lastmod>
-  </url>
-  <url>
-    <loc>https://us-ghg-center.github.io/ams-2024-workshop/interactive-session-3-large-point-source-methane-emission-events/emit-ch4plume-v1_User_Notebook.html</loc>
-    <lastmod>2024-01-22T18:53:21.710Z</lastmod>
-  </url>
-  <url>
-    <loc>https://us-ghg-center.github.io/ams-2024-workshop/ghg-center-at-ams-2024.html</loc>
-    <lastmod>2024-01-22T18:53:22.322Z</lastmod>
-  </url>
-  <url>
-    <loc>https://us-ghg-center.github.io/ams-2024-workshop/chapters.html</loc>
-    <lastmod>2024-01-22T18:53:22.974Z</lastmod>
-  </url>
-  <url>
-    <loc>https://us-ghg-center.github.io/ams-2024-workshop/interactive-session-2-anthropogenic-ghg-emissions/lpjwsl-wetlandch4-grid-v1_User_Notebook.html</loc>
-    <lastmod>2024-01-22T18:53:23.846Z</lastmod>
+    <loc>https://us-ghg-center.github.io/ams-2024-workshop/intro-stac/intro-to-stac.html</loc>
+    <lastmod>2024-01-22T18:57:16.126Z</lastmod>
   </url>
   <url>
     <loc>https://us-ghg-center.github.io/ams-2024-workshop/index.html</loc>
-    <lastmod>2024-01-22T18:53:24.414Z</lastmod>
+    <lastmod>2024-01-22T18:57:15.406Z</lastmod>
+  </url>
+  <url>
+    <loc>https://us-ghg-center.github.io/ams-2024-workshop/interactive-session-2-anthropogenic-ghg-emissions/lpjwsl-wetlandch4-grid-v1_User_Notebook.html</loc>
+    <lastmod>2024-01-22T18:57:14.866Z</lastmod>
+  </url>
+  <url>
+    <loc>https://us-ghg-center.github.io/ams-2024-workshop/chapters.html</loc>
+    <lastmod>2024-01-22T18:57:14.082Z</lastmod>
+  </url>
+  <url>
+    <loc>https://us-ghg-center.github.io/ams-2024-workshop/ghg-center-at-ams-2024.html</loc>
+    <lastmod>2024-01-22T18:57:13.458Z</lastmod>
+  </url>
+  <url>
+    <loc>https://us-ghg-center.github.io/ams-2024-workshop/interactive-session-3-large-point-source-methane-emission-events/emit-ch4plume-v1_User_Notebook.html</loc>
+    <lastmod>2024-01-22T18:57:12.870Z</lastmod>
+  </url>
+  <url>
+    <loc>https://us-ghg-center.github.io/ams-2024-workshop/prerequisites.html</loc>
+    <lastmod>2024-01-22T18:57:12.178Z</lastmod>
+  </url>
+  <url>
+    <loc>https://us-ghg-center.github.io/ams-2024-workshop/interactive-session-1-epa-gridded-methane-emissions/odiac-ffco2-monthgrid-v2022_User_Notebook.html</loc>
+    <lastmod>2024-01-22T18:57:10.926Z</lastmod>
+  </url>
+  <url>
+    <loc>https://us-ghg-center.github.io/ams-2024-workshop/interactive-session-1-epa-gridded-methane-emissions/epa-ch4emission-grid-v2express_User_Notebook.html</loc>
+    <lastmod>2024-01-22T18:57:11.394Z</lastmod>
+  </url>
+  <url>
+    <loc>https://us-ghg-center.github.io/ams-2024-workshop/speakers.html</loc>
+    <lastmod>2024-01-22T18:57:12.430Z</lastmod>
+  </url>
+  <url>
+    <loc>https://us-ghg-center.github.io/ams-2024-workshop/agenda.html</loc>
+    <lastmod>2024-01-22T18:57:13.826Z</lastmod>
   </url>
 </urlset>

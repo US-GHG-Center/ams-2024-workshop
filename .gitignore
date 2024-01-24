@@ -3,3 +3,4 @@ _site/
 *.json
 *.zip
 *.nc4
+*.DS_STORE

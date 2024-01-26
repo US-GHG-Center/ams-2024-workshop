@@ -550,11 +550,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="search-for-merra-2-data" class="level2">
 <h2 class="anchored" data-anchor-id="search-for-merra-2-data">Search for MERRA-2 Data</h2>
 <div id="cell-20" class="cell">
-<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>merra_t2m_dir<span class="op">=</span><span class="st">'../data/use-case-2/merra_t2m_dir/'</span></span>
-<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>merra_soil_moisture_dir <span class="op">=</span> <span class="st">'../data/use-case-2/merra_soil_moisture_dir/'</span></span>
-<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>merra_precip_rate_dir <span class="op">=</span> <span class="st">'../data/use-case-2/merra_precip_rate_dir/'</span></span>
-<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>merra_t2m_clim_dir <span class="op">=</span> <span class="st">'../data/use-case-2/merra_t2m_clim_dir/'</span></span>
-<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a>savedir <span class="op">=</span> <span class="st">'../data/use-case-2/saved_files'</span></span>
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>merra_t2m_dir<span class="op">=</span><span class="st">'data/merra_t2m_dir/'</span></span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>merra_soil_moisture_dir <span class="op">=</span> <span class="st">'data/merra_soil_moisture_dir/'</span></span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>merra_precip_rate_dir <span class="op">=</span> <span class="st">'data/merra_precip_rate_dir/'</span></span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>merra_t2m_clim_dir <span class="op">=</span> <span class="st">'data/merra_t2m_clim_dir/'</span></span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a>savedir <span class="op">=</span> <span class="st">'data/saved_files'</span></span>
 <span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a>merra_precip_rate_clim_dir <span class="op">=</span> merra_t2m_clim_dir </span>
 <span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a>merra_soil_moisture_clim_dir <span class="op">=</span> merra_t2m_clim_dir</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -774,7 +774,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Insert the path to the NetCDF file</span></span>
-<span id="cb17-6"><a href="#cb17-6" aria-hidden="true" tabindex="-1"></a>file_path <span class="op">=</span> <span class="st">'../data/use-case-2/merra_t2m_dir/1991/MERRA2_100.instM_2d_asm_Nx.199101.nc4'</span>  <span class="co"># Replace with the path to your NetCDF file</span></span>
+<span id="cb17-6"><a href="#cb17-6" aria-hidden="true" tabindex="-1"></a>file_path <span class="op">=</span> <span class="st">'data/merra_t2m_dir/1991/MERRA2_100.instM_2d_asm_Nx.199101.nc4'</span>  <span class="co"># Replace with the path to your NetCDF file</span></span>
 <span id="cb17-7"><a href="#cb17-7" aria-hidden="true" tabindex="-1"></a>dataset <span class="op">=</span> nc.Dataset(file_path)</span>
 <span id="cb17-8"><a href="#cb17-8" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb17-9"><a href="#cb17-9" aria-hidden="true" tabindex="-1"></a></span>
@@ -1044,7 +1044,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb26-49"><a href="#cb26-49" aria-hidden="true" tabindex="-1"></a>    ax.set_xlim(<span class="op">-</span><span class="dv">1</span>,<span class="dv">12</span>)</span>
 <span id="cb26-50"><a href="#cb26-50" aria-hidden="true" tabindex="-1"></a>    ax.set_ylim(<span class="bu">min</span>(ts[<span class="st">'box_totals'</span>]),<span class="bu">max</span>(ts[<span class="st">'box_totals'</span>]))     <span class="co">#   manual per parameter</span></span>
 <span id="cb26-51"><a href="#cb26-51" aria-hidden="true" tabindex="-1"></a>    plt.show()</span>
-<span id="cb26-52"><a href="#cb26-52" aria-hidden="true" tabindex="-1"></a>    plt.savefig(<span class="st">'../data/use-case-2/saved_files/'</span><span class="op">+</span>savename.split(<span class="st">'/'</span>)[<span class="op">-</span><span class="dv">1</span>],dpi<span class="op">=</span><span class="dv">300</span>,bbox_inches<span class="op">=</span><span class="st">'tight'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb26-52"><a href="#cb26-52" aria-hidden="true" tabindex="-1"></a>    plt.savefig(<span class="st">'data/saved_files/'</span><span class="op">+</span>savename.split(<span class="st">'/'</span>)[<span class="op">-</span><span class="dv">1</span>],dpi<span class="op">=</span><span class="dv">300</span>,bbox_inches<span class="op">=</span><span class="st">'tight'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 
 

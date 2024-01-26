@@ -420,23 +420,23 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Loading Permian Basin shape file as a region of interest</span></span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="co"># User can pass any json or shape file here</span></span>
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="co"># The "geopandas" library makes working with geospatial data easier by facilitating spatial operations on geometric types  </span></span>
-<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>permian_basin <span class="op">=</span> geopandas.read_file(<span class="st">'../data/use-case-3/permian.zip'</span>)</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>permian_basin <span class="op">=</span> geopandas.read_file(<span class="st">'data/permian.zip'</span>)</span>
 <span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>permian_basin <span class="op">=</span> permian_basin.set_crs(<span class="dv">4326</span>,allow_override<span class="op">=</span><span class="va">True</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div id="cell-10" class="cell">
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># The ISS spatial coverage data is called on here</span></span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>coverage <span class="op">=</span> geopandas.read_file(<span class="st">'../data/use-case-3/coverage.json'</span>)</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>coverage <span class="op">=</span> geopandas.read_file(<span class="st">'data/coverage.json'</span>)</span>
 <span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>coverage <span class="op">=</span> coverage.set_crs(<span class="dv">4326</span>,allow_override<span class="op">=</span><span class="va">True</span>)</span>
 <span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a><span class="co"># The ISS Date Time is converted to strings</span></span>
 <span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>coverage[<span class="st">'new_start_time'</span>] <span class="op">=</span> coverage.start_time.astype(<span class="st">'str'</span>)</span>
 <span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a><span class="co"># locations of where plumes are detected for the August 1, 2022 - present time period</span></span>
-<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>metadata_json <span class="op">=</span> geopandas.read_file(<span class="st">'../data/use-case-3/methane_metadata.json'</span>)</span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>metadata_json <span class="op">=</span> geopandas.read_file(<span class="st">'data/methane_metadata.json'</span>)</span>
 <span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a>metadata_json <span class="op">=</span> metadata_json.set_crs(<span class="dv">4326</span>,allow_override<span class="op">=</span><span class="va">True</span>)</span>
 <span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a>metadata_json[<span class="st">'new_start_time'</span>] <span class="op">=</span> metadata_json[<span class="st">'UTC Time Observed'</span>].astype(<span class="st">'str'</span>)</span>
 <span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a>metadata_json[<span class="st">'Scene FIDs'</span>] <span class="op">=</span> <span class="bu">list</span>(<span class="bu">map</span>(<span class="kw">lambda</span> x : x[<span class="dv">0</span>] ,metadata_json[<span class="st">'Scene FIDs'</span>]))</span>
-<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a>target_mask <span class="op">=</span> geopandas.read_file(<span class="st">'../data/use-case-3/target_mask.json'</span>)</span>
+<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a>target_mask <span class="op">=</span> geopandas.read_file(<span class="st">'data/target_mask.json'</span>)</span>
 <span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a>target_mask <span class="op">=</span> target_mask.set_crs(<span class="dv">4326</span>,allow_override<span class="op">=</span><span class="va">True</span>)</span>
 <span id="cb3-15"><a href="#cb3-15" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb3-16"><a href="#cb3-16" aria-hidden="true" tabindex="-1"></a></span>

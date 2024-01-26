@@ -60,6 +60,7 @@ website:
             contents:
               - sections/us-ghg-center-and-veda/index.qmd
               - sections/us-ghg-center-and-veda/catalog-interaction.ipynb
+              - sections/us-ghg-center-and-veda/qgis-in-hub.qmd
           - section: Usecase 1 - Human Anthropogenic Emissions
             contents:
               - interactive-session-1-epa-gridded-methane-emissions/epa-ch4emission-grid-v2express_User_Notebook.ipynb

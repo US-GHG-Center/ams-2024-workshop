@@ -354,304 +354,427 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 <section id="about-the-data" class="level2">
 <h2 class="anchored" data-anchor-id="about-the-data">About the Data</h2>
-<p>The EMIT instrument builds upon NASA’s long history of developing advanced imaging spectrometers for new science and applications. EMIT launched to the International Space Station (ISS) on July 14, 2022. The data shows high-confidence research grade methane plumes from point source emitters - updated as they are identified - in keeping with JPL Open Science and Open Data policy.</p>
+<p>The National Aeronautics and Space Administration (NASA) has a long history of developing advanced imaging spectrometers for new science and applications, and the Earth Surface Mineral Dust Source Investigation (EMIT) builds on this foundation. EMIT launched to the International Space Station (ISS) on July 14, 2022. The data shows high-confidence research grade methane plumes from point source emitters - updated as they are identified - in keeping with Jet Propulsion Laboratory (JPL) Open Science and Open Data policy.</p>
+<p>Methane is a strong greenhouse gas that is invisible to the human eye. Large methane emissions, typically referred to as point source emissions, represent a significant proportion of total methane emissions from the production, transport, and processing of oil and natural gas, landfills, and other sources. By measuring the spectral fingerprint of methane, EMIT can map areas of high methane concentration over background levels in the atmosphere, identifying plume complexes, and estimating the methane enhancements.</p>
 </section>
 <section id="requirements" class="level2">
 <h2 class="anchored" data-anchor-id="requirements">Requirements</h2>
 <ul>
-<li>NASA Earthdata Account</li>
-<li>Set up Python Environment - See setup_instructions.md in the ‘/setup/’ folder</li>
+<li>Set up Python Environment - See setup_instructions.md in the <code>/setup/</code> folder</li>
 </ul>
 </section>
 <section id="learning-objectives" class="level2">
 <h2 class="anchored" data-anchor-id="learning-objectives">Learning Objectives</h2>
 <ul>
-<li>How to use ‘U.S.GHG Center STAC Catalog’ to access ‘EMIT Methane Point Source Plume Complexes’ data.</li>
-<li>How to visualize ISS Spatial coverage and detected plumes target mask.</li>
-<li>How to visualize datasets using ‘folium’.</li>
+<li>How to use <code>U.S.GHG Center STAC Catalog</code> to access <code>EMIT Methane Point Source Plume Complexes</code> data.</li>
+<li>How to visualize ISS Spatial coverage and detect plumes along the path of the ISS.</li>
+<li>How to visualize datasets using <code>folium</code>.</li>
 </ul>
 </section>
 <section id="approach" class="level2">
 <h2 class="anchored" data-anchor-id="approach">Approach</h2>
 <ol type="1">
-<li>Visualize obsereved masks of the ISS and target masks of detected plumes.<br>
+<li>Visualize the spatial coverage of the ISS and the observed plumes along its path<br>
 </li>
-<li>Identify available dates and temporal frequency of observations for the given collection using the GHGC API <code>/stac</code> endpoint. The collection processed in this notebook is the Earth Surface Mineral Dust Source Investigation (EMIT) methane emission plumes data product.</li>
-<li>Pass the STAC item into the raster API <code>/stac/tilejson.json</code> endpoint.</li>
-<li>Using <code>folium.Map</code>, visualize the plumes.</li>
+<li>Identify available dates and temporal frequency of observations for a given collection using the GHGC API <code>/stac</code> endpoint. The collection processed in this notebook is the Earth Surface Mineral Dust Source Investigation (EMIT) methane emission plumes data product</li>
+<li>Pass the STAC item into the raster API <code>/stac/tilejson.json</code> endpoint</li>
+<li>Display the plumes using <code>folium.Map</code></li>
 </ol>
 </section>
 <section id="setup" class="level1">
 <h1>Setup</h1>
-<p>Import the required Python libraries.</p>
+<p>Import the required Python libraries by running the next cell.</p>
 <div id="cell-5" class="cell">
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Import required libraries</span></span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="co"># import earthaccess</span></span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> warnings</span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> requests</span>
-<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
-<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> geopandas</span>
-<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> folium</span>
-<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> folium.plugins</span>
-<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
-<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
-<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> branca.colormap <span class="im">as</span> cm</span>
-<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> folium <span class="im">import</span> Map, TileLayer </span>
-<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> branca.element <span class="im">import</span> Figure</span>
-<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> pystac_client <span class="im">import</span> Client </span>
-<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> pyproj <span class="im">import</span> Geod</span>
-<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> shapely <span class="im">import</span> wkt</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># import earthaccess</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> warnings</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> requests</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> geopandas</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> folium</span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> folium.plugins</span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> branca.colormap <span class="im">as</span> cm</span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> seaborn <span class="im">as</span> sns</span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> folium <span class="im">import</span> Map, TileLayer </span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> branca.element <span class="im">import</span> Figure</span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> pystac_client <span class="im">import</span> Client </span>
+<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> pyproj <span class="im">import</span> Geod</span>
+<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> shapely <span class="im">import</span> wkt</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <section id="nasa-earth-data-login-credentials" class="level2">
 <h2 class="anchored" data-anchor-id="nasa-earth-data-login-credentials">NASA Earth Data Login Credentials</h2>
-<p>To download or stream NASA data you will need an Earthdata account, you can create one here https://urs.earthdata.nasa.gov/home. We will use the ‘login’ function from the ‘earthaccess’ library for authentication before downloading at the end of the notebook. This function can also be used to create a local ‘.netrc’ file if it doesn’t exist or add your login info to an existing ‘.netrc’ file. If no Earthdata Login credentials are found in the ‘.netrc’ you’ll be prompted for them. This step is not necessary to conduct searches but is needed to download or stream data.</p>
+<p>To download or stream NASA data you will need an Earthdata account, you can create one here https://urs.earthdata.nasa.gov/home. We will use the <code>login</code> function from the <code>earthaccess</code> library for authentication before downloading at the end of the notebook. This function can also be used to create a local <code>.netrc</code> file if it doesn’t exist or add your login info to an existing <code>.netrc</code> file. If no Earthdata Login credentials are found in the <code>.netrc</code> you’ll be prompted for them. This step is not necessary to conduct searches but is needed to download or stream data.</p>
 </section>
-<section id="define-spatial-region-of-interest" class="level2">
-<h2 class="anchored" data-anchor-id="define-spatial-region-of-interest">Define Spatial Region of Interest</h2>
-<p>For this example, our spatial region of interest (ROI) will be the Permian Basin, USA.</p>
+<section id="define-the-spatial-region-of-interest" class="level2">
+<h2 class="anchored" data-anchor-id="define-the-spatial-region-of-interest">Define the Spatial Region of Interest</h2>
+<p>For this example, our spatial region of interest (ROI) will be the Permian Basin, USA. The Permian Basin is a regional depression expanding from the eastern side of New Mexico to West Texas, covering roughly 75 thousand square miles of land. This region is known to be “the largest hydrocarbon-producing basins in the United States and the world” <a href="https://www.eia.gov/maps/pdf/EIA-Permian-Part-II.pdf">U.S. Energy Information Administration</a>. Consequently, the Permian Basin is prone to excessive air pollution and a suitable site for monitoring methane variability and concentrations using the EMIT data.</p>
 <div id="cell-8" class="cell">
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Loading Permian Basin shape file as a region of interest</span></span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="co"># User can pass any json or shape file here</span></span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>permian_basin <span class="op">=</span> geopandas.read_file(<span class="st">'permian.zip'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="co"># The "geopandas" library makes working with geospatial data easier by facilitating spatial operations on geometric types  </span></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>permian_basin <span class="op">=</span> geopandas.read_file(<span class="st">'../data/use-case-3/permian.zip'</span>)</span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>permian_basin <span class="op">=</span> permian_basin.set_crs(<span class="dv">4326</span>,allow_override<span class="op">=</span><span class="va">True</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div id="cell-9" class="cell">
-<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># ISS data coverage </span></span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>coverage <span class="op">=</span> geopandas.read_file(<span class="st">'coverage.json'</span>)</span>
-<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>coverage[<span class="st">'new_start_time'</span>] <span class="op">=</span> coverage.start_time.astype(<span class="st">'str'</span>)</span>
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># The ISS spatial coverage data is called on here</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>coverage <span class="op">=</span> geopandas.read_file(<span class="st">'../data/use-case-3/coverage.json'</span>)</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>coverage <span class="op">=</span> coverage.set_crs(<span class="dv">4326</span>,allow_override<span class="op">=</span><span class="va">True</span>)</span>
 <span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a><span class="co"># location where plume was detected</span></span>
-<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>target_mask <span class="op">=</span> geopandas.read_file(<span class="st">'target_mask.json'</span>)</span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a><span class="co"># The ISS Date Time is converted to strings</span></span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>coverage[<span class="st">'new_start_time'</span>] <span class="op">=</span> coverage.start_time.astype(<span class="st">'str'</span>)</span>
 <span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a><span class="co"># ISS area intersecting with permian basin</span></span>
-<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>result_coverage <span class="op">=</span> geopandas.clip(coverage, permian_basin)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a><span class="co"># locations of where plumes are detected for the August 1, 2022 - present time period</span></span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>metadata_json <span class="op">=</span> geopandas.read_file(<span class="st">'../data/use-case-3/methane_metadata.json'</span>)</span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a>metadata_json <span class="op">=</span> metadata_json.set_crs(<span class="dv">4326</span>,allow_override<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a>metadata_json[<span class="st">'new_start_time'</span>] <span class="op">=</span> metadata_json[<span class="st">'UTC Time Observed'</span>].astype(<span class="st">'str'</span>)</span>
+<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a>metadata_json[<span class="st">'Scene FIDs'</span>] <span class="op">=</span> <span class="bu">list</span>(<span class="bu">map</span>(<span class="kw">lambda</span> x : x[<span class="dv">0</span>] ,metadata_json[<span class="st">'Scene FIDs'</span>]))</span>
+<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a>target_mask <span class="op">=</span> geopandas.read_file(<span class="st">'../data/use-case-3/target_mask.json'</span>)</span>
+<span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a>target_mask <span class="op">=</span> target_mask.set_crs(<span class="dv">4326</span>,allow_override<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb3-15"><a href="#cb3-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-16"><a href="#cb3-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-17"><a href="#cb3-17" aria-hidden="true" tabindex="-1"></a><span class="co"># The ISS spatial coverage data is clipped to the ROI (Permian Basin)</span></span>
+<span id="cb3-18"><a href="#cb3-18" aria-hidden="true" tabindex="-1"></a>result_coverage <span class="op">=</span> geopandas.clip(coverage, permian_basin)</span>
+<span id="cb3-19"><a href="#cb3-19" aria-hidden="true" tabindex="-1"></a><span class="co"># result_metadata = geopandas.clip(metadata_json, permian_basin)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div id="cell-10" class="cell">
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>new_coverage <span class="op">=</span> result_coverage.reset_index(drop<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="co"># result_coverage['date'] = result_coverage[(result_coverage['new_start_time'][:10]&lt;='2023-12-15') &amp; (result_coverage['new_start_time'][:10]&gt;='2023-07-01')]</span></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>new_coverage[<span class="st">'date'</span>] <span class="op">=</span> new_coverage.start_time.dt.strftime(<span class="st">'%Y-%m-</span><span class="sc">%d</span><span class="st">'</span>)</span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>new_coverage <span class="op">=</span> new_coverage[(new_coverage[<span class="st">'date'</span>]<span class="op">&lt;=</span><span class="st">'2023-12-15'</span>) <span class="op">&amp;</span> (new_coverage[<span class="st">'date'</span>]<span class="op">&gt;=</span><span class="st">'2023-07-01'</span>)]</span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>new_coverage.reset_index(drop<span class="op">=</span><span class="va">True</span>, inplace<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>new_coverage</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
-<section id="opening-and-exploring-spatial-coverage-of-iss-and-mask-of-identified-plumes" class="level2">
-<h2 class="anchored" data-anchor-id="opening-and-exploring-spatial-coverage-of-iss-and-mask-of-identified-plumes">Opening and Exploring Spatial Coverage of ISS and Mask of Identified Plumes</h2>
-<p>In this cell, we will visualize the outputs on a map using ‘folium’.</p>
-<div id="cell-11" class="cell">
-<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Initializing a map with a center at [43, -100] and a zoom level of 4. The use of tiles = None has been employed to remove the default basemap.</span></span>
-<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>colormap <span class="op">=</span> cm.linear.YlGn_09.scale(</span>
-<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>    coverage.start_time.<span class="bu">min</span>(), coverage.start_time.<span class="bu">max</span>()</span>
-<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>start_time_dict <span class="op">=</span> coverage.set_index(<span class="st">"fid"</span>)[<span class="st">"start_time"</span>]</span>
-<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>m_ <span class="op">=</span> folium.Map(location<span class="op">=</span>[<span class="dv">43</span>, <span class="op">-</span><span class="dv">100</span>], zoom_start<span class="op">=</span><span class="dv">4</span>, tiles<span class="op">=</span><span class="va">None</span>)</span>
-<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>folium.TileLayer(tiles<span class="op">=</span><span class="st">'https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/</span><span class="sc">{z}</span><span class="st">/</span><span class="sc">{y}</span><span class="st">/</span><span class="sc">{x}</span><span class="st">.png'</span>, name<span class="op">=</span><span class="st">'ESRI World Imagery'</span>, attr<span class="op">=</span><span class="st">'Tiles &amp;copy; Esri &amp;mdash; Source: Esri, i-cubed, USDA, USGS, AEX, GeoEye, Getmapping, Aerogrid, IGN, IGP, UPR-EGP, and the GIS User Community'</span>,overlay<span class="op">=</span><span class="st">'True'</span>).add_to(m_)</span>
-<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a><span class="co"># Load other TileLayer from https://leaflet-extras.github.io/leaflet-providers/preview/</span></span>
-<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a><span class="co"># From covergae.json fid, geometry has been selected</span></span>
-<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a><span class="co"># map_layer_target = folium.GeoJson(coverage[['fid', 'geometry', 'new_start_time']], name = 'ISS coverage').add_to(m_)</span></span>
-<span id="cb4-13"><a href="#cb4-13" aria-hidden="true" tabindex="-1"></a><span class="co"># map_layer_target.add_to(m_)</span></span>
-<span id="cb4-14"><a href="#cb4-14" aria-hidden="true" tabindex="-1"></a>coverage[[<span class="st">'fid'</span>, <span class="st">'geometry'</span>, <span class="st">'new_start_time'</span>]].explore(</span>
-<span id="cb4-15"><a href="#cb4-15" aria-hidden="true" tabindex="-1"></a>    <span class="st">"fid"</span>,</span>
-<span id="cb4-16"><a href="#cb4-16" aria-hidden="true" tabindex="-1"></a>    categorical<span class="op">=</span><span class="va">True</span>,</span>
-<span id="cb4-17"><a href="#cb4-17" aria-hidden="true" tabindex="-1"></a>    tooltip<span class="op">=</span>[</span>
-<span id="cb4-18"><a href="#cb4-18" aria-hidden="true" tabindex="-1"></a>        <span class="st">"fid"</span>,</span>
-<span id="cb4-19"><a href="#cb4-19" aria-hidden="true" tabindex="-1"></a>        <span class="st">"new_start_time"</span>,</span>
-<span id="cb4-20"><a href="#cb4-20" aria-hidden="true" tabindex="-1"></a>    ],</span>
-<span id="cb4-21"><a href="#cb4-21" aria-hidden="true" tabindex="-1"></a>    popup<span class="op">=</span><span class="va">True</span>,</span>
-<span id="cb4-22"><a href="#cb4-22" aria-hidden="true" tabindex="-1"></a>    style_kwds<span class="op">=</span><span class="bu">dict</span>(fillOpacity<span class="op">=</span><span class="fl">0.1</span>, width<span class="op">=</span><span class="dv">2</span>),</span>
-<span id="cb4-23"><a href="#cb4-23" aria-hidden="true" tabindex="-1"></a>    name<span class="op">=</span><span class="st">"EMIT"</span>,</span>
-<span id="cb4-24"><a href="#cb4-24" aria-hidden="true" tabindex="-1"></a>    m<span class="op">=</span>m_,</span>
-<span id="cb4-25"><a href="#cb4-25" aria-hidden="true" tabindex="-1"></a>    legend<span class="op">=</span><span class="va">False</span></span>
-<span id="cb4-26"><a href="#cb4-26" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb4-27"><a href="#cb4-27" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-28"><a href="#cb4-28" aria-hidden="true" tabindex="-1"></a>map_layer_coverage <span class="op">=</span> folium.GeoJson(target_mask, name <span class="op">=</span> <span class="st">' Target Mask'</span>).add_to(m_)</span>
-<span id="cb4-29"><a href="#cb4-29" aria-hidden="true" tabindex="-1"></a>map_layer_coverage.add_to(m_)</span>
-<span id="cb4-30"><a href="#cb4-30" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-31"><a href="#cb4-31" aria-hidden="true" tabindex="-1"></a><span class="co"># Layer control crates the toggle button for all the layers</span></span>
-<span id="cb4-32"><a href="#cb4-32" aria-hidden="true" tabindex="-1"></a>folium.LayerControl(collapsed<span class="op">=</span><span class="va">False</span>).add_to(m_)</span>
-<span id="cb4-33"><a href="#cb4-33" aria-hidden="true" tabindex="-1"></a>m_</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<section id="opening-and-exploring-the-spatial-coverage-of-the-iss-and-where-plumes-were-detected" class="level2">
+<h2 class="anchored" data-anchor-id="opening-and-exploring-the-spatial-coverage-of-the-iss-and-where-plumes-were-detected">Opening and Exploring the Spatial Coverage of the ISS and where plumes were detected</h2>
+<p>In this cell, we will visualize the EMIT-derived methane plumes over the Permian Basin using the <code>folium</code> library.</p>
+<div id="cell-12" class="cell">
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Setting a colormap using the “branca.colormap” library </span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>colormap <span class="op">=</span> cm.linear.YlGn_09.scale(</span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>    coverage.start_time.<span class="bu">min</span>(), coverage.start_time.<span class="bu">max</span>()</span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Initializing a map with a center at [43, -100] and a zoom level of 4. The use of tiles = None has been employed to remove the default basemap.</span></span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a>m_ <span class="op">=</span> folium.Map(location<span class="op">=</span>[<span class="dv">43</span>, <span class="op">-</span><span class="dv">100</span>], zoom_start<span class="op">=</span><span class="dv">4</span>, tiles<span class="op">=</span><span class="va">None</span>)</span>
+<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a><span class="co"># The TileLayer library helps in manipulating and displaying layers on a map</span></span>
+<span id="cb5-12"><a href="#cb5-12" aria-hidden="true" tabindex="-1"></a><span class="co"># For more information on other available tile layers, please visit https://leaflet-extras.github.io/leaflet-providers/preview/</span></span>
+<span id="cb5-13"><a href="#cb5-13" aria-hidden="true" tabindex="-1"></a>folium.TileLayer(tiles<span class="op">=</span><span class="st">'https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/</span><span class="sc">{z}</span><span class="st">/</span><span class="sc">{y}</span><span class="st">/</span><span class="sc">{x}</span><span class="st">.png'</span>, name<span class="op">=</span><span class="st">'ESRI World Imagery'</span>, attr<span class="op">=</span><span class="st">'Tiles &amp;copy; Esri &amp;mdash; Source: Esri, i-cubed, USDA, USGS, AEX, GeoEye, Getmapping, Aerogrid, IGN, IGP, UPR-EGP, and the GIS User Community'</span>,overlay<span class="op">=</span><span class="st">'True'</span>).add_to(m_)</span>
+<span id="cb5-14"><a href="#cb5-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-15"><a href="#cb5-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-16"><a href="#cb5-16" aria-hidden="true" tabindex="-1"></a><span class="co"># From covergae.json fid, geometry has been selected</span></span>
+<span id="cb5-17"><a href="#cb5-17" aria-hidden="true" tabindex="-1"></a><span class="co"># map_layer_coverage_target = folium.GeoJson(target_mask, name = ' Target Mask', marker=folium.Marker(icon=folium.Icon(color='blue', icon='globe')))</span></span>
+<span id="cb5-18"><a href="#cb5-18" aria-hidden="true" tabindex="-1"></a>map_layer_coverage_target <span class="op">=</span> folium.GeoJson(target_mask, name <span class="op">=</span> <span class="st">' Target Mask'</span>, marker<span class="op">=</span>folium.Circle(radius<span class="op">=</span><span class="dv">3</span>, fill_color<span class="op">=</span><span class="st">'blue'</span>, color<span class="op">=</span><span class="st">'blue'</span>))</span>
+<span id="cb5-19"><a href="#cb5-19" aria-hidden="true" tabindex="-1"></a>map_layer_coverage_metadata <span class="op">=</span> folium.GeoJson(metadata_json[[<span class="st">'Scene FIDs'</span>, <span class="st">'geometry'</span>, <span class="st">'new_start_time'</span>]], name <span class="op">=</span> <span class="st">' Metadata'</span>, marker<span class="op">=</span>folium.Circle(radius<span class="op">=</span><span class="dv">3</span>, fill_color<span class="op">=</span><span class="st">'red'</span>, color<span class="op">=</span><span class="st">'red'</span>))</span>
+<span id="cb5-20"><a href="#cb5-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-21"><a href="#cb5-21" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-22"><a href="#cb5-22" aria-hidden="true" tabindex="-1"></a>map_layer_coverage_target.add_to(m_)</span>
+<span id="cb5-23"><a href="#cb5-23" aria-hidden="true" tabindex="-1"></a><span class="co"># map_layer_coverage_target.marker(icon=folium.Icon(color='blue', icon='star'))</span></span>
+<span id="cb5-24"><a href="#cb5-24" aria-hidden="true" tabindex="-1"></a>map_layer_coverage_metadata.add_to(m_)</span>
+<span id="cb5-25"><a href="#cb5-25" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-26"><a href="#cb5-26" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-27"><a href="#cb5-27" aria-hidden="true" tabindex="-1"></a><span class="co"># We select “geometry” from the “fid” field in “coverage.json”</span></span>
+<span id="cb5-28"><a href="#cb5-28" aria-hidden="true" tabindex="-1"></a>coverage[[<span class="st">'fid'</span>, <span class="st">'geometry'</span>, <span class="st">'new_start_time'</span>]].explore(</span>
+<span id="cb5-29"><a href="#cb5-29" aria-hidden="true" tabindex="-1"></a>    <span class="st">"fid"</span>,</span>
+<span id="cb5-30"><a href="#cb5-30" aria-hidden="true" tabindex="-1"></a>    categorical<span class="op">=</span><span class="va">False</span>,</span>
+<span id="cb5-31"><a href="#cb5-31" aria-hidden="true" tabindex="-1"></a>    tooltip<span class="op">=</span>[</span>
+<span id="cb5-32"><a href="#cb5-32" aria-hidden="true" tabindex="-1"></a>        <span class="st">"fid"</span>,</span>
+<span id="cb5-33"><a href="#cb5-33" aria-hidden="true" tabindex="-1"></a>        <span class="st">"new_start_time"</span>,</span>
+<span id="cb5-34"><a href="#cb5-34" aria-hidden="true" tabindex="-1"></a>    ],</span>
+<span id="cb5-35"><a href="#cb5-35" aria-hidden="true" tabindex="-1"></a>    popup<span class="op">=</span><span class="va">True</span>,</span>
+<span id="cb5-36"><a href="#cb5-36" aria-hidden="true" tabindex="-1"></a>    style_kwds<span class="op">=</span><span class="bu">dict</span>(fillOpacity<span class="op">=</span><span class="fl">0.1</span>, width<span class="op">=</span><span class="dv">2</span>),</span>
+<span id="cb5-37"><a href="#cb5-37" aria-hidden="true" tabindex="-1"></a>    name<span class="op">=</span><span class="st">"Coverage"</span>,</span>
+<span id="cb5-38"><a href="#cb5-38" aria-hidden="true" tabindex="-1"></a>    m<span class="op">=</span>m_,</span>
+<span id="cb5-39"><a href="#cb5-39" aria-hidden="true" tabindex="-1"></a>    legend<span class="op">=</span><span class="va">False</span>,</span>
+<span id="cb5-40"><a href="#cb5-40" aria-hidden="true" tabindex="-1"></a>    show<span class="op">=</span><span class="va">False</span></span>
+<span id="cb5-41"><a href="#cb5-41" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb5-42"><a href="#cb5-42" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-43"><a href="#cb5-43" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-44"><a href="#cb5-44" aria-hidden="true" tabindex="-1"></a><span class="co"># The “LayerControl” creates the toggle button for all the layers</span></span>
+<span id="cb5-45"><a href="#cb5-45" aria-hidden="true" tabindex="-1"></a>folium.LayerControl(collapsed<span class="op">=</span><span class="va">False</span>).add_to(m_)</span>
+<span id="cb5-46"><a href="#cb5-46" aria-hidden="true" tabindex="-1"></a><span class="co"># Display the map</span></span>
+<span id="cb5-47"><a href="#cb5-47" aria-hidden="true" tabindex="-1"></a>m_</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
-<section id="opening-and-exploring-emit-methane-point-source-plume-complexes-data-using-the-raster-api" class="level2">
-<h2 class="anchored" data-anchor-id="opening-and-exploring-emit-methane-point-source-plume-complexes-data-using-the-raster-api">Opening and Exploring EMIT Methane Point Source Plume Complexes Data Using the Raster API</h2>
-<p>Search for EMIT Methane Point Source Plume Complexes Data</p>
-<div id="cell-13" class="cell">
-<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Provide STAC and RASTER API endpoints</span></span>
-<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>STAC_API_URL <span class="op">=</span> <span class="st">"http://ghg.center/api/stac"</span></span>
-<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>RASTER_API_URL <span class="op">=</span> <span class="st">"https://ghg.center/api/raster"</span></span>
-<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Please use the collection name similar to the one used in STAC collection.</span></span>
-<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Name of the collection for methane emission plumes. </span></span>
-<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>collection_name <span class="op">=</span> <span class="st">"emit-ch4plume-v1"</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
+<section id="opening-and-exploring-the-emit-methane-point-source-plume-complexes-data" class="level2">
+<h2 class="anchored" data-anchor-id="opening-and-exploring-the-emit-methane-point-source-plume-complexes-data">Opening and Exploring the EMIT Methane Point Source Plume Complexes Data</h2>
+<p>Search for the EMIT Methane Point Source Plume Complexes Data using the Raster API and its STAC collection name</p>
 <div id="cell-14" class="cell">
-<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Fetching the collection from STAC collections using appropriate endpoint.</span></span>
-<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="co"># the 'requests' library allows a HTTP request possible</span></span>
-<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>collection <span class="op">=</span> requests.get(<span class="ss">f"</span><span class="sc">{</span>STAC_API_URL<span class="sc">}</span><span class="ss">/collections/</span><span class="sc">{</span>collection_name<span class="sc">}</span><span class="ss">"</span>).json()</span>
-<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>collection <span class="op">=</span> {key: value <span class="cf">for</span> key, value <span class="kw">in</span> collection.items() <span class="cf">if</span> key <span class="op">!=</span> <span class="st">'summaries'</span>}</span>
-<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>collection</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Provide STAC and RASTER API endpoints</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>STAC_API_URL <span class="op">=</span> <span class="st">"http://ghg.center/api/stac"</span></span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>RASTER_API_URL <span class="op">=</span> <span class="st">"https://ghg.center/api/raster"</span></span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Please use the collection name similar to the one used in STAC collection</span></span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Name of the collection for methane emission plumes </span></span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>collection_name <span class="op">=</span> <span class="st">"emit-ch4plume-v1"</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<p>Examining the contents of our <code>collection</code> under the <code>temporal</code> variable, we note that data is available from August 2022 to May 2023. By looking at the <code>dashboard: time density</code>, we can see that observations are conducted daily and non-periodically (i.e., there are plumes emissions for multiple places on the same dates).</p>
-<div id="cell-16" class="cell">
-<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Create a function that would search for the number of items in above data collection in the STAC API</span></span>
-<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> get_item_count(collection_id):</span>
-<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>    count <span class="op">=</span> <span class="dv">0</span></span>
-<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>    items_url <span class="op">=</span> <span class="ss">f"</span><span class="sc">{</span>STAC_API_URL<span class="sc">}</span><span class="ss">/collections/</span><span class="sc">{</span>collection_id<span class="sc">}</span><span class="ss">/items"</span></span>
-<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>    <span class="cf">while</span> <span class="va">True</span>:</span>
-<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a>        response <span class="op">=</span> requests.get(items_url)</span>
-<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> <span class="kw">not</span> response.ok:</span>
-<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a>            <span class="bu">print</span>(<span class="st">"error getting items"</span>)</span>
-<span id="cb7-11"><a href="#cb7-11" aria-hidden="true" tabindex="-1"></a>            exit()</span>
-<span id="cb7-12"><a href="#cb7-12" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-13"><a href="#cb7-13" aria-hidden="true" tabindex="-1"></a>        stac <span class="op">=</span> response.json()</span>
-<span id="cb7-14"><a href="#cb7-14" aria-hidden="true" tabindex="-1"></a>        count <span class="op">+=</span> <span class="bu">int</span>(stac[<span class="st">"context"</span>].get(<span class="st">"returned"</span>, <span class="dv">0</span>))</span>
-<span id="cb7-15"><a href="#cb7-15" aria-hidden="true" tabindex="-1"></a>        <span class="bu">next</span> <span class="op">=</span> [link <span class="cf">for</span> link <span class="kw">in</span> stac[<span class="st">"links"</span>] <span class="cf">if</span> link[<span class="st">"rel"</span>] <span class="op">==</span> <span class="st">"next"</span>]</span>
-<span id="cb7-16"><a href="#cb7-16" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-17"><a href="#cb7-17" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> <span class="kw">not</span> <span class="bu">next</span>:</span>
-<span id="cb7-18"><a href="#cb7-18" aria-hidden="true" tabindex="-1"></a>            <span class="cf">break</span></span>
-<span id="cb7-19"><a href="#cb7-19" aria-hidden="true" tabindex="-1"></a>        items_url <span class="op">=</span> <span class="bu">next</span>[<span class="dv">0</span>][<span class="st">"href"</span>]</span>
-<span id="cb7-20"><a href="#cb7-20" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-21"><a href="#cb7-21" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> count</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div id="cell-15" class="cell">
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Fetching the collection from STAC collections using appropriate endpoint</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="co"># the 'requests' library allows a HTTP request possible</span></span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>collection <span class="op">=</span> requests.get(<span class="ss">f"</span><span class="sc">{</span>STAC_API_URL<span class="sc">}</span><span class="ss">/collections/</span><span class="sc">{</span>collection_name<span class="sc">}</span><span class="ss">"</span>).json()</span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>collection <span class="op">=</span> {key: value <span class="cf">for</span> key, value <span class="kw">in</span> collection.items() <span class="cf">if</span> key <span class="op">!=</span> <span class="st">'summaries'</span>}</span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>collection</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
+<p>Here we are examining the contents of our <code>collection</code> under the <code>temporal</code> variable. Please keep in mind that data is available from August 2022 to May 2023. By looking at the <code>dashboard: time density</code>, we can see that observations are collected on a daily-basis with plume emissions emerging from multiple places on the same date.</p>
 <div id="cell-17" class="cell">
-<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Apply the above function and check the total number of items available within the collection</span></span>
-<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>number_of_items <span class="op">=</span> get_item_count(collection_name)</span>
-<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>plume_complexes <span class="op">=</span> requests.get(<span class="ss">f"</span><span class="sc">{</span>STAC_API_URL<span class="sc">}</span><span class="ss">/collections/</span><span class="sc">{</span>collection_name<span class="sc">}</span><span class="ss">/items?limit=</span><span class="sc">{</span>number_of_items<span class="sc">}</span><span class="ss">"</span>).json()[<span class="st">"features"</span>]</span>
-<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>parse_plume_complexes <span class="op">=</span> plume_complexes</span>
-<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Found </span><span class="sc">{</span><span class="bu">len</span>(plume_complexes)<span class="sc">}</span><span class="ss"> items"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Create a function that would search for the number of items in above data collection in the STAC API</span></span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> get_item_count(collection_id):</span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>    count <span class="op">=</span> <span class="dv">0</span></span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>    items_url <span class="op">=</span> <span class="ss">f"</span><span class="sc">{</span>STAC_API_URL<span class="sc">}</span><span class="ss">/collections/</span><span class="sc">{</span>collection_id<span class="sc">}</span><span class="ss">/items"</span></span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a>    <span class="cf">while</span> <span class="va">True</span>:</span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a>        response <span class="op">=</span> requests.get(items_url)</span>
+<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> <span class="kw">not</span> response.ok:</span>
+<span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a>            <span class="bu">print</span>(<span class="st">"error getting items"</span>)</span>
+<span id="cb8-11"><a href="#cb8-11" aria-hidden="true" tabindex="-1"></a>            exit()</span>
+<span id="cb8-12"><a href="#cb8-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-13"><a href="#cb8-13" aria-hidden="true" tabindex="-1"></a>        stac <span class="op">=</span> response.json()</span>
+<span id="cb8-14"><a href="#cb8-14" aria-hidden="true" tabindex="-1"></a>        count <span class="op">+=</span> <span class="bu">int</span>(stac[<span class="st">"context"</span>].get(<span class="st">"returned"</span>, <span class="dv">0</span>))</span>
+<span id="cb8-15"><a href="#cb8-15" aria-hidden="true" tabindex="-1"></a>        <span class="bu">next</span> <span class="op">=</span> [link <span class="cf">for</span> link <span class="kw">in</span> stac[<span class="st">"links"</span>] <span class="cf">if</span> link[<span class="st">"rel"</span>] <span class="op">==</span> <span class="st">"next"</span>]</span>
+<span id="cb8-16"><a href="#cb8-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-17"><a href="#cb8-17" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> <span class="kw">not</span> <span class="bu">next</span>:</span>
+<span id="cb8-18"><a href="#cb8-18" aria-hidden="true" tabindex="-1"></a>            <span class="cf">break</span></span>
+<span id="cb8-19"><a href="#cb8-19" aria-hidden="true" tabindex="-1"></a>        items_url <span class="op">=</span> <span class="bu">next</span>[<span class="dv">0</span>][<span class="st">"href"</span>]</span>
+<span id="cb8-20"><a href="#cb8-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-21"><a href="#cb8-21" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> count</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div id="cell-18" class="cell">
-<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Examine the first item in the collection</span></span>
-<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>plume_complex_ids <span class="op">=</span> <span class="bu">list</span>(<span class="bu">map</span>(<span class="kw">lambda</span> d: d.get(<span class="st">'id'</span>, <span class="ss">f"id not found in dictionary"</span>), plume_complexes))</span>
-<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>plume_complex_ids[:<span class="dv">10</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Apply the above function and check the total number of items available within the collection</span></span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>number_of_items <span class="op">=</span> get_item_count(collection_name)</span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>plume_complexes <span class="op">=</span> requests.get(<span class="ss">f"</span><span class="sc">{</span>STAC_API_URL<span class="sc">}</span><span class="ss">/collections/</span><span class="sc">{</span>collection_name<span class="sc">}</span><span class="ss">/items?limit=</span><span class="sc">{</span>number_of_items<span class="sc">}</span><span class="ss">"</span>).json()[<span class="st">"features"</span>]</span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>parse_plume_complexes <span class="op">=</span> plume_complexes</span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Found </span><span class="sc">{</span><span class="bu">len</span>(plume_complexes)<span class="sc">}</span><span class="ss"> items"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div id="cell-19" class="cell">
-<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="co"># To access the year value from each item more easily, this will let us query more explicity by year and month (e.g., 2020-02)</span></span>
-<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>plume_complexes <span class="op">=</span> {plume_complex[<span class="st">"id"</span>]: plume_complex <span class="cf">for</span> plume_complex <span class="kw">in</span> plume_complexes} </span>
-<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>asset_name <span class="op">=</span> <span class="st">"ch4-plume-emissions"</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Exploring the items in the collection</span></span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>plume_complex_ids <span class="op">=</span> <span class="bu">list</span>(<span class="bu">map</span>(<span class="kw">lambda</span> d: d.get(<span class="st">'id'</span>, <span class="ss">f"id not found in dictionary"</span>), plume_complexes))</span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>plume_complex_ids[:<span class="dv">10</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div id="cell-20" class="cell">
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="co"># To access the year value from each item more easily, this will let us query more explicitly by year and month (e.g., 2020-02)</span></span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>plume_complexes <span class="op">=</span> {plume_complex[<span class="st">"id"</span>]: plume_complex <span class="cf">for</span> plume_complex <span class="kw">in</span> plume_complexes} </span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Set the asset value to the appropriate parameter </span></span>
+<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a>asset_name <span class="op">=</span> <span class="st">"ch4-plume-emissions"</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Below, we are entering the minimum and maximum values to provide our upper and lower bounds in <code>rescale_values</code>.</p>
-<div id="cell-21" class="cell">
-<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Fetching the min and max values for a specific item</span></span>
-<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>rescale_values <span class="op">=</span> {<span class="st">"max"</span>:plume_complexes[<span class="bu">list</span>(plume_complexes.keys())[<span class="dv">0</span>]][<span class="st">"assets"</span>][asset_name][<span class="st">"raster:bands"</span>][<span class="dv">0</span>][<span class="st">"histogram"</span>][<span class="st">"max"</span>], <span class="st">"min"</span>:plume_complexes[<span class="bu">list</span>(plume_complexes.keys())[<span class="dv">0</span>]][<span class="st">"assets"</span>][asset_name][<span class="st">"raster:bands"</span>][<span class="dv">0</span>][<span class="st">"histogram"</span>][<span class="st">"min"</span>]}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div id="cell-22" class="cell">
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Fetching the min and max values for a specific item</span></span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>rescale_values <span class="op">=</span> {<span class="st">"max"</span>:plume_complexes[<span class="bu">list</span>(plume_complexes.keys())[<span class="dv">0</span>]][<span class="st">"assets"</span>][asset_name][<span class="st">"raster:bands"</span>][<span class="dv">0</span>][<span class="st">"histogram"</span>][<span class="st">"max"</span>], <span class="st">"min"</span>:plume_complexes[<span class="bu">list</span>(plume_complexes.keys())[<span class="dv">0</span>]][<span class="st">"assets"</span>][asset_name][<span class="st">"raster:bands"</span>][<span class="dv">0</span>][<span class="st">"histogram"</span>][<span class="st">"min"</span>]}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Now we will pass the item id, collection name, and <code>rescaling_factor</code> to the <code>Raster API</code> endpoint. We will do this for only one item so that we can visualize the event.</p>
-<div id="cell-23" class="cell">
-<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>color_map <span class="op">=</span> <span class="st">"magma"</span> <span class="co"># please refer to matplotlib library if you'd prefer choosing a different color ramp.</span></span>
-<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a><span class="co"># For more information on Colormaps in Matplotlib, please visit https://matplotlib.org/stable/users/explain/colors/colormaps.html</span></span>
-<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Select the item ID which you want to visualize. Item ID is in the format yyyymmdd followed by the timestamp. This ID can be extracted from the COG name as well.</span></span>
-<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a>plume_complex_id <span class="op">=</span> <span class="st">"EMIT_L2B_CH4PLM_001_20230418T200118_000829"</span></span>
-<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a>methane_plume_tile <span class="op">=</span> requests.get(</span>
-<span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a>    <span class="ss">f"</span><span class="sc">{</span>RASTER_API_URL<span class="sc">}</span><span class="ss">/stac/tilejson.json?collection=</span><span class="sc">{</span>plume_complexes[plume_complex_id][<span class="st">'collection'</span>]<span class="sc">}</span><span class="ss">&amp;item=</span><span class="sc">{</span>plume_complexes[plume_complex_id][<span class="st">'id'</span>]<span class="sc">}</span><span class="ss">"</span></span>
-<span id="cb12-8"><a href="#cb12-8" aria-hidden="true" tabindex="-1"></a>    <span class="ss">f"&amp;assets=</span><span class="sc">{</span>asset_name<span class="sc">}</span><span class="ss">"</span></span>
-<span id="cb12-9"><a href="#cb12-9" aria-hidden="true" tabindex="-1"></a>    <span class="ss">f"&amp;color_formula=gamma+r+1.05&amp;colormap_name=</span><span class="sc">{</span>color_map<span class="sc">}</span><span class="ss">"</span></span>
-<span id="cb12-10"><a href="#cb12-10" aria-hidden="true" tabindex="-1"></a>    <span class="ss">f"&amp;rescale=</span><span class="sc">{</span>rescale_values[<span class="st">'min'</span>]<span class="sc">}</span><span class="ss">,</span><span class="sc">{</span>rescale_values[<span class="st">'max'</span>]<span class="sc">}</span><span class="ss">"</span>, </span>
-<span id="cb12-11"><a href="#cb12-11" aria-hidden="true" tabindex="-1"></a>).json()</span>
-<span id="cb12-12"><a href="#cb12-12" aria-hidden="true" tabindex="-1"></a>methane_plume_tile</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div id="cell-24" class="cell">
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Set a colormap for the granule</span></span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Please refer to matplotlib library if you'd prefer choosing a different color ramp (https://matplotlib.org/stable/users/explain/colors/colormaps.html)</span></span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>color_map <span class="op">=</span> <span class="st">"magma"</span> </span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Select the item ID which you want to visualize. Item ID is in the format yyyymmdd followed by the timestamp. This ID can be extracted from the Cloud Optimized GeoTIFF (OG) name as well.</span></span>
+<span id="cb13-7"><a href="#cb13-7" aria-hidden="true" tabindex="-1"></a>plume_complex_id_1 <span class="op">=</span> <span class="st">"EMIT_L2B_CH4PLM_001_20230418T200118_000829"</span></span>
+<span id="cb13-8"><a href="#cb13-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-9"><a href="#cb13-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-10"><a href="#cb13-10" aria-hidden="true" tabindex="-1"></a><span class="co"># Extract the tile using the appropriate ID and colormap </span></span>
+<span id="cb13-11"><a href="#cb13-11" aria-hidden="true" tabindex="-1"></a>methane_plume_tile_1 <span class="op">=</span> requests.get(</span>
+<span id="cb13-12"><a href="#cb13-12" aria-hidden="true" tabindex="-1"></a>    <span class="ss">f"</span><span class="sc">{</span>RASTER_API_URL<span class="sc">}</span><span class="ss">/stac/tilejson.json?collection=</span><span class="sc">{</span>plume_complexes[plume_complex_id_1][<span class="st">'collection'</span>]<span class="sc">}</span><span class="ss">&amp;item=</span><span class="sc">{</span>plume_complexes[plume_complex_id_1][<span class="st">'id'</span>]<span class="sc">}</span><span class="ss">"</span></span>
+<span id="cb13-13"><a href="#cb13-13" aria-hidden="true" tabindex="-1"></a>    <span class="ss">f"&amp;assets=</span><span class="sc">{</span>asset_name<span class="sc">}</span><span class="ss">"</span></span>
+<span id="cb13-14"><a href="#cb13-14" aria-hidden="true" tabindex="-1"></a>    <span class="ss">f"&amp;color_formula=gamma+r+1.05&amp;colormap_name=</span><span class="sc">{</span>color_map<span class="sc">}</span><span class="ss">"</span></span>
+<span id="cb13-15"><a href="#cb13-15" aria-hidden="true" tabindex="-1"></a>    <span class="ss">f"&amp;rescale=</span><span class="sc">{</span>rescale_values[<span class="st">'min'</span>]<span class="sc">}</span><span class="ss">,</span><span class="sc">{</span>rescale_values[<span class="st">'max'</span>]<span class="sc">}</span><span class="ss">"</span>, </span>
+<span id="cb13-16"><a href="#cb13-16" aria-hidden="true" tabindex="-1"></a>).json()</span>
+<span id="cb13-17"><a href="#cb13-17" aria-hidden="true" tabindex="-1"></a>methane_plume_tile_1</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div id="cell-25" class="cell">
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Set a colormap for the granule</span></span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Please refer to matplotlib library if you'd prefer choosing a different color ramp (https://matplotlib.org/stable/users/explain/colors/colormaps.html)</span></span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>color_map <span class="op">=</span> <span class="st">"magma"</span> </span>
+<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Select the item ID which you want to visualize. Item ID is in the format yyyymmdd followed by the timestamp. This ID can be extracted from the COG name as well.</span></span>
+<span id="cb14-7"><a href="#cb14-7" aria-hidden="true" tabindex="-1"></a>plume_complex_id_2 <span class="op">=</span> <span class="st">"EMIT_L2B_CH4PLM_001_20230614T193706_000038"</span></span>
+<span id="cb14-8"><a href="#cb14-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-9"><a href="#cb14-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-10"><a href="#cb14-10" aria-hidden="true" tabindex="-1"></a><span class="co"># Extract the tile using the appropriate ID and colormap </span></span>
+<span id="cb14-11"><a href="#cb14-11" aria-hidden="true" tabindex="-1"></a>methane_plume_tile_2 <span class="op">=</span> requests.get(</span>
+<span id="cb14-12"><a href="#cb14-12" aria-hidden="true" tabindex="-1"></a>    <span class="ss">f"</span><span class="sc">{</span>RASTER_API_URL<span class="sc">}</span><span class="ss">/stac/tilejson.json?collection=</span><span class="sc">{</span>plume_complexes[plume_complex_id_2][<span class="st">'collection'</span>]<span class="sc">}</span><span class="ss">&amp;item=</span><span class="sc">{</span>plume_complexes[plume_complex_id_2][<span class="st">'id'</span>]<span class="sc">}</span><span class="ss">"</span></span>
+<span id="cb14-13"><a href="#cb14-13" aria-hidden="true" tabindex="-1"></a>    <span class="ss">f"&amp;assets=</span><span class="sc">{</span>asset_name<span class="sc">}</span><span class="ss">"</span></span>
+<span id="cb14-14"><a href="#cb14-14" aria-hidden="true" tabindex="-1"></a>    <span class="ss">f"&amp;color_formula=gamma+r+1.05&amp;colormap_name=</span><span class="sc">{</span>color_map<span class="sc">}</span><span class="ss">"</span></span>
+<span id="cb14-15"><a href="#cb14-15" aria-hidden="true" tabindex="-1"></a>    <span class="ss">f"&amp;rescale=</span><span class="sc">{</span>rescale_values[<span class="st">'min'</span>]<span class="sc">}</span><span class="ss">,</span><span class="sc">{</span>rescale_values[<span class="st">'max'</span>]<span class="sc">}</span><span class="ss">"</span>, </span>
+<span id="cb14-16"><a href="#cb14-16" aria-hidden="true" tabindex="-1"></a>).json()</span>
+<span id="cb14-17"><a href="#cb14-17" aria-hidden="true" tabindex="-1"></a>methane_plume_tile_2</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 <section id="visualizing-ch₄-emission-plume" class="level2">
 <h2 class="anchored" data-anchor-id="visualizing-ch₄-emission-plume">Visualizing CH₄ Emission Plume</h2>
-<div id="cell-25" class="cell">
-<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>colormap <span class="op">=</span> <span class="st">"magma"</span> <span class="co"># please refer to matplotlib library if you'd prefer choosing a different color ramp.</span></span>
-<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a><span class="co"># For more information on Colormaps in Matplotlib, please visit https://matplotlib.org/stable/users/explain/colors/colormaps.html</span></span>
-<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a><span class="co">#Defining the breaks in the colormap </span></span>
-<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a>color_map <span class="op">=</span> cm.LinearColormap(colors <span class="op">=</span> [<span class="st">'#310597'</span>, <span class="st">'#4C02A1'</span>, <span class="st">'#6600A7'</span>, <span class="st">'#7E03A8'</span>, <span class="st">'#9511A1'</span>, <span class="st">'#AA2395'</span>, <span class="st">'#BC3587'</span>, <span class="st">'#CC4778'</span>, <span class="st">'#DA5A6A'</span>, <span class="st">'#E66C5C'</span>, <span class="st">'#F0804E'</span>, <span class="st">'#F89540'</span>,<span class="st">'#FDAC33'</span>, <span class="st">'#FDC527'</span>, <span class="st">'#F8DF25'</span>], vmin <span class="op">=</span> <span class="dv">0</span>, vmax <span class="op">=</span> <span class="dv">1500</span> )</span>
-<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a>color_map.caption <span class="op">=</span> <span class="st">'ppm-m'</span></span>
-<span id="cb13-7"><a href="#cb13-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb13-8"><a href="#cb13-8" aria-hidden="true" tabindex="-1"></a><span class="co"># Select the item ID which you want to visualize. Item ID is in the format yyyymmdd followed by the timestamp. This ID can be extracted from the COG name as well.</span></span>
-<span id="cb13-9"><a href="#cb13-9" aria-hidden="true" tabindex="-1"></a>plume_complex_id <span class="op">=</span> <span class="st">"EMIT_L2B_CH4PLM_001_20230418T200118_000829"</span></span>
-<span id="cb13-10"><a href="#cb13-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb13-11"><a href="#cb13-11" aria-hidden="true" tabindex="-1"></a>methane_plume_tile <span class="op">=</span> requests.get(</span>
-<span id="cb13-12"><a href="#cb13-12" aria-hidden="true" tabindex="-1"></a>    <span class="ss">f"</span><span class="sc">{</span>RASTER_API_URL<span class="sc">}</span><span class="ss">/stac/tilejson.json?collection=</span><span class="sc">{</span>plume_complexes[plume_complex_id][<span class="st">'collection'</span>]<span class="sc">}</span><span class="ss">&amp;item=</span><span class="sc">{</span>plume_complexes[plume_complex_id][<span class="st">'id'</span>]<span class="sc">}</span><span class="ss">"</span></span>
-<span id="cb13-13"><a href="#cb13-13" aria-hidden="true" tabindex="-1"></a>    <span class="ss">f"&amp;assets=</span><span class="sc">{</span>asset_name<span class="sc">}</span><span class="ss">"</span></span>
-<span id="cb13-14"><a href="#cb13-14" aria-hidden="true" tabindex="-1"></a>    <span class="ss">f"&amp;color_formula=gamma+r+1.05&amp;colormap_name=</span><span class="sc">{</span>colormap<span class="sc">}</span><span class="ss">"</span></span>
-<span id="cb13-15"><a href="#cb13-15" aria-hidden="true" tabindex="-1"></a>    <span class="ss">f"&amp;rescale=</span><span class="sc">{</span>rescale_values[<span class="st">'min'</span>]<span class="sc">}</span><span class="ss">,</span><span class="sc">{</span>rescale_values[<span class="st">'max'</span>]<span class="sc">}</span><span class="ss">"</span>, </span>
-<span id="cb13-16"><a href="#cb13-16" aria-hidden="true" tabindex="-1"></a>).json()</span>
-<span id="cb13-17"><a href="#cb13-17" aria-hidden="true" tabindex="-1"></a>methane_plume_tile</span>
-<span id="cb13-18"><a href="#cb13-18" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb13-19"><a href="#cb13-19" aria-hidden="true" tabindex="-1"></a><span class="co"># Set initial zoom and center of map for plume Layer</span></span>
-<span id="cb13-20"><a href="#cb13-20" aria-hidden="true" tabindex="-1"></a>map_ <span class="op">=</span> folium.Map(location<span class="op">=</span>(methane_plume_tile[<span class="st">"center"</span>][<span class="dv">1</span>], methane_plume_tile[<span class="st">"center"</span>][<span class="dv">0</span>]), zoom_start<span class="op">=</span><span class="dv">13</span>, tiles<span class="op">=</span><span class="va">None</span>, tooltip <span class="op">=</span> <span class="st">'test tool tip'</span>)</span>
-<span id="cb13-21"><a href="#cb13-21" aria-hidden="true" tabindex="-1"></a>folium.TileLayer(tiles<span class="op">=</span><span class="st">'https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/</span><span class="sc">{z}</span><span class="st">/</span><span class="sc">{y}</span><span class="st">/</span><span class="sc">{x}</span><span class="st">.png'</span>, name<span class="op">=</span><span class="st">'ESRI World Imagery'</span>, attr<span class="op">=</span><span class="st">'Tiles &amp;copy; Esri &amp;mdash; Source: Esri, i-cubed, USDA, USGS, AEX, GeoEye, Getmapping, Aerogrid, IGN, IGP, UPR-EGP, and the GIS User Community'</span>,overlay<span class="op">=</span><span class="st">'True'</span>).add_to(map_)</span>
-<span id="cb13-22"><a href="#cb13-22" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb13-23"><a href="#cb13-23" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb13-24"><a href="#cb13-24" aria-hidden="true" tabindex="-1"></a>map_layer <span class="op">=</span> TileLayer(</span>
-<span id="cb13-25"><a href="#cb13-25" aria-hidden="true" tabindex="-1"></a>    tiles<span class="op">=</span>methane_plume_tile[<span class="st">"tiles"</span>][<span class="dv">0</span>],</span>
-<span id="cb13-26"><a href="#cb13-26" aria-hidden="true" tabindex="-1"></a>    name<span class="op">=</span><span class="st">'Plume Complex'</span>,</span>
-<span id="cb13-27"><a href="#cb13-27" aria-hidden="true" tabindex="-1"></a>    overlay<span class="op">=</span><span class="st">'True'</span>,</span>
-<span id="cb13-28"><a href="#cb13-28" aria-hidden="true" tabindex="-1"></a>    attr<span class="op">=</span><span class="st">"GHG"</span>,</span>
-<span id="cb13-29"><a href="#cb13-29" aria-hidden="true" tabindex="-1"></a>    opacity<span class="op">=</span><span class="dv">1</span>,</span>
-<span id="cb13-30"><a href="#cb13-30" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb13-31"><a href="#cb13-31" aria-hidden="true" tabindex="-1"></a>map_layer.add_to(map_)</span>
-<span id="cb13-32"><a href="#cb13-32" aria-hidden="true" tabindex="-1"></a>folium.LayerControl(collapsed<span class="op">=</span><span class="va">False</span>, position<span class="op">=</span><span class="st">'bottomleft'</span>).add_to(map_)</span>
-<span id="cb13-33"><a href="#cb13-33" aria-hidden="true" tabindex="-1"></a>map_.add_child(color_map)</span>
-<span id="cb13-34"><a href="#cb13-34" aria-hidden="true" tabindex="-1"></a>svg_style <span class="op">=</span> <span class="st">'&lt;style&gt;svg#legend {font-size: 14px; background-color: white;}&lt;/style&gt;'</span></span>
-<span id="cb13-35"><a href="#cb13-35" aria-hidden="true" tabindex="-1"></a>map_.get_root().header.add_child(folium.Element(svg_style))</span>
-<span id="cb13-36"><a href="#cb13-36" aria-hidden="true" tabindex="-1"></a><span class="co"># visualising the map</span></span>
-<span id="cb13-37"><a href="#cb13-37" aria-hidden="true" tabindex="-1"></a>map_</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<div id="cell-26" class="cell">
-<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Creating a dataframe for each plume in the STAC and its corresponding area </span></span>
-<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>plume_df <span class="op">=</span> pd.DataFrame()</span>
-<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> plume <span class="kw">in</span> parse_plume_complexes:</span>
-<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a>    temp_polygon <span class="op">=</span> geopandas.GeoDataFrame.from_features([plume])[<span class="st">'geometry'</span>].values[<span class="dv">0</span>]</span>
-<span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a>    geod <span class="op">=</span> Geod(ellps<span class="op">=</span><span class="st">'WGS84'</span>)</span>
-<span id="cb14-7"><a href="#cb14-7" aria-hidden="true" tabindex="-1"></a>    ply <span class="op">=</span> wkt.loads(<span class="bu">str</span>(temp_polygon))</span>
-<span id="cb14-8"><a href="#cb14-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb14-9"><a href="#cb14-9" aria-hidden="true" tabindex="-1"></a>    temp_dict <span class="op">=</span> {<span class="st">'id'</span>:plume[<span class="st">'id'</span>], <span class="st">'geometry'</span>:temp_polygon, <span class="st">'area(km2)'</span>:(<span class="bu">abs</span>(geod.geometry_area_perimeter(ply)[<span class="dv">0</span>])<span class="op">/</span><span class="fl">1e+6</span>)}</span>
-<span id="cb14-10"><a href="#cb14-10" aria-hidden="true" tabindex="-1"></a>    plume_df <span class="op">=</span> plume_df._append(temp_dict, ignore_index <span class="op">=</span> <span class="va">True</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
 <div id="cell-27" class="cell">
-<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>plume_df</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Set a colormap for the granule</span></span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Please refer to matplotlib library if you'd prefer choosing a different color ramp (https://matplotlib.org/stable/users/explain/colors/colormaps.html)</span></span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>colormap <span class="op">=</span> <span class="st">"magma"</span> </span>
+<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-6"><a href="#cb15-6" aria-hidden="true" tabindex="-1"></a><span class="co">#Defining the breaks in the colormap </span></span>
+<span id="cb15-7"><a href="#cb15-7" aria-hidden="true" tabindex="-1"></a>color_map <span class="op">=</span> cm.LinearColormap(colors <span class="op">=</span> [<span class="st">'#310597'</span>, <span class="st">'#4C02A1'</span>, <span class="st">'#6600A7'</span>, <span class="st">'#7E03A8'</span>, <span class="st">'#9511A1'</span>, <span class="st">'#AA2395'</span>, <span class="st">'#BC3587'</span>, <span class="st">'#CC4778'</span>, <span class="st">'#DA5A6A'</span>, <span class="st">'#E66C5C'</span>, <span class="st">'#F0804E'</span>, <span class="st">'#F89540'</span>,<span class="st">'#FDAC33'</span>, <span class="st">'#FDC527'</span>, <span class="st">'#F8DF25'</span>], vmin <span class="op">=</span> <span class="dv">0</span>, vmax <span class="op">=</span> <span class="dv">1500</span> )</span>
+<span id="cb15-8"><a href="#cb15-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-9"><a href="#cb15-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-10"><a href="#cb15-10" aria-hidden="true" tabindex="-1"></a><span class="co"># Add an appropriate caption, in this case it would be Parts per million meter</span></span>
+<span id="cb15-11"><a href="#cb15-11" aria-hidden="true" tabindex="-1"></a>color_map.caption <span class="op">=</span> <span class="st">'ppm-m'</span></span>
+<span id="cb15-12"><a href="#cb15-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-13"><a href="#cb15-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-14"><a href="#cb15-14" aria-hidden="true" tabindex="-1"></a><span class="co"># Select the item ID which you want to visualize. Item ID is in the format yyyymmdd followed by the timestamp. This ID can be extracted from the COG name as well.</span></span>
+<span id="cb15-15"><a href="#cb15-15" aria-hidden="true" tabindex="-1"></a><span class="co"># Set initial zoom and center of map for plume Layer</span></span>
+<span id="cb15-16"><a href="#cb15-16" aria-hidden="true" tabindex="-1"></a>map_ <span class="op">=</span> folium.Map(location<span class="op">=</span>(methane_plume_tile_1[<span class="st">"center"</span>][<span class="dv">1</span>], methane_plume_tile_1[<span class="st">"center"</span>][<span class="dv">0</span>]), zoom_start<span class="op">=</span><span class="dv">13</span>, tiles<span class="op">=</span><span class="va">None</span>, tooltip <span class="op">=</span> <span class="st">'test tool tip'</span>)</span>
+<span id="cb15-17"><a href="#cb15-17" aria-hidden="true" tabindex="-1"></a>folium.TileLayer(tiles<span class="op">=</span><span class="st">'https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/</span><span class="sc">{z}</span><span class="st">/</span><span class="sc">{y}</span><span class="st">/</span><span class="sc">{x}</span><span class="st">.png'</span>, name<span class="op">=</span><span class="st">'ESRI World Imagery'</span>, attr<span class="op">=</span><span class="st">'Tiles &amp;copy; Esri &amp;mdash; Source: Esri, i-cubed, USDA, USGS, AEX, GeoEye, Getmapping, Aerogrid, IGN, IGP, UPR-EGP, and the GIS User Community'</span>,overlay<span class="op">=</span><span class="st">'True'</span>).add_to(map_)</span>
+<span id="cb15-18"><a href="#cb15-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-19"><a href="#cb15-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-20"><a href="#cb15-20" aria-hidden="true" tabindex="-1"></a><span class="co"># Use the 'TileLayer' library to display the raster layer, add an appropriate caption, and adjust the transparency of the layer on the map</span></span>
+<span id="cb15-21"><a href="#cb15-21" aria-hidden="true" tabindex="-1"></a>map_layer <span class="op">=</span> TileLayer(</span>
+<span id="cb15-22"><a href="#cb15-22" aria-hidden="true" tabindex="-1"></a>    tiles<span class="op">=</span>methane_plume_tile_1[<span class="st">"tiles"</span>][<span class="dv">0</span>],</span>
+<span id="cb15-23"><a href="#cb15-23" aria-hidden="true" tabindex="-1"></a>    name<span class="op">=</span><span class="st">'Plume Complex Landfill'</span>,</span>
+<span id="cb15-24"><a href="#cb15-24" aria-hidden="true" tabindex="-1"></a>    overlay<span class="op">=</span><span class="st">'True'</span>,</span>
+<span id="cb15-25"><a href="#cb15-25" aria-hidden="true" tabindex="-1"></a>    attr<span class="op">=</span><span class="st">"GHG"</span>,</span>
+<span id="cb15-26"><a href="#cb15-26" aria-hidden="true" tabindex="-1"></a>    opacity<span class="op">=</span><span class="dv">1</span>,</span>
+<span id="cb15-27"><a href="#cb15-27" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb15-28"><a href="#cb15-28" aria-hidden="true" tabindex="-1"></a>map_layer.add_to(map_)</span>
+<span id="cb15-29"><a href="#cb15-29" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-30"><a href="#cb15-30" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-31"><a href="#cb15-31" aria-hidden="true" tabindex="-1"></a><span class="co"># Adjust map elements </span></span>
+<span id="cb15-32"><a href="#cb15-32" aria-hidden="true" tabindex="-1"></a>folium.LayerControl(collapsed<span class="op">=</span><span class="va">False</span>, position<span class="op">=</span><span class="st">'bottomleft'</span>).add_to(map_)</span>
+<span id="cb15-33"><a href="#cb15-33" aria-hidden="true" tabindex="-1"></a>map_.add_child(color_map)</span>
+<span id="cb15-34"><a href="#cb15-34" aria-hidden="true" tabindex="-1"></a>svg_style <span class="op">=</span> <span class="st">'&lt;style&gt;svg#legend {font-size: 14px; background-color: white;}&lt;/style&gt;'</span></span>
+<span id="cb15-35"><a href="#cb15-35" aria-hidden="true" tabindex="-1"></a>map_.get_root().header.add_child(folium.Element(svg_style))</span>
+<span id="cb15-36"><a href="#cb15-36" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-37"><a href="#cb15-37" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-38"><a href="#cb15-38" aria-hidden="true" tabindex="-1"></a><span class="co"># Visualizing the map</span></span>
+<span id="cb15-39"><a href="#cb15-39" aria-hidden="true" tabindex="-1"></a>map_</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div id="cell-28" class="cell">
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>colormap <span class="op">=</span> <span class="st">"magma"</span> <span class="co"># please refer to matplotlib library if you'd prefer choosing a different color ramp.</span></span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a><span class="co"># For more information on Colormaps in Matplotlib, please visit https://matplotlib.org/stable/users/explain/colors/colormaps.html</span></span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a><span class="co">#Defining the breaks in the colormap </span></span>
+<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a>color_map <span class="op">=</span> cm.LinearColormap(colors <span class="op">=</span> [<span class="st">'#310597'</span>, <span class="st">'#4C02A1'</span>, <span class="st">'#6600A7'</span>, <span class="st">'#7E03A8'</span>, <span class="st">'#9511A1'</span>, <span class="st">'#AA2395'</span>, <span class="st">'#BC3587'</span>, <span class="st">'#CC4778'</span>, <span class="st">'#DA5A6A'</span>, <span class="st">'#E66C5C'</span>, <span class="st">'#F0804E'</span>, <span class="st">'#F89540'</span>,<span class="st">'#FDAC33'</span>, <span class="st">'#FDC527'</span>, <span class="st">'#F8DF25'</span>], vmin <span class="op">=</span> <span class="dv">0</span>, vmax <span class="op">=</span> <span class="dv">1500</span> )</span>
+<span id="cb16-6"><a href="#cb16-6" aria-hidden="true" tabindex="-1"></a>color_map.caption <span class="op">=</span> <span class="st">'ppm-m'</span></span>
+<span id="cb16-7"><a href="#cb16-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-8"><a href="#cb16-8" aria-hidden="true" tabindex="-1"></a><span class="co"># Set initial zoom and center of map for plume Layer</span></span>
+<span id="cb16-9"><a href="#cb16-9" aria-hidden="true" tabindex="-1"></a>map_ <span class="op">=</span> folium.Map(location<span class="op">=</span>(methane_plume_tile_2[<span class="st">"center"</span>][<span class="dv">1</span>], methane_plume_tile_2[<span class="st">"center"</span>][<span class="dv">0</span>]), zoom_start<span class="op">=</span><span class="dv">13</span>, tiles<span class="op">=</span><span class="va">None</span>, tooltip <span class="op">=</span> <span class="st">'test tool tip'</span>)</span>
+<span id="cb16-10"><a href="#cb16-10" aria-hidden="true" tabindex="-1"></a>folium.TileLayer(tiles<span class="op">=</span><span class="st">'https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/</span><span class="sc">{z}</span><span class="st">/</span><span class="sc">{y}</span><span class="st">/</span><span class="sc">{x}</span><span class="st">.png'</span>, name<span class="op">=</span><span class="st">'ESRI World Imagery'</span>, attr<span class="op">=</span><span class="st">'Tiles &amp;copy; Esri &amp;mdash; Source: Esri, i-cubed, USDA, USGS, AEX, GeoEye, Getmapping, Aerogrid, IGN, IGP, UPR-EGP, and the GIS User Community'</span>,overlay<span class="op">=</span><span class="st">'True'</span>).add_to(map_)</span>
+<span id="cb16-11"><a href="#cb16-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-12"><a href="#cb16-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-13"><a href="#cb16-13" aria-hidden="true" tabindex="-1"></a>map_layer <span class="op">=</span> TileLayer(</span>
+<span id="cb16-14"><a href="#cb16-14" aria-hidden="true" tabindex="-1"></a>    tiles<span class="op">=</span>methane_plume_tile_2[<span class="st">"tiles"</span>][<span class="dv">0</span>],</span>
+<span id="cb16-15"><a href="#cb16-15" aria-hidden="true" tabindex="-1"></a>    name<span class="op">=</span><span class="st">'Plume Complex Agriculture'</span>,</span>
+<span id="cb16-16"><a href="#cb16-16" aria-hidden="true" tabindex="-1"></a>    overlay<span class="op">=</span><span class="st">'True'</span>,</span>
+<span id="cb16-17"><a href="#cb16-17" aria-hidden="true" tabindex="-1"></a>    attr<span class="op">=</span><span class="st">"GHG"</span>,</span>
+<span id="cb16-18"><a href="#cb16-18" aria-hidden="true" tabindex="-1"></a>    opacity<span class="op">=</span><span class="dv">1</span>,</span>
+<span id="cb16-19"><a href="#cb16-19" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb16-20"><a href="#cb16-20" aria-hidden="true" tabindex="-1"></a>map_layer.add_to(map_)</span>
+<span id="cb16-21"><a href="#cb16-21" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-22"><a href="#cb16-22" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-23"><a href="#cb16-23" aria-hidden="true" tabindex="-1"></a><span class="co"># Adjust map elements </span></span>
+<span id="cb16-24"><a href="#cb16-24" aria-hidden="true" tabindex="-1"></a>folium.LayerControl(collapsed<span class="op">=</span><span class="va">False</span>, position<span class="op">=</span><span class="st">'bottomleft'</span>).add_to(map_)</span>
+<span id="cb16-25"><a href="#cb16-25" aria-hidden="true" tabindex="-1"></a>map_.add_child(color_map)</span>
+<span id="cb16-26"><a href="#cb16-26" aria-hidden="true" tabindex="-1"></a>svg_style <span class="op">=</span> <span class="st">'&lt;style&gt;svg#legend {font-size: 14px; background-color: white;}&lt;/style&gt;'</span></span>
+<span id="cb16-27"><a href="#cb16-27" aria-hidden="true" tabindex="-1"></a>map_.get_root().header.add_child(folium.Element(svg_style))</span>
+<span id="cb16-28"><a href="#cb16-28" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-29"><a href="#cb16-29" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-30"><a href="#cb16-30" aria-hidden="true" tabindex="-1"></a><span class="co"># Visualizing the map</span></span>
+<span id="cb16-31"><a href="#cb16-31" aria-hidden="true" tabindex="-1"></a>map_</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div id="cell-29" class="cell">
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Creating a dataframe for each plume in the STAC and its corresponding area </span></span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>plume_df <span class="op">=</span> pd.DataFrame()</span>
+<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> plume <span class="kw">in</span> parse_plume_complexes:</span>
+<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a>    temp_polygon <span class="op">=</span> geopandas.GeoDataFrame.from_features([plume])[<span class="st">'geometry'</span>].values[<span class="dv">0</span>]</span>
+<span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a>    geod <span class="op">=</span> Geod(ellps<span class="op">=</span><span class="st">'WGS84'</span>)</span>
+<span id="cb17-6"><a href="#cb17-6" aria-hidden="true" tabindex="-1"></a>    ply <span class="op">=</span> wkt.loads(<span class="bu">str</span>(temp_polygon))</span>
+<span id="cb17-7"><a href="#cb17-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-8"><a href="#cb17-8" aria-hidden="true" tabindex="-1"></a>    temp_dict <span class="op">=</span> {<span class="st">'id'</span>:plume[<span class="st">'id'</span>], <span class="st">'geometry'</span>:temp_polygon, <span class="st">'area(km2)'</span>:(<span class="bu">abs</span>(geod.geometry_area_perimeter(ply)[<span class="dv">0</span>])<span class="op">/</span><span class="fl">1e+6</span>), <span class="st">'date'</span>:plume[<span class="st">'properties'</span>][<span class="st">'datetime'</span>][:<span class="dv">10</span>]}</span>
+<span id="cb17-9"><a href="#cb17-9" aria-hidden="true" tabindex="-1"></a>    plume_df <span class="op">=</span> plume_df._append(temp_dict, ignore_index <span class="op">=</span> <span class="va">True</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div id="cell-30" class="cell">
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Print the generated dataframe</span></span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>plume_df</span>
+<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a><span class="co"># plume['properties']['datetime'][:10]</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 <section id="visualizing-ch4-emission-plumes-in-the-permian-basin" class="level2">
 <h2 class="anchored" data-anchor-id="visualizing-ch4-emission-plumes-in-the-permian-basin">Visualizing CH4 Emission Plumes in the Permian Basin</h2>
-<div id="cell-29" class="cell">
-<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Converting plume_df into a geo dataframe for further geospatial analysis</span></span>
-<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>geo_temp_df <span class="op">=</span> geopandas.GeoDataFrame(plume_df, geometry<span class="op">=</span>plume_df.geometry, crs <span class="op">=</span> <span class="st">'EPSG:4326'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div id="cell-32" class="cell">
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Converting plume_df into a geo dataframe for further geospatial analysis</span></span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>geo_temp_df <span class="op">=</span> geopandas.GeoDataFrame(plume_df, geometry<span class="op">=</span>plume_df.geometry, crs <span class="op">=</span> <span class="st">'EPSG:4326'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div id="cell-30" class="cell">
-<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Selecting all the plume tagets which are under permian basin</span></span>
-<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>geo_temp_df <span class="op">=</span> geopandas.clip(geo_temp_df, permian_basin)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<div id="cell-31" class="cell">
-<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>colormap <span class="op">=</span> <span class="st">"magma"</span> <span class="co"># please refer to matplotlib library if you'd prefer choosing a different color ramp.</span></span>
-<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a><span class="co"># For more information on Colormaps in Matplotlib, please visit https://matplotlib.org/stable/users/explain/colors/colormaps.html</span></span>
-<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a>color_map <span class="op">=</span> cm.LinearColormap(colors <span class="op">=</span> [<span class="st">'#310597'</span>, <span class="st">'#4C02A1'</span>, <span class="st">'#6600A7'</span>, <span class="st">'#7E03A8'</span>, <span class="st">'#9511A1'</span>, <span class="st">'#AA2395'</span>, <span class="st">'#BC3587'</span>, <span class="st">'#CC4778'</span>, <span class="st">'#DA5A6A'</span>, <span class="st">'#E66C5C'</span>, <span class="st">'#F0804E'</span>, <span class="st">'#F89540'</span>,<span class="st">'#FDAC33'</span>, <span class="st">'#FDC527'</span>, <span class="st">'#F8DF25'</span>], vmin <span class="op">=</span> <span class="dv">0</span>, vmax <span class="op">=</span> <span class="dv">1500</span> )</span>
-<span id="cb18-5"><a href="#cb18-5" aria-hidden="true" tabindex="-1"></a>color_map.caption <span class="op">=</span> <span class="st">'ppm-m'</span></span>
-<span id="cb18-6"><a href="#cb18-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Select the item ID which you want to visualize. Item ID is in the format yyyymmdd followed by the timestamp. This ID can be extracted from the COG name as well.</span></span>
-<span id="cb18-7"><a href="#cb18-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb18-8"><a href="#cb18-8" aria-hidden="true" tabindex="-1"></a>map_ <span class="op">=</span> folium.Map(location<span class="op">=</span>[<span class="dv">32</span>,<span class="op">-</span><span class="dv">102</span>], zoom_start<span class="op">=</span><span class="dv">10</span>, tiles<span class="op">=</span><span class="va">None</span>)</span>
-<span id="cb18-9"><a href="#cb18-9" aria-hidden="true" tabindex="-1"></a>folium.TileLayer(tiles<span class="op">=</span><span class="st">'https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/</span><span class="sc">{z}</span><span class="st">/</span><span class="sc">{y}</span><span class="st">/</span><span class="sc">{x}</span><span class="st">.png'</span>, name<span class="op">=</span><span class="st">'ESRI World Imagery'</span>, attr<span class="op">=</span><span class="st">'Tiles &amp;copy; Esri &amp;mdash; Source: Esri, i-cubed, USDA, USGS, AEX, GeoEye, Getmapping, Aerogrid, IGN, IGP, UPR-EGP, and the GIS User Community'</span>,overlay<span class="op">=</span><span class="st">'True'</span>).add_to(map_)</span>
-<span id="cb18-10"><a href="#cb18-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb18-11"><a href="#cb18-11" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> tile_id <span class="kw">in</span> geo_temp_df[<span class="st">'id'</span>]: </span>
-<span id="cb18-12"><a href="#cb18-12" aria-hidden="true" tabindex="-1"></a>    methane_plume_tile <span class="op">=</span> requests.get(</span>
-<span id="cb18-13"><a href="#cb18-13" aria-hidden="true" tabindex="-1"></a>        <span class="ss">f"</span><span class="sc">{</span>RASTER_API_URL<span class="sc">}</span><span class="ss">/stac/tilejson.json?collection=</span><span class="sc">{</span>plume_complexes[tile_id][<span class="st">'collection'</span>]<span class="sc">}</span><span class="ss">&amp;item=</span><span class="sc">{</span>plume_complexes[tile_id][<span class="st">'id'</span>]<span class="sc">}</span><span class="ss">"</span></span>
-<span id="cb18-14"><a href="#cb18-14" aria-hidden="true" tabindex="-1"></a>        <span class="ss">f"&amp;assets=</span><span class="sc">{</span>asset_name<span class="sc">}</span><span class="ss">"</span></span>
-<span id="cb18-15"><a href="#cb18-15" aria-hidden="true" tabindex="-1"></a>        <span class="ss">f"&amp;color_formula=gamma+r+1.05&amp;colormap_name=</span><span class="sc">{</span>colormap<span class="sc">}</span><span class="ss">"</span></span>
-<span id="cb18-16"><a href="#cb18-16" aria-hidden="true" tabindex="-1"></a>        <span class="ss">f"&amp;rescale=</span><span class="sc">{</span>rescale_values[<span class="st">'min'</span>]<span class="sc">}</span><span class="ss">,</span><span class="sc">{</span>rescale_values[<span class="st">'max'</span>]<span class="sc">}</span><span class="ss">"</span>, </span>
-<span id="cb18-17"><a href="#cb18-17" aria-hidden="true" tabindex="-1"></a>    ).json()</span>
-<span id="cb18-18"><a href="#cb18-18" aria-hidden="true" tabindex="-1"></a>    methane_plume_tile</span>
-<span id="cb18-19"><a href="#cb18-19" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb18-20"><a href="#cb18-20" aria-hidden="true" tabindex="-1"></a>    map_layer <span class="op">=</span> TileLayer(</span>
-<span id="cb18-21"><a href="#cb18-21" aria-hidden="true" tabindex="-1"></a>        tiles<span class="op">=</span>methane_plume_tile[<span class="st">"tiles"</span>][<span class="dv">0</span>],</span>
-<span id="cb18-22"><a href="#cb18-22" aria-hidden="true" tabindex="-1"></a>        name<span class="op">=</span>tile_id,</span>
-<span id="cb18-23"><a href="#cb18-23" aria-hidden="true" tabindex="-1"></a>        overlay<span class="op">=</span><span class="st">'True'</span>,</span>
-<span id="cb18-24"><a href="#cb18-24" aria-hidden="true" tabindex="-1"></a>        attr<span class="op">=</span><span class="st">"GHG"</span>,</span>
-<span id="cb18-25"><a href="#cb18-25" aria-hidden="true" tabindex="-1"></a>        opacity<span class="op">=</span><span class="dv">1</span>,</span>
-<span id="cb18-26"><a href="#cb18-26" aria-hidden="true" tabindex="-1"></a>    )</span>
-<span id="cb18-27"><a href="#cb18-27" aria-hidden="true" tabindex="-1"></a>    map_layer.add_to(map_)</span>
-<span id="cb18-28"><a href="#cb18-28" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb18-29"><a href="#cb18-29" aria-hidden="true" tabindex="-1"></a>map_layer_permian <span class="op">=</span> folium.GeoJson(permian_basin, name<span class="op">=</span> <span class="st">'Permian Shape'</span>).add_to(m_)</span>
-<span id="cb18-30"><a href="#cb18-30" aria-hidden="true" tabindex="-1"></a>map_layer_permian.add_to(map_)</span>
-<span id="cb18-31"><a href="#cb18-31" aria-hidden="true" tabindex="-1"></a>folium.LayerControl(collapsed<span class="op">=</span><span class="va">True</span>, position<span class="op">=</span><span class="st">'bottomleft'</span>).add_to(map_)</span>
-<span id="cb18-32"><a href="#cb18-32" aria-hidden="true" tabindex="-1"></a>map_.add_child(color_map)</span>
-<span id="cb18-33"><a href="#cb18-33" aria-hidden="true" tabindex="-1"></a>svg_style <span class="op">=</span> <span class="st">'&lt;style&gt;svg#legend {font-size: 14px; background-color: white;}&lt;/style&gt;'</span></span>
-<span id="cb18-34"><a href="#cb18-34" aria-hidden="true" tabindex="-1"></a>map_.get_root().header.add_child(folium.Element(svg_style))</span>
-<span id="cb18-35"><a href="#cb18-35" aria-hidden="true" tabindex="-1"></a><span class="co"># visualising the map</span></span>
-<span id="cb18-36"><a href="#cb18-36" aria-hidden="true" tabindex="-1"></a>map_</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div id="cell-33" class="cell">
+<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Selecting all the targeted plume areas that are within the Permian Basin region</span></span>
+<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a>geo_temp_df <span class="op">=</span> geopandas.clip(geo_temp_df, permian_basin)</span>
+<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a><span class="co"># filtered_geo_temp_df = geo_temp_df[(geo_temp_df['date']&lt;='2023-12-15') &amp; (geo_temp_df['date']&gt;='2023-07-01') ]</span></span>
+<span id="cb20-4"><a href="#cb20-4" aria-hidden="true" tabindex="-1"></a><span class="co"># filtered_geo_temp_df</span></span>
+<span id="cb20-5"><a href="#cb20-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-6"><a href="#cb20-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-7"><a href="#cb20-7" aria-hidden="true" tabindex="-1"></a>colormap <span class="op">=</span> <span class="st">"magma"</span> <span class="co"># please refer to matplotlib library if you'd prefer choosing a different color ramp.</span></span>
+<span id="cb20-8"><a href="#cb20-8" aria-hidden="true" tabindex="-1"></a><span class="co"># For more information on Colormaps in Matplotlib, please visit https://matplotlib.org/stable/users/explain/colors/colormaps.html</span></span>
+<span id="cb20-9"><a href="#cb20-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-10"><a href="#cb20-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-11"><a href="#cb20-11" aria-hidden="true" tabindex="-1"></a><span class="co"># Defining the breaks in the colormap</span></span>
+<span id="cb20-12"><a href="#cb20-12" aria-hidden="true" tabindex="-1"></a>color_map <span class="op">=</span> cm.LinearColormap(colors <span class="op">=</span> [<span class="st">'#310597'</span>, <span class="st">'#4C02A1'</span>, <span class="st">'#6600A7'</span>, <span class="st">'#7E03A8'</span>, <span class="st">'#9511A1'</span>, <span class="st">'#AA2395'</span>, <span class="st">'#BC3587'</span>, <span class="st">'#CC4778'</span>, <span class="st">'#DA5A6A'</span>, <span class="st">'#E66C5C'</span>, <span class="st">'#F0804E'</span>, <span class="st">'#F89540'</span>,<span class="st">'#FDAC33'</span>, <span class="st">'#FDC527'</span>, <span class="st">'#F8DF25'</span>], vmin <span class="op">=</span> <span class="dv">0</span>, vmax <span class="op">=</span> <span class="dv">1500</span> )</span>
+<span id="cb20-13"><a href="#cb20-13" aria-hidden="true" tabindex="-1"></a>color_map.caption <span class="op">=</span> <span class="st">'ppm-m'</span></span>
+<span id="cb20-14"><a href="#cb20-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-15"><a href="#cb20-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-16"><a href="#cb20-16" aria-hidden="true" tabindex="-1"></a><span class="co"># Set the initial zoom value and adjust the plume layer to be displayed at the 31.8 degree North and -101.7 degree West</span></span>
+<span id="cb20-17"><a href="#cb20-17" aria-hidden="true" tabindex="-1"></a>map_ <span class="op">=</span> folium.Map(location<span class="op">=</span>[<span class="fl">31.8</span>,<span class="op">-</span><span class="fl">101.7</span>], zoom_start<span class="op">=</span><span class="dv">11</span>, tiles<span class="op">=</span><span class="va">None</span>)</span>
+<span id="cb20-18"><a href="#cb20-18" aria-hidden="true" tabindex="-1"></a>folium.TileLayer(tiles<span class="op">=</span><span class="st">'https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/</span><span class="sc">{z}</span><span class="st">/</span><span class="sc">{y}</span><span class="st">/</span><span class="sc">{x}</span><span class="st">.png'</span>, name<span class="op">=</span><span class="st">'ESRI World Imagery'</span>, attr<span class="op">=</span><span class="st">'Tiles &amp;copy; Esri &amp;mdash; Source: Esri, i-cubed, USDA, USGS, AEX, GeoEye, Getmapping, Aerogrid, IGN, IGP, UPR-EGP, and the GIS User Community'</span>,overlay<span class="op">=</span><span class="st">'True'</span>).add_to(map_)</span>
+<span id="cb20-19"><a href="#cb20-19" aria-hidden="true" tabindex="-1"></a>new_coverage[[<span class="st">'fid'</span>, <span class="st">'geometry'</span>, <span class="st">'new_start_time'</span>]].explore(</span>
+<span id="cb20-20"><a href="#cb20-20" aria-hidden="true" tabindex="-1"></a>    <span class="st">"fid"</span>,</span>
+<span id="cb20-21"><a href="#cb20-21" aria-hidden="true" tabindex="-1"></a>    categorical<span class="op">=</span><span class="va">True</span>,</span>
+<span id="cb20-22"><a href="#cb20-22" aria-hidden="true" tabindex="-1"></a>    tooltip<span class="op">=</span>[</span>
+<span id="cb20-23"><a href="#cb20-23" aria-hidden="true" tabindex="-1"></a>        <span class="st">"fid"</span>,</span>
+<span id="cb20-24"><a href="#cb20-24" aria-hidden="true" tabindex="-1"></a>        <span class="st">"new_start_time"</span>,</span>
+<span id="cb20-25"><a href="#cb20-25" aria-hidden="true" tabindex="-1"></a>    ],</span>
+<span id="cb20-26"><a href="#cb20-26" aria-hidden="true" tabindex="-1"></a>    popup<span class="op">=</span><span class="va">True</span>,</span>
+<span id="cb20-27"><a href="#cb20-27" aria-hidden="true" tabindex="-1"></a>    style_kwds<span class="op">=</span><span class="bu">dict</span>(fillOpacity<span class="op">=</span><span class="fl">0.1</span>, width<span class="op">=</span><span class="dv">2</span>),</span>
+<span id="cb20-28"><a href="#cb20-28" aria-hidden="true" tabindex="-1"></a>    name<span class="op">=</span><span class="st">"Coverage"</span>,</span>
+<span id="cb20-29"><a href="#cb20-29" aria-hidden="true" tabindex="-1"></a>    m<span class="op">=</span>map_,</span>
+<span id="cb20-30"><a href="#cb20-30" aria-hidden="true" tabindex="-1"></a>    legend<span class="op">=</span><span class="va">False</span>,</span>
+<span id="cb20-31"><a href="#cb20-31" aria-hidden="true" tabindex="-1"></a>    show<span class="op">=</span><span class="va">True</span></span>
+<span id="cb20-32"><a href="#cb20-32" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb20-33"><a href="#cb20-33" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-34"><a href="#cb20-34" aria-hidden="true" tabindex="-1"></a>map_layer_permian <span class="op">=</span> folium.GeoJson(permian_basin, name<span class="op">=</span> <span class="st">'Permian Shape'</span>)</span>
+<span id="cb20-35"><a href="#cb20-35" aria-hidden="true" tabindex="-1"></a>map_layer_permian.add_to(map_)</span>
+<span id="cb20-36"><a href="#cb20-36" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-37"><a href="#cb20-37" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-38"><a href="#cb20-38" aria-hidden="true" tabindex="-1"></a><span class="co"># Extract and display the tile using the appropriate ID, colormap, asset name (parameter), and rescale values </span></span>
+<span id="cb20-39"><a href="#cb20-39" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> tile_id <span class="kw">in</span> geo_temp_df[<span class="st">'id'</span>]: </span>
+<span id="cb20-40"><a href="#cb20-40" aria-hidden="true" tabindex="-1"></a>    methane_plume_tile <span class="op">=</span> requests.get(</span>
+<span id="cb20-41"><a href="#cb20-41" aria-hidden="true" tabindex="-1"></a>        <span class="ss">f"</span><span class="sc">{</span>RASTER_API_URL<span class="sc">}</span><span class="ss">/stac/tilejson.json?collection=</span><span class="sc">{</span>plume_complexes[tile_id][<span class="st">'collection'</span>]<span class="sc">}</span><span class="ss">&amp;item=</span><span class="sc">{</span>plume_complexes[tile_id][<span class="st">'id'</span>]<span class="sc">}</span><span class="ss">"</span></span>
+<span id="cb20-42"><a href="#cb20-42" aria-hidden="true" tabindex="-1"></a>        <span class="ss">f"&amp;assets=</span><span class="sc">{</span>asset_name<span class="sc">}</span><span class="ss">"</span></span>
+<span id="cb20-43"><a href="#cb20-43" aria-hidden="true" tabindex="-1"></a>        <span class="ss">f"&amp;color_formula=gamma+r+1.05&amp;colormap_name=</span><span class="sc">{</span>colormap<span class="sc">}</span><span class="ss">"</span></span>
+<span id="cb20-44"><a href="#cb20-44" aria-hidden="true" tabindex="-1"></a>        <span class="ss">f"&amp;rescale=</span><span class="sc">{</span>rescale_values[<span class="st">'min'</span>]<span class="sc">}</span><span class="ss">,</span><span class="sc">{</span>rescale_values[<span class="st">'max'</span>]<span class="sc">}</span><span class="ss">"</span>, </span>
+<span id="cb20-45"><a href="#cb20-45" aria-hidden="true" tabindex="-1"></a>    ).json()</span>
+<span id="cb20-46"><a href="#cb20-46" aria-hidden="true" tabindex="-1"></a>    methane_plume_tile</span>
+<span id="cb20-47"><a href="#cb20-47" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-48"><a href="#cb20-48" aria-hidden="true" tabindex="-1"></a>    map_layer <span class="op">=</span> TileLayer(</span>
+<span id="cb20-49"><a href="#cb20-49" aria-hidden="true" tabindex="-1"></a>        tiles<span class="op">=</span>methane_plume_tile[<span class="st">"tiles"</span>][<span class="dv">0</span>],</span>
+<span id="cb20-50"><a href="#cb20-50" aria-hidden="true" tabindex="-1"></a>        name<span class="op">=</span>tile_id,</span>
+<span id="cb20-51"><a href="#cb20-51" aria-hidden="true" tabindex="-1"></a>        show<span class="op">=</span><span class="va">True</span>,</span>
+<span id="cb20-52"><a href="#cb20-52" aria-hidden="true" tabindex="-1"></a>        overlay<span class="op">=</span><span class="st">'True'</span>,</span>
+<span id="cb20-53"><a href="#cb20-53" aria-hidden="true" tabindex="-1"></a>        attr<span class="op">=</span><span class="st">"GHG"</span>,</span>
+<span id="cb20-54"><a href="#cb20-54" aria-hidden="true" tabindex="-1"></a>        opacity<span class="op">=</span><span class="dv">1</span>,</span>
+<span id="cb20-55"><a href="#cb20-55" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb20-56"><a href="#cb20-56" aria-hidden="true" tabindex="-1"></a>    map_layer.add_to(map_)</span>
+<span id="cb20-57"><a href="#cb20-57" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-58"><a href="#cb20-58" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-59"><a href="#cb20-59" aria-hidden="true" tabindex="-1"></a><span class="co"># Adjust map elements</span></span>
+<span id="cb20-60"><a href="#cb20-60" aria-hidden="true" tabindex="-1"></a>folium.LayerControl(collapsed<span class="op">=</span><span class="va">True</span>, position<span class="op">=</span><span class="st">'bottomleft'</span>).add_to(map_)</span>
+<span id="cb20-61"><a href="#cb20-61" aria-hidden="true" tabindex="-1"></a>map_.add_child(color_map)</span>
+<span id="cb20-62"><a href="#cb20-62" aria-hidden="true" tabindex="-1"></a>svg_style <span class="op">=</span> <span class="st">'&lt;style&gt;svg#legend {font-size: 14px; background-color: white;}&lt;/style&gt;'</span></span>
+<span id="cb20-63"><a href="#cb20-63" aria-hidden="true" tabindex="-1"></a>map_.get_root().header.add_child(folium.Element(svg_style))</span>
+<span id="cb20-64"><a href="#cb20-64" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-65"><a href="#cb20-65" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-66"><a href="#cb20-66" aria-hidden="true" tabindex="-1"></a><span class="co"># Visualizing the map</span></span>
+<span id="cb20-67"><a href="#cb20-67" aria-hidden="true" tabindex="-1"></a>map_</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 
 

@@ -359,8 +359,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="requirements" class="level2">
 <h2 class="anchored" data-anchor-id="requirements">Requirements</h2>
 <ul>
-<li>NASA Earthdata Account</li>
-<li>Set up Python Environment - See setup_instructions.md in the ‘/setup/’ folder</li>
+<li>Set up Python Environment - See setup_instructions.md in the <code>/setup/</code> folder</li>
 </ul>
 </section>
 <section id="learning-objectives" class="level2">
@@ -439,26 +438,28 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 <p>Examining the contents of our <code>collection</code> under <code>summaries</code> we see that the data is available from January 2000 to December 2021. By looking at the <code>dashboard:time density</code> we observe that the periodic frequency of these observations is monthly.</p>
 <div id="cell-10" class="cell">
-<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> get_item_count(STAC_API_URL, collection_id):</span>
-<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>    count <span class="op">=</span> <span class="dv">0</span></span>
-<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>    items_url <span class="op">=</span> <span class="ss">f"</span><span class="sc">{</span>STAC_API_URL<span class="sc">}</span><span class="ss">/collections/</span><span class="sc">{</span>collection_id<span class="sc">}</span><span class="ss">/items"</span></span>
-<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>    <span class="cf">while</span> <span class="va">True</span>:</span>
-<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>        response <span class="op">=</span> requests.get(items_url)</span>
-<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> <span class="kw">not</span> response.ok:</span>
-<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a>            <span class="bu">print</span>(<span class="st">"error getting items"</span>)</span>
-<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a>            exit()</span>
-<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a>        stac <span class="op">=</span> response.json()</span>
-<span id="cb4-13"><a href="#cb4-13" aria-hidden="true" tabindex="-1"></a>        count <span class="op">+=</span> <span class="bu">int</span>(stac[<span class="st">"context"</span>].get(<span class="st">"returned"</span>, <span class="dv">0</span>))</span>
-<span id="cb4-14"><a href="#cb4-14" aria-hidden="true" tabindex="-1"></a>        <span class="bu">next</span> <span class="op">=</span> [link <span class="cf">for</span> link <span class="kw">in</span> stac[<span class="st">"links"</span>] <span class="cf">if</span> link[<span class="st">"rel"</span>] <span class="op">==</span> <span class="st">"next"</span>]</span>
-<span id="cb4-15"><a href="#cb4-15" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-16"><a href="#cb4-16" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> <span class="kw">not</span> <span class="bu">next</span>:</span>
-<span id="cb4-17"><a href="#cb4-17" aria-hidden="true" tabindex="-1"></a>            <span class="cf">break</span></span>
-<span id="cb4-18"><a href="#cb4-18" aria-hidden="true" tabindex="-1"></a>        items_url <span class="op">=</span> <span class="bu">next</span>[<span class="dv">0</span>][<span class="st">"href"</span>]</span>
-<span id="cb4-19"><a href="#cb4-19" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-20"><a href="#cb4-20" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> count</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Create a function that would search for the number of items in above data collection in the STAC API</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> get_item_count(STAC_API_URL, collection_id):</span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>    count <span class="op">=</span> <span class="dv">0</span></span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>    items_url <span class="op">=</span> <span class="ss">f"</span><span class="sc">{</span>STAC_API_URL<span class="sc">}</span><span class="ss">/collections/</span><span class="sc">{</span>collection_id<span class="sc">}</span><span class="ss">/items"</span></span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>    <span class="cf">while</span> <span class="va">True</span>:</span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>        response <span class="op">=</span> requests.get(items_url)</span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> <span class="kw">not</span> response.ok:</span>
+<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a>            <span class="bu">print</span>(<span class="st">"error getting items"</span>)</span>
+<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a>            exit()</span>
+<span id="cb4-13"><a href="#cb4-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-14"><a href="#cb4-14" aria-hidden="true" tabindex="-1"></a>        stac <span class="op">=</span> response.json()</span>
+<span id="cb4-15"><a href="#cb4-15" aria-hidden="true" tabindex="-1"></a>        count <span class="op">+=</span> <span class="bu">int</span>(stac[<span class="st">"context"</span>].get(<span class="st">"returned"</span>, <span class="dv">0</span>))</span>
+<span id="cb4-16"><a href="#cb4-16" aria-hidden="true" tabindex="-1"></a>        <span class="bu">next</span> <span class="op">=</span> [link <span class="cf">for</span> link <span class="kw">in</span> stac[<span class="st">"links"</span>] <span class="cf">if</span> link[<span class="st">"rel"</span>] <span class="op">==</span> <span class="st">"next"</span>]</span>
+<span id="cb4-17"><a href="#cb4-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-18"><a href="#cb4-18" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> <span class="kw">not</span> <span class="bu">next</span>:</span>
+<span id="cb4-19"><a href="#cb4-19" aria-hidden="true" tabindex="-1"></a>            <span class="cf">break</span></span>
+<span id="cb4-20"><a href="#cb4-20" aria-hidden="true" tabindex="-1"></a>        items_url <span class="op">=</span> <span class="bu">next</span>[<span class="dv">0</span>][<span class="st">"href"</span>]</span>
+<span id="cb4-21"><a href="#cb4-21" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-22"><a href="#cb4-22" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> count</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div id="cell-11" class="cell">
 <div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Check total number of items available</span></span>
@@ -482,18 +483,21 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>We will explore changes in fossil fuel emissions in urban egions. In this notebook, we’ll explore the impacts of these emissions and explore these changes over time. We’ll then visualize the outputs on a map using <code>folium</code>.</p>
 <div id="cell-14" class="cell">
 <div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co"># to access the year value from each item more easily, this will let us query more explicity by year and month (e.g., 2020-02)</span></span>
-<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>items_odiac <span class="op">=</span> {item[<span class="st">"properties"</span>][<span class="st">"start_datetime"</span>][:<span class="dv">7</span>]: item <span class="cf">for</span> item <span class="kw">in</span> items_odiac} </span>
-<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>asset_name <span class="op">=</span> <span class="st">"co2-emissions"</span></span>
-<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>items_oco2 <span class="op">=</span> {item[<span class="st">"properties"</span>][<span class="st">"datetime"</span>][:<span class="dv">10</span>]: item <span class="cf">for</span> item <span class="kw">in</span> items_oco2} </span>
-<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>asset_name1 <span class="op">=</span> <span class="st">"xco2"</span></span>
-<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a>items_no2 <span class="op">=</span> {item[<span class="st">"properties"</span>][<span class="st">"start_datetime"</span>][:<span class="dv">10</span>]: item <span class="cf">for</span> item <span class="kw">in</span> items_no2}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Set the asset values to the appropriate parameter</span></span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>items_odiac <span class="op">=</span> {item[<span class="st">"properties"</span>][<span class="st">"start_datetime"</span>][:<span class="dv">7</span>]: item <span class="cf">for</span> item <span class="kw">in</span> items_odiac} </span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>asset_name <span class="op">=</span> <span class="st">"co2-emissions"</span></span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>items_oco2 <span class="op">=</span> {item[<span class="st">"properties"</span>][<span class="st">"datetime"</span>][:<span class="dv">10</span>]: item <span class="cf">for</span> item <span class="kw">in</span> items_oco2} </span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a>asset_name1 <span class="op">=</span> <span class="st">"xco2"</span></span>
+<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a>items_no2 <span class="op">=</span> {item[<span class="st">"properties"</span>][<span class="st">"start_datetime"</span>][:<span class="dv">10</span>]: item <span class="cf">for</span> item <span class="kw">in</span> items_no2}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div id="cell-15" class="cell">
-<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>rescale_values_odiac <span class="op">=</span> {<span class="st">"max"</span>:items_odiac[<span class="bu">list</span>(items_odiac.keys())[<span class="dv">0</span>]][<span class="st">"assets"</span>][asset_name][<span class="st">"raster:bands"</span>][<span class="dv">0</span>][<span class="st">"histogram"</span>][<span class="st">"max"</span>], <span class="st">"min"</span>:items_odiac[<span class="bu">list</span>(items_odiac.keys())[<span class="dv">0</span>]][<span class="st">"assets"</span>][asset_name][<span class="st">"raster:bands"</span>][<span class="dv">0</span>][<span class="st">"histogram"</span>][<span class="st">"min"</span>]}</span>
-<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>rescale_values_oco2 <span class="op">=</span> {<span class="st">'max'</span>:<span class="dv">415</span> , <span class="st">'min'</span>: <span class="dv">412</span>}</span>
-<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>rescale_values_no2 <span class="op">=</span> {<span class="st">'max'</span>: <span class="dv">9050373673124971</span>, <span class="st">'min'</span>: <span class="dv">0</span>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Below, we are entering the minimum and maximum values to provide our upper and lower bounds </span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>rescale_values_odiac <span class="op">=</span> {<span class="st">"max"</span>:items_odiac[<span class="bu">list</span>(items_odiac.keys())[<span class="dv">0</span>]][<span class="st">"assets"</span>][asset_name][<span class="st">"raster:bands"</span>][<span class="dv">0</span>][<span class="st">"histogram"</span>][<span class="st">"max"</span>], <span class="st">"min"</span>:items_odiac[<span class="bu">list</span>(items_odiac.keys())[<span class="dv">0</span>]][<span class="st">"assets"</span>][asset_name][<span class="st">"raster:bands"</span>][<span class="dv">0</span>][<span class="st">"histogram"</span>][<span class="st">"min"</span>]}</span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>rescale_values_oco2 <span class="op">=</span> {<span class="st">'max'</span>:<span class="dv">415</span> , <span class="st">'min'</span>: <span class="dv">412</span>}</span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>rescale_values_no2 <span class="op">=</span> {<span class="st">'max'</span>: <span class="dv">9050373673124971</span>, <span class="st">'min'</span>: <span class="dv">0</span>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Now we will pass the item id, collection name, and <code>rescaling_factor</code> to the <code>Raster API</code> endpoint. We will do this twice, once for January 2020 and again for January 2000, so that we can visualize each event independently.</p>
 </section>
@@ -501,31 +505,39 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <h2 class="anchored" data-anchor-id="opening-and-exploring-data-using-the-raster-api">Opening and Exploring Data Using the Raster API</h2>
 <p>In this notebook, we will explore the temporal impacts of methane emissions. We will visualize the outputs on a map using ‘folium’.</p>
 <div id="cell-18" class="cell">
-<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>color_map <span class="op">=</span> <span class="st">"rainbow"</span> <span class="co"># please select the color ramp from matplotlib library.</span></span>
-<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>january_2020_tile <span class="op">=</span> requests.get(</span>
-<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>    <span class="ss">f"</span><span class="sc">{</span>RASTER_API_URL<span class="sc">}</span><span class="ss">/stac/tilejson.json?collection=</span><span class="sc">{</span>items_odiac[<span class="st">'2020-01'</span>][<span class="st">'collection'</span>]<span class="sc">}</span><span class="ss">&amp;item=</span><span class="sc">{</span>items_odiac[<span class="st">'2020-01'</span>][<span class="st">'id'</span>]<span class="sc">}</span><span class="ss">"</span></span>
-<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>    <span class="ss">f"&amp;assets=</span><span class="sc">{</span>asset_name<span class="sc">}</span><span class="ss">"</span></span>
-<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>    <span class="ss">f"&amp;color_formula=gamma+r+1.05&amp;colormap_name=</span><span class="sc">{</span>color_map<span class="sc">}</span><span class="ss">"</span></span>
-<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a>    <span class="ss">f"&amp;rescale=</span><span class="sc">{</span>rescale_values_odiac[<span class="st">'min'</span>]<span class="sc">}</span><span class="ss">,</span><span class="sc">{</span>rescale_values_odiac[<span class="st">'max'</span>]<span class="sc">}</span><span class="ss">"</span>, </span>
-<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a>).json()</span>
-<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a>january_2020_tile</span>
-<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a>color_map1 <span class="op">=</span> <span class="st">"magma"</span></span>
-<span id="cb8-11"><a href="#cb8-11" aria-hidden="true" tabindex="-1"></a>oco2_1 <span class="op">=</span> requests.get(</span>
-<span id="cb8-12"><a href="#cb8-12" aria-hidden="true" tabindex="-1"></a>    <span class="ss">f"</span><span class="sc">{</span>RASTER_API_URL<span class="sc">}</span><span class="ss">/stac/tilejson.json?collection=</span><span class="sc">{</span>items_oco2[<span class="st">'2020-01-20'</span>][<span class="st">'collection'</span>]<span class="sc">}</span><span class="ss">&amp;item=</span><span class="sc">{</span>items_oco2[<span class="st">'2020-01-20'</span>][<span class="st">'id'</span>]<span class="sc">}</span><span class="ss">"</span></span>
-<span id="cb8-13"><a href="#cb8-13" aria-hidden="true" tabindex="-1"></a>    <span class="ss">f"&amp;assets=</span><span class="sc">{</span>asset_name1<span class="sc">}</span><span class="ss">"</span></span>
-<span id="cb8-14"><a href="#cb8-14" aria-hidden="true" tabindex="-1"></a>    <span class="ss">f"&amp;color_formula=gamma+r+1.05&amp;colormap_name=</span><span class="sc">{</span>color_map1<span class="sc">}</span><span class="ss">"</span></span>
-<span id="cb8-15"><a href="#cb8-15" aria-hidden="true" tabindex="-1"></a>    <span class="ss">f"&amp;rescale=</span><span class="sc">{</span>rescale_values_oco2[<span class="st">'min'</span>]<span class="sc">}</span><span class="ss">,</span><span class="sc">{</span>rescale_values_oco2[<span class="st">'max'</span>]<span class="sc">}</span><span class="ss">"</span>, </span>
-<span id="cb8-16"><a href="#cb8-16" aria-hidden="true" tabindex="-1"></a>).json()</span>
-<span id="cb8-17"><a href="#cb8-17" aria-hidden="true" tabindex="-1"></a>oco2_1</span>
-<span id="cb8-18"><a href="#cb8-18" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-19"><a href="#cb8-19" aria-hidden="true" tabindex="-1"></a>no2_1 <span class="op">=</span> requests.get(</span>
-<span id="cb8-20"><a href="#cb8-20" aria-hidden="true" tabindex="-1"></a>    <span class="ss">f"</span><span class="sc">{</span>RASTER_API_URL_veda<span class="sc">}</span><span class="ss">/stac/tilejson.json?collection=</span><span class="sc">{</span>items_no2[<span class="st">'2020-01-01'</span>][<span class="st">'collection'</span>]<span class="sc">}</span><span class="ss">&amp;item=</span><span class="sc">{</span>items_no2[<span class="st">'2020-01-01'</span>][<span class="st">'id'</span>]<span class="sc">}</span><span class="ss">"</span></span>
-<span id="cb8-21"><a href="#cb8-21" aria-hidden="true" tabindex="-1"></a>    <span class="ss">f"&amp;assets=cog_default"</span></span>
-<span id="cb8-22"><a href="#cb8-22" aria-hidden="true" tabindex="-1"></a>    <span class="ss">f"&amp;color_formula=gamma+r+1.05&amp;colormap_name=</span><span class="sc">{</span>color_map1<span class="sc">}</span><span class="ss">"</span></span>
-<span id="cb8-23"><a href="#cb8-23" aria-hidden="true" tabindex="-1"></a>    <span class="ss">f"&amp;rescale=</span><span class="sc">{</span>rescale_values_no2[<span class="st">'min'</span>]<span class="sc">}</span><span class="ss">,</span><span class="sc">{</span>rescale_values_no2[<span class="st">'max'</span>]<span class="sc">}</span><span class="ss">"</span>, </span>
-<span id="cb8-24"><a href="#cb8-24" aria-hidden="true" tabindex="-1"></a>).json()</span>
-<span id="cb8-25"><a href="#cb8-25" aria-hidden="true" tabindex="-1"></a>no2_1</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Set a colormap for the granule</span></span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Please refer to matplotlib library if you'd prefer choosing a different color ramp (https://matplotlib.org/stable/users/explain/colors/colormaps.html)</span></span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>color_map <span class="op">=</span> <span class="st">"rainbow"</span> <span class="co"># please select the color ramp from matplotlib library.</span></span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Extract and display the January 2020 tile using the appropriate ID, colormap, rescale values, and datetime (items['2020-01']) </span></span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a>january_2020_tile <span class="op">=</span> requests.get(</span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a>    <span class="ss">f"</span><span class="sc">{</span>RASTER_API_URL<span class="sc">}</span><span class="ss">/stac/tilejson.json?collection=</span><span class="sc">{</span>items_odiac[<span class="st">'2020-01'</span>][<span class="st">'collection'</span>]<span class="sc">}</span><span class="ss">&amp;item=</span><span class="sc">{</span>items_odiac[<span class="st">'2020-01'</span>][<span class="st">'id'</span>]<span class="sc">}</span><span class="ss">"</span></span>
+<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a>    <span class="ss">f"&amp;assets=</span><span class="sc">{</span>asset_name<span class="sc">}</span><span class="ss">"</span></span>
+<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a>    <span class="ss">f"&amp;color_formula=gamma+r+1.05&amp;colormap_name=</span><span class="sc">{</span>color_map<span class="sc">}</span><span class="ss">"</span></span>
+<span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a>    <span class="ss">f"&amp;rescale=</span><span class="sc">{</span>rescale_values_odiac[<span class="st">'min'</span>]<span class="sc">}</span><span class="ss">,</span><span class="sc">{</span>rescale_values_odiac[<span class="st">'max'</span>]<span class="sc">}</span><span class="ss">"</span>, </span>
+<span id="cb8-11"><a href="#cb8-11" aria-hidden="true" tabindex="-1"></a>).json()</span>
+<span id="cb8-12"><a href="#cb8-12" aria-hidden="true" tabindex="-1"></a>january_2020_tile</span>
+<span id="cb8-13"><a href="#cb8-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-14"><a href="#cb8-14" aria-hidden="true" tabindex="-1"></a>color_map1 <span class="op">=</span> <span class="st">"magma"</span></span>
+<span id="cb8-15"><a href="#cb8-15" aria-hidden="true" tabindex="-1"></a><span class="co"># Extract and display the OCO-2 January 2020 tile using the appropriate ID, colormap, rescale values, and datetime (items['2020-01-20']) </span></span>
+<span id="cb8-16"><a href="#cb8-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-17"><a href="#cb8-17" aria-hidden="true" tabindex="-1"></a>oco2_1 <span class="op">=</span> requests.get(</span>
+<span id="cb8-18"><a href="#cb8-18" aria-hidden="true" tabindex="-1"></a>    <span class="ss">f"</span><span class="sc">{</span>RASTER_API_URL<span class="sc">}</span><span class="ss">/stac/tilejson.json?collection=</span><span class="sc">{</span>items_oco2[<span class="st">'2020-01-20'</span>][<span class="st">'collection'</span>]<span class="sc">}</span><span class="ss">&amp;item=</span><span class="sc">{</span>items_oco2[<span class="st">'2020-01-20'</span>][<span class="st">'id'</span>]<span class="sc">}</span><span class="ss">"</span></span>
+<span id="cb8-19"><a href="#cb8-19" aria-hidden="true" tabindex="-1"></a>    <span class="ss">f"&amp;assets=</span><span class="sc">{</span>asset_name1<span class="sc">}</span><span class="ss">"</span></span>
+<span id="cb8-20"><a href="#cb8-20" aria-hidden="true" tabindex="-1"></a>    <span class="ss">f"&amp;color_formula=gamma+r+1.05&amp;colormap_name=</span><span class="sc">{</span>color_map1<span class="sc">}</span><span class="ss">"</span></span>
+<span id="cb8-21"><a href="#cb8-21" aria-hidden="true" tabindex="-1"></a>    <span class="ss">f"&amp;rescale=</span><span class="sc">{</span>rescale_values_oco2[<span class="st">'min'</span>]<span class="sc">}</span><span class="ss">,</span><span class="sc">{</span>rescale_values_oco2[<span class="st">'max'</span>]<span class="sc">}</span><span class="ss">"</span>, </span>
+<span id="cb8-22"><a href="#cb8-22" aria-hidden="true" tabindex="-1"></a>).json()</span>
+<span id="cb8-23"><a href="#cb8-23" aria-hidden="true" tabindex="-1"></a>oco2_1</span>
+<span id="cb8-24"><a href="#cb8-24" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-25"><a href="#cb8-25" aria-hidden="true" tabindex="-1"></a><span class="co"># Extract and display the NO-2 January 2020 tile using the appropriate ID, colormap, rescale values, and datetime (items['2020-01-01']) </span></span>
+<span id="cb8-26"><a href="#cb8-26" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-27"><a href="#cb8-27" aria-hidden="true" tabindex="-1"></a>no2_1 <span class="op">=</span> requests.get(</span>
+<span id="cb8-28"><a href="#cb8-28" aria-hidden="true" tabindex="-1"></a>    <span class="ss">f"</span><span class="sc">{</span>RASTER_API_URL_veda<span class="sc">}</span><span class="ss">/stac/tilejson.json?collection=</span><span class="sc">{</span>items_no2[<span class="st">'2020-01-01'</span>][<span class="st">'collection'</span>]<span class="sc">}</span><span class="ss">&amp;item=</span><span class="sc">{</span>items_no2[<span class="st">'2020-01-01'</span>][<span class="st">'id'</span>]<span class="sc">}</span><span class="ss">"</span></span>
+<span id="cb8-29"><a href="#cb8-29" aria-hidden="true" tabindex="-1"></a>    <span class="ss">f"&amp;assets=cog_default"</span></span>
+<span id="cb8-30"><a href="#cb8-30" aria-hidden="true" tabindex="-1"></a>    <span class="ss">f"&amp;color_formula=gamma+r+1.05&amp;colormap_name=</span><span class="sc">{</span>color_map1<span class="sc">}</span><span class="ss">"</span></span>
+<span id="cb8-31"><a href="#cb8-31" aria-hidden="true" tabindex="-1"></a>    <span class="ss">f"&amp;rescale=</span><span class="sc">{</span>rescale_values_no2[<span class="st">'min'</span>]<span class="sc">}</span><span class="ss">,</span><span class="sc">{</span>rescale_values_no2[<span class="st">'max'</span>]<span class="sc">}</span><span class="ss">"</span>, </span>
+<span id="cb8-32"><a href="#cb8-32" aria-hidden="true" tabindex="-1"></a>).json()</span>
+<span id="cb8-33"><a href="#cb8-33" aria-hidden="true" tabindex="-1"></a>no2_1</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 <section id="define-spatial-region-of-interest" class="level2">
@@ -592,18 +604,20 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb10-17"><a href="#cb10-17" aria-hidden="true" tabindex="-1"></a>sbs <span class="op">=</span> folium.plugins.SideBySideLayers(layer_left<span class="op">=</span>map_layer_2020, layer_right<span class="op">=</span>map_layer_2020_2)</span>
 <span id="cb10-18"><a href="#cb10-18" aria-hidden="true" tabindex="-1"></a>map_layer_2020.add_to(map_)</span>
 <span id="cb10-19"><a href="#cb10-19" aria-hidden="true" tabindex="-1"></a>map_layer_2020_2.add_to(map_)</span>
-<span id="cb10-20"><a href="#cb10-20" aria-hidden="true" tabindex="-1"></a>folium.GeoJson(sa_aoi, name<span class="op">=</span><span class="st">"louisiana, USA"</span>).add_to(map_)</span>
-<span id="cb10-21"><a href="#cb10-21" aria-hidden="true" tabindex="-1"></a>sbs.add_to(map_)</span>
-<span id="cb10-22"><a href="#cb10-22" aria-hidden="true" tabindex="-1"></a>MousePosition().add_to(map_)</span>
-<span id="cb10-23"><a href="#cb10-23" aria-hidden="true" tabindex="-1"></a><span class="co"># visualising the map</span></span>
-<span id="cb10-24"><a href="#cb10-24" aria-hidden="true" tabindex="-1"></a>map_</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb10-20"><a href="#cb10-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-21"><a href="#cb10-21" aria-hidden="true" tabindex="-1"></a><span class="co"># Load the GeoJSON file for South Africa</span></span>
+<span id="cb10-22"><a href="#cb10-22" aria-hidden="true" tabindex="-1"></a>folium.GeoJson(sa_aoi, name<span class="op">=</span><span class="st">"South Africa"</span>).add_to(map_)</span>
+<span id="cb10-23"><a href="#cb10-23" aria-hidden="true" tabindex="-1"></a>sbs.add_to(map_)</span>
+<span id="cb10-24"><a href="#cb10-24" aria-hidden="true" tabindex="-1"></a>MousePosition().add_to(map_)</span>
+<span id="cb10-25"><a href="#cb10-25" aria-hidden="true" tabindex="-1"></a><span class="co"># visualising the map</span></span>
+<span id="cb10-26"><a href="#cb10-26" aria-hidden="true" tabindex="-1"></a>map_</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div id="cell-23" class="cell">
 <div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Set initial zoom and center of map</span></span>
 <span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>map_ <span class="op">=</span> folium.Map(location<span class="op">=</span>(<span class="op">-</span><span class="fl">25.943840</span>, <span class="fl">29.789560</span>), zoom_start<span class="op">=</span><span class="dv">7</span>)</span>
 <span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a><span class="co"># December 2001</span></span>
+<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a><span class="co"># January 2020</span></span>
 <span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a>map_layer_2020_odiac <span class="op">=</span> TileLayer(</span>
 <span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a>    tiles<span class="op">=</span>january_2020_tile[<span class="st">"tiles"</span>][<span class="dv">0</span>],</span>
 <span id="cb11-8"><a href="#cb11-8" aria-hidden="true" tabindex="-1"></a>    attr<span class="op">=</span><span class="st">"GHG"</span>,</span>
@@ -612,28 +626,30 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb11-11"><a href="#cb11-11" aria-hidden="true" tabindex="-1"></a>)</span>
 <span id="cb11-12"><a href="#cb11-12" aria-hidden="true" tabindex="-1"></a>map_layer_2020_odiac.add_to(map_)</span>
 <span id="cb11-13"><a href="#cb11-13" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-14"><a href="#cb11-14" aria-hidden="true" tabindex="-1"></a>map_layer_2020_oco2 <span class="op">=</span> TileLayer(</span>
-<span id="cb11-15"><a href="#cb11-15" aria-hidden="true" tabindex="-1"></a>    tiles<span class="op">=</span>oco2_1[<span class="st">"tiles"</span>][<span class="dv">0</span>],</span>
-<span id="cb11-16"><a href="#cb11-16" aria-hidden="true" tabindex="-1"></a>    attr<span class="op">=</span><span class="st">"GHG"</span>,</span>
-<span id="cb11-17"><a href="#cb11-17" aria-hidden="true" tabindex="-1"></a>    name <span class="op">=</span> <span class="st">"OCO2"</span>,</span>
-<span id="cb11-18"><a href="#cb11-18" aria-hidden="true" tabindex="-1"></a>    opacity<span class="op">=</span><span class="fl">0.5</span>,</span>
-<span id="cb11-19"><a href="#cb11-19" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb11-20"><a href="#cb11-20" aria-hidden="true" tabindex="-1"></a>map_layer_2020_oco2.add_to(map_)</span>
-<span id="cb11-21"><a href="#cb11-21" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-22"><a href="#cb11-22" aria-hidden="true" tabindex="-1"></a>map_layer_2020_no2 <span class="op">=</span> TileLayer(</span>
-<span id="cb11-23"><a href="#cb11-23" aria-hidden="true" tabindex="-1"></a>    tiles<span class="op">=</span>no2_1[<span class="st">"tiles"</span>][<span class="dv">0</span>],</span>
-<span id="cb11-24"><a href="#cb11-24" aria-hidden="true" tabindex="-1"></a>    attr<span class="op">=</span><span class="st">"GHG"</span>,</span>
-<span id="cb11-25"><a href="#cb11-25" aria-hidden="true" tabindex="-1"></a>    name <span class="op">=</span> <span class="st">"NO2"</span>,</span>
-<span id="cb11-26"><a href="#cb11-26" aria-hidden="true" tabindex="-1"></a>    opacity<span class="op">=</span><span class="fl">0.5</span>,</span>
-<span id="cb11-27"><a href="#cb11-27" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb11-28"><a href="#cb11-28" aria-hidden="true" tabindex="-1"></a>map_layer_2020_no2.add_to(map_)</span>
-<span id="cb11-29"><a href="#cb11-29" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-30"><a href="#cb11-30" aria-hidden="true" tabindex="-1"></a>folium.GeoJson(sa_aoi, name<span class="op">=</span><span class="st">"South Africa"</span>).add_to(map_)</span>
-<span id="cb11-31"><a href="#cb11-31" aria-hidden="true" tabindex="-1"></a>folium.LayerControl(collapsed<span class="op">=</span><span class="va">False</span>,position<span class="op">=</span><span class="st">'bottomleft'</span>).add_to(map_)</span>
-<span id="cb11-32"><a href="#cb11-32" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-33"><a href="#cb11-33" aria-hidden="true" tabindex="-1"></a><span class="co"># visualising the map</span></span>
-<span id="cb11-34"><a href="#cb11-34" aria-hidden="true" tabindex="-1"></a>map_</span>
-<span id="cb11-35"><a href="#cb11-35" aria-hidden="true" tabindex="-1"></a></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb11-14"><a href="#cb11-14" aria-hidden="true" tabindex="-1"></a><span class="co"># OCO-2 2020</span></span>
+<span id="cb11-15"><a href="#cb11-15" aria-hidden="true" tabindex="-1"></a>map_layer_2020_oco2 <span class="op">=</span> TileLayer(</span>
+<span id="cb11-16"><a href="#cb11-16" aria-hidden="true" tabindex="-1"></a>    tiles<span class="op">=</span>oco2_1[<span class="st">"tiles"</span>][<span class="dv">0</span>],</span>
+<span id="cb11-17"><a href="#cb11-17" aria-hidden="true" tabindex="-1"></a>    attr<span class="op">=</span><span class="st">"GHG"</span>,</span>
+<span id="cb11-18"><a href="#cb11-18" aria-hidden="true" tabindex="-1"></a>    name <span class="op">=</span> <span class="st">"OCO2"</span>,</span>
+<span id="cb11-19"><a href="#cb11-19" aria-hidden="true" tabindex="-1"></a>    opacity<span class="op">=</span><span class="fl">0.5</span>,</span>
+<span id="cb11-20"><a href="#cb11-20" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb11-21"><a href="#cb11-21" aria-hidden="true" tabindex="-1"></a>map_layer_2020_oco2.add_to(map_)</span>
+<span id="cb11-22"><a href="#cb11-22" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-23"><a href="#cb11-23" aria-hidden="true" tabindex="-1"></a><span class="co"># NO-2 2020</span></span>
+<span id="cb11-24"><a href="#cb11-24" aria-hidden="true" tabindex="-1"></a>map_layer_2020_no2 <span class="op">=</span> TileLayer(</span>
+<span id="cb11-25"><a href="#cb11-25" aria-hidden="true" tabindex="-1"></a>    tiles<span class="op">=</span>no2_1[<span class="st">"tiles"</span>][<span class="dv">0</span>],</span>
+<span id="cb11-26"><a href="#cb11-26" aria-hidden="true" tabindex="-1"></a>    attr<span class="op">=</span><span class="st">"GHG"</span>,</span>
+<span id="cb11-27"><a href="#cb11-27" aria-hidden="true" tabindex="-1"></a>    name <span class="op">=</span> <span class="st">"NO2"</span>,</span>
+<span id="cb11-28"><a href="#cb11-28" aria-hidden="true" tabindex="-1"></a>    opacity<span class="op">=</span><span class="fl">0.5</span>,</span>
+<span id="cb11-29"><a href="#cb11-29" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb11-30"><a href="#cb11-30" aria-hidden="true" tabindex="-1"></a>map_layer_2020_no2.add_to(map_)</span>
+<span id="cb11-31"><a href="#cb11-31" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-32"><a href="#cb11-32" aria-hidden="true" tabindex="-1"></a>folium.GeoJson(sa_aoi, name<span class="op">=</span><span class="st">"South Africa"</span>).add_to(map_)</span>
+<span id="cb11-33"><a href="#cb11-33" aria-hidden="true" tabindex="-1"></a>folium.LayerControl(collapsed<span class="op">=</span><span class="va">False</span>,position<span class="op">=</span><span class="st">'bottomleft'</span>).add_to(map_)</span>
+<span id="cb11-34"><a href="#cb11-34" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-35"><a href="#cb11-35" aria-hidden="true" tabindex="-1"></a><span class="co"># visualising the map</span></span>
+<span id="cb11-36"><a href="#cb11-36" aria-hidden="true" tabindex="-1"></a>map_</span>
+<span id="cb11-37"><a href="#cb11-37" aria-hidden="true" tabindex="-1"></a></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 <section id="generate-statistics-and-time-series-lineplots-for-co2-emission" class="level2">
@@ -671,14 +687,15 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="sourceCode cell-code" id="cb16"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>stats[<span class="dv">0</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div id="cell-31" class="cell">
-<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> clean_stats(stats_json) <span class="op">-&gt;</span> pd.DataFrame:</span>
-<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>    df <span class="op">=</span> pd.json_normalize(stats_json)</span>
-<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>    df.columns <span class="op">=</span> [col.replace(<span class="st">"statistics.b1."</span>, <span class="st">""</span>) <span class="cf">for</span> col <span class="kw">in</span> df.columns]</span>
-<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a>    df[<span class="st">"date"</span>] <span class="op">=</span> pd.to_datetime(df[<span class="st">"start_datetime"</span>])</span>
-<span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> df</span>
-<span id="cb17-6"><a href="#cb17-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb17-7"><a href="#cb17-7" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span> clean_stats(stats)</span>
-<span id="cb17-8"><a href="#cb17-8" aria-hidden="true" tabindex="-1"></a>df.head(<span class="dv">5</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Manipulating and cleaning the stats output from the previous cell</span></span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> clean_stats(stats_json) <span class="op">-&gt;</span> pd.DataFrame:</span>
+<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>    df <span class="op">=</span> pd.json_normalize(stats_json)</span>
+<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a>    df.columns <span class="op">=</span> [col.replace(<span class="st">"statistics.b1."</span>, <span class="st">""</span>) <span class="cf">for</span> col <span class="kw">in</span> df.columns]</span>
+<span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a>    df[<span class="st">"date"</span>] <span class="op">=</span> pd.to_datetime(df[<span class="st">"start_datetime"</span>])</span>
+<span id="cb17-6"><a href="#cb17-6" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> df</span>
+<span id="cb17-7"><a href="#cb17-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-8"><a href="#cb17-8" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span> clean_stats(stats)</span>
+<span id="cb17-9"><a href="#cb17-9" aria-hidden="true" tabindex="-1"></a>df.head(<span class="dv">5</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 <section id="visualizing-the-data-as-a-time-series" class="level2">
@@ -689,7 +706,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a>fig <span class="op">=</span> plt.figure(figsize<span class="op">=</span>(<span class="dv">20</span>, <span class="dv">10</span>))</span>
 <span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb18-5"><a href="#cb18-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-5"><a href="#cb18-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Set the plot elements </span></span>
 <span id="cb18-6"><a href="#cb18-6" aria-hidden="true" tabindex="-1"></a>plt.plot(</span>
 <span id="cb18-7"><a href="#cb18-7" aria-hidden="true" tabindex="-1"></a>    df[<span class="st">"date"</span>],</span>
 <span id="cb18-8"><a href="#cb18-8" aria-hidden="true" tabindex="-1"></a>    df[<span class="st">"max"</span>],</span>
@@ -699,10 +716,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb18-12"><a href="#cb18-12" aria-hidden="true" tabindex="-1"></a>    label<span class="op">=</span><span class="st">"Max monthly CO₂ emissions"</span>,</span>
 <span id="cb18-13"><a href="#cb18-13" aria-hidden="true" tabindex="-1"></a>)</span>
 <span id="cb18-14"><a href="#cb18-14" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb18-15"><a href="#cb18-15" aria-hidden="true" tabindex="-1"></a>plt.legend()</span>
-<span id="cb18-16"><a href="#cb18-16" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="st">"Years"</span>)</span>
-<span id="cb18-17"><a href="#cb18-17" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="st">"CO2 emissions gC/m2/d"</span>)</span>
-<span id="cb18-18"><a href="#cb18-18" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">"CO2 emission Values for South Africa (2000-2021)"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb18-15"><a href="#cb18-15" aria-hidden="true" tabindex="-1"></a><span class="co"># Set the labels for the X and Y axis and assign a title for the plot </span></span>
+<span id="cb18-16"><a href="#cb18-16" aria-hidden="true" tabindex="-1"></a>plt.legend()</span>
+<span id="cb18-17"><a href="#cb18-17" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="st">"Years"</span>)</span>
+<span id="cb18-18"><a href="#cb18-18" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="st">"CO2 emissions gC/m2/d"</span>)</span>
+<span id="cb18-19"><a href="#cb18-19" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">"CO2 emission Values for South Africa (2000-2021)"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 
 

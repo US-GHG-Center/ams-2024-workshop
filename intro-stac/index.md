@@ -1,1 +1,0 @@
-# Spatio-Temporal Asset Catalog

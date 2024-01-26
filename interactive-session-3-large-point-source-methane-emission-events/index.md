@@ -1,1 +1,0 @@
-# Identifying and quantifying emissions from large point source methane emission events leveraging aircraft and satellite data 

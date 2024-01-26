@@ -63,14 +63,15 @@ website:
               - sections/us-ghg-center-and-veda/qgis-in-hub.qmd
           - section: Usecase 1 - Human Anthropogenic Emissions
             contents:
-              - interactive-session-1-epa-gridded-methane-emissions/epa-ch4emission-grid-v2express_User_Notebook.ipynb
-              - interactive-session-1-epa-gridded-methane-emissions/odiac-ffco2-monthgrid-v2022_User_Notebook.ipynb
+              - sections/use-case-1/epa-ch4emission-grid-v2express_User_Notebook.ipynb
+              - sections/use-case-1/odiac-ffco2-monthgrid-v2022_User_Notebook.ipynb
           - section: Usecase 2 - Complementing anthropogenic GHG emissions with natural GHG emissions and fluxes
             contents:
-              - interactive-session-2-anthropogenic-ghg-emissions/lpjwsl-wetlandch4-grid-v1_User_Notebook.ipynb
+              - sections/use-case-2/index.qmd
+              - sections/use-case-2/lpjwsl-wetlandch4-grid-v1_User_Notebook.ipynb
           - section: Usecase 3 - Identifying and quantifying emissions from large point source methane emission events leveraging aircraft and satellite data
             contents:
-              - interactive-session-3-large-point-source-methane-emission-events/emit-ch4plume-v1_User_Notebook.ipynb
+              - sections/use-case-3/emit-ch4plume-v1_User_Notebook.ipynb
           - section: Open Science in Action - GitHub and Science Communication using a Web Dashboard
             contents:
               - sections/open-science-in-action/index.md

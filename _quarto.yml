@@ -63,6 +63,7 @@ website:
               - sections/us-ghg-center-and-veda/qgis-in-hub.qmd
           - section: Usecase 1 - Human Anthropogenic Emissions
             contents:
+              - sections/use-case-1/index.qmd
               - sections/use-case-1/epa-ch4emission-grid-v2express_User_Notebook.ipynb
               - sections/use-case-1/odiac-ffco2-monthgrid-v2022_User_Notebook.ipynb
           - section: Usecase 2 - Complementing anthropogenic GHG emissions with natural GHG emissions and fluxes

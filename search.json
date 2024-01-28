@@ -267,135 +267,6 @@
     ]
   },
   {
-    "objectID": "setup/setup_instructions.html",
-    "href": "setup/setup_instructions.html",
-    "title": "Repository Setup Instructions",
-    "section": "",
-    "text": "The how-tos and tutorials in this repository require a NASA Earthdata account, an installation of Git, and a compatible Python Environment.\nFor local Python environment setup we recommend using mamba to manage Python packages. To install mamba, download miniforge for your operating system. If using Windows, be sure to check the box to “Add mamba to my PATH environment variable” to enable use of mamba directly from your command line interface. Note that this may cause an issue if you have an existing mamba install through Anaconda.\n\n\nconda create -n veda-ghg\nconda activate veda-ghg\n\n\n\nCheck requirements.txt.\nStill having trouble getting a compatible Python environment set up? Contact U.S.GHGC Team."
-  },
-  {
-    "objectID": "setup/setup_instructions.html#python-environment-setup",
-    "href": "setup/setup_instructions.html#python-environment-setup",
-    "title": "Repository Setup Instructions",
-    "section": "",
-    "text": "conda create -n veda-ghg\nconda activate veda-ghg"
-  },
-  {
-    "objectID": "setup/setup_instructions.html#installing-packages",
-    "href": "setup/setup_instructions.html#installing-packages",
-    "title": "Repository Setup Instructions",
-    "section": "",
-    "text": "Check requirements.txt.\nStill having trouble getting a compatible Python environment set up? Contact U.S.GHGC Team."
-  },
-  {
-    "objectID": "chapters.html",
-    "href": "chapters.html",
-    "title": "Chapters",
-    "section": "",
-    "text": "The flow of the workshop\n\n\n\nIntro to the US GHG Center\nThe US GHG Center Data Catalog (STAC)\nThe US GHG Center JupyterHub environment\n\n\n\n\n\nEPA Gridded Methane Emissions Inventory\nComplementing anthropogenic GHG emissions with natural GHG emissions and fluxes\nIdentifying and quantifying emissions from large point source methane emission events leveraging aircraft and satellite data\n\n\n\n\n\nIntro to GitHub & Communicating Science Discoveries via Web Dashboard\n\n\nℹ️ Content for each chapter will be added as they are prepared, please check back."
-  },
-  {
-    "objectID": "chapters.html#introduction",
-    "href": "chapters.html#introduction",
-    "title": "Chapters",
-    "section": "",
-    "text": "Intro to the US GHG Center\nThe US GHG Center Data Catalog (STAC)\nThe US GHG Center JupyterHub environment"
-  },
-  {
-    "objectID": "chapters.html#science-use-cases",
-    "href": "chapters.html#science-use-cases",
-    "title": "Chapters",
-    "section": "",
-    "text": "EPA Gridded Methane Emissions Inventory\nComplementing anthropogenic GHG emissions with natural GHG emissions and fluxes\nIdentifying and quantifying emissions from large point source methane emission events leveraging aircraft and satellite data"
-  },
-  {
-    "objectID": "chapters.html#open-science-in-action",
-    "href": "chapters.html#open-science-in-action",
-    "title": "Chapters",
-    "section": "",
-    "text": "Intro to GitHub & Communicating Science Discoveries via Web Dashboard\n\n\nℹ️ Content for each chapter will be added as they are prepared, please check back."
-  },
-  {
-    "objectID": "index.html",
-    "href": "index.html",
-    "title": "Utilizing Open Science Techniques for Exploring Greenhouse Gas Data",
-    "section": "",
-    "text": "📅 Jan 28, 2024, 🕣 8:00 AM - 3:45 PM EST, 📍 Baltimore Convention Center\n🔗 Session on the AMS Website",
-    "crumbs": [
-      "Home",
-      "Welcome"
-    ]
-  },
-  {
-    "objectID": "index.html#description",
-    "href": "index.html#description",
-    "title": "Utilizing Open Science Techniques for Exploring Greenhouse Gas Data",
-    "section": "Description",
-    "text": "Description\nThis workshop provides a hands-on learning experience for researchers, educators, and students who are eager to harness NASA’s key greenhouse gas datasets, open-source tools, and accessible computing resources for visualizing, exploring, publishing, and communicating scientific results. Participants will learn about and utilize the new U.S. Greenhouse Gas Center (GHG Center) to examine curated, trusted data in a cloud computing environment. The activities will center around data and information aligned with three science use cases to ensure broad applicability. Participants will learn to access analysis workflows using cloud-optimized data, access data products via a standards-based catalog, configure data products for web-based visualizations, and communicate scientific discoveries through a web dashboard.\nThe workshop will provide an overview of the newly released U.S. Greenhouse Gas Center, a prototype system that aims to integrate federal and non-federal data, reflecting transparency in both data and methods, to address a variety of end user needs for greenhouse gas monitoring and to bring together actionable information from multiple sources. Examples of products that will be part of this training include methane concentration anomalies from space-based instruments (e.g., EMIT), data on natural emissions and fluxes available from the U.S. GHG Center, as well as gridding processes of anthropogenic methane emissions.",
-    "crumbs": [
-      "Home",
-      "Welcome"
-    ]
-  },
-  {
-    "objectID": "index.html#learning-outcomes",
-    "href": "index.html#learning-outcomes",
-    "title": "Utilizing Open Science Techniques for Exploring Greenhouse Gas Data",
-    "section": "Learning Outcomes",
-    "text": "Learning Outcomes\nUpon completing this workshop, participants will be able to:\n\nUnderstand the scientific basis of the GHG products from the newly formed U.S. Greenhouse Gas Center.\nEmploy Python and Jupyter Notebooks for effective data analysis and visualization of Earth science data in the cloud.\nDisseminate and share scientific findings to achieve a wider impact.\nUnderstand basic principles for contributing to open-sourced software projects.",
-    "crumbs": [
-      "Home",
-      "Welcome"
-    ]
-  },
-  {
-    "objectID": "index.html#target-audience",
-    "href": "index.html#target-audience",
-    "title": "Utilizing Open Science Techniques for Exploring Greenhouse Gas Data",
-    "section": "Target Audience",
-    "text": "Target Audience\nThe target audience for this workshop includes Earth Science researchers, educators, and students across all career stages and disciplines who are interested in utilizing GHG datasets and open-source tools for their research projects. The workshop will be beneficial for both experienced programmers seeking an overview of modern open tools and those just getting started with scientific programming.",
-    "crumbs": [
-      "Home",
-      "Welcome"
-    ]
-  },
-  {
-    "objectID": "index.html#code-of-conduct",
-    "href": "index.html#code-of-conduct",
-    "title": "Utilizing Open Science Techniques for Exploring Greenhouse Gas Data",
-    "section": "Code of Conduct",
-    "text": "Code of Conduct\nThis workshop will be held following the Transform to Open Science Code of Conduct.",
-    "crumbs": [
-      "Home",
-      "Welcome"
-    ]
-  },
-  {
-    "objectID": "team.html",
-    "href": "team.html",
-    "title": "Speakers",
-    "section": "",
-    "text": "Speakers\n\nShanna Combley 1\nArgie Kavvada 1\nSlesa Adhikari 2\nSid Chaudhary 2\nLesley Ott 3\nRob Green 4\nAnnmarie Eldering 5\nTom Oda 6\n\n\n\nSupport Team\n\nGeneral Support\n\nDeborah Smith 2\nSid Chaudhary 2\nAlix Kashdan 1\n\n\n\nInteractive Sessions\n\nEmily Bell 3\nColin Quinn 3\nThomas Coligan 3\n\n\n1 National Aeronautics and Space Administration (NASA) Headquarters, 2 University of Alabama in Huntsville (UAH), 3 NASA Goddard Space Flight Center (GSFC), 4 NASA Jet Propulsion Laboratory, 5 National Institute of Standards and Technology, 6 Universities Space Research Association (USRA)"
-  },
-  {
-    "objectID": "setup/prerequisites.html",
-    "href": "setup/prerequisites.html",
-    "title": "Prerequisites",
-    "section": "",
-    "text": "Prerequisites\nTo follow along during the workshop, or to run through the notebooks contained within the repository using the 2i2c Cloud JupyterHub (cloud workspace), the following are required. All software or accounts are free.\n\nEarthdata Login account\n\nCreate an Earthdata Login account (if you don’t already have one) at https://urs.earthdata.nasa.gov/users/new\nRemember your username and password; you will need them to download or access data during the workshop and beyond.\n\nGitHub username\n\nCreate a GitHub account (if you don’t already have one) at https://github.com/join. Follow optional advice on choosing your username\nYour GitHub username is used to enable you access to a cloud environment during the workshop. To gain access, please request access to the NASA Openscapes JupyterHub using this form. You will receive an email invitation to join the organization on GitHub. You must join to gain access to the workspace.\n\n\nNetrc file\n\nThis file is needed to access NASA Earthdata assets from a scripting environment like Python.\nThere are multiple methods to create a .netrc file. For this workshop, earthaccess package is used to automatically create a netrc file using your Earthdata login credentials if one does not exist. There are detailed instruction available for creating a .netrc file.\nYou will need a netrc file containing your NASA Earthdata Login credentials in order to execute the notebooks. A netrc file can be created manually within text editor and saved to your home directory. An example of the required content is below.\n\nmachine urs.earthdata.nasa.gov\nlogin &lt;USERNAME&gt;\npassword &lt;PASSWORD&gt;\nLaptop or tablet\n\nParticipation in the exercises requires a laptop or tablet. Yes, a tablet works too! All workshop participants will have access to a 2i2c Jupyter Lab instance."
-  },
-  {
-    "objectID": "agenda.html",
-    "href": "agenda.html",
-    "title": "Workshop Agenda",
-    "section": "",
-    "text": "Workshop Agenda\nThe full-day workshop will be divided into the following sections:\n\n\n\n\n\n\n\n8:00 - 8:15\nWelcome\n\nWelcome message\nWorkshop Introduction\nTeam Introduction\nIcebreaker\n\n\n\n8:15 - 8:45\nOverview of the U.S. Greenhouse Gas Center and the Science\n\nWhat is the US GHG Center?\nRole of Methane and Carbon Dioxide in Climate Change\nWhat is included in the Center and why these datasets\nIntroduction to the science use cases / demonstration areas that will be explored during the workshop\n\n\n\n8:45 - 10:00\nIntroduction to the GHG Center Data Catalog\n\nIntro to the VEDA project and its relevance to Earth Science research and the US GHG Center\nHow do VEDA and US GHG Center support Open Science\nComponents of VEDA/US GHG Center\nHands-on exercise: searching and accessing cloud-optimized datasets using the STAC catalog\n\nIntro to JupyterHub and Jupyter Notebooks\n\nAccess to the JupyterHub environment\nCreating and running a Jupyter Notebook in the hub\n\nUsing the pystac client library to read the US GHG STAC catalog\n\nList all available datasets\nSpatial and temporal search\nAccess assets and visualize them\n\n(Time-permitting) Accessing the US GHG STAC catalog using QGIS on the browser\n\nEstablishing connection to the US GHG STAC catalog using the qgis-stac-plugin in QGIS in the GHG Center JupyterHub environment\nAdding a dataset/asset from the catalog as layer in QGIS\n\n\n\n\n\n10:00 - 10:15\nBREAK\n\n\n10:15 - 11:15\nHuman Anthropogenic Emissions\n\nIntroduction and background of datasets & human anthropogenic emissions\nHands-on exercise: Comparing emissions across sectors and time using EPA Gridded Methane data\nHands-on exercise: ODIAC: Compare to satellite data over time (using OCO-2, OCO-3 DAAC data), introduce intersection with geospatial data\n\n\n\n11:15 - 12:15\nComplementing anthropogenic GHG emissions with natural GHG emissions and fluxes\n\nIntroduction\nDescription of data sets and analysis available via the U.S. GHG Center (e.g., gridded wetland emissions and ecosystem exchange estimates)\nHands-on exercise: Exploring annual U.S. wetland methane emissions and their - meteorological influences.\n\n\n\n12:15 - 1:30\nLUNCH BREAK\n\n\n1:30 - 2:45\nIdentifying and quantifying emissions from large point source methane emission events leveraging aircraft and satellite data\n\nThe EMIT Instrument: Overview and GHG Applications\nHands-on exercise: Locating enhancement, understanding temporal relevance, exploring site with multiple observations.\n\n\n\n2:45 - 3:15\nOpen Science in Action: Intro to GitHub & Communicating Science Discoveries via Web Dashboard\n\nIntroduction to web dashboards for science communication\nHands-on exercise: creating a web dashboard to communicate science discoveries using the platform\n\n\n\n3:15 - 3:45\nClosing Remarks\n\nFuture Developments and Community Contributions\nEngaging with the U.S. Greenhouse Gas Center\nFeedback\n\n\n\n\nThroughout the workshop, facilitators will be available to provide support and guidance, ensuring participants are able to actively explore the workshop topics and apply their knowledge and skills to their own research projects.",
-    "crumbs": [
-      "Home",
-      "Workshop Agenda"
-    ]
-  },
-  {
     "objectID": "sections/use-case-2/lpjwsl-wetlandch4-grid-v1_User_Notebook.html",
     "href": "sections/use-case-2/lpjwsl-wetlandch4-grid-v1_User_Notebook.html",
     "title": "Interactive Session: Complementing anthropogenic GHG emissions with natural GHG emissions and fluxes",
@@ -615,6 +486,135 @@
       "Usecase 2 - Complementing anthropogenic GHG emissions with natural GHG emissions and fluxes",
       "Interactive Session: Complementing anthropogenic GHG emissions with natural GHG emissions and fluxes"
     ]
+  },
+  {
+    "objectID": "agenda.html",
+    "href": "agenda.html",
+    "title": "Workshop Agenda",
+    "section": "",
+    "text": "Workshop Agenda\nThe full-day workshop will be divided into the following sections:\n\n\n\n\n\n\n\n8:00 - 8:15\nWelcome\n\nWelcome message\nWorkshop Introduction\nTeam Introduction\nIcebreaker\n\n\n\n8:15 - 8:45\nOverview of the U.S. Greenhouse Gas Center and the Science\n\nWhat is the US GHG Center?\nRole of Methane and Carbon Dioxide in Climate Change\nWhat is included in the Center and why these datasets\nIntroduction to the science use cases / demonstration areas that will be explored during the workshop\n\n\n\n8:45 - 10:00\nIntroduction to the GHG Center Data Catalog\n\nIntro to the VEDA project and its relevance to Earth Science research and the US GHG Center\nHow do VEDA and US GHG Center support Open Science\nComponents of VEDA/US GHG Center\nHands-on exercise: searching and accessing cloud-optimized datasets using the STAC catalog\n\nIntro to JupyterHub and Jupyter Notebooks\n\nAccess to the JupyterHub environment\nCreating and running a Jupyter Notebook in the hub\n\nUsing the pystac client library to read the US GHG STAC catalog\n\nList all available datasets\nSpatial and temporal search\nAccess assets and visualize them\n\n(Time-permitting) Accessing the US GHG STAC catalog using QGIS on the browser\n\nEstablishing connection to the US GHG STAC catalog using the qgis-stac-plugin in QGIS in the GHG Center JupyterHub environment\nAdding a dataset/asset from the catalog as layer in QGIS\n\n\n\n\n\n10:00 - 10:15\nBREAK\n\n\n10:15 - 11:15\nHuman Anthropogenic Emissions\n\nIntroduction and background of datasets & human anthropogenic emissions\nHands-on exercise: Comparing emissions across sectors and time using EPA Gridded Methane data\nHands-on exercise: ODIAC: Compare to satellite data over time (using OCO-2, OCO-3 DAAC data), introduce intersection with geospatial data\n\n\n\n11:15 - 12:15\nComplementing anthropogenic GHG emissions with natural GHG emissions and fluxes\n\nIntroduction\nDescription of data sets and analysis available via the U.S. GHG Center (e.g., gridded wetland emissions and ecosystem exchange estimates)\nHands-on exercise: Exploring annual U.S. wetland methane emissions and their - meteorological influences.\n\n\n\n12:15 - 1:30\nLUNCH BREAK\n\n\n1:30 - 2:45\nIdentifying and quantifying emissions from large point source methane emission events leveraging aircraft and satellite data\n\nThe EMIT Instrument: Overview and GHG Applications\nHands-on exercise: Locating enhancement, understanding temporal relevance, exploring site with multiple observations.\n\n\n\n2:45 - 3:15\nOpen Science in Action: Intro to GitHub & Communicating Science Discoveries via Web Dashboard\n\nIntroduction to web dashboards for science communication\nHands-on exercise: creating a web dashboard to communicate science discoveries using the platform\n\n\n\n3:15 - 3:45\nClosing Remarks\n\nFuture Developments and Community Contributions\nEngaging with the U.S. Greenhouse Gas Center\nFeedback\n\n\n\n\nThroughout the workshop, facilitators will be available to provide support and guidance, ensuring participants are able to actively explore the workshop topics and apply their knowledge and skills to their own research projects.",
+    "crumbs": [
+      "Home",
+      "Workshop Agenda"
+    ]
+  },
+  {
+    "objectID": "setup/prerequisites.html",
+    "href": "setup/prerequisites.html",
+    "title": "Prerequisites",
+    "section": "",
+    "text": "Prerequisites\nTo follow along during the workshop, or to run through the notebooks contained within the repository using the 2i2c Cloud JupyterHub (cloud workspace), the following are required. All software or accounts are free.\n\nEarthdata Login account\n\nCreate an Earthdata Login account (if you don’t already have one) at https://urs.earthdata.nasa.gov/users/new\nRemember your username and password; you will need them to download or access data during the workshop and beyond.\n\nGitHub username\n\nCreate a GitHub account (if you don’t already have one) at https://github.com/join. Follow optional advice on choosing your username\nYour GitHub username is used to enable you access to a cloud environment during the workshop. To gain access, please request access to the NASA Openscapes JupyterHub using this form. You will receive an email invitation to join the organization on GitHub. You must join to gain access to the workspace.\n\n\nNetrc file\n\nThis file is needed to access NASA Earthdata assets from a scripting environment like Python.\nThere are multiple methods to create a .netrc file. For this workshop, earthaccess package is used to automatically create a netrc file using your Earthdata login credentials if one does not exist. There are detailed instruction available for creating a .netrc file.\nYou will need a netrc file containing your NASA Earthdata Login credentials in order to execute the notebooks. A netrc file can be created manually within text editor and saved to your home directory. An example of the required content is below.\n\nmachine urs.earthdata.nasa.gov\nlogin &lt;USERNAME&gt;\npassword &lt;PASSWORD&gt;\nLaptop or tablet\n\nParticipation in the exercises requires a laptop or tablet. Yes, a tablet works too! All workshop participants will have access to a 2i2c Jupyter Lab instance."
+  },
+  {
+    "objectID": "team.html",
+    "href": "team.html",
+    "title": "Speakers",
+    "section": "",
+    "text": "Speakers\n\nShanna Combley 1\nArgie Kavvada 1\nSlesa Adhikari 2\nSid Chaudhary 2\nLesley Ott 3\nRob Green 4\nAnnmarie Eldering 5\nTom Oda 6\n\n\n\nSupport Team\n\nGeneral Support\n\nDeborah Smith 2\nSid Chaudhary 2\nAlix Kashdan 1\n\n\n\nInteractive Sessions\n\nEmily Bell 3\nColin Quinn 3\nThomas Coligan 3\n\n\n1 National Aeronautics and Space Administration (NASA) Headquarters, 2 University of Alabama in Huntsville (UAH), 3 NASA Goddard Space Flight Center (GSFC), 4 NASA Jet Propulsion Laboratory, 5 National Institute of Standards and Technology, 6 Universities Space Research Association (USRA)"
+  },
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "Utilizing Open Science Techniques for Exploring Greenhouse Gas Data",
+    "section": "",
+    "text": "📅 Jan 28, 2024, 🕣 8:00 AM - 3:45 PM EST, 📍 Baltimore Convention Center\n🔗 Session on the AMS Website",
+    "crumbs": [
+      "Home",
+      "Welcome"
+    ]
+  },
+  {
+    "objectID": "index.html#description",
+    "href": "index.html#description",
+    "title": "Utilizing Open Science Techniques for Exploring Greenhouse Gas Data",
+    "section": "Description",
+    "text": "Description\nThis workshop provides a hands-on learning experience for researchers, educators, and students who are eager to harness NASA’s key greenhouse gas datasets, open-source tools, and accessible computing resources for visualizing, exploring, publishing, and communicating scientific results. Participants will learn about and utilize the new U.S. Greenhouse Gas Center (GHG Center) to examine curated, trusted data in a cloud computing environment. The activities will center around data and information aligned with three science use cases to ensure broad applicability. Participants will learn to access analysis workflows using cloud-optimized data, access data products via a standards-based catalog, configure data products for web-based visualizations, and communicate scientific discoveries through a web dashboard.\nThe workshop will provide an overview of the newly released U.S. Greenhouse Gas Center, a prototype system that aims to integrate federal and non-federal data, reflecting transparency in both data and methods, to address a variety of end user needs for greenhouse gas monitoring and to bring together actionable information from multiple sources. Examples of products that will be part of this training include methane concentration anomalies from space-based instruments (e.g., EMIT), data on natural emissions and fluxes available from the U.S. GHG Center, as well as gridding processes of anthropogenic methane emissions.",
+    "crumbs": [
+      "Home",
+      "Welcome"
+    ]
+  },
+  {
+    "objectID": "index.html#learning-outcomes",
+    "href": "index.html#learning-outcomes",
+    "title": "Utilizing Open Science Techniques for Exploring Greenhouse Gas Data",
+    "section": "Learning Outcomes",
+    "text": "Learning Outcomes\nUpon completing this workshop, participants will be able to:\n\nUnderstand the scientific basis of the GHG products from the newly formed U.S. Greenhouse Gas Center.\nEmploy Python and Jupyter Notebooks for effective data analysis and visualization of Earth science data in the cloud.\nDisseminate and share scientific findings to achieve a wider impact.\nUnderstand basic principles for contributing to open-sourced software projects.",
+    "crumbs": [
+      "Home",
+      "Welcome"
+    ]
+  },
+  {
+    "objectID": "index.html#target-audience",
+    "href": "index.html#target-audience",
+    "title": "Utilizing Open Science Techniques for Exploring Greenhouse Gas Data",
+    "section": "Target Audience",
+    "text": "Target Audience\nThe target audience for this workshop includes Earth Science researchers, educators, and students across all career stages and disciplines who are interested in utilizing GHG datasets and open-source tools for their research projects. The workshop will be beneficial for both experienced programmers seeking an overview of modern open tools and those just getting started with scientific programming.",
+    "crumbs": [
+      "Home",
+      "Welcome"
+    ]
+  },
+  {
+    "objectID": "index.html#code-of-conduct",
+    "href": "index.html#code-of-conduct",
+    "title": "Utilizing Open Science Techniques for Exploring Greenhouse Gas Data",
+    "section": "Code of Conduct",
+    "text": "Code of Conduct\nThis workshop will be held following the Transform to Open Science Code of Conduct.",
+    "crumbs": [
+      "Home",
+      "Welcome"
+    ]
+  },
+  {
+    "objectID": "chapters.html",
+    "href": "chapters.html",
+    "title": "Chapters",
+    "section": "",
+    "text": "The flow of the workshop\n\n\n\nIntro to the US GHG Center\nThe US GHG Center Data Catalog (STAC)\nThe US GHG Center JupyterHub environment\n\n\n\n\n\nEPA Gridded Methane Emissions Inventory\nComplementing anthropogenic GHG emissions with natural GHG emissions and fluxes\nIdentifying and quantifying emissions from large point source methane emission events leveraging aircraft and satellite data\n\n\n\n\n\nIntro to GitHub & Communicating Science Discoveries via Web Dashboard\n\n\nℹ️ Content for each chapter will be added as they are prepared, please check back."
+  },
+  {
+    "objectID": "chapters.html#introduction",
+    "href": "chapters.html#introduction",
+    "title": "Chapters",
+    "section": "",
+    "text": "Intro to the US GHG Center\nThe US GHG Center Data Catalog (STAC)\nThe US GHG Center JupyterHub environment"
+  },
+  {
+    "objectID": "chapters.html#science-use-cases",
+    "href": "chapters.html#science-use-cases",
+    "title": "Chapters",
+    "section": "",
+    "text": "EPA Gridded Methane Emissions Inventory\nComplementing anthropogenic GHG emissions with natural GHG emissions and fluxes\nIdentifying and quantifying emissions from large point source methane emission events leveraging aircraft and satellite data"
+  },
+  {
+    "objectID": "chapters.html#open-science-in-action",
+    "href": "chapters.html#open-science-in-action",
+    "title": "Chapters",
+    "section": "",
+    "text": "Intro to GitHub & Communicating Science Discoveries via Web Dashboard\n\n\nℹ️ Content for each chapter will be added as they are prepared, please check back."
+  },
+  {
+    "objectID": "setup/setup_instructions.html",
+    "href": "setup/setup_instructions.html",
+    "title": "Repository Setup Instructions",
+    "section": "",
+    "text": "The how-tos and tutorials in this repository require a NASA Earthdata account, an installation of Git, and a compatible Python Environment.\nFor local Python environment setup we recommend using mamba to manage Python packages. To install mamba, download miniforge for your operating system. If using Windows, be sure to check the box to “Add mamba to my PATH environment variable” to enable use of mamba directly from your command line interface. Note that this may cause an issue if you have an existing mamba install through Anaconda.\n\n\nconda create -n veda-ghg\nconda activate veda-ghg\n\n\n\nCheck requirements.txt.\nStill having trouble getting a compatible Python environment set up? Contact U.S.GHGC Team."
+  },
+  {
+    "objectID": "setup/setup_instructions.html#python-environment-setup",
+    "href": "setup/setup_instructions.html#python-environment-setup",
+    "title": "Repository Setup Instructions",
+    "section": "",
+    "text": "conda create -n veda-ghg\nconda activate veda-ghg"
+  },
+  {
+    "objectID": "setup/setup_instructions.html#installing-packages",
+    "href": "setup/setup_instructions.html#installing-packages",
+    "title": "Repository Setup Instructions",
+    "section": "",
+    "text": "Check requirements.txt.\nStill having trouble getting a compatible Python environment set up? Contact U.S.GHGC Team."
   },
   {
     "objectID": "sections/use-case-3/emit-ch4plume-v1_User_Notebook.html",

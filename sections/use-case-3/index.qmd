@@ -1,0 +1,13 @@
+---
+title: Identifying and quantifying emissions from large point source methane emission events leveraging aircraft and satellite data
+---
+
+<iframe
+    src="https://docs.google.com/presentation/d/e/2PACX-1vRQjwFsg0ps_1-fEDLj2ujOKO3WkV8RbGEBVKKJpvI5-sh_--fIkA_QFwYb8F14qg/embed?start=false&loop=false&delayms=3000"
+    frameborder="0"
+    width="960"
+    height="569"
+    allowfullscreen="true"
+    mozallowfullscreen="true"
+    webkitallowfullscreen="true">
+</iframe>

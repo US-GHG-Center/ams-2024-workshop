@@ -102,7 +102,7 @@
     "href": "sections/use-case-1/odiac-ffco2-monthgrid-v2022_User_Notebook.html#setup",
     "title": "Interactive Session: Human Anthropogenic Emissions (ODIAC)",
     "section": "Setup",
-    "text": "Setup\nImport the required Python libraries.\n\n# Import required libraries\n\nimport earthaccess\nimport warnings\nimport requests\nimport pandas as pd\nimport geopandas\nimport folium\nimport folium.plugins\nimport seaborn as sns\nimport glob\nimport numpy as np\nimport matplotlib.pyplot as plt\nimport branca.colormap as cm\n\nfrom folium import Map, TileLayer \nfrom branca.element import Figure\nfrom pystac_client import Client \nfrom pyproj import Geod\nfrom shapely import wkt\nfrom datetime import datetime\nfrom folium.plugins import MousePosition",
+    "text": "Setup\nImport the required Python libraries.\n\n# Import required libraries\n\nimport earthaccess\nimport warnings\nimport requests\nimport pandas as pd\nimport os\nos.environ['USE_PYGEOS'] = '0'\nimport geopandas\nimport folium\nimport folium.plugins\nimport seaborn as sns\nimport glob\nimport numpy as np\nimport matplotlib.pyplot as plt\nimport branca.colormap as cm\n\nfrom folium import Map, TileLayer \nfrom branca.element import Figure\nfrom pystac_client import Client \nfrom pyproj import Geod\nfrom shapely import wkt\nfrom datetime import datetime\nfrom folium.plugins import MousePosition",
     "crumbs": [
       "Home",
       "Sections",
@@ -478,7 +478,7 @@
     "href": "sections/use-case-2/lpjwsl-wetlandch4-grid-v1_User_Notebook.html#setup",
     "title": "Interactive Session: Complementing anthropogenic GHG emissions with natural GHG emissions and fluxes",
     "section": "Setup",
-    "text": "Setup\nImport the required Python libraries by running the next cell.\n\n# import earthaccess\nimport os\nimport warnings\nimport requests\nimport pandas as pd\nimport geopandas\nimport folium\nimport folium.plugins\nimport seaborn as sns\nimport glob\nimport numpy as np\nimport netCDF4 as nc\nimport matplotlib.pyplot as plt\nimport branca.colormap as cm\n\nfrom folium import Map, TileLayer \nfrom branca.element import Figure\nfrom pystac_client import Client \nfrom pyproj import Geod\nfrom shapely import wkt\nfrom datetime import datetime",
+    "text": "Setup\nImport the required Python libraries by running the next cell.\n\n# import earthaccess\nimport os\nimport warnings\nimport requests\nimport pandas as pd\nos.environ['USE_PYGEOS'] = '0'\nimport geopandas\nimport folium\nimport folium.plugins\nimport seaborn as sns\nimport glob\nimport numpy as np\nimport netCDF4 as nc\nimport matplotlib.pyplot as plt\nimport branca.colormap as cm\n\nfrom folium import Map, TileLayer \nfrom branca.element import Figure\nfrom pystac_client import Client \nfrom pyproj import Geod\nfrom shapely import wkt\nfrom datetime import datetime",
     "crumbs": [
       "Home",
       "Sections",

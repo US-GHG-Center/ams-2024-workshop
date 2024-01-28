@@ -206,7 +206,13 @@
     "href": "sections/use-case-1/index.html",
     "title": "EPA Gridded Methane Emissions Inventory",
     "section": "",
-    "text": "Click here to access the slides."
+    "text": "Click here to access the slides.",
+    "crumbs": [
+      "Home",
+      "Sections",
+      "Usecase 1 - Human Anthropogenic Emissions",
+      "EPA Gridded Methane Emissions Inventory"
+    ]
   },
   {
     "objectID": "sections/us-ghg-center-and-veda/catalog-interaction.html",

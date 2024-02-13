@@ -1,217 +1,204 @@
 [
   {
-    "objectID": "prerequisites.html",
-    "href": "prerequisites.html",
+    "objectID": "setup/prerequisites.html",
+    "href": "setup/prerequisites.html",
     "title": "Prerequisites",
     "section": "",
-    "text": "Participants are expected to have a basic knowledge of the python programming language.\nParticipants MUST obtain the following to be able to follow along the workshop:\n\nUS GHG Center JupyterHub Access\nEarthdata credentials\n\n\n\n🚨 Please make sure you have both of the accesses before you come to the workshop on Sunday.\n\n\n\nThe US GHG Center notebook environment is available to authorized users on an as-need basis. You can request access by using our Hub Access Request form.\n\nMake sure you have a GitHub Account. Take note of your GitHub username.\nFill out the request form and provide needed information. Make sure to use your organization/univerity email and use “AMS Workshop 2024” as the reason.\nWatch your email for notification of authorization and the invite to join the US GHG Center Hub Access GitHub Team.\nOnce you accept the invitation, you can go to hub.ghg.center and login using your GitHub credentials.\n\n\n\n\nFollow the tutorial on this link to register for Earthdata login: https://www.earthdata.nasa.gov/eosdis/science-system-description/eosdis-components/earthdata-login.\nMake sure to note your username and password.",
+    "text": "Prerequisites\nTo follow along during the workshop, or to run through the notebooks contained within the repository using the 2i2c Cloud JupyterHub (cloud workspace), the following are required. All software or accounts are free.\n\nEarthdata Login account\n\nCreate an Earthdata Login account (if you don’t already have one) at https://urs.earthdata.nasa.gov/users/new\nRemember your username and password; you will need them to download or access data during the workshop and beyond.\n\nGitHub username\n\nCreate a GitHub account (if you don’t already have one) at https://github.com/join. Follow optional advice on choosing your username\nYour GitHub username is used to enable you access to a cloud environment during the workshop. To gain access, please request access to the NASA Openscapes JupyterHub using this form. You will receive an email invitation to join the organization on GitHub. You must join to gain access to the workspace.\n\n\nNetrc file\n\nThis file is needed to access NASA Earthdata assets from a scripting environment like Python.\nThere are multiple methods to create a .netrc file. For this workshop, earthaccess package is used to automatically create a netrc file using your Earthdata login credentials if one does not exist. There are detailed instruction available for creating a .netrc file.\nYou will need a netrc file containing your NASA Earthdata Login credentials in order to execute the notebooks. A netrc file can be created manually within text editor and saved to your home directory. An example of the required content is below.\n\nmachine urs.earthdata.nasa.gov\nlogin &lt;USERNAME&gt;\npassword &lt;PASSWORD&gt;\nLaptop or tablet\n\nParticipation in the exercises requires a laptop or tablet. Yes, a tablet works too! All workshop participants will have access to a 2i2c Jupyter Lab instance."
+  },
+  {
+    "objectID": "ghg-center-at-ams-2024.html",
+    "href": "ghg-center-at-ams-2024.html",
+    "title": "The US GHG Center at American Meteorological Society Annual Meeting 2024",
+    "section": "",
+    "text": "Join members of the GHG Center team for several events at the 2024 AMS Annual Meeting at Baltimore, Maryland; January 28th - February 1st"
+  },
+  {
+    "objectID": "ghg-center-at-ams-2024.html#short-course",
+    "href": "ghg-center-at-ams-2024.html#short-course",
+    "title": "The US GHG Center at American Meteorological Society Annual Meeting 2024",
+    "section": "Short Course",
+    "text": "Short Course\nAdvancing Open Science: An Interactive Workshop on Harnessing VEDA for Earth Science Research at the U.S. Greenhouse Gas Center\n📅 Jan 28, 2024, 🕣 8:00 AM - 3:45 PM EST, 📍 Baltimore Convention Center\nLearn how to effectively analyze and visualize Earth science data in the cloud using open-source tools and datasets [Jan 28, room ]."
+  },
+  {
+    "objectID": "ghg-center-at-ams-2024.html#town-hall",
+    "href": "ghg-center-at-ams-2024.html#town-hall",
+    "title": "The US GHG Center at American Meteorological Society Annual Meeting 2024",
+    "section": "Town Hall",
+    "text": "Town Hall\nU.S. Greenhouse Gas Center: Listening Session.\n📅 Jan 30, 2024, 🕣 12:25 PM - 1:15 PM EST, 📍 Holiday 5, Hilton Baltimore Inner Harbor\nCome share your thoughts and see a demonstration of the US GHG Center. Upcoming developments and opportunities will be presented. [Jan 30, room Holiday 5 at Hilton Baltimore Inner Harbor]."
+  },
+  {
+    "objectID": "ghg-center-at-ams-2024.html#presentations",
+    "href": "ghg-center-at-ams-2024.html#presentations",
+    "title": "The US GHG Center at American Meteorological Society Annual Meeting 2024",
+    "section": "Presentations",
+    "text": "Presentations\nMultiple presentations by GHG Center team members will occur throughout the week. Stop by to hear more from GHG Center team members!\n\n\n\n\n\n\n\n\nWhen\nRoom\nPresentation Title\n\n\n\n\nTues, Jan 30 4:45\nHoliday 5\nHilton Baltimore Inner Harbor\n8A.2 Stakeholder Engagement for the US Greenhouse Gas Center (Combley)\n\n\nMon, Jan 29 5:15\n336\nThe Baltimore Convention Center\nJ4B.4 Developing a Cross-Institutional Open-Source Cyberinfrastructure to Explore, Analyze, and Communicate Greenhouse Gas Data and Information (Chaudhary)\n\n\nTues, Jan 30 5:15\nBallroom II\nThe Baltimore Convention Center\nJ8A.4 PPAP’s and NIST’s Urban Greenhouse Gas Measurements Program (Whetstone)\n\n\nWed, Jan 31 5:30\nHoliday 5\nHilton Baltimore Inner Harbor\n12A.5 NIST’s Urban Greenhouse Gas Measurements Program and Interactions with NOAA’s Air Resources Laboratory (Whetstone)\n\n\nMon, Jan 29 11:30\n321/322\nThe Baltimore Convention Center\n2B.4 Methane and Carbon Dioxide Point Source Measurements Across Six Continents from the EMIT Imaging Spectrometer on the International Space Station - and Contributions to the U.S. Greenhouse Gas Center (Green)\n\n\nMon, Jan 29 5:30\n321/322\nThe Baltimore Convention Center\n4B.5 Detectability of Anthropogenic Impacts on Terrestrial Carbon Storage through Space Based Greenhouse Gas Observations (Weir)\n\n\nThur, Feb 1 2:30\nHoliday 4\nHilton Baltimore Inner Harbor\nJ15.4 NOAA Carbon Monitoring, Research and Innovation: Long-Standing Foundation to Support Climate Mitigation (Grubišić)"
+  },
+  {
+    "objectID": "agenda.html",
+    "href": "agenda.html",
+    "title": "Workshop Agenda",
+    "section": "",
+    "text": "Workshop Agenda\nThe full-day workshop will be divided into the following sections:\n\n\n\n\n\n\n\n8:00 - 8:15\nWelcome\n\nWelcome message\nWorkshop Introduction\nTeam Introduction\nIcebreaker\n\n\n\n8:15 - 8:45\nOverview of the U.S. Greenhouse Gas Center and the Science\n\nWhat is the US GHG Center?\nRole of Methane and Carbon Dioxide in Climate Change\nWhat is included in the Center and why these datasets\nIntroduction to the science use cases / demonstration areas that will be explored during the workshop\n\n\n\n8:45 - 10:00\nIntroduction to the GHG Center Data Catalog\n\nIntro to the VEDA project and its relevance to Earth Science research and the US GHG Center\nHow do VEDA and US GHG Center support Open Science\nComponents of VEDA/US GHG Center\nHands-on exercise: searching and accessing cloud-optimized datasets using the STAC catalog\n\nIntro to JupyterHub and Jupyter Notebooks\n\nAccess to the JupyterHub environment\nCreating and running a Jupyter Notebook in the hub\n\nUsing the pystac client library to read the US GHG STAC catalog\n\nList all available datasets\nSpatial and temporal search\nAccess assets and visualize them\n\n(Time-permitting) Accessing the US GHG STAC catalog using QGIS on the browser\n\nEstablishing connection to the US GHG STAC catalog using the qgis-stac-plugin in QGIS in the GHG Center JupyterHub environment\nAdding a dataset/asset from the catalog as layer in QGIS\n\n\n\n\n\n10:00 - 10:15\nBREAK\n\n\n10:15 - 11:15\nHuman Anthropogenic Emissions\n\nIntroduction and background of datasets & human anthropogenic emissions\nHands-on exercise: Comparing emissions across sectors and time using EPA Gridded Methane data\nHands-on exercise: ODIAC: Compare to satellite data over time (using OCO-2, OCO-3 DAAC data), introduce intersection with geospatial data\n\n\n\n11:15 - 12:15\nComplementing anthropogenic GHG emissions with natural GHG emissions and fluxes\n\nIntroduction\nDescription of data sets and analysis available via the U.S. GHG Center (e.g., gridded wetland emissions and ecosystem exchange estimates)\nHands-on exercise: Exploring annual U.S. wetland methane emissions and their - meteorological influences.\n\n\n\n12:15 - 1:30\nLUNCH BREAK\n\n\n1:30 - 2:45\nIdentifying and quantifying emissions from large point source methane emission events leveraging aircraft and satellite data\n\nThe EMIT Instrument: Overview and GHG Applications\nHands-on exercise: Locating enhancement, understanding temporal relevance, exploring site with multiple observations.\n\n\n\n2:45 - 3:15\nOpen Science in Action: Intro to GitHub & Communicating Science Discoveries via Web Dashboard\n\nIntroduction to web dashboards for science communication\nHands-on exercise: creating a web dashboard to communicate science discoveries using the platform\n\n\n\n3:15 - 3:45\nClosing Remarks\n\nFuture Developments and Community Contributions\nEngaging with the U.S. Greenhouse Gas Center\nFeedback\n\n\n\n\nThroughout the workshop, facilitators will be available to provide support and guidance, ensuring participants are able to actively explore the workshop topics and apply their knowledge and skills to their own research projects.",
     "crumbs": [
       "Home",
-      "Prerequisites"
+      "Workshop Agenda"
     ]
   },
   {
-    "objectID": "prerequisites.html#to-get-us-ghg-center-jupyterhub-access",
-    "href": "prerequisites.html#to-get-us-ghg-center-jupyterhub-access",
-    "title": "Prerequisites",
+    "objectID": "sections/use-case-1/epa-ch4emission-grid-v2express_User_Notebook.html",
+    "href": "sections/use-case-1/epa-ch4emission-grid-v2express_User_Notebook.html",
+    "title": "Interactive Session: Human Anthropogenic Emissions (EPA)",
     "section": "",
-    "text": "The US GHG Center notebook environment is available to authorized users on an as-need basis. You can request access by using our Hub Access Request form.\n\nMake sure you have a GitHub Account. Take note of your GitHub username.\nFill out the request form and provide needed information. Make sure to use your organization/univerity email and use “AMS Workshop 2024” as the reason.\nWatch your email for notification of authorization and the invite to join the US GHG Center Hub Access GitHub Team.\nOnce you accept the invitation, you can go to hub.ghg.center and login using your GitHub credentials.",
-    "crumbs": [
-      "Home",
-      "Prerequisites"
-    ]
-  },
-  {
-    "objectID": "prerequisites.html#to-obtain-earthdata-credentials",
-    "href": "prerequisites.html#to-obtain-earthdata-credentials",
-    "title": "Prerequisites",
-    "section": "",
-    "text": "Follow the tutorial on this link to register for Earthdata login: https://www.earthdata.nasa.gov/eosdis/science-system-description/eosdis-components/earthdata-login.\nMake sure to note your username and password.",
-    "crumbs": [
-      "Home",
-      "Prerequisites"
-    ]
-  },
-  {
-    "objectID": "sections/use-case-1/odiac-ffco2-monthgrid-v2022_User_Notebook.html",
-    "href": "sections/use-case-1/odiac-ffco2-monthgrid-v2022_User_Notebook.html",
-    "title": "Interactive Session: Human Anthropogenic Emissions (ODIAC)",
-    "section": "",
-    "text": "The Open-Data Inventory for Anthropogenic Carbon dioxide (ODIAC) is a high-spatial resolution global emission data product of CO₂ emissions from fossil fuel combustion (Oda and Maksyutov, 2011). ODIAC pioneered the combined use of space-based nighttime light data and individual power plant emission/location profiles to estimate the global spatial extent of fossil fuel CO₂ emissions. With the innovative emission modeling approach, ODIAC achieved the fine picture of global fossil fuel CO₂ emissions at a 1x1km.",
+    "text": "The gridded EPA U.S. anthropogenic methane greenhouse gas inventory (gridded GHGI) includes spatially disaggregated (0.1 deg x 0.1 deg or approximately 10 x 10 km resolution) maps of annual anthropogenic methane emissions (for the contiguous United States (CONUS), consistent with national annual U.S. anthropogenic methane emissions reported in the U.S. EPA Inventory of U.S. Greenhouse Gas Emissions and Sinks (U.S. GHGI). This V2 Express Extension dataset contains methane emissions provided as fluxes, in units of molecules of methane per square cm per second, for over 25 individual emission source categories, including those from agriculture, petroleum and natural gas systems, coal mining, and waste. The data have been converted from their original NetCDF format to Cloud-Optimized GeoTIFF (COG) for use in the US GHG Center, thereby enabling user exploration of spatial anthropogenic methane emissions and their trends.",
     "crumbs": [
       "Home",
       "Sections",
       "Usecase 1 - Human Anthropogenic Emissions",
-      "Interactive Session: Human Anthropogenic Emissions (ODIAC)"
+      "Interactive Session: Human Anthropogenic Emissions (EPA)"
     ]
   },
   {
-    "objectID": "sections/use-case-1/odiac-ffco2-monthgrid-v2022_User_Notebook.html#about-the-data",
-    "href": "sections/use-case-1/odiac-ffco2-monthgrid-v2022_User_Notebook.html#about-the-data",
-    "title": "Interactive Session: Human Anthropogenic Emissions (ODIAC)",
+    "objectID": "sections/use-case-1/epa-ch4emission-grid-v2express_User_Notebook.html#about-the-data",
+    "href": "sections/use-case-1/epa-ch4emission-grid-v2express_User_Notebook.html#about-the-data",
+    "title": "Interactive Session: Human Anthropogenic Emissions (EPA)",
     "section": "",
-    "text": "The Open-Data Inventory for Anthropogenic Carbon dioxide (ODIAC) is a high-spatial resolution global emission data product of CO₂ emissions from fossil fuel combustion (Oda and Maksyutov, 2011). ODIAC pioneered the combined use of space-based nighttime light data and individual power plant emission/location profiles to estimate the global spatial extent of fossil fuel CO₂ emissions. With the innovative emission modeling approach, ODIAC achieved the fine picture of global fossil fuel CO₂ emissions at a 1x1km.",
+    "text": "The gridded EPA U.S. anthropogenic methane greenhouse gas inventory (gridded GHGI) includes spatially disaggregated (0.1 deg x 0.1 deg or approximately 10 x 10 km resolution) maps of annual anthropogenic methane emissions (for the contiguous United States (CONUS), consistent with national annual U.S. anthropogenic methane emissions reported in the U.S. EPA Inventory of U.S. Greenhouse Gas Emissions and Sinks (U.S. GHGI). This V2 Express Extension dataset contains methane emissions provided as fluxes, in units of molecules of methane per square cm per second, for over 25 individual emission source categories, including those from agriculture, petroleum and natural gas systems, coal mining, and waste. The data have been converted from their original NetCDF format to Cloud-Optimized GeoTIFF (COG) for use in the US GHG Center, thereby enabling user exploration of spatial anthropogenic methane emissions and their trends.",
     "crumbs": [
       "Home",
       "Sections",
       "Usecase 1 - Human Anthropogenic Emissions",
-      "Interactive Session: Human Anthropogenic Emissions (ODIAC)"
+      "Interactive Session: Human Anthropogenic Emissions (EPA)"
     ]
   },
   {
-    "objectID": "sections/use-case-1/odiac-ffco2-monthgrid-v2022_User_Notebook.html#requirements",
-    "href": "sections/use-case-1/odiac-ffco2-monthgrid-v2022_User_Notebook.html#requirements",
-    "title": "Interactive Session: Human Anthropogenic Emissions (ODIAC)",
+    "objectID": "sections/use-case-1/epa-ch4emission-grid-v2express_User_Notebook.html#requirements",
+    "href": "sections/use-case-1/epa-ch4emission-grid-v2express_User_Notebook.html#requirements",
+    "title": "Interactive Session: Human Anthropogenic Emissions (EPA)",
     "section": "Requirements",
     "text": "Requirements\n\nSet up Python Environment - See setup_instructions.md in the /setup/ folder",
     "crumbs": [
       "Home",
       "Sections",
       "Usecase 1 - Human Anthropogenic Emissions",
-      "Interactive Session: Human Anthropogenic Emissions (ODIAC)"
+      "Interactive Session: Human Anthropogenic Emissions (EPA)"
     ]
   },
   {
-    "objectID": "sections/use-case-1/odiac-ffco2-monthgrid-v2022_User_Notebook.html#learning-objectives",
-    "href": "sections/use-case-1/odiac-ffco2-monthgrid-v2022_User_Notebook.html#learning-objectives",
-    "title": "Interactive Session: Human Anthropogenic Emissions (ODIAC)",
+    "objectID": "sections/use-case-1/epa-ch4emission-grid-v2express_User_Notebook.html#learning-objectives",
+    "href": "sections/use-case-1/epa-ch4emission-grid-v2express_User_Notebook.html#learning-objectives",
+    "title": "Interactive Session: Human Anthropogenic Emissions (EPA)",
     "section": "Learning Objectives",
-    "text": "Learning Objectives\n\nHow to use U.S. GHG Center STAC Catalogto access ‘ODIAC Fossil Fuel CO₂ Emissions’ and OCO-2 GEOS Column CO₂ Concentrations data.\nHow to use VEDA STAC Catalog to access NO₂ Emissions data.\nHow to visualize datasets using folium and perfom zonal statistics over South Africa.\nHow to plot time series plot for ODIAC and analyze the results.",
+    "text": "Learning Objectives\n\nHow to use U.S. GHG Center STAC Catalog to access U.S. Gridded Anthropogenic Methane Emissions Inventory data\nHow to visualize a dataset using folium and perform zonal statistics",
     "crumbs": [
       "Home",
       "Sections",
       "Usecase 1 - Human Anthropogenic Emissions",
-      "Interactive Session: Human Anthropogenic Emissions (ODIAC)"
+      "Interactive Session: Human Anthropogenic Emissions (EPA)"
     ]
   },
   {
-    "objectID": "sections/use-case-1/odiac-ffco2-monthgrid-v2022_User_Notebook.html#approach",
-    "href": "sections/use-case-1/odiac-ffco2-monthgrid-v2022_User_Notebook.html#approach",
-    "title": "Interactive Session: Human Anthropogenic Emissions (ODIAC)",
+    "objectID": "sections/use-case-1/epa-ch4emission-grid-v2express_User_Notebook.html#approach",
+    "href": "sections/use-case-1/epa-ch4emission-grid-v2express_User_Notebook.html#approach",
+    "title": "Interactive Session: Human Anthropogenic Emissions (EPA)",
     "section": "Approach",
-    "text": "Approach\n\nIdentify available dates and temporal frequency of observations for the given collection using the GHGC API /stac endpoint. Collection processed in this notebook is ODIAC CO₂ emissions version 2022.\nPass the STAC item into raster API /stac/tilejson.json endpoint\nWe’ll visualize two tiles (side-by-side) allowing for comparison of each of the time points using folium.plugins.DualMap\nAfter the visualization, we’ll perform zonal statistics for a given polygon.",
+    "text": "Approach\n\nIdentify available dates and temporal frequency of observations for the given collection using the GHGC API /stac endpoint. The collection processed in this notebook is the gridded methane emissions data product.\nPass the STAC item into the raster API /stac/tilejson.jsonendpoint.\nUsing folium.plugins.DualMap, we will visualize two tiles (side-by-side), allowing us to compare time points.\nAfter the visualization, we will perform zonal statistics for a given polygon.",
     "crumbs": [
       "Home",
       "Sections",
       "Usecase 1 - Human Anthropogenic Emissions",
-      "Interactive Session: Human Anthropogenic Emissions (ODIAC)"
+      "Interactive Session: Human Anthropogenic Emissions (EPA)"
     ]
   },
   {
-    "objectID": "sections/use-case-1/odiac-ffco2-monthgrid-v2022_User_Notebook.html#setup",
-    "href": "sections/use-case-1/odiac-ffco2-monthgrid-v2022_User_Notebook.html#setup",
-    "title": "Interactive Session: Human Anthropogenic Emissions (ODIAC)",
-    "section": "Setup",
-    "text": "Setup\nImport the required Python libraries.\n\n# Import required libraries\n\nimport earthaccess\nimport warnings\nimport requests\nimport pandas as pd\nimport os\nos.environ['USE_PYGEOS'] = '0'\nimport geopandas\nimport folium\nimport folium.plugins\nimport seaborn as sns\nimport glob\nimport numpy as np\nimport matplotlib.pyplot as plt\nimport branca.colormap as cm\n\nfrom folium import Map, TileLayer \nfrom branca.element import Figure\nfrom pystac_client import Client \nfrom pyproj import Geod\nfrom shapely import wkt\nfrom datetime import datetime\nfrom folium.plugins import MousePosition",
+    "objectID": "sections/use-case-1/epa-ch4emission-grid-v2express_User_Notebook.html#define-the-spatial-region-of-interest",
+    "href": "sections/use-case-1/epa-ch4emission-grid-v2express_User_Notebook.html#define-the-spatial-region-of-interest",
+    "title": "Interactive Session: Human Anthropogenic Emissions (EPA)",
+    "section": "Define the Spatial Region of Interest",
+    "text": "Define the Spatial Region of Interest\nFor this example, our spatial region of interest (ROI) will be the Permian Basin, USA. The Permian Basin is a regional depression expanding from the eastern side of New Mexico to West Texas, covering roughly 75 thousand square miles of land. This region is known to be “the largest hydrocarbon-producing basins in the United States and the world” according to the U.S. Energy Information Administration. Consequently, the Permian Basin is prone to excessive air pollution and a suitable site for monitoring anthropogenic methane emissions.\n\n# Loading Permian Basin shape file as a ROI\n# User can pass any json or shape file here\n# The \"geopandas\" library makes working with geospatial data easier by facilitating spatial operations on geometric types  \ndata_dir = f\"{os.getenv('HOME')}/shared/data\"\npermian_basin = geopandas.read_file(f'{data_dir}/use-case-3/Permian.zip')",
     "crumbs": [
       "Home",
       "Sections",
       "Usecase 1 - Human Anthropogenic Emissions",
-      "Interactive Session: Human Anthropogenic Emissions (ODIAC)"
+      "Interactive Session: Human Anthropogenic Emissions (EPA)"
     ]
   },
   {
-    "objectID": "sections/use-case-1/odiac-ffco2-monthgrid-v2022_User_Notebook.html#querying-the-stac-api",
-    "href": "sections/use-case-1/odiac-ffco2-monthgrid-v2022_User_Notebook.html#querying-the-stac-api",
-    "title": "Interactive Session: Human Anthropogenic Emissions (ODIAC)",
+    "objectID": "sections/use-case-1/epa-ch4emission-grid-v2express_User_Notebook.html#querying-the-stac-api",
+    "href": "sections/use-case-1/epa-ch4emission-grid-v2express_User_Notebook.html#querying-the-stac-api",
+    "title": "Interactive Session: Human Anthropogenic Emissions (EPA)",
     "section": "Querying the STAC API",
-    "text": "Querying the STAC API\nSearch for ODIAC Fossil Fuel Co2 Emissions, OCO-2 and NO2 Emissions dataset\n\n# Provide STAC and RASTER API endpoints\nSTAC_API_URL = \"http://ghg.center/api/stac\"\nRASTER_API_URL = \"https://ghg.center/api/raster\"\n\nSTAC_API_URL_veda = \"https://staging-stac.delta-backend.com\"\nRASTER_API_URL_veda = \"https://staging-raster.delta-backend.com\"\n\n#Please use the collection name similar to the one used in STAC collection.\n# Name of the collection for ODIAC dataset. \ncollection_name_odiac = \"odiac-ffco2-monthgrid-v2022\"\ncollection_name_oco = \"oco2geos-co2-daygrid-v10r\"\ncollection_name_no2 = \"no2-monthly\"\n\n\n# Fetching the collection from STAC collections using appropriate endpoint.\ncollection_odiac = requests.get(f\"{STAC_API_URL}/collections/{collection_name_odiac}\").json()\ncollection_odiac\n\ncollection_oco2 = requests.get(f\"{STAC_API_URL}/collections/{collection_name_oco}\").json()\ncollection_oco2\n\ncollection_no2 = requests.get(f\"{STAC_API_URL_veda}/collections/{collection_name_no2}\").json()\ncollection_no2\n\nExamining the contents of our collection under summaries we see that the data is available from January 2000 to December 2021. By looking at the dashboard:time density we observe that the periodic frequency of these observations is monthly.\n\n# Create a function that would search for the number of items in above data collection in the STAC API\n\ndef get_item_count(STAC_API_URL, collection_id):\n    count = 0\n    items_url = f\"{STAC_API_URL}/collections/{collection_id}/items\"\n\n    while True:\n        response = requests.get(items_url)\n\n        if not response.ok:\n            print(\"error getting items\")\n            exit()\n\n        stac = response.json()\n        count += int(stac[\"context\"].get(\"returned\", 0))\n        next = [link for link in stac[\"links\"] if link[\"rel\"] == \"next\"]\n\n        if not next:\n            break\n        items_url = next[0][\"href\"]\n\n    return count\n\n\n# Check total number of items available\nnumber_of_items_odiac = get_item_count(STAC_API_URL,collection_name_odiac)\nitems_odiac = requests.get(f\"{STAC_API_URL}/collections/{collection_name_odiac}/items?limit={number_of_items_odiac}\").json()[\"features\"]\nprint(f\"Found {len(items_odiac)} odiac items\")\n\nnumber_of_items_oco2 = get_item_count(STAC_API_URL,collection_name_oco)\nitems_oco2 = requests.get(f\"{STAC_API_URL}/collections/{collection_name_oco}/items?limit={number_of_items_oco2}\").json()[\"features\"]\nprint(f\"Found {len(items_oco2)} oco2 items\")\n\nnumber_of_items_no2 = get_item_count(STAC_API_URL_veda,collection_name_no2)\nitems_no2 = requests.get(f\"{STAC_API_URL_veda}/collections/{collection_name_no2}/items?limit={number_of_items_no2}\").json()[\"features\"]\nprint(f\"Found {len(items_no2)} no2 items\")\n\nThis makes sense as there are 22 years between 2000 - 2021, with 12 months per year, meaning 264 records in total.\nBelow, we are entering the minimum and maximum values to provide our upper and lower bounds in rescale_values.",
+    "text": "Querying the STAC API\nSearch for U.S. Gridded Anthropogenic Methane Emissions Inventory Data\n\n# Provide STAC and RASTER API endpoints\nSTAC_API_URL = \"http://ghg.center/api/stac\"\nRASTER_API_URL = \"https://ghg.center/api/raster\"\n\n# Please use the collection name similar to the one used in STAC collection.\n# Name of the collection for gridded methane dataset. \ncollection_name = \"epa-ch4emission-yeargrid-v2express\"\n\n\n# Fetching the collection from STAC collections using appropriate endpoint.\ncollection = requests.get(f\"{STAC_API_URL}/collections/{collection_name}\").json()\ncollection\n\nExamining the contents of our collection under the temporal variable, we see that the data is available from January 2012 to December 2020. By looking at the dashboard:time density, we observe that the periodic frequency of these observations is yearly.\n\n# Create a function that would search for the number of items in above data collection in the STAC API\ndef get_item_count(collection_id):\n    count = 0\n    items_url = f\"{STAC_API_URL}/collections/{collection_id}/items\"\n\n    while True:\n        response = requests.get(items_url)\n\n        if not response.ok:\n            print(\"error getting items\")\n            exit()\n\n        stac = response.json()\n        count += int(stac[\"context\"].get(\"returned\", 0))\n        next = [link for link in stac[\"links\"] if link[\"rel\"] == \"next\"]\n\n        if not next:\n            break\n        items_url = next[0][\"href\"]\n\n    return count\n\n\n# Check total number of items available\nnumber_of_items = get_item_count(collection_name)\nitems = requests.get(f\"{STAC_API_URL}/collections/{collection_name}/items?limit={number_of_items}\").json()[\"features\"]\nprint(f\"Found {len(items)} items\")\n\n\n# Examining the first item in the collection\n# Keep in mind that a list starts from 0, 1, 2,... therefore ‘[0]’ is referring to the first item in the list/collection \nitems[0]",
     "crumbs": [
       "Home",
       "Sections",
       "Usecase 1 - Human Anthropogenic Emissions",
-      "Interactive Session: Human Anthropogenic Emissions (ODIAC)"
+      "Interactive Session: Human Anthropogenic Emissions (EPA)"
     ]
   },
   {
-    "objectID": "sections/use-case-1/odiac-ffco2-monthgrid-v2022_User_Notebook.html#exploring-changes-in-carbon-dioxide-co₂-levels-using-the-raster-api",
-    "href": "sections/use-case-1/odiac-ffco2-monthgrid-v2022_User_Notebook.html#exploring-changes-in-carbon-dioxide-co₂-levels-using-the-raster-api",
-    "title": "Interactive Session: Human Anthropogenic Emissions (ODIAC)",
-    "section": "Exploring Changes in Carbon Dioxide (CO₂) levels using the Raster API",
-    "text": "Exploring Changes in Carbon Dioxide (CO₂) levels using the Raster API\nWe will explore changes in fossil fuel emissions in urban egions. In this notebook, we’ll explore the impacts of these emissions and explore these changes over time. We’ll then visualize the outputs on a map using folium.\n\n# to access the year value from each item more easily, this will let us query more explicity by year and month (e.g., 2020-02)\n# Set the asset values to the appropriate parameter\n\nitems_odiac = {item[\"properties\"][\"start_datetime\"][:7]: item for item in items_odiac} \nasset_name = \"co2-emissions\"\n\nitems_oco2 = {item[\"properties\"][\"datetime\"][:10]: item for item in items_oco2} \nasset_name1 = \"xco2\"\n\nitems_no2 = {item[\"properties\"][\"start_datetime\"][:10]: item for item in items_no2}\n\n\n# Below, we are entering the minimum and maximum values to provide our upper and lower bounds \nrescale_values_odiac = {\"max\":items_odiac[list(items_odiac.keys())[0]][\"assets\"][asset_name][\"raster:bands\"][0][\"histogram\"][\"max\"], \"min\":items_odiac[list(items_odiac.keys())[0]][\"assets\"][asset_name][\"raster:bands\"][0][\"histogram\"][\"min\"]}\nrescale_values_oco2 = {'max':415 , 'min': 412}\nrescale_values_no2 = {'max': 9050373673124971, 'min': 0}\n\nNow we will pass the item id, collection name, and rescaling_factor to the Raster API endpoint. We will do this twice, once for January 2020 and again for January 2000, so that we can visualize each event independently.",
+    "objectID": "sections/use-case-1/epa-ch4emission-grid-v2express_User_Notebook.html#opening-and-exploring-methane-emissions-using-the-raster-api",
+    "href": "sections/use-case-1/epa-ch4emission-grid-v2express_User_Notebook.html#opening-and-exploring-methane-emissions-using-the-raster-api",
+    "title": "Interactive Session: Human Anthropogenic Emissions (EPA)",
+    "section": "Opening and Exploring Methane Emissions Using the Raster API",
+    "text": "Opening and Exploring Methane Emissions Using the Raster API\nIn this notebook, we will explore the temporal impacts of methane emissions. We will visualize the outputs on a map using folium.\n\n# To access the year value from each item more easily, this will let us query more explicity by year and month (e.g., 2020-02)\nitems = {item[\"properties\"][\"datetime\"][:7]: item for item in items} \n\n# Set the asset values to the appropriate parameters\nasset_name_1 = \"production-ngs\"\nasset_name_2 = 'production-ps'\nasset_name_3 = 'total-methane'\n\n\n# Below, we are entering the minimum and maximum values to provide our upper and lower bounds\nrescale_values = {'max': 20,'min': 0}\n\n\n# Examining the items in the collection\nitems\n\nNow, we will pass the item id, collection name, and rescaling_factor to the Raster API endpoint. We will do this twice, once for January 2018 and again for January 2012, so that we can visualize each event independently.\n\n# Set a colormap for the granule\n# Please refer to matplotlib library if you'd prefer choosing a different color ramp (https://matplotlib.org/stable/users/explain/colors/colormaps.html)\ncolor_map = \"rainbow\" \n\n# Petroleum-Production Methane Emissions\n\n# Extract and display the January 2018 tile using the appropriate ID, colormap, rescale values, and datetime (items['2018-01']) \n\njanuary_2018_tile_ps = requests.get(\n    f\"{RASTER_API_URL}/stac/tilejson.json?collection={items['2018-01']['collection']}&item={items['2018-01']['id']}\"\n    f\"&assets={asset_name_1}\"\n    f\"&color_formula=gamma+r+1.05&colormap_name={color_map}\"\n    f\"&rescale={rescale_values['min']},{rescale_values['max']}\", \n).json()\n\n# Print the information associated with this tile\njanuary_2018_tile_ps\n\njanuary_2012_tile_ps = requests.get(\n    f\"{RASTER_API_URL}/stac/tilejson.json?collection={items['2012-01']['collection']}&item={items['2012-01']['id']}\"\n    f\"&assets={asset_name_1}\"\n    f\"&color_formula=gamma+r+1.05&colormap_name={color_map}\"\n    f\"&rescale={rescale_values['min']},{rescale_values['max']}\", \n).json()\njanuary_2012_tile_ps\n\n\n# Natural Gas-Production Methane Emissions\n\ncolor_map = \"rainbow\" # please select the color ramp from matplotlib library.\njanuary_2018_tile_ngs = requests.get(\n    f\"{RASTER_API_URL}/stac/tilejson.json?collection={items['2018-01']['collection']}&item={items['2018-01']['id']}\"\n    f\"&assets={asset_name_2}\"\n    f\"&color_formula=gamma+r+1.05&colormap_name={color_map}\"\n    f\"&rescale={rescale_values['min']},{rescale_values['max']}\", \n).json()\njanuary_2018_tile_ngs\n\njanuary_2012_tile_ngs = requests.get(\n    f\"{RASTER_API_URL}/stac/tilejson.json?collection={items['2012-01']['collection']}&item={items['2012-01']['id']}\"\n    f\"&assets={asset_name_2}\"\n    f\"&color_formula=gamma+r+1.05&colormap_name={color_map}\"\n    f\"&rescale={rescale_values['min']},{rescale_values['max']}\", \n).json()\njanuary_2012_tile_ngs\n\n\n# Total Methane Emissions\n\ncolor_map = \"rainbow\" # please select the color ramp from matplotlib library.\njanuary_2018_tile_tm = requests.get(\n    f\"{RASTER_API_URL}/stac/tilejson.json?collection={items['2018-01']['collection']}&item={items['2018-01']['id']}\"\n    f\"&assets={asset_name_3}\"\n    f\"&color_formula=gamma+r+1.05&colormap_name={color_map}\"\n    f\"&rescale={rescale_values['min']},{rescale_values['max']}\", \n).json()\njanuary_2018_tile_tm\n\njanuary_2012_tile_tm = requests.get(\n    f\"{RASTER_API_URL}/stac/tilejson.json?collection={items['2012-01']['collection']}&item={items['2012-01']['id']}\"\n    f\"&assets={asset_name_3}\"\n    f\"&color_formula=gamma+r+1.05&colormap_name={color_map}\"\n    f\"&rescale={rescale_values['min']},{rescale_values['max']}\", \n).json()\njanuary_2012_tile_tm",
     "crumbs": [
       "Home",
       "Sections",
       "Usecase 1 - Human Anthropogenic Emissions",
-      "Interactive Session: Human Anthropogenic Emissions (ODIAC)"
+      "Interactive Session: Human Anthropogenic Emissions (EPA)"
     ]
   },
   {
-    "objectID": "sections/use-case-1/odiac-ffco2-monthgrid-v2022_User_Notebook.html#opening-and-exploring-data-using-the-raster-api",
-    "href": "sections/use-case-1/odiac-ffco2-monthgrid-v2022_User_Notebook.html#opening-and-exploring-data-using-the-raster-api",
-    "title": "Interactive Session: Human Anthropogenic Emissions (ODIAC)",
-    "section": "Opening and Exploring Data Using the Raster API",
-    "text": "Opening and Exploring Data Using the Raster API\nIn this notebook, we will explore the temporal impacts of methane emissions. We will visualize the outputs on a map using ‘folium’.\n\n# Set a colormap for the granule\n# Please refer to matplotlib library if you'd prefer choosing a different color ramp (https://matplotlib.org/stable/users/explain/colors/colormaps.html)\ncolor_map = \"rainbow\" # please select the color ramp from matplotlib library.\n\n# Extract and display the January 2020 tile using the appropriate ID, colormap, rescale values, and datetime (items['2020-01']) \njanuary_2020_tile = requests.get(\n    f\"{RASTER_API_URL}/stac/tilejson.json?collection={items_odiac['2020-01']['collection']}&item={items_odiac['2020-01']['id']}\"\n    f\"&assets={asset_name}\"\n    f\"&color_formula=gamma+r+1.05&colormap_name={color_map}\"\n    f\"&rescale={rescale_values_odiac['min']},{rescale_values_odiac['max']}\", \n).json()\njanuary_2020_tile\n\ncolor_map1 = \"magma\"\n# Extract and display the OCO-2 January 2020 tile using the appropriate ID, colormap, rescale values, and datetime (items['2020-01-20']) \n\noco2_1 = requests.get(\n    f\"{RASTER_API_URL}/stac/tilejson.json?collection={items_oco2['2020-01-20']['collection']}&item={items_oco2['2020-01-20']['id']}\"\n    f\"&assets={asset_name1}\"\n    f\"&color_formula=gamma+r+1.05&colormap_name={color_map1}\"\n    f\"&rescale={rescale_values_oco2['min']},{rescale_values_oco2['max']}\", \n).json()\noco2_1\n\n# Extract and display the NO-2 January 2020 tile using the appropriate ID, colormap, rescale values, and datetime (items['2020-01-01']) \n\nno2_1 = requests.get(\n    f\"{RASTER_API_URL_veda}/stac/tilejson.json?collection={items_no2['2020-01-01']['collection']}&item={items_no2['2020-01-01']['id']}\"\n    f\"&assets=cog_default\"\n    f\"&color_formula=gamma+r+1.05&colormap_name={color_map1}\"\n    f\"&rescale={rescale_values_no2['min']},{rescale_values_no2['max']}\", \n).json()\nno2_1",
+    "objectID": "sections/use-case-1/epa-ch4emission-grid-v2express_User_Notebook.html#visualizing-petroleum--production-annual-ch₄-emissions",
+    "href": "sections/use-case-1/epa-ch4emission-grid-v2express_User_Notebook.html#visualizing-petroleum--production-annual-ch₄-emissions",
+    "title": "Interactive Session: Human Anthropogenic Emissions (EPA)",
+    "section": "Visualizing Petroleum- Production (annual) CH₄ emissions",
+    "text": "Visualizing Petroleum- Production (annual) CH₄ emissions\n\n# Set initial zoom and center of map for CH₄ Layer\n# Centre of map [latitude,longitude]\nmap_ = folium.plugins.DualMap(location=(32, -102), zoom_start=6)\n\n# January 2018\nmap_layer_2018 = TileLayer(\n    tiles=january_2018_tile_ps[\"tiles\"][0],\n    name = 'Petroleum production for 2018',\n    attr=\"GHG\",\n    opacity=0.7,\n)\nmap_layer_2018.add_to(map_.m1)\n\n# January 2012\nmap_layer_2012 = TileLayer(\n    tiles=january_2012_tile_ps[\"tiles\"][0],\n    name = 'Petroleum production for 2012',\n    attr=\"GHG\",\n    opacity=0.7,\n)\nmap_layer_2012.add_to(map_.m2)\n\n# Load the GeoJSON file for the Permian Basin\nmap_layer_permian = folium.GeoJson(permian_basin, name= 'Permian Shape')\nmap_layer_permian.add_to(map_)\n\n# Adjust map elements\nfolium.LayerControl(collapsed=True, position='bottomleft').add_to(map_)\n# visualising the map\nmap_",
     "crumbs": [
       "Home",
       "Sections",
       "Usecase 1 - Human Anthropogenic Emissions",
-      "Interactive Session: Human Anthropogenic Emissions (ODIAC)"
+      "Interactive Session: Human Anthropogenic Emissions (EPA)"
     ]
   },
   {
-    "objectID": "sections/use-case-1/odiac-ffco2-monthgrid-v2022_User_Notebook.html#define-spatial-region-of-interest",
-    "href": "sections/use-case-1/odiac-ffco2-monthgrid-v2022_User_Notebook.html#define-spatial-region-of-interest",
-    "title": "Interactive Session: Human Anthropogenic Emissions (ODIAC)",
-    "section": "Define Spatial Region of Interest",
-    "text": "Define Spatial Region of Interest\nFor this example, our spatial region of interest (ROI) will be the a region in South Africa.\n\nsa_aoi = {\n  \"type\": \"FeatureCollection\",\n  \"features\": [\n    {\n      \"type\": \"Feature\",\n      \"properties\": {},\n      \"geometry\": {\n        \"coordinates\": [\n          [\n            [\n              25.519052777398997,\n              -24.8470086420499\n            ],\n            [\n              25.519052777398997,\n              -28.145634397543844\n            ],\n            [\n              30.29637465013832,\n              -28.145634397543844\n            ],\n            [\n              30.29637465013832,\n              -24.8470086420499\n            ],\n            [\n              25.519052777398997,\n              -24.8470086420499\n            ]\n          ]\n        ],\n        \"type\": \"Polygon\"\n      }\n    }\n  ]\n}",
+    "objectID": "sections/use-case-1/epa-ch4emission-grid-v2express_User_Notebook.html#visualizing-natural-gas---production-annual-ch₄-emissions",
+    "href": "sections/use-case-1/epa-ch4emission-grid-v2express_User_Notebook.html#visualizing-natural-gas---production-annual-ch₄-emissions",
+    "title": "Interactive Session: Human Anthropogenic Emissions (EPA)",
+    "section": "Visualizing Natural Gas - Production (annual) CH₄ emissions",
+    "text": "Visualizing Natural Gas - Production (annual) CH₄ emissions\n\nmap_ = folium.plugins.DualMap(location=(32, -102), zoom_start=6)\n\n# January 2018\nmap_layer_2018 = TileLayer(\n    tiles=january_2018_tile_ngs[\"tiles\"][0],\n    name = 'Natural Gas production for 2018',\n    attr=\"GHG\",\n    opacity=0.7,\n)\nmap_layer_2018.add_to(map_.m1)\n\n# January 2012\nmap_layer_2012 = TileLayer(\n    tiles=january_2012_tile_ngs[\"tiles\"][0],\n    name = 'Natural Gas Production for 2012',\n    attr=\"GHG\",\n    opacity=0.7,\n)\nmap_layer_2012.add_to(map_.m2)\n\nmap_layer_permian = folium.GeoJson(permian_basin, name= 'Permian Shape')\nmap_layer_permian.add_to(map_)\nfolium.LayerControl(collapsed=True, position='bottomleft').add_to(map_)\n\n# visualising the map\nmap_",
     "crumbs": [
       "Home",
       "Sections",
       "Usecase 1 - Human Anthropogenic Emissions",
-      "Interactive Session: Human Anthropogenic Emissions (ODIAC)"
+      "Interactive Session: Human Anthropogenic Emissions (EPA)"
     ]
   },
   {
-    "objectID": "sections/use-case-1/odiac-ffco2-monthgrid-v2022_User_Notebook.html#visualizing-co₂-emissions",
-    "href": "sections/use-case-1/odiac-ffco2-monthgrid-v2022_User_Notebook.html#visualizing-co₂-emissions",
-    "title": "Interactive Session: Human Anthropogenic Emissions (ODIAC)",
-    "section": "Visualizing CO₂ emissions",
-    "text": "Visualizing CO₂ emissions\n\n\n\nmap_ = folium.Map(location=(-25.943840, 29.789560), zoom_start=7)\n\nmap_layer_2020 = TileLayer(\n    tiles=january_2020_tile[\"tiles\"][0],\n    attr=\"GHG\",\n    name =\"ODIAC\",\n    opacity=0.5,\n)\nmap_layer_2020_2 = TileLayer(\n    tiles=no2_1[\"tiles\"][0],\n    attr=\"GHG\",\n    name = \"NO2\",\n    opacity=0.5,\n)\nsbs = folium.plugins.SideBySideLayers(layer_left=map_layer_2020, layer_right=map_layer_2020_2)\nmap_layer_2020.add_to(map_)\nmap_layer_2020_2.add_to(map_)\n\n# Load the GeoJSON file for South Africa\nfolium.GeoJson(sa_aoi, name=\"South Africa\").add_to(map_)\nsbs.add_to(map_)\nMousePosition().add_to(map_)\n# visualising the map\nmap_\n\n\n\n# Set initial zoom and center of map\nmap_ = folium.Map(location=(-25.943840, 29.789560), zoom_start=7)\n\n# January 2020\nmap_layer_2020_odiac = TileLayer(\n    tiles=january_2020_tile[\"tiles\"][0],\n    attr=\"GHG\",\n    name =\"ODIAC\",\n    opacity=0.5,\n)\nmap_layer_2020_odiac.add_to(map_)\n\n# OCO-2 2020\nmap_layer_2020_oco2 = TileLayer(\n    tiles=oco2_1[\"tiles\"][0],\n    attr=\"GHG\",\n    name = \"OCO2\",\n    opacity=0.5,\n)\nmap_layer_2020_oco2.add_to(map_)\n\n# NO-2 2020\nmap_layer_2020_no2 = TileLayer(\n    tiles=no2_1[\"tiles\"][0],\n    attr=\"GHG\",\n    name = \"NO2\",\n    opacity=0.5,\n)\nmap_layer_2020_no2.add_to(map_)\n\nfolium.GeoJson(sa_aoi, name=\"South Africa\").add_to(map_)\nfolium.LayerControl(collapsed=False,position='bottomleft').add_to(map_)\n\n# visualising the map\nmap_",
+    "objectID": "sections/use-case-1/epa-ch4emission-grid-v2express_User_Notebook.html#visualizing-total-ch₄-emissions",
+    "href": "sections/use-case-1/epa-ch4emission-grid-v2express_User_Notebook.html#visualizing-total-ch₄-emissions",
+    "title": "Interactive Session: Human Anthropogenic Emissions (EPA)",
+    "section": "Visualizing Total CH₄ emissions",
+    "text": "Visualizing Total CH₄ emissions\n\n# We will import folium to map and folium.plugins to allow side-by-side mapping\nimport folium\nimport folium.plugins\n\n# Set initial zoom and center of map for CH₄ Layer\n# Centre of map [latitude,longitude]\nmap_ = folium.plugins.DualMap(location=(32, -102), zoom_start=6)\n\n# January 2018\nmap_layer_2018 = TileLayer(\n    tiles=january_2018_tile_tm[\"tiles\"][0],\n    attr=\"GHG\",\n    name = 'Total methane emissions for 2018',\n    opacity=0.7,\n)\nmap_layer_2018.add_to(map_.m1)\n\n# January 2012\nmap_layer_2012 = TileLayer(\n    tiles=january_2012_tile_tm[\"tiles\"][0],\n    name= 'Total methane emissions for 2012',\n    attr=\"GHG\",\n    opacity=0.7,\n)\nmap_layer_2012.add_to(map_.m2)\n\nmap_layer_permian = folium.GeoJson(permian_basin, name= 'Permian Shape')\nmap_layer_permian.add_to(map_)\nfolium.LayerControl(collapsed=True, position='bottomleft').add_to(map_)\n# visualising the map\nmap_",
     "crumbs": [
       "Home",
       "Sections",
       "Usecase 1 - Human Anthropogenic Emissions",
-      "Interactive Session: Human Anthropogenic Emissions (ODIAC)"
+      "Interactive Session: Human Anthropogenic Emissions (EPA)"
     ]
   },
   {
-    "objectID": "sections/use-case-1/odiac-ffco2-monthgrid-v2022_User_Notebook.html#generate-statistics-and-time-series-lineplots-for-co2-emission",
-    "href": "sections/use-case-1/odiac-ffco2-monthgrid-v2022_User_Notebook.html#generate-statistics-and-time-series-lineplots-for-co2-emission",
-    "title": "Interactive Session: Human Anthropogenic Emissions (ODIAC)",
-    "section": "Generate Statistics and Time Series Lineplots for CO2 Emission",
-    "text": "Generate Statistics and Time Series Lineplots for CO2 Emission\n\n# Check total number of items available\nitems = requests.get(\n    f\"{STAC_API_URL}/collections/{collection_name_odiac}/items?limit={number_of_items}\"\n).json()[\"features\"]\nprint(f\"Found {len(items)} items\")\n\n\n# Explore one item to see what it contains\nitems\n\n\n# the bounding box should be passed to the geojson param as a geojson Feature or FeatureCollection\ndef generate_stats(item, geojson):\n    result = requests.post(\n        f\"{RASTER_API_URL}/cog/statistics\",\n        params={\"url\": item[\"assets\"][asset_name][\"href\"]},\n        json=geojson,\n    ).json()['features']\n    return {\n        **result[0][\"properties\"],\n        \"start_datetime\": item[\"properties\"][\"start_datetime\"][:7],\n    }\n\nWith the function above we can generate the statistics for the AOI.\n\n%%time\nstats = [generate_stats(item,sa_aoi) for item in items]\n\n\nstats[0]\n\n\n# Manipulating and cleaning the stats output from the previous cell\ndef clean_stats(stats_json) -&gt; pd.DataFrame:\n    df = pd.json_normalize(stats_json)\n    df.columns = [col.replace(\"statistics.b1.\", \"\") for col in df.columns]\n    df[\"date\"] = pd.to_datetime(df[\"start_datetime\"])\n    return df\n\ndf = clean_stats(stats)\ndf.head(5)",
-    "crumbs": [
-      "Home",
-      "Sections",
-      "Usecase 1 - Human Anthropogenic Emissions",
-      "Interactive Session: Human Anthropogenic Emissions (ODIAC)"
-    ]
-  },
-  {
-    "objectID": "sections/use-case-1/odiac-ffco2-monthgrid-v2022_User_Notebook.html#visualizing-the-data-as-a-time-series",
-    "href": "sections/use-case-1/odiac-ffco2-monthgrid-v2022_User_Notebook.html#visualizing-the-data-as-a-time-series",
-    "title": "Interactive Session: Human Anthropogenic Emissions (ODIAC)",
+    "objectID": "sections/use-case-1/epa-ch4emission-grid-v2express_User_Notebook.html#visualizing-the-data-as-a-time-series",
+    "href": "sections/use-case-1/epa-ch4emission-grid-v2express_User_Notebook.html#visualizing-the-data-as-a-time-series",
+    "title": "Interactive Session: Human Anthropogenic Emissions (EPA)",
     "section": "Visualizing the Data as a Time Series",
-    "text": "Visualizing the Data as a Time Series\nWe can now explore the ODIAC fossil fuel emission time series available (January 2000 -December 2021) for the Texas, Dallas area of USA. We can plot the data set using the code below:\n\nimport matplotlib.pyplot as plt\n\nfig = plt.figure(figsize=(20, 10))\n\n# Set the plot elements \nplt.plot(\n    df[\"date\"],\n    df[\"max\"],\n    color=\"red\",\n    linestyle=\"-\",\n    linewidth=0.5,\n    label=\"Max monthly CO₂ emissions\",\n)\n\n# Set the labels for the X and Y axis and assign a title for the plot \nplt.legend()\nplt.xlabel(\"Years\")\nplt.ylabel(\"CO2 emissions gC/m2/d\")\nplt.title(\"CO2 emission Values for South Africa (2000-2021)\")",
+    "text": "Visualizing the Data as a Time Series\nWe can now explore the total gridded methane emission time series (January 2000 -December 2021) available for the Permian Basin area of the U.S. We can plot the data set using the code below:\n\nfig = plt.figure(figsize=(20, 10))\n\n# Set the plot elements\nplt.plot(\n    df[\"date\"],\n    df[\"max\"],\n    color=\"red\",\n    linestyle=\"-\",\n    linewidth=0.5,\n    label=\"Max monthly CO₂ emissions\",\n)\n\n# Set the labels for the X and Y axis and assign a title for the plot \nplt.legend()\nplt.xlabel(\"Years\")\nplt.ylabel(\"CH4 emissions Molecules CH₄/cm²/s\")\nplt.title(\"Total CH4 gridded methane emission for Permian Basin (2012-2018)\")",
     "crumbs": [
       "Home",
       "Sections",
       "Usecase 1 - Human Anthropogenic Emissions",
-      "Interactive Session: Human Anthropogenic Emissions (ODIAC)"
-    ]
-  },
-  {
-    "objectID": "sections/use-case-1/index.html",
-    "href": "sections/use-case-1/index.html",
-    "title": "EPA Gridded Methane Emissions Inventory",
-    "section": "",
-    "text": "Click here to access the slides.",
-    "crumbs": [
-      "Home",
-      "Sections",
-      "Usecase 1 - Human Anthropogenic Emissions",
-      "EPA Gridded Methane Emissions Inventory"
+      "Interactive Session: Human Anthropogenic Emissions (EPA)"
     ]
   },
   {
@@ -488,22 +475,32 @@
     ]
   },
   {
-    "objectID": "agenda.html",
-    "href": "agenda.html",
-    "title": "Workshop Agenda",
+    "objectID": "chapters.html",
+    "href": "chapters.html",
+    "title": "Chapters",
     "section": "",
-    "text": "Workshop Agenda\nThe full-day workshop will be divided into the following sections:\n\n\n\n\n\n\n\n8:00 - 8:15\nWelcome\n\nWelcome message\nWorkshop Introduction\nTeam Introduction\nIcebreaker\n\n\n\n8:15 - 8:45\nOverview of the U.S. Greenhouse Gas Center and the Science\n\nWhat is the US GHG Center?\nRole of Methane and Carbon Dioxide in Climate Change\nWhat is included in the Center and why these datasets\nIntroduction to the science use cases / demonstration areas that will be explored during the workshop\n\n\n\n8:45 - 10:00\nIntroduction to the GHG Center Data Catalog\n\nIntro to the VEDA project and its relevance to Earth Science research and the US GHG Center\nHow do VEDA and US GHG Center support Open Science\nComponents of VEDA/US GHG Center\nHands-on exercise: searching and accessing cloud-optimized datasets using the STAC catalog\n\nIntro to JupyterHub and Jupyter Notebooks\n\nAccess to the JupyterHub environment\nCreating and running a Jupyter Notebook in the hub\n\nUsing the pystac client library to read the US GHG STAC catalog\n\nList all available datasets\nSpatial and temporal search\nAccess assets and visualize them\n\n(Time-permitting) Accessing the US GHG STAC catalog using QGIS on the browser\n\nEstablishing connection to the US GHG STAC catalog using the qgis-stac-plugin in QGIS in the GHG Center JupyterHub environment\nAdding a dataset/asset from the catalog as layer in QGIS\n\n\n\n\n\n10:00 - 10:15\nBREAK\n\n\n10:15 - 11:15\nHuman Anthropogenic Emissions\n\nIntroduction and background of datasets & human anthropogenic emissions\nHands-on exercise: Comparing emissions across sectors and time using EPA Gridded Methane data\nHands-on exercise: ODIAC: Compare to satellite data over time (using OCO-2, OCO-3 DAAC data), introduce intersection with geospatial data\n\n\n\n11:15 - 12:15\nComplementing anthropogenic GHG emissions with natural GHG emissions and fluxes\n\nIntroduction\nDescription of data sets and analysis available via the U.S. GHG Center (e.g., gridded wetland emissions and ecosystem exchange estimates)\nHands-on exercise: Exploring annual U.S. wetland methane emissions and their - meteorological influences.\n\n\n\n12:15 - 1:30\nLUNCH BREAK\n\n\n1:30 - 2:45\nIdentifying and quantifying emissions from large point source methane emission events leveraging aircraft and satellite data\n\nThe EMIT Instrument: Overview and GHG Applications\nHands-on exercise: Locating enhancement, understanding temporal relevance, exploring site with multiple observations.\n\n\n\n2:45 - 3:15\nOpen Science in Action: Intro to GitHub & Communicating Science Discoveries via Web Dashboard\n\nIntroduction to web dashboards for science communication\nHands-on exercise: creating a web dashboard to communicate science discoveries using the platform\n\n\n\n3:15 - 3:45\nClosing Remarks\n\nFuture Developments and Community Contributions\nEngaging with the U.S. Greenhouse Gas Center\nFeedback\n\n\n\n\nThroughout the workshop, facilitators will be available to provide support and guidance, ensuring participants are able to actively explore the workshop topics and apply their knowledge and skills to their own research projects.",
-    "crumbs": [
-      "Home",
-      "Workshop Agenda"
-    ]
+    "text": "The flow of the workshop\n\n\n\nIntro to the US GHG Center\nThe US GHG Center Data Catalog (STAC)\nThe US GHG Center JupyterHub environment\n\n\n\n\n\nEPA Gridded Methane Emissions Inventory\nComplementing anthropogenic GHG emissions with natural GHG emissions and fluxes\nIdentifying and quantifying emissions from large point source methane emission events leveraging aircraft and satellite data\n\n\n\n\n\nIntro to GitHub & Communicating Science Discoveries via Web Dashboard\n\n\nℹ️ Content for each chapter will be added as they are prepared, please check back."
   },
   {
-    "objectID": "setup/prerequisites.html",
-    "href": "setup/prerequisites.html",
-    "title": "Prerequisites",
+    "objectID": "chapters.html#introduction",
+    "href": "chapters.html#introduction",
+    "title": "Chapters",
     "section": "",
-    "text": "Prerequisites\nTo follow along during the workshop, or to run through the notebooks contained within the repository using the 2i2c Cloud JupyterHub (cloud workspace), the following are required. All software or accounts are free.\n\nEarthdata Login account\n\nCreate an Earthdata Login account (if you don’t already have one) at https://urs.earthdata.nasa.gov/users/new\nRemember your username and password; you will need them to download or access data during the workshop and beyond.\n\nGitHub username\n\nCreate a GitHub account (if you don’t already have one) at https://github.com/join. Follow optional advice on choosing your username\nYour GitHub username is used to enable you access to a cloud environment during the workshop. To gain access, please request access to the NASA Openscapes JupyterHub using this form. You will receive an email invitation to join the organization on GitHub. You must join to gain access to the workspace.\n\n\nNetrc file\n\nThis file is needed to access NASA Earthdata assets from a scripting environment like Python.\nThere are multiple methods to create a .netrc file. For this workshop, earthaccess package is used to automatically create a netrc file using your Earthdata login credentials if one does not exist. There are detailed instruction available for creating a .netrc file.\nYou will need a netrc file containing your NASA Earthdata Login credentials in order to execute the notebooks. A netrc file can be created manually within text editor and saved to your home directory. An example of the required content is below.\n\nmachine urs.earthdata.nasa.gov\nlogin &lt;USERNAME&gt;\npassword &lt;PASSWORD&gt;\nLaptop or tablet\n\nParticipation in the exercises requires a laptop or tablet. Yes, a tablet works too! All workshop participants will have access to a 2i2c Jupyter Lab instance."
+    "text": "Intro to the US GHG Center\nThe US GHG Center Data Catalog (STAC)\nThe US GHG Center JupyterHub environment"
+  },
+  {
+    "objectID": "chapters.html#science-use-cases",
+    "href": "chapters.html#science-use-cases",
+    "title": "Chapters",
+    "section": "",
+    "text": "EPA Gridded Methane Emissions Inventory\nComplementing anthropogenic GHG emissions with natural GHG emissions and fluxes\nIdentifying and quantifying emissions from large point source methane emission events leveraging aircraft and satellite data"
+  },
+  {
+    "objectID": "chapters.html#open-science-in-action",
+    "href": "chapters.html#open-science-in-action",
+    "title": "Chapters",
+    "section": "",
+    "text": "Intro to GitHub & Communicating Science Discoveries via Web Dashboard\n\n\nℹ️ Content for each chapter will be added as they are prepared, please check back."
   },
   {
     "objectID": "team.html",
@@ -568,53 +565,198 @@
     ]
   },
   {
-    "objectID": "chapters.html",
-    "href": "chapters.html",
-    "title": "Chapters",
+    "objectID": "sections/overview-us-ghg-center/index.html",
+    "href": "sections/overview-us-ghg-center/index.html",
+    "title": "Overview of the U.S. Greenhouse Gas Center",
     "section": "",
-    "text": "The flow of the workshop\n\n\n\nIntro to the US GHG Center\nThe US GHG Center Data Catalog (STAC)\nThe US GHG Center JupyterHub environment\n\n\n\n\n\nEPA Gridded Methane Emissions Inventory\nComplementing anthropogenic GHG emissions with natural GHG emissions and fluxes\nIdentifying and quantifying emissions from large point source methane emission events leveraging aircraft and satellite data\n\n\n\n\n\nIntro to GitHub & Communicating Science Discoveries via Web Dashboard\n\n\nℹ️ Content for each chapter will be added as they are prepared, please check back."
+    "text": "Click here to access the slides.",
+    "crumbs": [
+      "Home",
+      "Sections",
+      "Overview of the U.S. Greenhouse Gas Center and the Science"
+    ]
   },
   {
-    "objectID": "chapters.html#introduction",
-    "href": "chapters.html#introduction",
-    "title": "Chapters",
+    "objectID": "sections/use-case-1/index.html",
+    "href": "sections/use-case-1/index.html",
+    "title": "EPA Gridded Methane Emissions Inventory",
     "section": "",
-    "text": "Intro to the US GHG Center\nThe US GHG Center Data Catalog (STAC)\nThe US GHG Center JupyterHub environment"
+    "text": "Click here to access the slides.",
+    "crumbs": [
+      "Home",
+      "Sections",
+      "Usecase 1 - Human Anthropogenic Emissions",
+      "EPA Gridded Methane Emissions Inventory"
+    ]
   },
   {
-    "objectID": "chapters.html#science-use-cases",
-    "href": "chapters.html#science-use-cases",
-    "title": "Chapters",
+    "objectID": "sections/use-case-1/odiac-ffco2-monthgrid-v2022_User_Notebook.html",
+    "href": "sections/use-case-1/odiac-ffco2-monthgrid-v2022_User_Notebook.html",
+    "title": "Interactive Session: Human Anthropogenic Emissions (ODIAC)",
     "section": "",
-    "text": "EPA Gridded Methane Emissions Inventory\nComplementing anthropogenic GHG emissions with natural GHG emissions and fluxes\nIdentifying and quantifying emissions from large point source methane emission events leveraging aircraft and satellite data"
+    "text": "The Open-Data Inventory for Anthropogenic Carbon dioxide (ODIAC) is a high-spatial resolution global emission data product of CO₂ emissions from fossil fuel combustion (Oda and Maksyutov, 2011). ODIAC pioneered the combined use of space-based nighttime light data and individual power plant emission/location profiles to estimate the global spatial extent of fossil fuel CO₂ emissions. With the innovative emission modeling approach, ODIAC achieved the fine picture of global fossil fuel CO₂ emissions at a 1x1km.",
+    "crumbs": [
+      "Home",
+      "Sections",
+      "Usecase 1 - Human Anthropogenic Emissions",
+      "Interactive Session: Human Anthropogenic Emissions (ODIAC)"
+    ]
   },
   {
-    "objectID": "chapters.html#open-science-in-action",
-    "href": "chapters.html#open-science-in-action",
-    "title": "Chapters",
+    "objectID": "sections/use-case-1/odiac-ffco2-monthgrid-v2022_User_Notebook.html#about-the-data",
+    "href": "sections/use-case-1/odiac-ffco2-monthgrid-v2022_User_Notebook.html#about-the-data",
+    "title": "Interactive Session: Human Anthropogenic Emissions (ODIAC)",
     "section": "",
-    "text": "Intro to GitHub & Communicating Science Discoveries via Web Dashboard\n\n\nℹ️ Content for each chapter will be added as they are prepared, please check back."
+    "text": "The Open-Data Inventory for Anthropogenic Carbon dioxide (ODIAC) is a high-spatial resolution global emission data product of CO₂ emissions from fossil fuel combustion (Oda and Maksyutov, 2011). ODIAC pioneered the combined use of space-based nighttime light data and individual power plant emission/location profiles to estimate the global spatial extent of fossil fuel CO₂ emissions. With the innovative emission modeling approach, ODIAC achieved the fine picture of global fossil fuel CO₂ emissions at a 1x1km.",
+    "crumbs": [
+      "Home",
+      "Sections",
+      "Usecase 1 - Human Anthropogenic Emissions",
+      "Interactive Session: Human Anthropogenic Emissions (ODIAC)"
+    ]
   },
   {
-    "objectID": "setup/setup_instructions.html",
-    "href": "setup/setup_instructions.html",
-    "title": "Repository Setup Instructions",
-    "section": "",
-    "text": "The how-tos and tutorials in this repository require a NASA Earthdata account, an installation of Git, and a compatible Python Environment.\nFor local Python environment setup we recommend using mamba to manage Python packages. To install mamba, download miniforge for your operating system. If using Windows, be sure to check the box to “Add mamba to my PATH environment variable” to enable use of mamba directly from your command line interface. Note that this may cause an issue if you have an existing mamba install through Anaconda.\n\n\nconda create -n veda-ghg\nconda activate veda-ghg\n\n\n\nCheck requirements.txt.\nStill having trouble getting a compatible Python environment set up? Contact U.S.GHGC Team."
+    "objectID": "sections/use-case-1/odiac-ffco2-monthgrid-v2022_User_Notebook.html#requirements",
+    "href": "sections/use-case-1/odiac-ffco2-monthgrid-v2022_User_Notebook.html#requirements",
+    "title": "Interactive Session: Human Anthropogenic Emissions (ODIAC)",
+    "section": "Requirements",
+    "text": "Requirements\n\nSet up Python Environment - See setup_instructions.md in the /setup/ folder",
+    "crumbs": [
+      "Home",
+      "Sections",
+      "Usecase 1 - Human Anthropogenic Emissions",
+      "Interactive Session: Human Anthropogenic Emissions (ODIAC)"
+    ]
   },
   {
-    "objectID": "setup/setup_instructions.html#python-environment-setup",
-    "href": "setup/setup_instructions.html#python-environment-setup",
-    "title": "Repository Setup Instructions",
-    "section": "",
-    "text": "conda create -n veda-ghg\nconda activate veda-ghg"
+    "objectID": "sections/use-case-1/odiac-ffco2-monthgrid-v2022_User_Notebook.html#learning-objectives",
+    "href": "sections/use-case-1/odiac-ffco2-monthgrid-v2022_User_Notebook.html#learning-objectives",
+    "title": "Interactive Session: Human Anthropogenic Emissions (ODIAC)",
+    "section": "Learning Objectives",
+    "text": "Learning Objectives\n\nHow to use U.S. GHG Center STAC Catalogto access ‘ODIAC Fossil Fuel CO₂ Emissions’ and OCO-2 GEOS Column CO₂ Concentrations data.\nHow to use VEDA STAC Catalog to access NO₂ Emissions data.\nHow to visualize datasets using folium and perfom zonal statistics over South Africa.\nHow to plot time series plot for ODIAC and analyze the results.",
+    "crumbs": [
+      "Home",
+      "Sections",
+      "Usecase 1 - Human Anthropogenic Emissions",
+      "Interactive Session: Human Anthropogenic Emissions (ODIAC)"
+    ]
   },
   {
-    "objectID": "setup/setup_instructions.html#installing-packages",
-    "href": "setup/setup_instructions.html#installing-packages",
-    "title": "Repository Setup Instructions",
-    "section": "",
-    "text": "Check requirements.txt.\nStill having trouble getting a compatible Python environment set up? Contact U.S.GHGC Team."
+    "objectID": "sections/use-case-1/odiac-ffco2-monthgrid-v2022_User_Notebook.html#approach",
+    "href": "sections/use-case-1/odiac-ffco2-monthgrid-v2022_User_Notebook.html#approach",
+    "title": "Interactive Session: Human Anthropogenic Emissions (ODIAC)",
+    "section": "Approach",
+    "text": "Approach\n\nIdentify available dates and temporal frequency of observations for the given collection using the GHGC API /stac endpoint. Collection processed in this notebook is ODIAC CO₂ emissions version 2022.\nPass the STAC item into raster API /stac/tilejson.json endpoint\nWe’ll visualize two tiles (side-by-side) allowing for comparison of each of the time points using folium.plugins.DualMap\nAfter the visualization, we’ll perform zonal statistics for a given polygon.",
+    "crumbs": [
+      "Home",
+      "Sections",
+      "Usecase 1 - Human Anthropogenic Emissions",
+      "Interactive Session: Human Anthropogenic Emissions (ODIAC)"
+    ]
+  },
+  {
+    "objectID": "sections/use-case-1/odiac-ffco2-monthgrid-v2022_User_Notebook.html#setup",
+    "href": "sections/use-case-1/odiac-ffco2-monthgrid-v2022_User_Notebook.html#setup",
+    "title": "Interactive Session: Human Anthropogenic Emissions (ODIAC)",
+    "section": "Setup",
+    "text": "Setup\nImport the required Python libraries.\n\n# Import required libraries\n\nimport earthaccess\nimport warnings\nimport requests\nimport pandas as pd\nimport os\nos.environ['USE_PYGEOS'] = '0'\nimport geopandas\nimport folium\nimport folium.plugins\nimport seaborn as sns\nimport glob\nimport numpy as np\nimport matplotlib.pyplot as plt\nimport branca.colormap as cm\n\nfrom folium import Map, TileLayer \nfrom branca.element import Figure\nfrom pystac_client import Client \nfrom pyproj import Geod\nfrom shapely import wkt\nfrom datetime import datetime\nfrom folium.plugins import MousePosition",
+    "crumbs": [
+      "Home",
+      "Sections",
+      "Usecase 1 - Human Anthropogenic Emissions",
+      "Interactive Session: Human Anthropogenic Emissions (ODIAC)"
+    ]
+  },
+  {
+    "objectID": "sections/use-case-1/odiac-ffco2-monthgrid-v2022_User_Notebook.html#querying-the-stac-api",
+    "href": "sections/use-case-1/odiac-ffco2-monthgrid-v2022_User_Notebook.html#querying-the-stac-api",
+    "title": "Interactive Session: Human Anthropogenic Emissions (ODIAC)",
+    "section": "Querying the STAC API",
+    "text": "Querying the STAC API\nSearch for ODIAC Fossil Fuel Co2 Emissions, OCO-2 and NO2 Emissions dataset\n\n# Provide STAC and RASTER API endpoints\nSTAC_API_URL = \"http://ghg.center/api/stac\"\nRASTER_API_URL = \"https://ghg.center/api/raster\"\n\nSTAC_API_URL_veda = \"https://staging-stac.delta-backend.com\"\nRASTER_API_URL_veda = \"https://staging-raster.delta-backend.com\"\n\n#Please use the collection name similar to the one used in STAC collection.\n# Name of the collection for ODIAC dataset. \ncollection_name_odiac = \"odiac-ffco2-monthgrid-v2022\"\ncollection_name_oco = \"oco2geos-co2-daygrid-v10r\"\ncollection_name_no2 = \"no2-monthly\"\n\n\n# Fetching the collection from STAC collections using appropriate endpoint.\ncollection_odiac = requests.get(f\"{STAC_API_URL}/collections/{collection_name_odiac}\").json()\ncollection_odiac\n\ncollection_oco2 = requests.get(f\"{STAC_API_URL}/collections/{collection_name_oco}\").json()\ncollection_oco2\n\ncollection_no2 = requests.get(f\"{STAC_API_URL_veda}/collections/{collection_name_no2}\").json()\ncollection_no2\n\nExamining the contents of our collection under summaries we see that the data is available from January 2000 to December 2021. By looking at the dashboard:time density we observe that the periodic frequency of these observations is monthly.\n\n# Create a function that would search for the number of items in above data collection in the STAC API\n\ndef get_item_count(STAC_API_URL, collection_id):\n    count = 0\n    items_url = f\"{STAC_API_URL}/collections/{collection_id}/items\"\n\n    while True:\n        response = requests.get(items_url)\n\n        if not response.ok:\n            print(\"error getting items\")\n            exit()\n\n        stac = response.json()\n        count += int(stac[\"context\"].get(\"returned\", 0))\n        next = [link for link in stac[\"links\"] if link[\"rel\"] == \"next\"]\n\n        if not next:\n            break\n        items_url = next[0][\"href\"]\n\n    return count\n\n\n# Check total number of items available\nnumber_of_items_odiac = get_item_count(STAC_API_URL,collection_name_odiac)\nitems_odiac = requests.get(f\"{STAC_API_URL}/collections/{collection_name_odiac}/items?limit={number_of_items_odiac}\").json()[\"features\"]\nprint(f\"Found {len(items_odiac)} odiac items\")\n\nnumber_of_items_oco2 = get_item_count(STAC_API_URL,collection_name_oco)\nitems_oco2 = requests.get(f\"{STAC_API_URL}/collections/{collection_name_oco}/items?limit={number_of_items_oco2}\").json()[\"features\"]\nprint(f\"Found {len(items_oco2)} oco2 items\")\n\nnumber_of_items_no2 = get_item_count(STAC_API_URL_veda,collection_name_no2)\nitems_no2 = requests.get(f\"{STAC_API_URL_veda}/collections/{collection_name_no2}/items?limit={number_of_items_no2}\").json()[\"features\"]\nprint(f\"Found {len(items_no2)} no2 items\")\n\nThis makes sense as there are 22 years between 2000 - 2021, with 12 months per year, meaning 264 records in total.\nBelow, we are entering the minimum and maximum values to provide our upper and lower bounds in rescale_values.",
+    "crumbs": [
+      "Home",
+      "Sections",
+      "Usecase 1 - Human Anthropogenic Emissions",
+      "Interactive Session: Human Anthropogenic Emissions (ODIAC)"
+    ]
+  },
+  {
+    "objectID": "sections/use-case-1/odiac-ffco2-monthgrid-v2022_User_Notebook.html#exploring-changes-in-carbon-dioxide-co₂-levels-using-the-raster-api",
+    "href": "sections/use-case-1/odiac-ffco2-monthgrid-v2022_User_Notebook.html#exploring-changes-in-carbon-dioxide-co₂-levels-using-the-raster-api",
+    "title": "Interactive Session: Human Anthropogenic Emissions (ODIAC)",
+    "section": "Exploring Changes in Carbon Dioxide (CO₂) levels using the Raster API",
+    "text": "Exploring Changes in Carbon Dioxide (CO₂) levels using the Raster API\nWe will explore changes in fossil fuel emissions in urban egions. In this notebook, we’ll explore the impacts of these emissions and explore these changes over time. We’ll then visualize the outputs on a map using folium.\n\n# to access the year value from each item more easily, this will let us query more explicity by year and month (e.g., 2020-02)\n# Set the asset values to the appropriate parameter\n\nitems_odiac = {item[\"properties\"][\"start_datetime\"][:7]: item for item in items_odiac} \nasset_name = \"co2-emissions\"\n\nitems_oco2 = {item[\"properties\"][\"datetime\"][:10]: item for item in items_oco2} \nasset_name1 = \"xco2\"\n\nitems_no2 = {item[\"properties\"][\"start_datetime\"][:10]: item for item in items_no2}\n\n\n# Below, we are entering the minimum and maximum values to provide our upper and lower bounds \nrescale_values_odiac = {\"max\":items_odiac[list(items_odiac.keys())[0]][\"assets\"][asset_name][\"raster:bands\"][0][\"histogram\"][\"max\"], \"min\":items_odiac[list(items_odiac.keys())[0]][\"assets\"][asset_name][\"raster:bands\"][0][\"histogram\"][\"min\"]}\nrescale_values_oco2 = {'max':415 , 'min': 412}\nrescale_values_no2 = {'max': 9050373673124971, 'min': 0}\n\nNow we will pass the item id, collection name, and rescaling_factor to the Raster API endpoint. We will do this twice, once for January 2020 and again for January 2000, so that we can visualize each event independently.",
+    "crumbs": [
+      "Home",
+      "Sections",
+      "Usecase 1 - Human Anthropogenic Emissions",
+      "Interactive Session: Human Anthropogenic Emissions (ODIAC)"
+    ]
+  },
+  {
+    "objectID": "sections/use-case-1/odiac-ffco2-monthgrid-v2022_User_Notebook.html#opening-and-exploring-data-using-the-raster-api",
+    "href": "sections/use-case-1/odiac-ffco2-monthgrid-v2022_User_Notebook.html#opening-and-exploring-data-using-the-raster-api",
+    "title": "Interactive Session: Human Anthropogenic Emissions (ODIAC)",
+    "section": "Opening and Exploring Data Using the Raster API",
+    "text": "Opening and Exploring Data Using the Raster API\nIn this notebook, we will explore the temporal impacts of methane emissions. We will visualize the outputs on a map using ‘folium’.\n\n# Set a colormap for the granule\n# Please refer to matplotlib library if you'd prefer choosing a different color ramp (https://matplotlib.org/stable/users/explain/colors/colormaps.html)\ncolor_map = \"rainbow\" # please select the color ramp from matplotlib library.\n\n# Extract and display the January 2020 tile using the appropriate ID, colormap, rescale values, and datetime (items['2020-01']) \njanuary_2020_tile = requests.get(\n    f\"{RASTER_API_URL}/stac/tilejson.json?collection={items_odiac['2020-01']['collection']}&item={items_odiac['2020-01']['id']}\"\n    f\"&assets={asset_name}\"\n    f\"&color_formula=gamma+r+1.05&colormap_name={color_map}\"\n    f\"&rescale={rescale_values_odiac['min']},{rescale_values_odiac['max']}\", \n).json()\njanuary_2020_tile\n\ncolor_map1 = \"magma\"\n# Extract and display the OCO-2 January 2020 tile using the appropriate ID, colormap, rescale values, and datetime (items['2020-01-20']) \n\noco2_1 = requests.get(\n    f\"{RASTER_API_URL}/stac/tilejson.json?collection={items_oco2['2020-01-20']['collection']}&item={items_oco2['2020-01-20']['id']}\"\n    f\"&assets={asset_name1}\"\n    f\"&color_formula=gamma+r+1.05&colormap_name={color_map1}\"\n    f\"&rescale={rescale_values_oco2['min']},{rescale_values_oco2['max']}\", \n).json()\noco2_1\n\n# Extract and display the NO-2 January 2020 tile using the appropriate ID, colormap, rescale values, and datetime (items['2020-01-01']) \n\nno2_1 = requests.get(\n    f\"{RASTER_API_URL_veda}/stac/tilejson.json?collection={items_no2['2020-01-01']['collection']}&item={items_no2['2020-01-01']['id']}\"\n    f\"&assets=cog_default\"\n    f\"&color_formula=gamma+r+1.05&colormap_name={color_map1}\"\n    f\"&rescale={rescale_values_no2['min']},{rescale_values_no2['max']}\", \n).json()\nno2_1",
+    "crumbs": [
+      "Home",
+      "Sections",
+      "Usecase 1 - Human Anthropogenic Emissions",
+      "Interactive Session: Human Anthropogenic Emissions (ODIAC)"
+    ]
+  },
+  {
+    "objectID": "sections/use-case-1/odiac-ffco2-monthgrid-v2022_User_Notebook.html#define-spatial-region-of-interest",
+    "href": "sections/use-case-1/odiac-ffco2-monthgrid-v2022_User_Notebook.html#define-spatial-region-of-interest",
+    "title": "Interactive Session: Human Anthropogenic Emissions (ODIAC)",
+    "section": "Define Spatial Region of Interest",
+    "text": "Define Spatial Region of Interest\nFor this example, our spatial region of interest (ROI) will be the a region in South Africa.\n\nsa_aoi = {\n  \"type\": \"FeatureCollection\",\n  \"features\": [\n    {\n      \"type\": \"Feature\",\n      \"properties\": {},\n      \"geometry\": {\n        \"coordinates\": [\n          [\n            [\n              25.519052777398997,\n              -24.8470086420499\n            ],\n            [\n              25.519052777398997,\n              -28.145634397543844\n            ],\n            [\n              30.29637465013832,\n              -28.145634397543844\n            ],\n            [\n              30.29637465013832,\n              -24.8470086420499\n            ],\n            [\n              25.519052777398997,\n              -24.8470086420499\n            ]\n          ]\n        ],\n        \"type\": \"Polygon\"\n      }\n    }\n  ]\n}",
+    "crumbs": [
+      "Home",
+      "Sections",
+      "Usecase 1 - Human Anthropogenic Emissions",
+      "Interactive Session: Human Anthropogenic Emissions (ODIAC)"
+    ]
+  },
+  {
+    "objectID": "sections/use-case-1/odiac-ffco2-monthgrid-v2022_User_Notebook.html#visualizing-co₂-emissions",
+    "href": "sections/use-case-1/odiac-ffco2-monthgrid-v2022_User_Notebook.html#visualizing-co₂-emissions",
+    "title": "Interactive Session: Human Anthropogenic Emissions (ODIAC)",
+    "section": "Visualizing CO₂ emissions",
+    "text": "Visualizing CO₂ emissions\n\n\n\nmap_ = folium.Map(location=(-25.943840, 29.789560), zoom_start=7)\n\nmap_layer_2020 = TileLayer(\n    tiles=january_2020_tile[\"tiles\"][0],\n    attr=\"GHG\",\n    name =\"ODIAC\",\n    opacity=0.5,\n)\nmap_layer_2020_2 = TileLayer(\n    tiles=no2_1[\"tiles\"][0],\n    attr=\"GHG\",\n    name = \"NO2\",\n    opacity=0.5,\n)\nsbs = folium.plugins.SideBySideLayers(layer_left=map_layer_2020, layer_right=map_layer_2020_2)\nmap_layer_2020.add_to(map_)\nmap_layer_2020_2.add_to(map_)\n\n# Load the GeoJSON file for South Africa\nfolium.GeoJson(sa_aoi, name=\"South Africa\").add_to(map_)\nsbs.add_to(map_)\nMousePosition().add_to(map_)\n# visualising the map\nmap_\n\n\n\n# Set initial zoom and center of map\nmap_ = folium.Map(location=(-25.943840, 29.789560), zoom_start=7)\n\n# January 2020\nmap_layer_2020_odiac = TileLayer(\n    tiles=january_2020_tile[\"tiles\"][0],\n    attr=\"GHG\",\n    name =\"ODIAC\",\n    opacity=0.5,\n)\nmap_layer_2020_odiac.add_to(map_)\n\n# OCO-2 2020\nmap_layer_2020_oco2 = TileLayer(\n    tiles=oco2_1[\"tiles\"][0],\n    attr=\"GHG\",\n    name = \"OCO2\",\n    opacity=0.5,\n)\nmap_layer_2020_oco2.add_to(map_)\n\n# NO-2 2020\nmap_layer_2020_no2 = TileLayer(\n    tiles=no2_1[\"tiles\"][0],\n    attr=\"GHG\",\n    name = \"NO2\",\n    opacity=0.5,\n)\nmap_layer_2020_no2.add_to(map_)\n\nfolium.GeoJson(sa_aoi, name=\"South Africa\").add_to(map_)\nfolium.LayerControl(collapsed=False,position='bottomleft').add_to(map_)\n\n# visualising the map\nmap_",
+    "crumbs": [
+      "Home",
+      "Sections",
+      "Usecase 1 - Human Anthropogenic Emissions",
+      "Interactive Session: Human Anthropogenic Emissions (ODIAC)"
+    ]
+  },
+  {
+    "objectID": "sections/use-case-1/odiac-ffco2-monthgrid-v2022_User_Notebook.html#generate-statistics-and-time-series-lineplots-for-co2-emission",
+    "href": "sections/use-case-1/odiac-ffco2-monthgrid-v2022_User_Notebook.html#generate-statistics-and-time-series-lineplots-for-co2-emission",
+    "title": "Interactive Session: Human Anthropogenic Emissions (ODIAC)",
+    "section": "Generate Statistics and Time Series Lineplots for CO2 Emission",
+    "text": "Generate Statistics and Time Series Lineplots for CO2 Emission\n\n# Check total number of items available\nitems = requests.get(\n    f\"{STAC_API_URL}/collections/{collection_name_odiac}/items?limit={number_of_items}\"\n).json()[\"features\"]\nprint(f\"Found {len(items)} items\")\n\n\n# Explore one item to see what it contains\nitems\n\n\n# the bounding box should be passed to the geojson param as a geojson Feature or FeatureCollection\ndef generate_stats(item, geojson):\n    result = requests.post(\n        f\"{RASTER_API_URL}/cog/statistics\",\n        params={\"url\": item[\"assets\"][asset_name][\"href\"]},\n        json=geojson,\n    ).json()['features']\n    return {\n        **result[0][\"properties\"],\n        \"start_datetime\": item[\"properties\"][\"start_datetime\"][:7],\n    }\n\nWith the function above we can generate the statistics for the AOI.\n\n%%time\nstats = [generate_stats(item,sa_aoi) for item in items]\n\n\nstats[0]\n\n\n# Manipulating and cleaning the stats output from the previous cell\ndef clean_stats(stats_json) -&gt; pd.DataFrame:\n    df = pd.json_normalize(stats_json)\n    df.columns = [col.replace(\"statistics.b1.\", \"\") for col in df.columns]\n    df[\"date\"] = pd.to_datetime(df[\"start_datetime\"])\n    return df\n\ndf = clean_stats(stats)\ndf.head(5)",
+    "crumbs": [
+      "Home",
+      "Sections",
+      "Usecase 1 - Human Anthropogenic Emissions",
+      "Interactive Session: Human Anthropogenic Emissions (ODIAC)"
+    ]
+  },
+  {
+    "objectID": "sections/use-case-1/odiac-ffco2-monthgrid-v2022_User_Notebook.html#visualizing-the-data-as-a-time-series",
+    "href": "sections/use-case-1/odiac-ffco2-monthgrid-v2022_User_Notebook.html#visualizing-the-data-as-a-time-series",
+    "title": "Interactive Session: Human Anthropogenic Emissions (ODIAC)",
+    "section": "Visualizing the Data as a Time Series",
+    "text": "Visualizing the Data as a Time Series\nWe can now explore the ODIAC fossil fuel emission time series available (January 2000 -December 2021) for the Texas, Dallas area of USA. We can plot the data set using the code below:\n\nimport matplotlib.pyplot as plt\n\nfig = plt.figure(figsize=(20, 10))\n\n# Set the plot elements \nplt.plot(\n    df[\"date\"],\n    df[\"max\"],\n    color=\"red\",\n    linestyle=\"-\",\n    linewidth=0.5,\n    label=\"Max monthly CO₂ emissions\",\n)\n\n# Set the labels for the X and Y axis and assign a title for the plot \nplt.legend()\nplt.xlabel(\"Years\")\nplt.ylabel(\"CO2 emissions gC/m2/d\")\nplt.title(\"CO2 emission Values for South Africa (2000-2021)\")",
+    "crumbs": [
+      "Home",
+      "Sections",
+      "Usecase 1 - Human Anthropogenic Emissions",
+      "Interactive Session: Human Anthropogenic Emissions (ODIAC)"
+    ]
   },
   {
     "objectID": "sections/use-case-3/emit-ch4plume-v1_User_Notebook.html",
@@ -760,199 +902,57 @@
     ]
   },
   {
-    "objectID": "sections/overview-us-ghg-center/index.html",
-    "href": "sections/overview-us-ghg-center/index.html",
-    "title": "Overview of the U.S. Greenhouse Gas Center",
+    "objectID": "prerequisites.html",
+    "href": "prerequisites.html",
+    "title": "Prerequisites",
     "section": "",
-    "text": "Click here to access the slides.",
+    "text": "Participants are expected to have a basic knowledge of the python programming language.\nParticipants MUST obtain the following to be able to follow along the workshop:\n\nUS GHG Center JupyterHub Access\nEarthdata credentials\n\n\n\n🚨 Please make sure you have both of the accesses before you come to the workshop on Sunday.\n\n\n\nThe US GHG Center notebook environment is available to authorized users on an as-need basis. You can request access by using our Hub Access Request form.\n\nMake sure you have a GitHub Account. Take note of your GitHub username.\nFill out the request form and provide needed information. Make sure to use your organization/univerity email and use “AMS Workshop 2024” as the reason.\nWatch your email for notification of authorization and the invite to join the US GHG Center Hub Access GitHub Team.\nOnce you accept the invitation, you can go to hub.ghg.center and login using your GitHub credentials.\n\n\n\n\nFollow the tutorial on this link to register for Earthdata login: https://www.earthdata.nasa.gov/eosdis/science-system-description/eosdis-components/earthdata-login.\nMake sure to note your username and password.",
     "crumbs": [
       "Home",
-      "Sections",
-      "Overview of the U.S. Greenhouse Gas Center and the Science"
+      "Prerequisites"
     ]
   },
   {
-    "objectID": "sections/use-case-1/epa-ch4emission-grid-v2express_User_Notebook.html",
-    "href": "sections/use-case-1/epa-ch4emission-grid-v2express_User_Notebook.html",
-    "title": "Interactive Session: Human Anthropogenic Emissions (EPA)",
+    "objectID": "prerequisites.html#to-get-us-ghg-center-jupyterhub-access",
+    "href": "prerequisites.html#to-get-us-ghg-center-jupyterhub-access",
+    "title": "Prerequisites",
     "section": "",
-    "text": "The gridded EPA U.S. anthropogenic methane greenhouse gas inventory (gridded GHGI) includes spatially disaggregated (0.1 deg x 0.1 deg or approximately 10 x 10 km resolution) maps of annual anthropogenic methane emissions (for the contiguous United States (CONUS), consistent with national annual U.S. anthropogenic methane emissions reported in the U.S. EPA Inventory of U.S. Greenhouse Gas Emissions and Sinks (U.S. GHGI). This V2 Express Extension dataset contains methane emissions provided as fluxes, in units of molecules of methane per square cm per second, for over 25 individual emission source categories, including those from agriculture, petroleum and natural gas systems, coal mining, and waste. The data have been converted from their original NetCDF format to Cloud-Optimized GeoTIFF (COG) for use in the US GHG Center, thereby enabling user exploration of spatial anthropogenic methane emissions and their trends.",
+    "text": "The US GHG Center notebook environment is available to authorized users on an as-need basis. You can request access by using our Hub Access Request form.\n\nMake sure you have a GitHub Account. Take note of your GitHub username.\nFill out the request form and provide needed information. Make sure to use your organization/univerity email and use “AMS Workshop 2024” as the reason.\nWatch your email for notification of authorization and the invite to join the US GHG Center Hub Access GitHub Team.\nOnce you accept the invitation, you can go to hub.ghg.center and login using your GitHub credentials.",
     "crumbs": [
       "Home",
-      "Sections",
-      "Usecase 1 - Human Anthropogenic Emissions",
-      "Interactive Session: Human Anthropogenic Emissions (EPA)"
+      "Prerequisites"
     ]
   },
   {
-    "objectID": "sections/use-case-1/epa-ch4emission-grid-v2express_User_Notebook.html#about-the-data",
-    "href": "sections/use-case-1/epa-ch4emission-grid-v2express_User_Notebook.html#about-the-data",
-    "title": "Interactive Session: Human Anthropogenic Emissions (EPA)",
+    "objectID": "prerequisites.html#to-obtain-earthdata-credentials",
+    "href": "prerequisites.html#to-obtain-earthdata-credentials",
+    "title": "Prerequisites",
     "section": "",
-    "text": "The gridded EPA U.S. anthropogenic methane greenhouse gas inventory (gridded GHGI) includes spatially disaggregated (0.1 deg x 0.1 deg or approximately 10 x 10 km resolution) maps of annual anthropogenic methane emissions (for the contiguous United States (CONUS), consistent with national annual U.S. anthropogenic methane emissions reported in the U.S. EPA Inventory of U.S. Greenhouse Gas Emissions and Sinks (U.S. GHGI). This V2 Express Extension dataset contains methane emissions provided as fluxes, in units of molecules of methane per square cm per second, for over 25 individual emission source categories, including those from agriculture, petroleum and natural gas systems, coal mining, and waste. The data have been converted from their original NetCDF format to Cloud-Optimized GeoTIFF (COG) for use in the US GHG Center, thereby enabling user exploration of spatial anthropogenic methane emissions and their trends.",
+    "text": "Follow the tutorial on this link to register for Earthdata login: https://www.earthdata.nasa.gov/eosdis/science-system-description/eosdis-components/earthdata-login.\nMake sure to note your username and password.",
     "crumbs": [
       "Home",
-      "Sections",
-      "Usecase 1 - Human Anthropogenic Emissions",
-      "Interactive Session: Human Anthropogenic Emissions (EPA)"
+      "Prerequisites"
     ]
   },
   {
-    "objectID": "sections/use-case-1/epa-ch4emission-grid-v2express_User_Notebook.html#requirements",
-    "href": "sections/use-case-1/epa-ch4emission-grid-v2express_User_Notebook.html#requirements",
-    "title": "Interactive Session: Human Anthropogenic Emissions (EPA)",
-    "section": "Requirements",
-    "text": "Requirements\n\nSet up Python Environment - See setup_instructions.md in the /setup/ folder",
-    "crumbs": [
-      "Home",
-      "Sections",
-      "Usecase 1 - Human Anthropogenic Emissions",
-      "Interactive Session: Human Anthropogenic Emissions (EPA)"
-    ]
-  },
-  {
-    "objectID": "sections/use-case-1/epa-ch4emission-grid-v2express_User_Notebook.html#learning-objectives",
-    "href": "sections/use-case-1/epa-ch4emission-grid-v2express_User_Notebook.html#learning-objectives",
-    "title": "Interactive Session: Human Anthropogenic Emissions (EPA)",
-    "section": "Learning Objectives",
-    "text": "Learning Objectives\n\nHow to use U.S. GHG Center STAC Catalog to access U.S. Gridded Anthropogenic Methane Emissions Inventory data\nHow to visualize a dataset using folium and perform zonal statistics",
-    "crumbs": [
-      "Home",
-      "Sections",
-      "Usecase 1 - Human Anthropogenic Emissions",
-      "Interactive Session: Human Anthropogenic Emissions (EPA)"
-    ]
-  },
-  {
-    "objectID": "sections/use-case-1/epa-ch4emission-grid-v2express_User_Notebook.html#approach",
-    "href": "sections/use-case-1/epa-ch4emission-grid-v2express_User_Notebook.html#approach",
-    "title": "Interactive Session: Human Anthropogenic Emissions (EPA)",
-    "section": "Approach",
-    "text": "Approach\n\nIdentify available dates and temporal frequency of observations for the given collection using the GHGC API /stac endpoint. The collection processed in this notebook is the gridded methane emissions data product.\nPass the STAC item into the raster API /stac/tilejson.jsonendpoint.\nUsing folium.plugins.DualMap, we will visualize two tiles (side-by-side), allowing us to compare time points.\nAfter the visualization, we will perform zonal statistics for a given polygon.",
-    "crumbs": [
-      "Home",
-      "Sections",
-      "Usecase 1 - Human Anthropogenic Emissions",
-      "Interactive Session: Human Anthropogenic Emissions (EPA)"
-    ]
-  },
-  {
-    "objectID": "sections/use-case-1/epa-ch4emission-grid-v2express_User_Notebook.html#define-the-spatial-region-of-interest",
-    "href": "sections/use-case-1/epa-ch4emission-grid-v2express_User_Notebook.html#define-the-spatial-region-of-interest",
-    "title": "Interactive Session: Human Anthropogenic Emissions (EPA)",
-    "section": "Define the Spatial Region of Interest",
-    "text": "Define the Spatial Region of Interest\nFor this example, our spatial region of interest (ROI) will be the Permian Basin, USA. The Permian Basin is a regional depression expanding from the eastern side of New Mexico to West Texas, covering roughly 75 thousand square miles of land. This region is known to be “the largest hydrocarbon-producing basins in the United States and the world” according to the U.S. Energy Information Administration. Consequently, the Permian Basin is prone to excessive air pollution and a suitable site for monitoring anthropogenic methane emissions.\n\n# Loading Permian Basin shape file as a ROI\n# User can pass any json or shape file here\n# The \"geopandas\" library makes working with geospatial data easier by facilitating spatial operations on geometric types  \ndata_dir = f\"{os.getenv('HOME')}/shared/data\"\npermian_basin = geopandas.read_file(f'{data_dir}/use-case-3/Permian.zip')",
-    "crumbs": [
-      "Home",
-      "Sections",
-      "Usecase 1 - Human Anthropogenic Emissions",
-      "Interactive Session: Human Anthropogenic Emissions (EPA)"
-    ]
-  },
-  {
-    "objectID": "sections/use-case-1/epa-ch4emission-grid-v2express_User_Notebook.html#querying-the-stac-api",
-    "href": "sections/use-case-1/epa-ch4emission-grid-v2express_User_Notebook.html#querying-the-stac-api",
-    "title": "Interactive Session: Human Anthropogenic Emissions (EPA)",
-    "section": "Querying the STAC API",
-    "text": "Querying the STAC API\nSearch for U.S. Gridded Anthropogenic Methane Emissions Inventory Data\n\n# Provide STAC and RASTER API endpoints\nSTAC_API_URL = \"http://ghg.center/api/stac\"\nRASTER_API_URL = \"https://ghg.center/api/raster\"\n\n# Please use the collection name similar to the one used in STAC collection.\n# Name of the collection for gridded methane dataset. \ncollection_name = \"epa-ch4emission-yeargrid-v2express\"\n\n\n# Fetching the collection from STAC collections using appropriate endpoint.\ncollection = requests.get(f\"{STAC_API_URL}/collections/{collection_name}\").json()\ncollection\n\nExamining the contents of our collection under the temporal variable, we see that the data is available from January 2012 to December 2020. By looking at the dashboard:time density, we observe that the periodic frequency of these observations is yearly.\n\n# Create a function that would search for the number of items in above data collection in the STAC API\ndef get_item_count(collection_id):\n    count = 0\n    items_url = f\"{STAC_API_URL}/collections/{collection_id}/items\"\n\n    while True:\n        response = requests.get(items_url)\n\n        if not response.ok:\n            print(\"error getting items\")\n            exit()\n\n        stac = response.json()\n        count += int(stac[\"context\"].get(\"returned\", 0))\n        next = [link for link in stac[\"links\"] if link[\"rel\"] == \"next\"]\n\n        if not next:\n            break\n        items_url = next[0][\"href\"]\n\n    return count\n\n\n# Check total number of items available\nnumber_of_items = get_item_count(collection_name)\nitems = requests.get(f\"{STAC_API_URL}/collections/{collection_name}/items?limit={number_of_items}\").json()[\"features\"]\nprint(f\"Found {len(items)} items\")\n\n\n# Examining the first item in the collection\n# Keep in mind that a list starts from 0, 1, 2,... therefore ‘[0]’ is referring to the first item in the list/collection \nitems[0]",
-    "crumbs": [
-      "Home",
-      "Sections",
-      "Usecase 1 - Human Anthropogenic Emissions",
-      "Interactive Session: Human Anthropogenic Emissions (EPA)"
-    ]
-  },
-  {
-    "objectID": "sections/use-case-1/epa-ch4emission-grid-v2express_User_Notebook.html#opening-and-exploring-methane-emissions-using-the-raster-api",
-    "href": "sections/use-case-1/epa-ch4emission-grid-v2express_User_Notebook.html#opening-and-exploring-methane-emissions-using-the-raster-api",
-    "title": "Interactive Session: Human Anthropogenic Emissions (EPA)",
-    "section": "Opening and Exploring Methane Emissions Using the Raster API",
-    "text": "Opening and Exploring Methane Emissions Using the Raster API\nIn this notebook, we will explore the temporal impacts of methane emissions. We will visualize the outputs on a map using folium.\n\n# To access the year value from each item more easily, this will let us query more explicity by year and month (e.g., 2020-02)\nitems = {item[\"properties\"][\"datetime\"][:7]: item for item in items} \n\n# Set the asset values to the appropriate parameters\nasset_name_1 = \"production-ngs\"\nasset_name_2 = 'production-ps'\nasset_name_3 = 'total-methane'\n\n\n# Below, we are entering the minimum and maximum values to provide our upper and lower bounds\nrescale_values = {'max': 20,'min': 0}\n\n\n# Examining the items in the collection\nitems\n\nNow, we will pass the item id, collection name, and rescaling_factor to the Raster API endpoint. We will do this twice, once for January 2018 and again for January 2012, so that we can visualize each event independently.\n\n# Set a colormap for the granule\n# Please refer to matplotlib library if you'd prefer choosing a different color ramp (https://matplotlib.org/stable/users/explain/colors/colormaps.html)\ncolor_map = \"rainbow\" \n\n# Petroleum-Production Methane Emissions\n\n# Extract and display the January 2018 tile using the appropriate ID, colormap, rescale values, and datetime (items['2018-01']) \n\njanuary_2018_tile_ps = requests.get(\n    f\"{RASTER_API_URL}/stac/tilejson.json?collection={items['2018-01']['collection']}&item={items['2018-01']['id']}\"\n    f\"&assets={asset_name_1}\"\n    f\"&color_formula=gamma+r+1.05&colormap_name={color_map}\"\n    f\"&rescale={rescale_values['min']},{rescale_values['max']}\", \n).json()\n\n# Print the information associated with this tile\njanuary_2018_tile_ps\n\njanuary_2012_tile_ps = requests.get(\n    f\"{RASTER_API_URL}/stac/tilejson.json?collection={items['2012-01']['collection']}&item={items['2012-01']['id']}\"\n    f\"&assets={asset_name_1}\"\n    f\"&color_formula=gamma+r+1.05&colormap_name={color_map}\"\n    f\"&rescale={rescale_values['min']},{rescale_values['max']}\", \n).json()\njanuary_2012_tile_ps\n\n\n# Natural Gas-Production Methane Emissions\n\ncolor_map = \"rainbow\" # please select the color ramp from matplotlib library.\njanuary_2018_tile_ngs = requests.get(\n    f\"{RASTER_API_URL}/stac/tilejson.json?collection={items['2018-01']['collection']}&item={items['2018-01']['id']}\"\n    f\"&assets={asset_name_2}\"\n    f\"&color_formula=gamma+r+1.05&colormap_name={color_map}\"\n    f\"&rescale={rescale_values['min']},{rescale_values['max']}\", \n).json()\njanuary_2018_tile_ngs\n\njanuary_2012_tile_ngs = requests.get(\n    f\"{RASTER_API_URL}/stac/tilejson.json?collection={items['2012-01']['collection']}&item={items['2012-01']['id']}\"\n    f\"&assets={asset_name_2}\"\n    f\"&color_formula=gamma+r+1.05&colormap_name={color_map}\"\n    f\"&rescale={rescale_values['min']},{rescale_values['max']}\", \n).json()\njanuary_2012_tile_ngs\n\n\n# Total Methane Emissions\n\ncolor_map = \"rainbow\" # please select the color ramp from matplotlib library.\njanuary_2018_tile_tm = requests.get(\n    f\"{RASTER_API_URL}/stac/tilejson.json?collection={items['2018-01']['collection']}&item={items['2018-01']['id']}\"\n    f\"&assets={asset_name_3}\"\n    f\"&color_formula=gamma+r+1.05&colormap_name={color_map}\"\n    f\"&rescale={rescale_values['min']},{rescale_values['max']}\", \n).json()\njanuary_2018_tile_tm\n\njanuary_2012_tile_tm = requests.get(\n    f\"{RASTER_API_URL}/stac/tilejson.json?collection={items['2012-01']['collection']}&item={items['2012-01']['id']}\"\n    f\"&assets={asset_name_3}\"\n    f\"&color_formula=gamma+r+1.05&colormap_name={color_map}\"\n    f\"&rescale={rescale_values['min']},{rescale_values['max']}\", \n).json()\njanuary_2012_tile_tm",
-    "crumbs": [
-      "Home",
-      "Sections",
-      "Usecase 1 - Human Anthropogenic Emissions",
-      "Interactive Session: Human Anthropogenic Emissions (EPA)"
-    ]
-  },
-  {
-    "objectID": "sections/use-case-1/epa-ch4emission-grid-v2express_User_Notebook.html#visualizing-petroleum--production-annual-ch₄-emissions",
-    "href": "sections/use-case-1/epa-ch4emission-grid-v2express_User_Notebook.html#visualizing-petroleum--production-annual-ch₄-emissions",
-    "title": "Interactive Session: Human Anthropogenic Emissions (EPA)",
-    "section": "Visualizing Petroleum- Production (annual) CH₄ emissions",
-    "text": "Visualizing Petroleum- Production (annual) CH₄ emissions\n\n# Set initial zoom and center of map for CH₄ Layer\n# Centre of map [latitude,longitude]\nmap_ = folium.plugins.DualMap(location=(32, -102), zoom_start=6)\n\n# January 2018\nmap_layer_2018 = TileLayer(\n    tiles=january_2018_tile_ps[\"tiles\"][0],\n    name = 'Petroleum production for 2018',\n    attr=\"GHG\",\n    opacity=0.7,\n)\nmap_layer_2018.add_to(map_.m1)\n\n# January 2012\nmap_layer_2012 = TileLayer(\n    tiles=january_2012_tile_ps[\"tiles\"][0],\n    name = 'Petroleum production for 2012',\n    attr=\"GHG\",\n    opacity=0.7,\n)\nmap_layer_2012.add_to(map_.m2)\n\n# Load the GeoJSON file for the Permian Basin\nmap_layer_permian = folium.GeoJson(permian_basin, name= 'Permian Shape')\nmap_layer_permian.add_to(map_)\n\n# Adjust map elements\nfolium.LayerControl(collapsed=True, position='bottomleft').add_to(map_)\n# visualising the map\nmap_",
-    "crumbs": [
-      "Home",
-      "Sections",
-      "Usecase 1 - Human Anthropogenic Emissions",
-      "Interactive Session: Human Anthropogenic Emissions (EPA)"
-    ]
-  },
-  {
-    "objectID": "sections/use-case-1/epa-ch4emission-grid-v2express_User_Notebook.html#visualizing-natural-gas---production-annual-ch₄-emissions",
-    "href": "sections/use-case-1/epa-ch4emission-grid-v2express_User_Notebook.html#visualizing-natural-gas---production-annual-ch₄-emissions",
-    "title": "Interactive Session: Human Anthropogenic Emissions (EPA)",
-    "section": "Visualizing Natural Gas - Production (annual) CH₄ emissions",
-    "text": "Visualizing Natural Gas - Production (annual) CH₄ emissions\n\nmap_ = folium.plugins.DualMap(location=(32, -102), zoom_start=6)\n\n# January 2018\nmap_layer_2018 = TileLayer(\n    tiles=january_2018_tile_ngs[\"tiles\"][0],\n    name = 'Natural Gas production for 2018',\n    attr=\"GHG\",\n    opacity=0.7,\n)\nmap_layer_2018.add_to(map_.m1)\n\n# January 2012\nmap_layer_2012 = TileLayer(\n    tiles=january_2012_tile_ngs[\"tiles\"][0],\n    name = 'Natural Gas Production for 2012',\n    attr=\"GHG\",\n    opacity=0.7,\n)\nmap_layer_2012.add_to(map_.m2)\n\nmap_layer_permian = folium.GeoJson(permian_basin, name= 'Permian Shape')\nmap_layer_permian.add_to(map_)\nfolium.LayerControl(collapsed=True, position='bottomleft').add_to(map_)\n\n# visualising the map\nmap_",
-    "crumbs": [
-      "Home",
-      "Sections",
-      "Usecase 1 - Human Anthropogenic Emissions",
-      "Interactive Session: Human Anthropogenic Emissions (EPA)"
-    ]
-  },
-  {
-    "objectID": "sections/use-case-1/epa-ch4emission-grid-v2express_User_Notebook.html#visualizing-total-ch₄-emissions",
-    "href": "sections/use-case-1/epa-ch4emission-grid-v2express_User_Notebook.html#visualizing-total-ch₄-emissions",
-    "title": "Interactive Session: Human Anthropogenic Emissions (EPA)",
-    "section": "Visualizing Total CH₄ emissions",
-    "text": "Visualizing Total CH₄ emissions\n\n# We will import folium to map and folium.plugins to allow side-by-side mapping\nimport folium\nimport folium.plugins\n\n# Set initial zoom and center of map for CH₄ Layer\n# Centre of map [latitude,longitude]\nmap_ = folium.plugins.DualMap(location=(32, -102), zoom_start=6)\n\n# January 2018\nmap_layer_2018 = TileLayer(\n    tiles=january_2018_tile_tm[\"tiles\"][0],\n    attr=\"GHG\",\n    name = 'Total methane emissions for 2018',\n    opacity=0.7,\n)\nmap_layer_2018.add_to(map_.m1)\n\n# January 2012\nmap_layer_2012 = TileLayer(\n    tiles=january_2012_tile_tm[\"tiles\"][0],\n    name= 'Total methane emissions for 2012',\n    attr=\"GHG\",\n    opacity=0.7,\n)\nmap_layer_2012.add_to(map_.m2)\n\nmap_layer_permian = folium.GeoJson(permian_basin, name= 'Permian Shape')\nmap_layer_permian.add_to(map_)\nfolium.LayerControl(collapsed=True, position='bottomleft').add_to(map_)\n# visualising the map\nmap_",
-    "crumbs": [
-      "Home",
-      "Sections",
-      "Usecase 1 - Human Anthropogenic Emissions",
-      "Interactive Session: Human Anthropogenic Emissions (EPA)"
-    ]
-  },
-  {
-    "objectID": "sections/use-case-1/epa-ch4emission-grid-v2express_User_Notebook.html#visualizing-the-data-as-a-time-series",
-    "href": "sections/use-case-1/epa-ch4emission-grid-v2express_User_Notebook.html#visualizing-the-data-as-a-time-series",
-    "title": "Interactive Session: Human Anthropogenic Emissions (EPA)",
-    "section": "Visualizing the Data as a Time Series",
-    "text": "Visualizing the Data as a Time Series\nWe can now explore the total gridded methane emission time series (January 2000 -December 2021) available for the Permian Basin area of the U.S. We can plot the data set using the code below:\n\nfig = plt.figure(figsize=(20, 10))\n\n# Set the plot elements\nplt.plot(\n    df[\"date\"],\n    df[\"max\"],\n    color=\"red\",\n    linestyle=\"-\",\n    linewidth=0.5,\n    label=\"Max monthly CO₂ emissions\",\n)\n\n# Set the labels for the X and Y axis and assign a title for the plot \nplt.legend()\nplt.xlabel(\"Years\")\nplt.ylabel(\"CH4 emissions Molecules CH₄/cm²/s\")\nplt.title(\"Total CH4 gridded methane emission for Permian Basin (2012-2018)\")",
-    "crumbs": [
-      "Home",
-      "Sections",
-      "Usecase 1 - Human Anthropogenic Emissions",
-      "Interactive Session: Human Anthropogenic Emissions (EPA)"
-    ]
-  },
-  {
-    "objectID": "ghg-center-at-ams-2024.html",
-    "href": "ghg-center-at-ams-2024.html",
-    "title": "The US GHG Center at American Meteorological Society Annual Meeting 2024",
+    "objectID": "setup/setup_instructions.html",
+    "href": "setup/setup_instructions.html",
+    "title": "Repository Setup Instructions",
     "section": "",
-    "text": "Join members of the GHG Center team for several events at the 2024 AMS Annual Meeting at Baltimore, Maryland; January 28th - February 1st"
+    "text": "The how-tos and tutorials in this repository require a NASA Earthdata account, an installation of Git, and a compatible Python Environment.\nFor local Python environment setup we recommend using mamba to manage Python packages. To install mamba, download miniforge for your operating system. If using Windows, be sure to check the box to “Add mamba to my PATH environment variable” to enable use of mamba directly from your command line interface. Note that this may cause an issue if you have an existing mamba install through Anaconda.\n\n\nconda create -n veda-ghg\nconda activate veda-ghg\n\n\n\nCheck requirements.txt.\nStill having trouble getting a compatible Python environment set up? Contact U.S.GHGC Team."
   },
   {
-    "objectID": "ghg-center-at-ams-2024.html#short-course",
-    "href": "ghg-center-at-ams-2024.html#short-course",
-    "title": "The US GHG Center at American Meteorological Society Annual Meeting 2024",
-    "section": "Short Course",
-    "text": "Short Course\nAdvancing Open Science: An Interactive Workshop on Harnessing VEDA for Earth Science Research at the U.S. Greenhouse Gas Center\n📅 Jan 28, 2024, 🕣 8:00 AM - 3:45 PM EST, 📍 Baltimore Convention Center\nLearn how to effectively analyze and visualize Earth science data in the cloud using open-source tools and datasets [Jan 28, room ]."
+    "objectID": "setup/setup_instructions.html#python-environment-setup",
+    "href": "setup/setup_instructions.html#python-environment-setup",
+    "title": "Repository Setup Instructions",
+    "section": "",
+    "text": "conda create -n veda-ghg\nconda activate veda-ghg"
   },
   {
-    "objectID": "ghg-center-at-ams-2024.html#town-hall",
-    "href": "ghg-center-at-ams-2024.html#town-hall",
-    "title": "The US GHG Center at American Meteorological Society Annual Meeting 2024",
-    "section": "Town Hall",
-    "text": "Town Hall\nU.S. Greenhouse Gas Center: Listening Session.\n📅 Jan 30, 2024, 🕣 12:25 PM - 1:15 PM EST, 📍 Holiday 5, Hilton Baltimore Inner Harbor\nCome share your thoughts and see a demonstration of the US GHG Center. Upcoming developments and opportunities will be presented. [Jan 30, room Holiday 5 at Hilton Baltimore Inner Harbor]."
-  },
-  {
-    "objectID": "ghg-center-at-ams-2024.html#presentations",
-    "href": "ghg-center-at-ams-2024.html#presentations",
-    "title": "The US GHG Center at American Meteorological Society Annual Meeting 2024",
-    "section": "Presentations",
-    "text": "Presentations\nMultiple presentations by GHG Center team members will occur throughout the week. Stop by to hear more from GHG Center team members!\n\n\n\n\n\n\n\n\nWhen\nRoom\nPresentation Title\n\n\n\n\nTues, Jan 30 4:45\nHoliday 5\nHilton Baltimore Inner Harbor\n8A.2 Stakeholder Engagement for the US Greenhouse Gas Center (Combley)\n\n\nMon, Jan 29 5:15\n336\nThe Baltimore Convention Center\nJ4B.4 Developing a Cross-Institutional Open-Source Cyberinfrastructure to Explore, Analyze, and Communicate Greenhouse Gas Data and Information (Chaudhary)\n\n\nTues, Jan 30 5:15\nBallroom II\nThe Baltimore Convention Center\nJ8A.4 PPAP’s and NIST’s Urban Greenhouse Gas Measurements Program (Whetstone)\n\n\nWed, Jan 31 5:30\nHoliday 5\nHilton Baltimore Inner Harbor\n12A.5 NIST’s Urban Greenhouse Gas Measurements Program and Interactions with NOAA’s Air Resources Laboratory (Whetstone)\n\n\nMon, Jan 29 11:30\n321/322\nThe Baltimore Convention Center\n2B.4 Methane and Carbon Dioxide Point Source Measurements Across Six Continents from the EMIT Imaging Spectrometer on the International Space Station - and Contributions to the U.S. Greenhouse Gas Center (Green)\n\n\nMon, Jan 29 5:30\n321/322\nThe Baltimore Convention Center\n4B.5 Detectability of Anthropogenic Impacts on Terrestrial Carbon Storage through Space Based Greenhouse Gas Observations (Weir)\n\n\nThur, Feb 1 2:30\nHoliday 4\nHilton Baltimore Inner Harbor\nJ15.4 NOAA Carbon Monitoring, Research and Innovation: Long-Standing Foundation to Support Climate Mitigation (Grubišić)"
+    "objectID": "setup/setup_instructions.html#installing-packages",
+    "href": "setup/setup_instructions.html#installing-packages",
+    "title": "Repository Setup Instructions",
+    "section": "",
+    "text": "Check requirements.txt.\nStill having trouble getting a compatible Python environment set up? Contact U.S.GHGC Team."
   }
 ]

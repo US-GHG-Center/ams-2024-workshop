@@ -77,6 +77,8 @@ website:
           - section: Open Science in Action - GitHub and Science Communication using a Web Dashboard
             contents:
               - sections/open-science-in-action/index.md
+          - text: Closing
+            href: sections/closing/index.qmd
           
 format:
   html:
